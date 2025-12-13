@@ -1,5 +1,5 @@
-/home/alex/Documents/apuntes_extra/microServices/log-service/src/main/java/com/microservices/log/service/LogService.java
-/home/alex/Documents/apuntes_extra/microServices/log-service/src/main/java/com/microservices/log/LogServiceApplication.java
-/home/alex/Documents/apuntes_extra/microServices/log-service/src/main/java/com/microservices/log/controller/LogController.java
-/home/alex/Documents/apuntes_extra/microServices/log-service/src/main/java/com/microservices/log/repository/LogRepository.java
-/home/alex/Documents/apuntes_extra/microServices/log-service/src/main/java/com/microservices/log/model/ApplicationLog.java
+/home/alex/Documents/apuntes_extra/microservices-template/infrastructure/log-service/src/main/java/com/microservices/log/LogServiceApplication.java
+/home/alex/Documents/apuntes_extra/microservices-template/infrastructure/log-service/src/main/java/com/microservices/log/controller/LogController.java
+/home/alex/Documents/apuntes_extra/microservices-template/infrastructure/log-service/src/main/java/com/microservices/log/model/ApplicationLog.java
+/home/alex/Documents/apuntes_extra/microservices-template/infrastructure/log-service/src/main/java/com/microservices/log/repository/LogRepository.java
+/home/alex/Documents/apuntes_extra/microservices-template/infrastructure/log-service/src/main/java/com/microservices/log/service/LogService.java

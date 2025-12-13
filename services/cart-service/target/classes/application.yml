@@ -1,44 +1,5 @@
-server:
-  port: 8082
-
 spring:
   application:
     name: cart-service
-  datasource:
-    url: jdbc:h2:mem:cartdb
-    driverClassName: org.h2.Driver
-    username: sa
-    password: password
-  jpa:
-    database-platform: org.hibernate.dialect.H2Dialect
-    hibernate:
-      ddl-auto: create-drop
-    show-sql: true
-  h2:
-    console:
-      enabled: true
-
-eureka:
-  client:
-    service-url:
-      defaultZone: http://localhost:8761/eureka/
-  instance:
-    prefer-ip-address: true
-
-management:
-  endpoints:
-    web:
-      exposure:
-        include: health,info,metrics
-
-# Feign client configuration
-feign:
-  client:
     config:
-      catalog-service:
-        connect-timeout: 5000
-        read-timeout: 5000
-
-logging:
-  level:
-    com.microservices.cart: DEBUG
+      import: optional:configserver:http://config-server:8888

@@ -1,4 +1,4 @@
-/home/alex/Documents/apuntes_extra/microServices/cart-service/src/main/java/com/microservices/cart/model/ShoppingCart.java
-/home/alex/Documents/apuntes_extra/microServices/cart-service/src/main/java/com/microservices/cart/model/CartItem.java
-/home/alex/Documents/apuntes_extra/microServices/cart-service/src/main/java/com/microservices/cart/client/CatalogServiceClient.java
-/home/alex/Documents/apuntes_extra/microServices/cart-service/src/main/java/com/microservices/cart/CartServiceApplication.java
+/home/alex/Documents/apuntes_extra/microservices-template/services/cart-service/src/main/java/com/microservices/cart/CartServiceApplication.java
+/home/alex/Documents/apuntes_extra/microservices-template/services/cart-service/src/main/java/com/microservices/cart/client/CatalogServiceClient.java
+/home/alex/Documents/apuntes_extra/microservices-template/services/cart-service/src/main/java/com/microservices/cart/model/CartItem.java
+/home/alex/Documents/apuntes_extra/microservices-template/services/cart-service/src/main/java/com/microservices/cart/model/ShoppingCart.java

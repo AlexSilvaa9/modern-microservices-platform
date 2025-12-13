@@ -9,9 +9,9 @@ spring:
     config:
       server:
         git:
-          uri: https://github.com/AlexSilvaa9/springcloud-microservices-template/infrastructure/config-repo
+          uri: https://github.com/AlexSilvaa9/springcloud-microservices-template.git
+          search-paths: infrastructure/config-repo
           default-label: main
-
 management:
   endpoints:
     web:
