@@ -1,0 +1,6 @@
+com/microservices/log/service/LogService.class
+com/microservices/log/controller/LogController.class
+com/microservices/log/model/ApplicationLog$LogLevel.class
+com/microservices/log/LogServiceApplication.class
+com/microservices/log/model/ApplicationLog.class
+com/microservices/log/repository/LogRepository.class

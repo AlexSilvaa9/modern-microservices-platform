@@ -1,0 +1,5 @@
+com/microservices/cart/model/ShoppingCart.class
+com/microservices/cart/client/ProductDto.class
+com/microservices/cart/CartServiceApplication.class
+com/microservices/cart/client/CatalogServiceClient.class
+com/microservices/cart/model/CartItem.class

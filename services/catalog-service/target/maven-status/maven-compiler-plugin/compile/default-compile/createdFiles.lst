@@ -1,0 +1,5 @@
+com/microservices/catalog/repository/ProductRepository.class
+com/microservices/catalog/controller/ProductController.class
+com/microservices/catalog/model/Product.class
+com/microservices/catalog/service/ProductService.class
+com/microservices/catalog/CatalogServiceApplication.class
