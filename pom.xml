@@ -23,7 +23,6 @@
         <module>infrastructure/config-server</module>
         <module>infrastructure/eureka-server</module>
         <module>infrastructure/gateway-service</module>
-        <module>infrastructure/log-service</module>
         <module>services/catalog-service</module>
         <module>services/cart-service</module>
     </modules>

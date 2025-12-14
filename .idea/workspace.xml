@@ -4,7 +4,44 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5e77696f-e307-4867-83b6-44be6a0bf308" name="Changes" comment="" />
+    <list default="true" id="5e77696f-e307-4867-83b6-44be6a0bf308" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/infrastructure/config-repo/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/infrastructure/config-repo/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/infrastructure/config-repo/log-service.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/infrastructure/config-server/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/infrastructure/config-server/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/infrastructure/eureka-server/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/infrastructure/eureka-server/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/infrastructure/gateway-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/infrastructure/gateway-service/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/infrastructure/log-service/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/infrastructure/log-service/src/main/java/com/microservices/log/LogServiceApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/infrastructure/log-service/src/main/java/com/microservices/log/controller/LogController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/infrastructure/log-service/src/main/java/com/microservices/log/model/ApplicationLog.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/infrastructure/log-service/src/main/java/com/microservices/log/repository/LogRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/infrastructure/log-service/src/main/java/com/microservices/log/service/LogService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/infrastructure/log-service/src/main/resources/application.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/infrastructure/log-service/target/classes/application.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/infrastructure/log-service/target/classes/com/microservices/log/LogServiceApplication.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/infrastructure/log-service/target/classes/com/microservices/log/controller/LogController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/infrastructure/log-service/target/classes/com/microservices/log/model/ApplicationLog$LogLevel.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/infrastructure/log-service/target/classes/com/microservices/log/model/ApplicationLog.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/infrastructure/log-service/target/classes/com/microservices/log/repository/LogRepository.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/infrastructure/log-service/target/classes/com/microservices/log/service/LogService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/infrastructure/log-service/target/log-service-1.0.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/infrastructure/log-service/target/maven-archiver/pom.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/infrastructure/log-service/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/infrastructure/log-service/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/infrastructure/logs/cart-service.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/infrastructure/logs/catalog-service.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/infrastructure/logs/config-server.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/infrastructure/logs/eureka-server.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/infrastructure/logs/gateway-service.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/infrastructure/logs/log-service.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/cart-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/services/cart-service/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/catalog-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/services/catalog-service/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/catalog-service/target/classes/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/services/catalog-service/target/classes/application.yml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -23,6 +60,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Application.CatalogServiceApplication.executor": "Run",
     "Application.ConfigServerApplication.executor": "Run",
     "Application.EurekaServerApplication.executor": "Run",
     "Application.GatewayApplication.executor": "Run",
@@ -35,7 +73,20 @@
     "last_opened_file_path": "/home/alex/Documents/apuntes_extra/microservices-template"
   }
 }]]></component>
-  <component name="RunManager" selected="Application.GatewayApplication">
+  <component name="RunManager" selected="Application.CatalogServiceApplication">
+    <configuration name="CatalogServiceApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.microservices.catalog.CatalogServiceApplication" />
+      <module name="catalog-service" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.microservices.catalog.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="ConfigServerApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.microservices.config.ConfigServerApplication" />
       <module name="config-server" />
@@ -77,6 +128,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.CatalogServiceApplication" />
         <item itemvalue="Application.GatewayApplication" />
         <item itemvalue="Application.ConfigServerApplication" />
         <item itemvalue="Application.EurekaServerApplication" />
