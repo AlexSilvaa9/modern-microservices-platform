@@ -1,6 +1,5 @@
 package com.microservices.cart.model;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,13 +12,21 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
+import lombok.Getter;
+import lombok.Setter;
 
+/**
+ * Entidad que representa un carrito de compra.
+ */
 @Entity
 @Table(name = "shopping_carts")
-public class ShoppingCart {
+@Getter
+@Setter
+public class ShoppingCartEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,8 +36,8 @@ public class ShoppingCart {
     @Column(nullable = false, unique = true)
     private String userId;
 
-    @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<CartItem> items = new ArrayList<>();
+    @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    private List<CartItemEntity> items = new ArrayList<>();
 
     @Column(nullable = false)
     private LocalDateTime createdAt;
@@ -38,38 +45,45 @@ public class ShoppingCart {
     @Column(nullable = false)
     private LocalDateTime updatedAt;
 
-    // Constructors
-    public ShoppingCart() {
-        this.createdAt = LocalDateTime.now();
-        this.updatedAt = LocalDateTime.now();
-    }
-
-    public ShoppingCart(String userId) {
-        this();
-        this.userId = userId;
-    }
-
-    // Business methods
-    public BigDecimal getTotalAmount() {
-        return items.stream()
-                   .map(CartItem::getSubtotal)
-                   .reduce(BigDecimal.ZERO, BigDecimal::add);
-    }
-
-    public int getTotalItems() {
-        return items.stream()
-                   .mapToInt(CartItem::getQuantity)
-                   .sum();
+    @PrePersist
+    protected void onCreate() {
+        LocalDateTime now = LocalDateTime.now();
+        this.createdAt = now;
+        this.updatedAt = now;
     }
 
     @PreUpdate
-    public void preUpdate() {
+    protected void onUpdate() {
         this.updatedAt = LocalDateTime.now();
     }
 
-    // Getters and Setters
+    /**
+     * Añade un item al carrito y establece la relación bidireccional.
+     *
+     * @param item elemento a añadir
+     */
+    public void addItem(CartItemEntity item) {
+        item.setCart(this);
+        this.items.add(item);
+    }
+
+    /**
+     * Elimina un item del carrito y limpia la relación.
+     *
+     * @param item elemento a eliminar
+     * @return true si se eliminó
+     */
+    public boolean removeItem(CartItemEntity item) {
+        boolean removed = this.items.remove(item);
+        if (removed) {
+            item.setCart(null);
+        }
+        return removed;
+    }
+
+    // Accesores explícitos para compatibilidad con herramientas de análisis estático
     public Long getId() {
-        return id;
+        return this.id;
     }
 
     public void setId(Long id) {
@@ -77,23 +91,23 @@ public class ShoppingCart {
     }
 
     public String getUserId() {
-        return userId;
+        return this.userId;
     }
 
     public void setUserId(String userId) {
         this.userId = userId;
     }
 
-    public List<CartItem> getItems() {
-        return items;
+    public List<CartItemEntity> getItems() {
+        return this.items;
     }
 
-    public void setItems(List<CartItem> items) {
+    public void setItems(List<CartItemEntity> items) {
         this.items = items;
     }
 
     public LocalDateTime getCreatedAt() {
-        return createdAt;
+        return this.createdAt;
     }
 
     public void setCreatedAt(LocalDateTime createdAt) {
@@ -101,7 +115,7 @@ public class ShoppingCart {
     }
 
     public LocalDateTime getUpdatedAt() {
-        return updatedAt;
+        return this.updatedAt;
     }
 
     public void setUpdatedAt(LocalDateTime updatedAt) {

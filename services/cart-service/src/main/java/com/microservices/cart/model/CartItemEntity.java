@@ -13,10 +13,17 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
+import lombok.Getter;
+import lombok.Setter;
 
+/**
+ * Entidad que representa un elemento dentro de un carrito de compra.
+ */
 @Entity
+@Getter
+@Setter
 @Table(name = "cart_items")
-public class CartItem {
+public class CartItemEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,7 +31,7 @@ public class CartItem {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "cart_id", nullable = false)
-    private ShoppingCart cart;
+    private ShoppingCartEntity cart;
 
     @NotNull
     @Column(nullable = false)
@@ -44,40 +51,25 @@ public class CartItem {
     @Column(nullable = false)
     private Integer quantity;
 
-    // Constructors
-    public CartItem() {}
-
-    public CartItem(Long productId, String productName, BigDecimal price, Integer quantity) {
-        this.productId = productId;
-        this.productName = productName;
-        this.price = price;
-        this.quantity = quantity;
-    }
-
-    // Business methods
-    public BigDecimal getSubtotal() {
-        return price.multiply(BigDecimal.valueOf(quantity));
-    }
-
-    // Getters and Setters
+    // Accesores explícitos para herramientas que no procesan Lombok
     public Long getId() {
-        return id;
+        return this.id;
     }
 
     public void setId(Long id) {
         this.id = id;
     }
 
-    public ShoppingCart getCart() {
-        return cart;
+    public ShoppingCartEntity getCart() {
+        return this.cart;
     }
 
-    public void setCart(ShoppingCart cart) {
+    public void setCart(ShoppingCartEntity cart) {
         this.cart = cart;
     }
 
     public Long getProductId() {
-        return productId;
+        return this.productId;
     }
 
     public void setProductId(Long productId) {
@@ -85,26 +77,27 @@ public class CartItem {
     }
 
     public String getProductName() {
-        return productName;
+        return this.productName;
     }
 
     public void setProductName(String productName) {
         this.productName = productName;
     }
 
-    public BigDecimal getPrice() {
-        return price;
+    public java.math.BigDecimal getPrice() {
+        return this.price;
     }
 
-    public void setPrice(BigDecimal price) {
+    public void setPrice(java.math.BigDecimal price) {
         this.price = price;
     }
 
     public Integer getQuantity() {
-        return quantity;
+        return this.quantity;
     }
 
     public void setQuantity(Integer quantity) {
         this.quantity = quantity;
     }
+
 }

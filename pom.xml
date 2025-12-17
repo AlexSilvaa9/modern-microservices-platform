@@ -25,6 +25,7 @@
         <module>infrastructure/gateway-service</module>
         <module>services/catalog-service</module>
         <module>services/cart-service</module>
+        <module>services/user-service</module>
     </modules>
     <dependencyManagement>
         <dependencies>
