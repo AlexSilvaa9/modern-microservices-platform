@@ -12,7 +12,7 @@ spring:
           lower-case-service-id: true
       routes:
         - id: catalog-service
-          uri: lb://catalog-service
+          uri: lb://CATALOG-SERVICE
           predicates:
             - Path=/api/catalog/**
           filters:
