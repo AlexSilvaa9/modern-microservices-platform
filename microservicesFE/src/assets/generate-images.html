@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Generador de Imágenes Placeholder</title>
+</head>
+<body>
+    <script>
+        // Script para generar imágenes SVG placeholder
+        function generateProductImage(category, color, text) {
+            const svg = `<svg width="300" height="300" xmlns="http://www.w3.org/2000/svg">
+                <rect width="100%" height="100%" fill="${color}"/>
+                <rect x="50" y="50" width="200" height="200" fill="white" opacity="0.1" rx="10"/>
+                <text x="150" y="140" font-family="Arial" font-size="16" fill="white" text-anchor="middle">${category}</text>
+                <text x="150" y="170" font-family="Arial" font-size="24" font-weight="bold" fill="white" text-anchor="middle">${text}</text>
+            </svg>`;
+            return `data:image/svg+xml;base64,${btoa(svg)}`;
+        }
+
+        // Generar imágenes para diferentes categorías
+        const products = [
+            { name: 'Smartphone', category: 'Electrónicos', color: '#3498db' },
+            { name: 'Laptop', category: 'Electrónicos', color: '#2980b9' },
+            { name: 'Auriculares', category: 'Electrónicos', color: '#9b59b6' },
+            { name: 'Tablet', category: 'Electrónicos', color: '#8e44ad' },
+            { name: 'Camiseta', category: 'Ropa', color: '#e74c3c' },
+            { name: 'Jeans', category: 'Ropa', color: '#c0392b' },
+            { name: 'Zapatillas', category: 'Ropa', color: '#f39c12' },
+            { name: 'Chaqueta', category: 'Ropa', color: '#d35400' },
+            { name: 'Libro', category: 'Hogar', color: '#27ae60' },
+            { name: 'Lámpara', category: 'Hogar', color: '#229954' },
+            { name: 'Sofá', category: 'Hogar', color: '#16a085' },
+            { name: 'Mesa', category: 'Hogar', color: '#138d75' },
+        ];
+
+        // Log de las imágenes para copiar
+        products.forEach((product, index) => {
+            const imageData = generateProductImage(product.category, product.color, product.name);
+            console.log(`${product.name.toLowerCase()}.svg: ${imageData}`);
+        });
+
+        console.log('Copiar las imágenes generadas arriba y guardarlas como archivos SVG');
+    </script>
+</body>
+</html>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="300" height="300" viewBox="0 0 300 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="300" height="300" fill="#F8F9FA"/>
+<path d="M150 120C161.046 120 170 111.046 170 100C170 88.954 161.046 80 150 80C138.954 80 130 88.954 130 100C130 111.046 138.954 120 150 120Z" fill="#DEE2E6"/>
+<path d="M220 220H80L120 160L140 180L180 140L220 220Z" fill="#DEE2E6"/>
+<text x="150" y="250" text-anchor="middle" fill="#6C757D" font-family="Arial, sans-serif" font-size="14">Sin imagen</text>
+</svg>

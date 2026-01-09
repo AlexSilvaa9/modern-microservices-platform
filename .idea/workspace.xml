@@ -4,7 +4,24 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5e77696f-e307-4867-83b6-44be6a0bf308" name="Changes" comment="" />
+    <list default="true" id="5e77696f-e307-4867-83b6-44be6a0bf308" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/infrastructure/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/cart-service/Dokerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/cart-service/Jenkinsfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/infrastructure/config-server/target/classes/com/microservices/config/ConfigServerApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/infrastructure/config-server/target/classes/com/microservices/config/ConfigServerApplication.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/infrastructure/eureka-server/target/classes/com/microservices/eureka/EurekaServerApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/infrastructure/eureka-server/target/classes/com/microservices/eureka/EurekaServerApplication.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/infrastructure/gateway-service/target/classes/com/microservices/gateway/GatewayApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/infrastructure/gateway-service/target/classes/com/microservices/gateway/GatewayApplication.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/microservicesFE/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/microservicesFE/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/microservicesFE/angular.json" beforeDir="false" afterPath="$PROJECT_DIR$/microservicesFE/angular.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/microservicesFE/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/microservicesFE/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/microservicesFE/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/microservicesFE/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/microservicesFE/src/app/app.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/microservicesFE/src/app/app.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/microservicesFE/src/app/app.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/microservicesFE/src/app/app.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/microservicesFE/src/app/app.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/microservicesFE/src/app/app.config.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/microservicesFE/src/app/app.routes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/microservicesFE/src/app/app.routes.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/microservicesFE/src/styles.scss" beforeDir="false" afterPath="$PROJECT_DIR$/microservicesFE/src/styles.scss" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -47,7 +64,7 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/home/alex/Documents/apuntes_extra/microservices-template/infrastructure/config-repo",
+    "last_opened_file_path": "/home/alex/Documents/apuntes_extra/microservices-template/services/catalog-service",
     "onboarding.tips.debug.path": "/home/alex/Documents/apuntes_extra/microservices-template/core/src/main/java/com/microservices/Main.java",
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.0",
@@ -57,11 +74,11 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/services/catalog-service" />
       <recent name="$PROJECT_DIR$/infrastructure/config-repo" />
       <recent name="$PROJECT_DIR$/services/user-service/src/main/resources" />
       <recent name="$PROJECT_DIR$/services/catalog-service/src/main/resources" />
       <recent name="$PROJECT_DIR$/services/cart-service/src/main/resources" />
-      <recent name="$PROJECT_DIR$/infrastructure/gateway-service/src/main/resources" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/services" />
