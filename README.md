@@ -34,9 +34,11 @@ El dominio funcional es deliberadamente sencillo (un **catálogo y carrito de co
 
 ## Arquitectura objetivo
 
-![Kubernetes](https://upload.wikimedia.org/wikipedia/commons/3/39/Kubernetes_logo_without_workmark.svg)
-
-![AWS](https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg)
+<p align="center">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/3/39/Kubernetes_logo_without_workmark.svg" alt="Kubernetes" width="120" />
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <img src="https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg" alt="AWS" width="120" />
+</p>
 
 La plataforma evolucionará hacia una arquitectura donde Kubernetes gestione el ciclo de vida de los servicios, AWS proporcione la infraestructura cloud y balanceo de carga, y Jenkins automatice todo el proceso de despliegue.
 
