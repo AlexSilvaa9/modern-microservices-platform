@@ -4,10 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5e77696f-e307-4867-83b6-44be6a0bf308" name="Changes" comment="secreto jwt de prueba pasa a application.yml">
+    <list default="true" id="5e77696f-e307-4867-83b6-44be6a0bf308" name="Changes" comment="debug logging en springSecurity">
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/core/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/microservices/core/security/JwtFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/microservices/core/security/JwtFilter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/microservices/core/security/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/microservices/core/security/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/infrastructure/config-repo/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/infrastructure/config-repo/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/infrastructure/config-server/target/config-server-1.0.0.jar" beforeDir="false" afterPath="$PROJECT_DIR$/infrastructure/config-server/target/config-server-1.0.0.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/infrastructure/eureka-server/target/eureka-server-1.0.0.jar" beforeDir="false" afterPath="$PROJECT_DIR$/infrastructure/eureka-server/target/eureka-server-1.0.0.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/infrastructure/gateway-service/target/gateway-service-1.0.0.jar" beforeDir="false" afterPath="$PROJECT_DIR$/infrastructure/gateway-service/target/gateway-service-1.0.0.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/services/cart-service/target/cart-service-1.0.0.jar" beforeDir="false" afterPath="$PROJECT_DIR$/services/cart-service/target/cart-service-1.0.0.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/cart-service/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/services/cart-service/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/catalog-service/target/catalog-service-1.0.0.jar" beforeDir="false" afterPath="$PROJECT_DIR$/services/catalog-service/target/catalog-service-1.0.0.jar" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -93,7 +102,7 @@
       <recent name="com.microservices.cart.dto" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.CatalogServiceApplication">
+  <component name="RunManager" selected="Application.UserServiceApplication">
     <configuration name="CatalogServiceApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.microservices.catalog.CatalogServiceApplication" />
       <module name="catalog-service" />
@@ -168,11 +177,11 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.CatalogServiceApplication" />
         <item itemvalue="Application.UserServiceApplication" />
-        <item itemvalue="Application.GatewayApplication" />
+        <item itemvalue="Application.CatalogServiceApplication" />
         <item itemvalue="Application.EurekaServerApplication" />
         <item itemvalue="Application.ConfigServerApplication" />
+        <item itemvalue="Application.GatewayApplication" />
       </list>
     </recent_temporary>
   </component>
@@ -192,7 +201,15 @@
       <option name="project" value="LOCAL" />
       <updated>1768049133963</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="debug logging en springSecurity">
+      <option name="closed" value="true" />
+      <created>1768068731305</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1768068731305</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -212,7 +229,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="secreto jwt de prueba pasa a application.yml" />
-    <option name="LAST_COMMIT_MESSAGE" value="secreto jwt de prueba pasa a application.yml" />
+    <MESSAGE value="debug logging en springSecurity" />
+    <option name="LAST_COMMIT_MESSAGE" value="debug logging en springSecurity" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -239,8 +257,18 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/core/src/main/java/com/microservices/core/security/JwtFilter.java</url>
-          <line>29</line>
+          <line>35</line>
           <option name="timeStamp" value="14" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/core/src/main/java/com/microservices/core/security/JwtFilter.java</url>
+          <line>48</line>
+          <option name="timeStamp" value="15" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/core/src/main/java/com/microservices/core/security/JwtFilter.java</url>
+          <line>52</line>
+          <option name="timeStamp" value="16" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

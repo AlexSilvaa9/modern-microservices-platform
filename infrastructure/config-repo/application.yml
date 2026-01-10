@@ -23,6 +23,11 @@ security:
 
 logging:
   level:
+    com:
+      microservices:
+        core:
+          security:
+            JwtFilter: TRACE
     org:
       springframework:
         security: DEBUG

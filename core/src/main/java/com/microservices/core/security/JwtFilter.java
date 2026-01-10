@@ -5,6 +5,8 @@ import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -24,6 +26,10 @@ public class JwtFilter extends OncePerRequestFilter {
     @Autowired
     private JwtUtil jwtUtil;
 
+    private static final Logger LOGGER =
+            LoggerFactory.getLogger(JwtFilter.class);
+
+
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
@@ -40,9 +46,11 @@ public class JwtFilter extends OncePerRequestFilter {
                         java.util.List.of(new SimpleGrantedAuthority(role))
                 );
                 SecurityContextHolder.getContext().setAuthentication(auth);
+                LOGGER.debug("Authenticated user: {} with role: {}", subject, role);
             } catch (Exception ex) {
                 // token inválido: limpiar contexto y continuar (Security rechazará si es necesario)
                 SecurityContextHolder.clearContext();
+                LOGGER.warn("Invalid JWT token: {}", ex.getMessage());
             }
         }
         filterChain.doFilter(request, response);

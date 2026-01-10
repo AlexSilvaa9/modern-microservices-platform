@@ -3,7 +3,19 @@
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/core/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/core/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/infrastructure/config-server/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/infrastructure/config-server/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/infrastructure/eureka-server/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/infrastructure/eureka-server/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/infrastructure/gateway-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/infrastructure/gateway-service/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/services/cart-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/services/cart-service/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/services/catalog-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/services/catalog-service/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/services/user-service/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/services/user-service/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/resources" charset="UTF-8" />
   </component>
 </project>

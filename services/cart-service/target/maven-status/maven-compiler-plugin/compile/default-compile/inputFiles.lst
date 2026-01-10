@@ -1,12 +1,13 @@
 /home/alex/Documents/apuntes_extra/microservices-template/services/cart-service/src/main/java/com/microservices/cart/CartServiceApplication.java
+/home/alex/Documents/apuntes_extra/microservices-template/services/cart-service/src/main/java/com/microservices/cart/service/ShoppingCartService.java
+/home/alex/Documents/apuntes_extra/microservices-template/services/cart-service/src/main/java/com/microservices/cart/dto/ShoppingCartDTO.java
+/home/alex/Documents/apuntes_extra/microservices-template/services/cart-service/src/main/java/com/microservices/cart/dto/CartItemDTO.java
 /home/alex/Documents/apuntes_extra/microservices-template/services/cart-service/src/main/java/com/microservices/cart/client/CatalogServiceClient.java
 /home/alex/Documents/apuntes_extra/microservices-template/services/cart-service/src/main/java/com/microservices/cart/client/UserServiceClient.java
-/home/alex/Documents/apuntes_extra/microservices-template/services/cart-service/src/main/java/com/microservices/cart/service/ShoppingCartService.java
 /home/alex/Documents/apuntes_extra/microservices-template/services/cart-service/src/main/java/com/microservices/cart/model/ShoppingCartEntity.java
-/home/alex/Documents/apuntes_extra/microservices-template/services/cart-service/src/main/java/com/microservices/cart/dto/ShoppingCartDTO.java
 /home/alex/Documents/apuntes_extra/microservices-template/services/cart-service/src/main/java/com/microservices/cart/model/CartItemEntity.java
 /home/alex/Documents/apuntes_extra/microservices-template/services/cart-service/src/main/java/com/microservices/cart/mapper/CartItemMapper.java
-/home/alex/Documents/apuntes_extra/microservices-template/services/cart-service/src/main/java/com/microservices/cart/dto/CartItemDTO.java
 /home/alex/Documents/apuntes_extra/microservices-template/services/cart-service/src/main/java/com/microservices/cart/mapper/ShoppingCartMapper.java
+/home/alex/Documents/apuntes_extra/microservices-template/services/cart-service/src/main/java/com/microservices/cart/controller/CartController.java
 /home/alex/Documents/apuntes_extra/microservices-template/services/cart-service/src/main/java/com/microservices/cart/dao/ShoppingCartDAO.java
 /home/alex/Documents/apuntes_extra/microservices-template/services/cart-service/src/main/java/com/microservices/cart/repository/ShoppingCartRepository.java
