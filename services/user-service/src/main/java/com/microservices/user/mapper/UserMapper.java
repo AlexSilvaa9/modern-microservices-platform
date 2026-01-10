@@ -4,6 +4,7 @@ import com.microservices.core.dto.UserDTO;
 import org.mapstruct.Mapper;
 
 import com.microservices.user.model.UserEntity;
+import org.mapstruct.Mapping;
 
 /**
  * MapStruct mapper para UserEntity <-> UserDTO.
@@ -11,6 +12,11 @@ import com.microservices.user.model.UserEntity;
 @Mapper(componentModel = "spring")
 public interface UserMapper {
     UserDTO toDTO(UserEntity entity);
+
+
+    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "passwordHash", ignore = true)
+    @Mapping(target = "createdAt", ignore = true)
     UserEntity fromDTO(UserDTO dto);
 }
 

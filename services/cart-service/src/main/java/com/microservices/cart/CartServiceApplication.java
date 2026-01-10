@@ -5,9 +5,15 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 
-@SpringBootApplication
-@EnableDiscoveryClient
+@SpringBootApplication(
+        scanBasePackages = {
+                "com.microservices.core",
+                "com.microservices.cart"
+        }
+)@EnableDiscoveryClient
 @EnableFeignClients
+
+
 public class CartServiceApplication {
 
     public static void main(String[] args) {

@@ -1,5 +1,7 @@
+/home/alex/Documents/apuntes_extra/microservices-template/services/catalog-service/src/main/java/com/microservices/catalog/mapper/ProductMapper.java
+/home/alex/Documents/apuntes_extra/microservices-template/services/catalog-service/src/main/java/com/microservices/catalog/model/ProductEntity.java
 /home/alex/Documents/apuntes_extra/microservices-template/services/catalog-service/src/main/java/com/microservices/catalog/service/ProductService.java
-/home/alex/Documents/apuntes_extra/microservices-template/services/catalog-service/src/main/java/com/microservices/catalog/model/Product.java
+/home/alex/Documents/apuntes_extra/microservices-template/services/catalog-service/src/main/java/com/microservices/catalog/dao/ProductDAO.java
 /home/alex/Documents/apuntes_extra/microservices-template/services/catalog-service/src/main/java/com/microservices/catalog/repository/ProductRepository.java
 /home/alex/Documents/apuntes_extra/microservices-template/services/catalog-service/src/main/java/com/microservices/catalog/controller/ProductController.java
 /home/alex/Documents/apuntes_extra/microservices-template/services/catalog-service/src/main/java/com/microservices/catalog/CatalogServiceApplication.java

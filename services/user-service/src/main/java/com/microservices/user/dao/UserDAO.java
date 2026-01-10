@@ -23,5 +23,7 @@ public class UserDAO {
     public UserEntity save(UserEntity user) { return repository.save(user); }
     public Optional<UserEntity> findById(UUID id) { return repository.findById(id); }
     public Optional<UserEntity> findByEmail(String email) { return repository.findByEmail(email); }
+    public Optional<UserEntity> findByUsername(String username) { return repository.findByEmail(username); }
+
 }
 

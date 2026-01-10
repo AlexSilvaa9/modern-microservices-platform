@@ -1,10 +1,14 @@
 package com.microservices.user.service;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.UUID;
 
 import com.microservices.core.dto.UserDTO;
 import jakarta.validation.constraints.NotNull;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,7 +25,7 @@ import com.microservices.core.security.JwtUtil;
  */
 @Service
 @Transactional
-public class UserService {
+public class UserService implements UserDetailsService {
 
     private final UserDAO dao;
     private final UserMapper mapper;
@@ -45,6 +49,7 @@ public class UserService {
     public @NotNull UserDTO register(UserDTO userDto, String rawPassword) {
         UserEntity e = mapper.fromDTO(userDto);
         e.setPasswordHash(passwordEncoder.encode(rawPassword));
+        e.setCreatedAt(LocalDateTime.now());
         UserEntity saved = dao.save(e);
         return mapper.toDTO(saved);
     }
@@ -60,6 +65,15 @@ public class UserService {
             }
             return null;
         }).orElse(null);
+    }
+    @Override
+    public UserDetails loadUserByUsername(String username)
+            throws UsernameNotFoundException {
+
+        return dao.findByEmail(username)
+                .orElseThrow(() ->
+                        new UsernameNotFoundException("User not found: " + username)
+                );
     }
 }
 
