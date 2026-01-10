@@ -1,5 +1,6 @@
 package com.microservices.user.controller;
 
+import com.microservices.core.dto.UserDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,6 +25,7 @@ public class RegisterController {
     public ResponseEntity<UserDTO> register(@RequestBody AuthRequestDTO req) {
         UserDTO u = new UserDTO();
         u.setEmail(req.getEmail());
+        u.setUsername(req.getUsername());
         UserDTO saved = service.register(u, req.getPassword());
         return ResponseEntity.ok(saved);
     }

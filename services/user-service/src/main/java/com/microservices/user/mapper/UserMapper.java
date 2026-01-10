@@ -1,5 +1,6 @@
 package com.microservices.user.mapper;
 
+import com.microservices.core.dto.UserDTO;
 import org.mapstruct.Mapper;
 
 import com.microservices.user.model.UserEntity;

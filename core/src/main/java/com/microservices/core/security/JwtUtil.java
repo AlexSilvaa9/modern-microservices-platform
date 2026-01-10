@@ -1,9 +1,10 @@
-package com.microservices.user.security;
+package com.microservices.core.security;
 
 import java.security.Key;
 import java.util.Date;
 import java.nio.charset.StandardCharsets;
 
+import com.microservices.core.dto.enums.Role;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -11,6 +12,7 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
+
 
 /**
  * Utilidad para generar y validar JWT.
@@ -28,7 +30,7 @@ public class JwtUtil {
         return Keys.hmacShaKeyFor(jwtSecret.getBytes(StandardCharsets.UTF_8));
     }
 
-    public String generateToken(String subject, String role) {
+    public String generateToken(String subject, Role role) {
         Date now = new Date();
         return Jwts.builder()
                 .setSubject(subject)

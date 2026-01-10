@@ -10,6 +10,7 @@ El dominio funcional es deliberadamente sencillo (un **catálogo y carrito de co
   &nbsp;&nbsp;&nbsp;&nbsp;
   <img src="https://logo.svgcdn.com/logos/aws.png" alt="AWS" width="120" />
 </p>
+
 ---
 
 ## Tecnologías principales

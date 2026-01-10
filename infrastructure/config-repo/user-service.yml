@@ -11,12 +11,6 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: false
-security:
-  jwt:
-    secret: huhgsth898hrfroijjjjjjjjjjjjjjfdspoijfpasjfdifjsif_TODO_CHANGE
-    expiration-ms: 3600000
-
-
 
 eureka:
   client:
