@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -43,10 +44,13 @@ public class JwtFilter extends OncePerRequestFilter {
                 UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(
                         subject,
                         null,
-                        java.util.List.of(new SimpleGrantedAuthority(role))
+                        java.util.List.of(new SimpleGrantedAuthority("ROLE_" + role))
                 );
                 SecurityContextHolder.getContext().setAuthentication(auth);
                 LOGGER.debug("Authenticated user: {} with role: {}", subject, role);
+                SecurityContext context = SecurityContextHolder.getContext();
+                context.setAuthentication(auth);
+
             } catch (Exception ex) {
                 // token inválido: limpiar contexto y continuar (Security rechazará si es necesario)
                 SecurityContextHolder.clearContext();
