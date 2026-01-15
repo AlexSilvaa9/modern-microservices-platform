@@ -4,20 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5e77696f-e307-4867-83b6-44be6a0bf308" name="Changes" comment="debug logging en springSecurity">
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/core/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/microservices/core/security/JwtFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/microservices/core/security/JwtFilter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/microservices/core/security/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/microservices/core/security/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/infrastructure/config-repo/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/infrastructure/config-repo/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/infrastructure/config-server/target/config-server-1.0.0.jar" beforeDir="false" afterPath="$PROJECT_DIR$/infrastructure/config-server/target/config-server-1.0.0.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/infrastructure/eureka-server/target/eureka-server-1.0.0.jar" beforeDir="false" afterPath="$PROJECT_DIR$/infrastructure/eureka-server/target/eureka-server-1.0.0.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/infrastructure/gateway-service/target/gateway-service-1.0.0.jar" beforeDir="false" afterPath="$PROJECT_DIR$/infrastructure/gateway-service/target/gateway-service-1.0.0.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/cart-service/target/cart-service-1.0.0.jar" beforeDir="false" afterPath="$PROJECT_DIR$/services/cart-service/target/cart-service-1.0.0.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/cart-service/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/services/cart-service/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/catalog-service/target/catalog-service-1.0.0.jar" beforeDir="false" afterPath="$PROJECT_DIR$/services/catalog-service/target/catalog-service-1.0.0.jar" afterDir="false" />
-    </list>
+    <list default="true" id="5e77696f-e307-4867-83b6-44be6a0bf308" name="Changes" comment="debug logging en springSecurity" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -71,13 +58,15 @@
     "Maven.user-service [install].executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "SONARLINT_PRECOMMIT_ANALYSIS": "true",
     "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/home/alex/Documents/apuntes_extra/microservices-template/services/catalog-service",
+    "last_opened_file_path": "C:/Users/alejandro.a.silva/Documents/personal/modern-microservices-platform",
     "onboarding.tips.debug.path": "/home/alex/Documents/apuntes_extra/microservices-template/core/src/main/java/com/microservices/Main.java",
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.0",
@@ -272,5 +261,13 @@
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
+  </component>
+  <component name="github-copilot-workspace">
+    <instructionFileLocations>
+      <option value=".github/instructions" />
+    </instructionFileLocations>
+    <promptFileLocations>
+      <option value=".github/prompts" />
+    </promptFileLocations>
   </component>
 </project>
