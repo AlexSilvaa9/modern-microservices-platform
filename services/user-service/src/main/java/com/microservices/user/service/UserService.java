@@ -5,6 +5,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 import com.microservices.core.dto.UserDTO;
+import com.microservices.core.exception.BadRequestException;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -54,17 +55,17 @@ public class UserService implements UserDetailsService {
         return mapper.toDTO(saved);
     }
 
-    public AuthResponseDTO authenticate(AuthRequestDTO request) {
-        return dao.findByEmail(request.getEmail()).map(u -> {
-            if (passwordEncoder.matches(request.getPassword(), u.getPasswordHash())) {
-                String token = jwtUtil.generateToken(u.getEmail(), u.getRole());
-                AuthResponseDTO r = new AuthResponseDTO();
-                r.setToken(token);
-                r.setUser(mapper.toDTO(u));
-                return r;
-            }
-            return null;
-        }).orElse(null);
+    public @NotNull AuthResponseDTO authenticate(AuthRequestDTO request) {
+        var user = dao.findByEmail(request.email())
+                .filter(u -> passwordEncoder.matches(request.password(), u.getPasswordHash()))
+                .orElseThrow(() -> new BadRequestException("Credenciales inválidas"));
+
+        String token = jwtUtil.generateToken(user.getEmail(), user.getRole());
+        AuthResponseDTO r = new AuthResponseDTO();
+        r.setToken(token);
+        r.setUser(mapper.toDTO(user));
+        return r;
+
     }
     @Override
     public UserDetails loadUserByUsername(String username)

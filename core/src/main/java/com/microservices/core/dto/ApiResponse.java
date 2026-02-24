@@ -1,23 +1,13 @@
 package com.microservices.core.dto;
 
-import lombok.Builder;
 import java.time.Instant;
 
-@Builder
-public class ApiResponse<T> {
-
-    private String message;
-
-    @Builder.Default
-    private Instant timestamp = Instant.now();
-
-    private T data;
-
+public record ApiResponse<T>(
+        String message,
+        Instant timestamp,
+        T data
+) {
     public ApiResponse(String message, T data) {
-
-        this.message = message;
-        this.timestamp = Instant.now();
-        this.data = data;}
-
+        this(message, Instant.now(), data);
+    }
 }
-
