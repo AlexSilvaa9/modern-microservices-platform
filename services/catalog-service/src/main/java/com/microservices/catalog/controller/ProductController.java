@@ -23,7 +23,6 @@ import java.util.NoSuchElementException;
 @Validated
 public class ProductController {
 
-
     private final ProductService productService;
 
     public ProductController(ProductService productService) {
@@ -32,7 +31,8 @@ public class ProductController {
 
     /**
      * Obtiene todos los productos activos.
-     * Devuelve 200 con lista (vacía si no hay productos) en un ApiResponse consistente.
+     * Devuelve 200 con lista (vacía si no hay productos) en un ApiResponse
+     * consistente.
      *
      * @return ResponseEntity con la lista de {@link ProductDTO}
      */
@@ -42,17 +42,17 @@ public class ProductController {
         if (products == null) {
             products = Collections.emptyList();
         }
-        ApiResponse<List<ProductDTO>> body = ApiResponse.<List<ProductDTO>>builder()
-                .message(products.isEmpty() ? "No products" : "OK")
-                .data(products)
-                .build();
+        ApiResponse<List<ProductDTO>> body = new ApiResponse<>(
+                products.isEmpty() ? "No products" : "OK",
+                products);
         return ResponseEntity.ok(body);
     }
 
     /**
      * Obtiene un producto por id.
      * Valida que el id sea positivo.
-     * Si no existe, se lanza NoSuchElementException y el handler global lo convertirá en 404.
+     * Si no existe, se lanza NoSuchElementException y el handler global lo
+     * convertirá en 404.
      *
      * @param id identificador del producto
      * @return ResponseEntity con el {@link ProductDTO}
@@ -61,10 +61,9 @@ public class ProductController {
     public ResponseEntity<ApiResponse<ProductDTO>> getProductById(@PathVariable @NotNull @Positive Long id) {
         ProductDTO dto = productService.getProductById(id)
                 .orElseThrow(() -> new NoSuchElementException("Producto no encontrado con id: " + id));
-        ApiResponse<ProductDTO> body = ApiResponse.<ProductDTO>builder()
-                .message("OK")
-                .data(dto)
-                .build();
+        ApiResponse<ProductDTO> body = new ApiResponse<>(
+                "OK",
+                dto);
         return ResponseEntity.ok(body);
     }
 
@@ -73,33 +72,36 @@ public class ProductController {
      * Valida que la categoría no sea vacía.
      *
      * @param category nombre de la categoría
-     * @return ResponseEntity con la lista de {@link ProductDTO} (200 con lista vacía si no hay coincidencias)
+     * @return ResponseEntity con la lista de {@link ProductDTO} (200 con lista
+     *         vacía si no hay coincidencias)
      */
     @GetMapping("/category/{category}")
-    public ResponseEntity<ApiResponse<List<ProductDTO>>> getProductsByCategory(@PathVariable @NotBlank String category) {
+    public ResponseEntity<ApiResponse<List<ProductDTO>>> getProductsByCategory(
+            @PathVariable @NotBlank String category) {
         List<ProductDTO> products = productService.getProductsByCategory(category.trim());
-        ApiResponse<List<ProductDTO>> body = ApiResponse.<List<ProductDTO>>builder()
-                .message(products.isEmpty() ? "No results" : "OK")
-                .data(products)
-                .build();
-        // Devolver 200 con lista vacía es frecuente para endpoints que devuelven colecciones
+        ApiResponse<List<ProductDTO>> body = new ApiResponse<>(
+                products.isEmpty() ? "No results" : "OK",
+                products);
+        // Devolver 200 con lista vacía es frecuente para endpoints que devuelven
+        // colecciones
         return ResponseEntity.ok(body);
     }
 
     /**
      * Busca productos por nombre.
-     * Si no hay resultados, devuelve 200 con lista vacía en ApiResponse para mantener contrato uniforme.
+     * Si no hay resultados, devuelve 200 con lista vacía en ApiResponse para
+     * mantener contrato uniforme.
      *
      * @param name parámetro de búsqueda (fragmento)
      * @return ResponseEntity con los resultados (lista vacía si no hay resultados)
      */
     @GetMapping("/search")
-    public ResponseEntity<ApiResponse<List<ProductDTO>>> searchProducts(@RequestParam(name = "name") @NotBlank String name) {
+    public ResponseEntity<ApiResponse<List<ProductDTO>>> searchProducts(
+            @RequestParam(name = "name") @NotBlank String name) {
         List<ProductDTO> products = productService.searchProductsByName(name.trim());
-        ApiResponse<List<ProductDTO>> body = ApiResponse.<List<ProductDTO>>builder()
-                .message(products.isEmpty() ? "No results" : "OK")
-                .data(products)
-                .build();
+        ApiResponse<List<ProductDTO>> body = new ApiResponse<>(
+                products.isEmpty() ? "No results" : "OK",
+                products);
         return ResponseEntity.ok(body);
     }
 
@@ -111,10 +113,9 @@ public class ProductController {
     @GetMapping("/categories")
     public ResponseEntity<ApiResponse<List<String>>> getCategories() {
         List<String> categories = productService.getAllCategories();
-        ApiResponse<List<String>> body = ApiResponse.<List<String>>builder()
-                .message(categories.isEmpty() ? "No categories" : "OK")
-                .data(categories)
-                .build();
+        ApiResponse<List<String>> body = new ApiResponse<>(
+                categories.isEmpty() ? "No categories" : "OK",
+                categories);
         return ResponseEntity.ok(body);
     }
 }

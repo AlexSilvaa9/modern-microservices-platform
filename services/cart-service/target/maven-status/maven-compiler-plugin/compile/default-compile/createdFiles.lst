@@ -1,12 +1,17 @@
 com/microservices/cart/CartServiceApplication.class
+com/microservices/cart/model/CartItemEntity.class
 com/microservices/cart/client/CatalogServiceClient.class
 com/microservices/cart/dto/ShoppingCartDTO.class
 com/microservices/cart/mapper/ShoppingCartMapperImpl.class
 com/microservices/cart/mapper/CartItemMapper.class
+com/microservices/cart/controller/CartController.class
+com/microservices/cart/dao/ShoppingCartDAO.class
 com/microservices/cart/dto/ShoppingCartDTO$ShoppingCartDTOBuilder.class
 com/microservices/cart/mapper/CartItemMapperImpl.class
 com/microservices/cart/dto/CartItemDTO$CartItemDTOBuilder.class
 com/microservices/cart/mapper/ShoppingCartMapper.class
+com/microservices/cart/model/ShoppingCartEntity.class
 com/microservices/cart/service/ShoppingCartService.class
 com/microservices/cart/dto/CartItemDTO.class
 com/microservices/cart/client/UserServiceClient.class
+com/microservices/cart/repository/ShoppingCartRepository.class

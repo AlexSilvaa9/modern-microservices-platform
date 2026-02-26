@@ -1,0 +1,8 @@
+com/microservices/catalog/repository/ProductRepository.class
+com/microservices/catalog/model/ProductEntity.class
+com/microservices/catalog/controller/ProductController.class
+com/microservices/catalog/dao/ProductDAO.class
+com/microservices/catalog/mapper/ProductMapper.class
+com/microservices/catalog/service/ProductService.class
+com/microservices/catalog/CatalogServiceApplication.class
+com/microservices/catalog/mapper/ProductMapperImpl.class
