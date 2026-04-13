@@ -1,0 +1,61 @@
+version: v2beta1
+name: devspace
+pipelines:
+  dev:
+    run: -|
+      start_dev user-service catalog-service cart-service
+dev:
+  user-service:
+    imageSelector: "user-service:1.0.0"
+    command: ["java", "-jar", "/app/user-service-1.0.0.jar"]
+    sync:
+      - path: ./services/user-service/target/user-service-1.0.0.jar:/app/user-service-1.0.0.jar
+        disableDownload: true
+        onUpload:
+          exec:
+            - command: "pkill -f user-service || true"
+            - command: "java -jar /app/user-service-1.0.0.jar"
+    ports:
+      - port: "8081:8080"
+    open:
+      - url: http://localhost:8081/swagger-ui/index.html
+    logs:
+      enabled: true
+
+  catalog-service:
+    imageSelector: "catalog-service:1.0.0"
+    command: ["java", "-jar", "/app/catalog-service-1.0.0.jar"]
+    sync:
+      - path: ./services/catalog-service/target/catalog-service-1.0.0.jar:/app/catalog-service-1.0.0.jar
+        disableDownload: true
+        onUpload:
+          exec:
+            - command: "pkill -f catalog-service || true"
+            - command: "java -jar /app/catalog-service-1.0.0.jar"
+    ports:
+      - port: "8082:8080"
+    open:
+      - url: http://localhost:8082/swagger-ui/index.html
+    logs:
+      enabled: true
+
+  cart-service:
+    imageSelector: "cart-service:1.0.0"
+    command: ["java", "-jar", "/app/cart-service-1.0.0.jar"]
+    sync:
+      - path: ./services/cart-service/target/cart-service-1.0.0.jar:/app/cart-service-1.0.0.jar
+        disableDownload: true
+        onUpload:
+          exec:
+            - command: "pkill -f cart-service || true"
+            - command: "java -jar /app/cart-service-1.0.0.jar"
+    ssh:
+      enabled: true
+    ports:
+      - port: "8083:8080"
+    open:
+      - url: http://localhost:8083/swagger-ui/index.html
+    logs:
+      enabled: true
+
+

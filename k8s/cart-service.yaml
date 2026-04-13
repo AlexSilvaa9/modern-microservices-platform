@@ -14,15 +14,15 @@ spec:
     spec:
       containers:
         - name: cart-service
-          image: cart-service:latest
+          image: cart-service:1.0.0
           imagePullPolicy: Never
           resources:
             requests:
-              cpu: "100m"
-              memory: "256Mi"
-            limits:
               cpu: "300m"
               memory: "256Mi"
+            limits:
+              cpu: "600m"
+              memory: "1024Mi"
           ports:
             - containerPort: 8080
           env:

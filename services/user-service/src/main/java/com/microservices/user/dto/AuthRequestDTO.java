@@ -23,6 +23,7 @@ public record AuthRequestDTO(
         String password,
 
         @Nullable
-        Role role
+        Role role,
+        String apellido
 
 ) {}
