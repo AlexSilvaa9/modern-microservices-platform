@@ -35,6 +35,8 @@ spec:
         - name: config-volume
           configMap:
             name: microservices-config
+
+      serviceAccountName: cart-service-sa
 ---
 apiVersion: v1
 kind: Service
