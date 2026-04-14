@@ -4,17 +4,33 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5e77696f-e307-4867-83b6-44be6a0bf308" name="Changes" comment="debug logging en springSecurity" />
+    <list default="true" id="5e77696f-e307-4867-83b6-44be6a0bf308" name="Changes" comment="chore: eliminado front">
+      <change afterPath="$PROJECT_DIR$/k8s/RBAC/cart-service-sa-discobery-role-binding.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/k8s/RBAC/cart-service-sa.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/k8s/RBAC/discovery-role.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/k8s/cart-service.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/k8s/cart-service.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/k8s/configmap.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/k8s/configmap.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/cart-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/services/cart-service/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/cart-service/src/main/java/com/microservices/cart/CartServiceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/services/cart-service/src/main/java/com/microservices/cart/CartServiceApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/cart-service/target/cart-service-1.0.0.jar" beforeDir="false" afterPath="$PROJECT_DIR$/services/cart-service/target/cart-service-1.0.0.jar" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="CopilotPersistence">
+    <persistenceIdMap>
+      <entry key="_/home/alex/Documents/apuntes_extra/microservices-template" value="36oOzSi2wg2L1IHN0NSDD0LiAW4" />
+    </persistenceIdMap>
+  </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="Enum" />
+        <option value="Class" />
+        <option value="Exception" />
       </list>
     </option>
   </component>
@@ -41,39 +57,44 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.CartServiceApplication.executor": "Run",
-    "Application.CartServiceApplicationLocal.executor": "Run",
-    "Application.CatalogServiceApplication.executor": "Debug",
-    "Application.ConfigServerApplication.executor": "Run",
-    "Application.EurekaServerApplication.executor": "Run",
-    "Application.GatewayApplication.executor": "Run",
-    "Application.UserServiceApplication.executor": "Debug",
-    "Maven.cart-service [install].executor": "Run",
-    "Maven.catalog-service [install].executor": "Run",
-    "Maven.core [install].executor": "Run",
-    "Maven.gateway-service [install].executor": "Run",
-    "Maven.microservices-template [install].executor": "Run",
-    "Maven.user-service [install].executor": "Run",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "SONARLINT_PRECOMMIT_ANALYSIS": "true",
-    "git-widget-placeholder": "main",
-    "ignore.virus.scanning.warn.message": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/alejandro.a.silva/Documents/personal/modern-microservices-platform",
-    "onboarding.tips.debug.path": "/home/alex/Documents/apuntes_extra/microservices-template/core/src/main/java/com/microservices/Main.java",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "preferences.keymap"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.CartServiceApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Application.CartServiceApplicationLocal.executor&quot;: &quot;Run&quot;,
+    &quot;Application.CatalogServiceApplication.executor&quot;: &quot;Debug&quot;,
+    &quot;Application.ConfigServerApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Application.EurekaServerApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Application.GatewayApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Application.UserServiceApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Maven.cart-service [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.cart-service [install].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.catalog-service [install].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.core [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.core [install].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.gateway-service [install].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.microservices-template [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.microservices-template [install].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.user-service [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.user-service [install].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.user-service [package].executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;SONARLINT_PRECOMMIT_ANALYSIS&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;feature/kubernetes-integration&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/alex/Documents/apuntes_extra/microservices-template&quot;,
+    &quot;onboarding.tips.debug.path&quot;: &quot;/home/alex/Documents/apuntes_extra/microservices-template/core/src/main/java/com/microservices/Main.java&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/services/catalog-service" />
@@ -91,7 +112,20 @@
       <recent name="com.microservices.cart.dto" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.UserServiceApplication">
+  <component name="RunManager" selected="Application.CartServiceApplication">
+    <configuration name="CartServiceApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.microservices.cart.CartServiceApplication" />
+      <module name="cart-service" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.microservices.cart.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="CatalogServiceApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.microservices.catalog.CatalogServiceApplication" />
       <module name="catalog-service" />
@@ -131,19 +165,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="GatewayApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.microservices.gateway.GatewayApplication" />
-      <module name="gateway-service" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.microservices.gateway.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="UserServiceApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.microservices.user.UserServiceApplication" />
       <module name="user-service" />
@@ -158,19 +179,19 @@
       </method>
     </configuration>
     <list>
+      <item itemvalue="Application.CartServiceApplication" />
       <item itemvalue="Application.UserServiceApplication" />
       <item itemvalue="Application.CatalogServiceApplication" />
       <item itemvalue="Application.ConfigServerApplication" />
       <item itemvalue="Application.EurekaServerApplication" />
-      <item itemvalue="Application.GatewayApplication" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.CartServiceApplication" />
         <item itemvalue="Application.UserServiceApplication" />
-        <item itemvalue="Application.CatalogServiceApplication" />
         <item itemvalue="Application.EurekaServerApplication" />
         <item itemvalue="Application.ConfigServerApplication" />
-        <item itemvalue="Application.GatewayApplication" />
+        <item itemvalue="Application.CatalogServiceApplication" />
       </list>
     </recent_temporary>
   </component>
@@ -198,7 +219,23 @@
       <option name="project" value="LOCAL" />
       <updated>1768068731305</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Merge branch 'main' of https://github.com/AlexSilvaa9/springcloud-microservices-template&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml">
+      <option name="closed" value="true" />
+      <created>1768493995579</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1768493995579</updated>
+    </task>
+    <task id="LOCAL-00004" summary="chore: eliminado front">
+      <option name="closed" value="true" />
+      <created>1771962310906</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1771962310906</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -219,7 +256,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="secreto jwt de prueba pasa a application.yml" />
     <MESSAGE value="debug logging en springSecurity" />
-    <option name="LAST_COMMIT_MESSAGE" value="debug logging en springSecurity" />
+    <MESSAGE value="chore: eliminado front" />
+    <option name="LAST_COMMIT_MESSAGE" value="chore: eliminado front" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -235,28 +273,18 @@
           <option name="timeStamp" value="4" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/services/catalog-service/src/main/java/com/microservices/catalog/controller/ProductController.java</url>
-          <line>32</line>
-          <option name="timeStamp" value="5" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/services/catalog-service/src/main/java/com/microservices/catalog/controller/ProductController.java</url>
-          <line>33</line>
-          <option name="timeStamp" value="6" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/core/src/main/java/com/microservices/core/security/JwtFilter.java</url>
-          <line>35</line>
+          <line>37</line>
           <option name="timeStamp" value="14" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/core/src/main/java/com/microservices/core/security/JwtFilter.java</url>
-          <line>48</line>
+          <line>50</line>
           <option name="timeStamp" value="15" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/core/src/main/java/com/microservices/core/security/JwtFilter.java</url>
-          <line>52</line>
+          <line>54</line>
           <option name="timeStamp" value="16" />
         </line-breakpoint>
       </breakpoints>

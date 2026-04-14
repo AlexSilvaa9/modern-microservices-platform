@@ -1,21 +1,27 @@
 package com.microservices.catalog.controller;
 
 import com.microservices.catalog.service.ProductService;
+import com.microservices.core.dto.ApiResponse;
 import com.microservices.core.dto.ProductDTO;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
+
+import java.util.Collections;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 /**
  * Controlador REST para gestionar endpoints relacionados con productos.
  */
 @RestController
 @RequestMapping("/products")
-@CrossOrigin(origins = "*")
+@Validated
 public class ProductController {
-
 
     private final ProductService productService;
 
@@ -25,53 +31,78 @@ public class ProductController {
 
     /**
      * Obtiene todos los productos activos.
+     * Devuelve 200 con lista (vacía si no hay productos) en un ApiResponse
+     * consistente.
      *
      * @return ResponseEntity con la lista de {@link ProductDTO}
      */
     @GetMapping
-    public ResponseEntity<List<ProductDTO>> getAllProducts() {
+    public ResponseEntity<ApiResponse<List<ProductDTO>>> getAllProducts() {
         List<ProductDTO> products = productService.getAllActiveProducts();
-        return ResponseEntity.ok(products);
+        if (products == null) {
+            products = Collections.emptyList();
+        }
+        ApiResponse<List<ProductDTO>> body = new ApiResponse<>(
+                products.isEmpty() ? "No products" : "OK",
+                products);
+        return ResponseEntity.ok(body);
     }
 
     /**
      * Obtiene un producto por id.
+     * Valida que el id sea positivo.
+     * Si no existe, se lanza NoSuchElementException y el handler global lo
+     * convertirá en 404.
      *
      * @param id identificador del producto
-     * @return ResponseEntity con el {@link ProductDTO} o 404 si no existe
+     * @return ResponseEntity con el {@link ProductDTO}
      */
     @GetMapping("/{id}")
-    public ResponseEntity<ProductDTO> getProductById(@PathVariable Long id) {
-        return productService.getProductById(id)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
+    public ResponseEntity<ApiResponse<ProductDTO>> getProductById(@PathVariable @NotNull @Positive Long id) {
+        ProductDTO dto = productService.getProductById(id)
+                .orElseThrow(() -> new NoSuchElementException("Producto no encontrado con id: " + id));
+        ApiResponse<ProductDTO> body = new ApiResponse<>(
+                "OK",
+                dto);
+        return ResponseEntity.ok(body);
     }
 
     /**
      * Obtiene productos por categoría.
+     * Valida que la categoría no sea vacía.
      *
      * @param category nombre de la categoría
-     * @return ResponseEntity con la lista de {@link ProductDTO}
+     * @return ResponseEntity con la lista de {@link ProductDTO} (200 con lista
+     *         vacía si no hay coincidencias)
      */
     @GetMapping("/category/{category}")
-    public ResponseEntity<List<ProductDTO>> getProductsByCategory(@PathVariable String category) {
-        List<ProductDTO> products = productService.getProductsByCategory(category);
-        return ResponseEntity.ok(products);
+    public ResponseEntity<ApiResponse<List<ProductDTO>>> getProductsByCategory(
+            @PathVariable @NotBlank String category) {
+        List<ProductDTO> products = productService.getProductsByCategory(category.trim());
+        ApiResponse<List<ProductDTO>> body = new ApiResponse<>(
+                products.isEmpty() ? "No results" : "OK",
+                products);
+        // Devolver 200 con lista vacía es frecuente para endpoints que devuelven
+        // colecciones
+        return ResponseEntity.ok(body);
     }
 
     /**
      * Busca productos por nombre.
+     * Si no hay resultados, devuelve 200 con lista vacía en ApiResponse para
+     * mantener contrato uniforme.
      *
      * @param name parámetro de búsqueda (fragmento)
-     * @return ResponseEntity con los resultados o 204 si no hay resultados
+     * @return ResponseEntity con los resultados (lista vacía si no hay resultados)
      */
     @GetMapping("/search")
-    public ResponseEntity<List<ProductDTO>> searchProducts(@RequestParam String name) {
-        List<ProductDTO> products = productService.searchProductsByName(name);
-        if (products.isEmpty()) {
-            return ResponseEntity.noContent().build(); // 204 si no hay resultados
-        }
-        return ResponseEntity.ok(products);
+    public ResponseEntity<ApiResponse<List<ProductDTO>>> searchProducts(
+            @RequestParam(name = "name") @NotBlank String name) {
+        List<ProductDTO> products = productService.searchProductsByName(name.trim());
+        ApiResponse<List<ProductDTO>> body = new ApiResponse<>(
+                products.isEmpty() ? "No results" : "OK",
+                products);
+        return ResponseEntity.ok(body);
     }
 
     /**
@@ -80,8 +111,11 @@ public class ProductController {
      * @return ResponseEntity con la lista de categorías
      */
     @GetMapping("/categories")
-    public  ResponseEntity<List<String>> getCategories() {
+    public ResponseEntity<ApiResponse<List<String>>> getCategories() {
         List<String> categories = productService.getAllCategories();
-        return ResponseEntity.ok(categories);
+        ApiResponse<List<String>> body = new ApiResponse<>(
+                categories.isEmpty() ? "No categories" : "OK",
+                categories);
+        return ResponseEntity.ok(body);
     }
 }

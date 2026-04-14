@@ -60,7 +60,7 @@ public class ProductService {
      * @param category nombre de la categoría
      * @return lista de {@link ProductDTO} en la categoría (puede estar vacía)
      */
-    public List<ProductDTO> getProductsByCategory(String category) {
+    public @NotNull List<ProductDTO> getProductsByCategory(String category) {
         List<ProductEntity> entities = productDAO.findByCategory(category);
         return entities.stream()
                 .map(productMapper::toDTO)
@@ -73,7 +73,7 @@ public class ProductService {
      * @param name fragmento de nombre a buscar
      * @return lista de {@link ProductDTO} cuyos nombres contienen el fragmento
      */
-    public List<ProductDTO> searchProductsByName(String name) {
+    public @NotNull List<ProductDTO> searchProductsByName(String name) {
         List<ProductEntity> entities = productDAO.searchByName(name);
         return entities.stream()
                 .map(productMapper::toDTO)
