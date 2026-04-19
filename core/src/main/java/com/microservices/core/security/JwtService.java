@@ -3,6 +3,7 @@ package com.microservices.core.security;
 import java.security.Key;
 import java.util.Date;
 import java.nio.charset.StandardCharsets;
+import java.util.List;
 
 import com.microservices.core.dto.enums.Role;
 import org.springframework.beans.factory.annotation.Value;
@@ -18,7 +19,7 @@ import io.jsonwebtoken.security.Keys;
  * Utilidad para generar y validar JWT.
  */
 @Component
-public class JwtUtil {
+public class JwtService {
 
     @Value("${security.jwt.secret:changeitchangeme}")
     private String jwtSecret;
@@ -30,11 +31,11 @@ public class JwtUtil {
         return Keys.hmacShaKeyFor(jwtSecret.getBytes(StandardCharsets.UTF_8));
     }
 
-    public String generateToken(String subject, Role role) {
+    public String generateToken(String subject, List<Role> roles) {
         Date now = new Date();
         return Jwts.builder()
                 .setSubject(subject)
-                .claim("role", role)
+                .claim("roles", roles.stream().map(Role::name).toList())
                 .setIssuedAt(now)
                 .setExpiration(new Date(now.getTime() + jwtExpirationMs))
                 .signWith(key(), SignatureAlgorithm.HS256)

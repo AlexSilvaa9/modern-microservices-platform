@@ -6,6 +6,8 @@ import org.mapstruct.Mapper;
 import com.microservices.user.model.UserEntity;
 import org.mapstruct.Mapping;
 
+import java.util.List;
+
 /**
  * MapStruct mapper para UserEntity <-> UserDTO.
  */
@@ -13,10 +15,13 @@ import org.mapstruct.Mapping;
 public interface UserMapper {
     UserDTO toDTO(UserEntity entity);
 
-
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "passwordHash", ignore = true)
     @Mapping(target = "createdAt", ignore = true)
+    @Mapping(target = "accountNonExpired", ignore = true)
+    @Mapping(target = "accountNonLocked", ignore = true)
+    @Mapping(target = "credentialsNonExpired", ignore = true)
+    @Mapping(target = "enabled", ignore = true)
     UserEntity fromDTO(UserDTO dto);
 }
 

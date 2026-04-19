@@ -3,7 +3,7 @@ name: devspace
 pipelines:
   dev:
     run: -|
-      start_dev user-service catalog-service cart-service
+      start_dev user-service catalog-service
 dev:
   user-service:
     imageSelector: "user-service:1.0.0"
@@ -12,9 +12,7 @@ dev:
       - path: ./services/user-service/target/user-service-1.0.0.jar:/app/user-service-1.0.0.jar
         disableDownload: true
         onUpload:
-          exec:
-            - command: "pkill -f user-service || true"
-            - command: "java -jar /app/user-service-1.0.0.jar"
+          restartContainer: true
     ports:
       - port: "8081:8080"
     open:
@@ -29,9 +27,7 @@ dev:
       - path: ./services/catalog-service/target/catalog-service-1.0.0.jar:/app/catalog-service-1.0.0.jar
         disableDownload: true
         onUpload:
-          exec:
-            - command: "pkill -f catalog-service || true"
-            - command: "java -jar /app/catalog-service-1.0.0.jar"
+          restartContainer: true
     ports:
       - port: "8082:8080"
     open:
@@ -46,9 +42,7 @@ dev:
       - path: ./services/cart-service/target/cart-service-1.0.0.jar:/app/cart-service-1.0.0.jar
         disableDownload: true
         onUpload:
-          exec:
-            - command: "pkill -f cart-service || true"
-            - command: "java -jar /app/cart-service-1.0.0.jar"
+          restartContainer: true
     ssh:
       enabled: true
     ports:

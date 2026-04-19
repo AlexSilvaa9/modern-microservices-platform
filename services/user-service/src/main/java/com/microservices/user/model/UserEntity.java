@@ -5,12 +5,15 @@ import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 
+import com.microservices.core.dto.enums.IdentityProvider;
 import com.microservices.core.dto.enums.Role;
 import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
-import lombok.NonNull;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.jspecify.annotations.NullMarked;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -22,10 +25,10 @@ import org.springframework.security.core.userdetails.UserDetails;
 @Getter
 @Setter
 @Table(name = "users")
-public class UserEntity implements UserDetails {
+public class UserEntity {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
     @Column(nullable = false, unique = true)
@@ -34,12 +37,26 @@ public class UserEntity implements UserDetails {
     @Column(nullable = false, unique = true)
     private String username;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String passwordHash;
 
-    @Column(nullable = false)
+    @ElementCollection(fetch = FetchType.EAGER)
+    @CollectionTable(
+            name = "user_role",
+            joinColumns = @JoinColumn(name = "user_id")
+    )
     @Enumerated(EnumType.STRING)
-    private Role role;
+    @Column(name = "role")
+    private List<Role> roles;
+
+    @ElementCollection(fetch = FetchType.EAGER)
+    @CollectionTable(
+            name = "user_provider",
+            joinColumns = @JoinColumn(name = "user_id")
+    )
+    @Enumerated(EnumType.STRING)
+    @Column(name = "provider")
+    private List<IdentityProvider> providers;
 
     @Column(nullable = false)
     private LocalDateTime createdAt;
@@ -56,18 +73,5 @@ public class UserEntity implements UserDetails {
 
     @Column(nullable = false)
     private boolean enabled = true;
-
-    @Override
-    @NonNull
-    public Collection< ? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority("ROLE_" + this.role.name()));
-    }
-
-
-    @Override
-    public @Nullable String getPassword() {
-        return this.passwordHash;
-    }
-
 
 }

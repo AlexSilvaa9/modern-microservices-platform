@@ -17,7 +17,7 @@ El dominio funcional es deliberadamente sencillo (un **catálogo y carrito de co
 
 * **Java 17 + Spring Boot**
 * **Spring Cloud** (Config, Discovery, Gateway)
-* **Spring Security** (JWT)
+* Arquitectura de seguridad personalizada basada en **Spring Security**. Autenticación híbrida base de datos + google. 
 * **Arquitectura de microservicios**
 * **Comunicación síncrona y asíncrona** (REST + mensajería)
 

@@ -5,15 +5,46 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5e77696f-e307-4867-83b6-44be6a0bf308" name="Changes" comment="chore: eliminado front">
-      <change afterPath="$PROJECT_DIR$/k8s/RBAC/cart-service-sa-discobery-role-binding.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/k8s/RBAC/cart-service-sa.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/k8s/RBAC/discovery-role.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/src/main/java/com/microservices/core/config/OpenAPIConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/src/main/java/com/microservices/core/dto/BaseApiResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/src/main/java/com/microservices/core/dto/enums/IdentityProvider.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/src/main/java/com/microservices/core/exception/UserAlreadyExistsException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/src/main/java/com/microservices/core/security/JwtAuthenticationProvider.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/src/main/java/com/microservices/core/security/JwtAuthenticationToken.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/src/main/java/com/microservices/core/security/JwtHttpOnlyCookieFilter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/src/main/java/com/microservices/core/security/SecurityProperties.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front/googleAuthTest.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/user-service/src/main/java/com/microservices/user/dto/DataBaseLoginRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/user-service/src/main/java/com/microservices/user/model/RefreshToken.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/user-service/src/main/java/com/microservices/user/repository/RefreshTokenRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/user-service/src/main/java/com/microservices/user/service/AuthService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/user-service/src/main/java/com/microservices/user/service/GoogleAuthService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/user-service/src/main/java/com/microservices/user/service/RefreshTokenService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/user-service/src/main/resources/data.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/k8s/cart-service.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/k8s/cart-service.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/core/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/microservices/core/dto/ApiResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/microservices/core/dto/UserDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/microservices/core/dto/UserDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/microservices/core/exception/GlobalExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/microservices/core/exception/GlobalExceptionHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/microservices/core/security/JwtFilter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/microservices/core/security/JwtUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/microservices/core/security/JwtService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/microservices/core/security/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/microservices/core/security/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/devspace.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/devspace.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/k8s/configmap.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/k8s/configmap.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/cart-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/services/cart-service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/cart-service/src/main/java/com/microservices/cart/CartServiceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/services/cart-service/src/main/java/com/microservices/cart/CartServiceApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/cart-service/target/cart-service-1.0.0.jar" beforeDir="false" afterPath="$PROJECT_DIR$/services/cart-service/target/cart-service-1.0.0.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/reload.sh" beforeDir="false" afterPath="$PROJECT_DIR$/reload.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/catalog-service/src/main/java/com/microservices/catalog/controller/ProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/services/catalog-service/src/main/java/com/microservices/catalog/controller/ProductController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/user-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/services/user-service/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/user-service/src/main/java/com/microservices/user/UserServiceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/services/user-service/src/main/java/com/microservices/user/UserServiceApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/user-service/src/main/java/com/microservices/user/controller/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/services/user-service/src/main/java/com/microservices/user/controller/AuthController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/user-service/src/main/java/com/microservices/user/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/services/user-service/src/main/java/com/microservices/user/controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/user-service/src/main/java/com/microservices/user/dao/UserDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/services/user-service/src/main/java/com/microservices/user/dao/UserDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/user-service/src/main/java/com/microservices/user/dto/AuthRequestDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/services/user-service/src/main/java/com/microservices/user/dto/DataBaseRegistrationRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/user-service/src/main/java/com/microservices/user/dto/AuthResponseDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/services/user-service/src/main/java/com/microservices/user/dto/AuthDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/user-service/src/main/java/com/microservices/user/mapper/UserMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/services/user-service/src/main/java/com/microservices/user/mapper/UserMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/user-service/src/main/java/com/microservices/user/model/UserEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/services/user-service/src/main/java/com/microservices/user/model/UserEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/user-service/src/main/java/com/microservices/user/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/services/user-service/src/main/java/com/microservices/user/service/UserService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,8 +60,10 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Enum" />
-        <option value="Class" />
+        <option value="Record" />
         <option value="Exception" />
+        <option value="Class" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -49,6 +82,9 @@
     &quot;accountId&quot;: &quot;da9dfbd0-a863-448d-9627-04ba25d59e15&quot;
   }
 }</component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="jar://$MAVEN_REPOSITORY$/org/springframework/security/spring-security-web/7.0.0/spring-security-web-7.0.0.jar!/org/springframework/security/web/authentication/AnonymousAuthenticationFilter.class" root0="SKIP_INSPECTION" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 1
 }</component>
@@ -57,44 +93,46 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.CartServiceApplication.executor&quot;: &quot;Run&quot;,
-    &quot;Application.CartServiceApplicationLocal.executor&quot;: &quot;Run&quot;,
-    &quot;Application.CatalogServiceApplication.executor&quot;: &quot;Debug&quot;,
-    &quot;Application.ConfigServerApplication.executor&quot;: &quot;Run&quot;,
-    &quot;Application.EurekaServerApplication.executor&quot;: &quot;Run&quot;,
-    &quot;Application.GatewayApplication.executor&quot;: &quot;Run&quot;,
-    &quot;Application.UserServiceApplication.executor&quot;: &quot;Run&quot;,
-    &quot;Maven.cart-service [clean].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.cart-service [install].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.catalog-service [install].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.core [clean].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.core [install].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.gateway-service [install].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.microservices-template [clean].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.microservices-template [install].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.user-service [clean].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.user-service [install].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.user-service [package].executor&quot;: &quot;Run&quot;,
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;SONARLINT_PRECOMMIT_ANALYSIS&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;feature/kubernetes-integration&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/alex/Documents/apuntes_extra/microservices-template&quot;,
-    &quot;onboarding.tips.debug.path&quot;: &quot;/home/alex/Documents/apuntes_extra/microservices-template/core/src/main/java/com/microservices/Main.java&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.CartServiceApplication.executor": "Run",
+    "Application.CartServiceApplicationLocal.executor": "Run",
+    "Application.CatalogServiceApplication.executor": "Debug",
+    "Application.ConfigServerApplication.executor": "Run",
+    "Application.EurekaServerApplication.executor": "Run",
+    "Application.GatewayApplication.executor": "Run",
+    "Application.UserServiceApplication.executor": "Run",
+    "DefaultHtmlFileTemplate": "HTML File",
+    "Maven.cart-service [clean].executor": "Run",
+    "Maven.cart-service [install].executor": "Run",
+    "Maven.catalog-service [install].executor": "Run",
+    "Maven.core [clean].executor": "Run",
+    "Maven.core [install].executor": "Run",
+    "Maven.gateway-service [install].executor": "Run",
+    "Maven.microservices-template [clean,install].executor": "Run",
+    "Maven.microservices-template [clean].executor": "Run",
+    "Maven.microservices-template [install].executor": "Run",
+    "Maven.user-service [clean].executor": "Run",
+    "Maven.user-service [install].executor": "Run",
+    "Maven.user-service [package].executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "SONARLINT_PRECOMMIT_ANALYSIS": "true",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/home/alex/Documents/apuntes_extra/microservices-template",
+    "onboarding.tips.debug.path": "/home/alex/Documents/apuntes_extra/microservices-template/front/src/Main.java",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "preferences.pluginManager"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/services/catalog-service" />
@@ -107,12 +145,13 @@
       <recent name="$PROJECT_DIR$/services" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.microservices.user.config.security" />
       <recent name="com.microservices.cart.mapper" />
       <recent name="dto" />
       <recent name="com.microservices.cart.dto" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.CartServiceApplication">
+  <component name="RunManager" selected="Maven.microservices-template [clean,install]">
     <configuration name="CartServiceApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.microservices.cart.CartServiceApplication" />
       <module name="cart-service" />
@@ -178,17 +217,49 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="microservices-template [clean,install]" type="MavenRunConfiguration" factoryName="Maven" nameIsGenerated="true">
+      <MavenSettings>
+        <option name="myGeneralSettings" />
+        <option name="myRunnerSettings" />
+        <option name="myRunnerParameters">
+          <MavenRunnerParameters>
+            <option name="cmdOptions" />
+            <option name="profiles">
+              <set />
+            </option>
+            <option name="goals">
+              <list>
+                <option value="clean" />
+                <option value="install" />
+              </list>
+            </option>
+            <option name="multimoduleDir" />
+            <option name="pomFileName" />
+            <option name="profilesMap">
+              <map />
+            </option>
+            <option name="projectsCmdOptionValues">
+              <list />
+            </option>
+            <option name="resolveToWorkspace" value="false" />
+            <option name="workingDirPath" value="$PROJECT_DIR$" />
+          </MavenRunnerParameters>
+        </option>
+      </MavenSettings>
+      <method v="2" />
+    </configuration>
     <list>
       <item itemvalue="Application.CartServiceApplication" />
       <item itemvalue="Application.UserServiceApplication" />
       <item itemvalue="Application.CatalogServiceApplication" />
       <item itemvalue="Application.ConfigServerApplication" />
       <item itemvalue="Application.EurekaServerApplication" />
+      <item itemvalue="Maven.microservices-template [clean,install]" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.CartServiceApplication" />
         <item itemvalue="Application.UserServiceApplication" />
+        <item itemvalue="Application.CartServiceApplication" />
         <item itemvalue="Application.EurekaServerApplication" />
         <item itemvalue="Application.ConfigServerApplication" />
         <item itemvalue="Application.CatalogServiceApplication" />
@@ -253,6 +324,17 @@
     <option featureType="dependencySupport" implementationName="java:jakarta.ws.rs:jakarta.ws.rs-api" />
     <option featureType="dependencySupport" implementationName="java:org.springframework.boot:spring-boot" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="secreto jwt de prueba pasa a application.yml" />
     <MESSAGE value="debug logging en springSecurity" />
@@ -273,19 +355,9 @@
           <option name="timeStamp" value="4" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/core/src/main/java/com/microservices/core/security/JwtFilter.java</url>
-          <line>37</line>
-          <option name="timeStamp" value="14" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/core/src/main/java/com/microservices/core/security/JwtFilter.java</url>
-          <line>50</line>
-          <option name="timeStamp" value="15" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/core/src/main/java/com/microservices/core/security/JwtFilter.java</url>
-          <line>54</line>
-          <option name="timeStamp" value="16" />
+          <url>file://$PROJECT_DIR$/front/src/Main.java</url>
+          <line>11</line>
+          <option name="timeStamp" value="17" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

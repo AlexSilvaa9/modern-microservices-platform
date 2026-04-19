@@ -1,24 +1,35 @@
 package com.microservices.user.controller;
-import java.util.UUID;
 
-import com.microservices.core.dto.ApiResponse;
+
+import com.microservices.core.dto.BaseApiResponse;
 import com.microservices.core.dto.UserDTO;
-import com.microservices.core.exception.BadRequestException;
-import com.microservices.user.service.UserService;
 
+import com.microservices.user.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
-import io.swagger.v3.oas.annotations.media.ExampleObject;
-import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.enums.ParameterIn;
 
+
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.security.SecurityScheme;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/users")
+@SecurityScheme(
+        name = "bearerAuth",
+        type = SecuritySchemeType.HTTP,
+        scheme = "bearer",
+        bearerFormat = "JWT"
+)
 public class UserController {
 
     private final UserService service;
@@ -27,47 +38,53 @@ public class UserController {
         this.service = service;
     }
 
-    @GetMapping("/{id}")
-    @Operation(summary = "Get User by ID")
+
+
+    @GetMapping("/me")
+    @Operation(summary = "Get current authenticated user")
     @ApiResponses(value = {
-            @io.swagger.v3.oas.annotations.responses.ApiResponse(
+            @ApiResponse(
                     responseCode = "200",
-                    description = "User fetched successfully",
+                    description = "Current user fetched successfully",
                     content = @Content(
                             mediaType = "application/json",
                             schema = @Schema(implementation = UserDTO.class)
                     )
-            ),
-            @io.swagger.v3.oas.annotations.responses.ApiResponse(
-                    responseCode = "404",
-                    description = "User not found",
-                    content = @Content(
-                            mediaType = "application/json",
-                            schema = @Schema(implementation = ApiResponse.class),
-                            examples = {
-                                    @ExampleObject(value = "{\"message\": \"User not found\", \"data\": null}")
-                            }
-                    )
             )
     })
-    public ResponseEntity<ApiResponse<UserDTO>> getUser(
-            @PathVariable
-            @Parameter(description = "ID del usuario a consultar", required = true)
-            String id,
+    public ResponseEntity<BaseApiResponse<UserDTO>> me(Authentication authentication) {
 
-            @RequestHeader("Authorization")
-            @Parameter(
-                    in = ParameterIn.HEADER,
-                    description = "Token JWT Bearer",
-                    required = true,
-                    example = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+
+        if (authentication == null || !authentication.isAuthenticated()){
+            throw new AccessDeniedException("Not Signed In");
+        }
+        // principal = email
+        String email = authentication.getName();
+
+        var user = service.findByEmail(email)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+
+        BaseApiResponse<UserDTO> body =
+                new BaseApiResponse<>("Current user fetched successfully", user);
+
+        return ResponseEntity.ok(body);
+    }
+
+    @GetMapping
+    @Operation(summary = "Get all users paginated")
+    @ApiResponses(value = {
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "Users fetched successfully"
             )
-            String authHeader
-    )  {
-        var user = service.findById(UUID.fromString(id))
-                .orElseThrow(() -> new BadRequestException("User not found"));
+    })
+    public ResponseEntity<BaseApiResponse<Page<UserDTO>>> users(Pageable pageable) {
 
-        ApiResponse<UserDTO> body = new ApiResponse<>("User fetched successfully", user);
+        Page<UserDTO> users = service.findAll(pageable);
+
+        BaseApiResponse<Page<UserDTO>> body =
+                new BaseApiResponse<>("Users fetched successfully", users);
+
         return ResponseEntity.ok(body);
     }
 }
