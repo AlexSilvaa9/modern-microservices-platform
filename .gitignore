@@ -3,3 +3,5 @@ logs/
 
 # Ignore DevSpace cache and log folder
 .devspace/
+
+secrets.yaml
