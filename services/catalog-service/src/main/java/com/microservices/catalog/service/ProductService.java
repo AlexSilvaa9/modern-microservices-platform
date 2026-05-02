@@ -2,7 +2,6 @@ package com.microservices.catalog.service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import com.microservices.core.dto.ProductDTO;
 import jakarta.validation.constraints.NotNull;
@@ -41,7 +40,7 @@ public class ProductService {
         List<ProductEntity> entities = productDAO.findAllActive();
         return entities.stream()
                 .map(productMapper::toDTO)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     /**
@@ -64,7 +63,7 @@ public class ProductService {
         List<ProductEntity> entities = productDAO.findByCategory(category);
         return entities.stream()
                 .map(productMapper::toDTO)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     /**
@@ -77,7 +76,7 @@ public class ProductService {
         List<ProductEntity> entities = productDAO.searchByName(name);
         return entities.stream()
                 .map(productMapper::toDTO)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     /**

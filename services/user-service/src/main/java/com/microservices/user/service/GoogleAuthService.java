@@ -2,12 +2,13 @@ package com.microservices.user.service;
 
 import com.microservices.core.dto.enums.IdentityProvider;
 import com.microservices.core.dto.enums.Role;
-import com.microservices.core.security.JwtService;
+import com.microservices.core.security.jwt.JwtService;
 import com.microservices.user.dto.AuthDTO;
-import com.microservices.user.mapper.UserMapper;
 import com.microservices.user.model.RefreshToken;
 import com.microservices.user.model.UserEntity;
 import com.microservices.user.repository.UserRepository;
+import jakarta.annotation.Nullable;
+import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
@@ -22,6 +23,7 @@ import java.util.Map;
 
 @Service
 @Slf4j
+@Transactional
 public class GoogleAuthService {
 
     @Value("${google.client-id}")
@@ -46,14 +48,14 @@ public class GoogleAuthService {
         this.jwtService = jwtService;
         this.refreshTokenService = refreshTokenService;
     }
-
+    @Transactional
     public AuthDTO handleGoogleLogin(String code) {
-        log.info("handleGoogleLogin called");
         // 1. Code → Access Token
         String accessToken = getAccessToken(code);
 
         // 2. UserInfo
         Map<String, Object> userInfo = getUserInfo(accessToken);
+
 
         String email = (String) userInfo.get("email");
 
@@ -108,7 +110,7 @@ public class GoogleAuthService {
         return (String) response.get("access_token");
     }
 
-    private Map<String, Object> getUserInfo(String token) {
+    private @Nullable Map<String, Object> getUserInfo(String token) {
 
         String url = "https://openidconnect.googleapis.com/v1/userinfo";
 

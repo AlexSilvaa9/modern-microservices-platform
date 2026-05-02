@@ -12,7 +12,6 @@ import com.microservices.user.service.RefreshTokenService;
 import com.microservices.user.dto.DataBaseLoginRequest;
 import com.microservices.user.dto.AuthDTO;
 
-import io.swagger.v3.oas.annotations.media.ExampleObject;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
@@ -23,14 +22,12 @@ import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.media.Schema;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
+
 
 import java.io.IOException;
 import java.util.Collections;
+import java.util.Objects;
 
 @Slf4j
 @RestController
@@ -41,7 +38,7 @@ public class AuthController {
     private final GoogleAuthService googleAuthService;
     private final AuthService service;
     private final RefreshTokenService refreshTokenService;
-
+    private static final String SAME_SITE_STRICT = "Strict";
     public AuthController(GoogleAuthService googleAuthService,
                           AuthService service,
                           RefreshTokenService refreshTokenService) {
@@ -50,22 +47,22 @@ public class AuthController {
         this.refreshTokenService = refreshTokenService;
     }
 
-    private HttpHeaders buildAuthHeaders(String accessToken, String refreshToken) {
+    private HttpHeaders buildAuthHeaders(String accessToken, String refreshToken, long maxAge) {
 
         ResponseCookie accessCookie = ResponseCookie.from("access_token", accessToken)
                 .httpOnly(true)
                 .secure(true)
                 .path("/")
-                .maxAge(60 * 60 * 24)
-                .sameSite("Strict")
+                .maxAge(maxAge)
+                .sameSite(SAME_SITE_STRICT)
                 .build();
 
         ResponseCookie refreshCookie = ResponseCookie.from("refresh_token", refreshToken)
                 .httpOnly(true)
                 .secure(true)
                 .path("/")
-                .maxAge(60 * 60 * 24)
-                .sameSite("Strict")
+                .maxAge(maxAge)
+                .sameSite(SAME_SITE_STRICT)
                 .build();
 
         HttpHeaders headers = new HttpHeaders();
@@ -85,15 +82,32 @@ public class AuthController {
 
         return ResponseEntity
                 .status(HttpStatus.OK)
-                .headers(buildAuthHeaders(resp.getToken(), resp.getRefreshToken().getToken()))
+                .headers(buildAuthHeaders(resp.getToken(), resp.getRefreshToken().getToken(), 3000))
                 .body(body);
+    }
+
+    @PostMapping("/logout")
+    public ResponseEntity<BaseApiResponse<Object>> logout(
+            @CookieValue(name = "refresh_token", required = false) String refreshToken) {
+
+        // 1. Invalidar refresh token en BD
+        if (refreshToken != null) {
+            refreshTokenService.invalidRefreshToken(refreshToken);
+        }
+
+
+
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .headers(buildAuthHeaders("","", 0))
+                .body(new BaseApiResponse<>("Logout successful", null));
     }
 
     @PostMapping("/refresh")
     public ResponseEntity<BaseApiResponse<Object>> refreshToken(
-            @RequestBody String requestToken) {
+            @CookieValue(name = "refresh_token", required = false) String requestedToken) {
 
-        RefreshToken refreshToken = refreshTokenService.findByToken(requestToken);
+        RefreshToken refreshToken = refreshTokenService.findByToken(requestedToken);
         AuthDTO authDTO = refreshTokenService.refresh(refreshToken);
 
         BaseApiResponse<Object> body =
@@ -102,9 +116,11 @@ public class AuthController {
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .headers(buildAuthHeaders(authDTO.getToken(),
-                        authDTO.getRefreshToken().getToken()))
+                        authDTO.getRefreshToken().getToken(),
+                        3000))
                 .body(body);
     }
+
 
     @PostMapping("/register")
     public ResponseEntity<BaseApiResponse<UserDTO>> register(
@@ -134,14 +150,15 @@ public class AuthController {
 
         HttpHeaders headers = buildAuthHeaders(
                 resp.getToken(),
-                resp.getRefreshToken().getToken()
+                resp.getRefreshToken().getToken(),
+                3000
         );
 
         response.addHeader(HttpHeaders.SET_COOKIE,
                 headers.getFirst(HttpHeaders.SET_COOKIE));
         response.addHeader(HttpHeaders.SET_COOKIE,
-                headers.get(HttpHeaders.SET_COOKIE).get(1));
+                Objects.requireNonNull(headers.get(HttpHeaders.SET_COOKIE)).get(1));
 
-        response.sendRedirect("http://localhost:8082/swagger-ui/index.html");
+        response.sendRedirect("http://localhost:4200/");
     }
 }

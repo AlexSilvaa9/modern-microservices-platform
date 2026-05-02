@@ -1,7 +1,10 @@
+/** Prerendering: genera HTML estático para rutas de idioma (es, en, de, fr) */
+
 import { RenderMode, ServerRoute, ServerRoutePrerender } from '@angular/ssr';
 import { routes } from './app.routes';
 import { Route } from '@angular/router';
 
+/** Detecta rutas con path = exactamente 2 letras y extrae sus subrutas */
 function collectLangPaths(routesArr: Route[]): string[] {
   const langRoutes = routesArr.filter(
     r => typeof r.path === 'string' && /^[a-z]{2}$/.test(r.path),
@@ -10,6 +13,7 @@ function collectLangPaths(routesArr: Route[]): string[] {
 
   const paths: string[] = [];
 
+  /** Recorre recursivamente children para construir paths completos */
   function traverse(children: Route[] | undefined, prefix: string) {
     if (!children) return;
     for (const c of children) {
@@ -35,10 +39,8 @@ const prerenderRoutes: ServerRoutePrerender[] = esPaths.map(
   p => ({ path: p, renderMode: RenderMode.Prerender } as ServerRoutePrerender),
 );
 
+/** Rutas de idioma: prerenderizdas | Otras rutas: renderizadas en cliente */
 export const serverRoutes: ServerRoute[] = [
-  // prerender only routes that start with `es` and are defined in the normal router
   ...prerenderRoutes,
-
-  // everything else: client-side SPA
   { path: '**', renderMode: RenderMode.Client }
 ];

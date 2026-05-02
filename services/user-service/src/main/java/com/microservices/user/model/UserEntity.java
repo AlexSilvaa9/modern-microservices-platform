@@ -1,22 +1,15 @@
 package com.microservices.user.model;
 
 import java.time.LocalDateTime;
-import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 
 import com.microservices.core.dto.enums.IdentityProvider;
 import com.microservices.core.dto.enums.Role;
-import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
-import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.jspecify.annotations.NullMarked;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
+
 
 /**
  * Entidad JPA que representa un usuario.

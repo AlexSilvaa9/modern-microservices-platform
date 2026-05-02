@@ -6,7 +6,6 @@ import org.mapstruct.Mapper;
 import com.microservices.user.model.UserEntity;
 import org.mapstruct.Mapping;
 
-import java.util.List;
 
 /**
  * MapStruct mapper para UserEntity <-> UserDTO.

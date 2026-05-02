@@ -1,5 +1,8 @@
 package com.microservices.core.security;
 
+import com.microservices.core.security.jwt.JwtAuthenticationProvider;
+import com.microservices.core.security.jwt.JwtHttpOnlyCookieFilter;
+import com.microservices.core.security.properties.SecurityProperties;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
@@ -34,7 +37,7 @@ public class SecurityConfig {
         this.jwtAuthenticationProvider = jwtAuthenticationProvider;
     }
     @Bean
-    public SecurityFilterChain AuthServersecurityFilterChain(HttpSecurity http,
+    public SecurityFilterChain securityFilterChain(HttpSecurity http,
                                                              JwtHttpOnlyCookieFilter jwtHttpOnlyCookieFilter){
 
         String[] whiteList = Optional.ofNullable(securityProperties.getWhitelist())
@@ -54,9 +57,9 @@ public class SecurityConfig {
                     configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
                     configuration.setAllowedHeaders(List.of("*"));
                     configuration.setAllowCredentials(true); // Permitir cookies/autenticación
-                    var source = new org.springframework.web.cors.UrlBasedCorsConfigurationSource();
-                    source.registerCorsConfiguration("/**", configuration);
-                    return source.getCorsConfiguration(request);
+                    configuration.setAllowedOrigins(List.of("http://localhost:4200"));
+
+                    return configuration;
                 }))
                 .csrf(AbstractHttpConfigurer::disable)
 
@@ -81,7 +84,7 @@ public class SecurityConfig {
         return http.build();
     }
     @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration config) {
         return config.getAuthenticationManager();
     }
 

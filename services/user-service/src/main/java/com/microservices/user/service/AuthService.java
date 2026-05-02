@@ -4,13 +4,14 @@ import com.microservices.core.dto.UserDTO;
 import com.microservices.core.dto.enums.IdentityProvider;
 import com.microservices.core.exception.BadRequestException;
 import com.microservices.core.exception.UserAlreadyExistsException;
-import com.microservices.core.security.JwtService;
+import com.microservices.core.security.jwt.JwtService;
 import com.microservices.user.dao.UserDAO;
 import com.microservices.user.dto.DataBaseLoginRequest;
 import com.microservices.user.dto.AuthDTO;
 import com.microservices.user.mapper.UserMapper;
 import com.microservices.user.model.RefreshToken;
 import com.microservices.user.model.UserEntity;
+import jakarta.transaction.Transactional;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -55,7 +56,7 @@ public class AuthService {
 
         return mapper.toDTO(saved);
     }
-
+    @Transactional
     public @NotNull AuthDTO authenticate(DataBaseLoginRequest request) {
         var user = dao.findByEmail(request.email())
                 .filter(u ->

@@ -2,21 +2,20 @@
 
     <!-- HERO -->
     <section class="hero">
-        <h1>Plantilla de Microservicios Moderna</h1>
+        <h1>{{ 'BLOG.HERO.TITLE' | translate }}</h1>
         <p>
-            Arquitectura basada en eventos con Kafka, orquestación con Kubernetes y seguridad con Spring Security.
+            {{ 'BLOG.HERO.SUBTITLE' | translate }}
         </p>
 
         <div class="status">
-            🚧 Proyecto en desarrollo — contenido en constante actualización
+            {{ 'BLOG.STATUS' | translate }}
         </div>
     </section>
 
     <!-- INTRO -->
     <section class="intro">
         <p>
-            Esta plantilla está diseñada como base para aplicaciones web escalables.
-            Integra múltiples tecnologías clave del ecosistema cloud-native con buenas prácticas desde el inicio.
+            {{ 'BLOG.INTRO.TEXT' | translate }}
         </p>
     </section>
 
@@ -24,67 +23,62 @@
     <section class="tech-grid">
 
         <article class="tech">
-            <h3>Apache Kafka</h3>
+            <h3>{{ 'BLOG.TECH.KAFKA.TITLE' | translate }}</h3>
             <p class="desc">
-                Plataforma de mensajería distribuida basada en eventos que permite desacoplar servicios.
+                {{ 'BLOG.TECH.KAFKA.DESC' | translate }}
             </p>
             <p class="use">
-                Se utiliza para comunicar microservicios mediante eventos asíncronos,
-                mejorando la resiliencia y escalabilidad del sistema.
+                {{ 'BLOG.TECH.KAFKA.USE' | translate }}
             </p>
         </article>
 
         <article class="tech">
-            <h3>Kubernetes</h3>
+            <h3>{{ 'BLOG.TECH.KUBERNETES.TITLE' | translate }}</h3>
             <p class="desc">
-                Sistema de orquestación de contenedores que automatiza despliegue y escalado.
+                {{ 'BLOG.TECH.KUBERNETES.DESC' | translate }}
             </p>
             <p class="use">
-                Gestiona los microservicios, permitiendo escalado automático,
-                balanceo de carga y alta disponibilidad.
+                {{ 'BLOG.TECH.KUBERNETES.USE' | translate }}
             </p>
         </article>
 
         <article class="tech">
-            <h3>Spring Boot</h3>
+            <h3>{{ 'BLOG.TECH.SPRINGBOOT.TITLE' | translate }}</h3>
             <p class="desc">
-                Framework para crear microservicios en Java de forma rápida y estructurada.
+                {{ 'BLOG.TECH.SPRINGBOOT.DESC' | translate }}
             </p>
             <p class="use">
-                Se utiliza como base para cada servicio, facilitando APIs REST
-                y lógica de negocio desacoplada.
+                {{ 'BLOG.TECH.SPRINGBOOT.USE' | translate }}
             </p>
         </article>
 
         <article class="tech">
-            <h3>Spring Security</h3>
+            <h3>{{ 'BLOG.TECH.SPRINGSECURITY.TITLE' | translate }}</h3>
             <p class="desc">
-                Framework de seguridad para autenticación y autorización.
+                {{ 'BLOG.TECH.SPRINGSECURITY.DESC' | translate }}
             </p>
             <p class="use">
-                Protege endpoints mediante JWT, control de roles
-                y autenticación centralizada.
+                {{ 'BLOG.TECH.SPRINGSECURITY.USE' | translate }}
             </p>
         </article>
 
         <article class="tech">
-            <h3>Docker</h3>
+            <h3>{{ 'BLOG.TECH.DOCKER.TITLE' | translate }}</h3>
             <p class="desc">
-                Plataforma de contenedores que permite empaquetar aplicaciones.
+                {{ 'BLOG.TECH.DOCKER.DESC' | translate }}
             </p>
             <p class="use">
-                Cada microservicio se ejecuta en su propio contenedor,
-                asegurando consistencia entre entornos.
+                {{ 'BLOG.TECH.DOCKER.USE' | translate }}
             </p>
         </article>
 
         <article class="tech">
-            <h3>API Gateway</h3>
+            <h3>{{ 'BLOG.TECH.APIGATEWAY.TITLE' | translate }}</h3>
             <p class="desc">
-                Punto de entrada único para todos los servicios.
+                {{ 'BLOG.TECH.APIGATEWAY.DESC' | translate }}
             </p>
             <p class="use">
-                Gestiona routing, autenticación y control de tráfico.
+                {{ 'BLOG.TECH.APIGATEWAY.USE' | translate }}
             </p>
         </article>
 
@@ -92,24 +86,22 @@
 
     <!-- FLUJO -->
     <section class="flow">
-        <h2>Flujo de la arquitectura</h2>
+        <h2>{{ 'BLOG.FLOW.TITLE' | translate }}</h2>
         <p>
-            El cliente realiza una petición → pasa por el API Gateway →
-            se autentica con Spring Security → el servicio procesa la lógica →
-            se genera un evento en Kafka → otros servicios reaccionan.
+            {{ 'BLOG.FLOW.TEXT' | translate }}
         </p>
     </section>
 
     <!-- ESTADO -->
     <section class="roadmap">
-        <h2>Estado del proyecto</h2>
+        <h2>{{ 'BLOG.ROADMAP.TITLE' | translate }}</h2>
         <ul>
-            <li>✔ Estructura base de microservicios</li>
-            <li>✔ Integración con Kafka</li>
-            <li>✔ Contenerización con Docker</li>
-            <li>🔄 Despliegue completo en Kubernetes</li>
-            <li>🔄 Seguridad avanzada con Spring Security</li>
-            <li>⏳ Observabilidad (logs, métricas, tracing)</li>
+            <li>{{ 'BLOG.ROADMAP.ITEM1' | translate }}</li>
+            <li>{{ 'BLOG.ROADMAP.ITEM2' | translate }}</li>
+            <li>{{ 'BLOG.ROADMAP.ITEM3' | translate }}</li>
+            <li>{{ 'BLOG.ROADMAP.ITEM4' | translate }}</li>
+            <li>{{ 'BLOG.ROADMAP.ITEM5' | translate }}</li>
+            <li>{{ 'BLOG.ROADMAP.ITEM6' | translate }}</li>
         </ul>
     </section>
 
