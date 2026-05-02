@@ -1,6 +1,7 @@
-package com.microservices.core.security;
+package com.microservices.core.security.jwt;
 
 
+import com.microservices.core.security.properties.SecurityProperties;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.Cookie;

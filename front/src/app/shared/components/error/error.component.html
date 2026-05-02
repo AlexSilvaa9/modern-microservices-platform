@@ -1,0 +1,35 @@
+<div class="error-modal-backdrop" *ngIf="errorService.currentError() as error">
+    <div class="error-modal">
+        <div class="error-modal-header">
+            <div class="error-title">
+                <i class="bi bi-exclamation-octagon-fill"></i>
+                <span>{{ 'GENERAL.ERROR' | translate }}</span>
+            </div>
+            <button class="close-btn" (click)="errorService.clearError()">
+                <i class="bi bi-x-lg"></i>
+            </button>
+        </div>
+
+        <div class="error-modal-body">
+            <p *ngIf="error.message" class="error-message">{{ error.message }}</p>
+
+            <div *ngIf="error.errors" class="error-details">
+                <ul class="error-list" *ngIf="isObject(error.errors); else rawError">
+                    <li *ngFor="let item of error.errors | keyvalue">
+                        <strong>{{ item.key }}:</strong> {{ item.value }}
+                    </li>
+                </ul>
+                <ng-template #rawError>
+                    <p class="error-raw">{{ error.errors }}</p>
+                </ng-template>
+            </div>
+
+            <small class="error-timestamp" *ngIf="error.timestamp">{{ error.timestamp | date:'short' }}</small>
+        </div>
+
+        <div class="error-modal-footer">
+            <button class="p-button accept-btn" (click)="errorService.clearError()">{{ 'GENERAL.ACCEPT' | translate
+                }}</button>
+        </div>
+    </div>
+</div>

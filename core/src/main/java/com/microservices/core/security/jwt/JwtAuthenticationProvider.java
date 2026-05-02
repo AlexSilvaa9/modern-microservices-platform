@@ -1,4 +1,4 @@
-package com.microservices.core.security;
+package com.microservices.core.security.jwt;
 
 import io.jsonwebtoken.Claims;
 import org.springframework.security.authentication.AuthenticationProvider;

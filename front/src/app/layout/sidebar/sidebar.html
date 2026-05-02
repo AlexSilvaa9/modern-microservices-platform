@@ -1,0 +1,75 @@
+<div class="sidebar">
+
+    <nav class="menu">
+
+        <ng-container *ngFor="let item of menu">
+
+            <!-- ITEM CON HIJOS sin admin-->
+            <div *ngIf="item.children && !item.roles?.includes(Role.ADMIN)" class="menu-group">
+
+                <div class="menu-item group" (click)="toggleGroup(item.label)">
+                    <i [class]="item.icon"></i>
+                    <span class="label">{{ item.label | translate }}</span>
+                    <span class="arrow">›</span>
+                </div>
+
+                <div class="submenu" *ngIf="openGroup() === item.label">
+
+                    <div *ngFor="let child of item.children" class="submenu-item" [class.active]="isActive(child.route)"
+                        (click)="navigate(child.route!)">
+                        <span class="label">{{ child.label | translate}}</span>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- ITEM CON HIJOS con admin-->
+            <div *appIsAdmin>
+                <div *ngIf="item.children && item.roles?.includes(Role.ADMIN)" class="menu-group">
+
+                    <div class="menu-item group" (click)="toggleGroup(item.label)">
+                        <i [class]="item.icon"></i>
+                        <span class="label">{{ item.label | translate }}</span>
+                        <span class="arrow">›</span>
+                    </div>
+
+                    <div class="submenu" *ngIf="openGroup() === item.label">
+
+                        <div *ngFor="let child of item.children" class="submenu-item"
+                            [class.active]="isActive(child.route)" (click)="navigate(child.route!)">
+                            <span class="label">{{ child.label | translate}}</span>
+                        </div>
+
+                    </div>
+                </div>
+                <div *ngIf="item.children && item.roles?.includes(Role.ADMIN)" class="menu-group">
+
+                    <div class="menu-item group" (click)="toggleGroup(item.label)">
+                        <i [class]="item.icon"></i>
+                        <span class="label">{{ item.label | translate}}</span>
+                        <span class="arrow">›</span>
+                    </div>
+
+                    <div class="submenu" *ngIf="openGroup() === item.label">
+
+                        <div *ngFor="let child of item.children" class="submenu-item"
+                            [class.active]="isActive(child.route)" (click)="navigate(child.route!)">
+                            <span class="label">{{ child.label | translate}}</span>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- ITEM SIMPLE -->
+            <div *ngIf="!item.children" class="menu-item" [class.active]="isActive(item.route)"
+                (click)="navigate(item.route!)">
+                <i [class]="item.icon"></i>
+                <span class="label">{{ item.label | translate}}</span>
+            </div>
+
+        </ng-container>
+
+    </nav>
+
+</div>

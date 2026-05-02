@@ -1,4 +1,4 @@
-package com.microservices.core.security;
+package com.microservices.core.security.jwt;
 
 import java.security.Key;
 import java.util.Date;
@@ -6,7 +6,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 import com.microservices.core.dto.enums.Role;
-import org.springframework.beans.factory.annotation.Value;
+import com.microservices.core.security.properties.SecurityProperties;
 import org.springframework.stereotype.Component;
 
 import io.jsonwebtoken.Claims;
@@ -21,14 +21,14 @@ import io.jsonwebtoken.security.Keys;
 @Component
 public class JwtService {
 
-    @Value("${security.jwt.secret:changeitchangeme}")
-    private String jwtSecret;
+    private final SecurityProperties securityProperties;
 
-    @Value("${security.jwt.expiration-ms:3600000}")
-    private long jwtExpirationMs;
+    public JwtService(SecurityProperties securityProperties) {
+        this.securityProperties = securityProperties;
+    }
 
     private Key key() {
-        return Keys.hmacShaKeyFor(jwtSecret.getBytes(StandardCharsets.UTF_8));
+        return Keys.hmacShaKeyFor(securityProperties.getJwtProperties().getSecret().getBytes(StandardCharsets.UTF_8));
     }
 
     public String generateToken(String subject, List<Role> roles) {
@@ -37,7 +37,7 @@ public class JwtService {
                 .setSubject(subject)
                 .claim("roles", roles.stream().map(Role::name).toList())
                 .setIssuedAt(now)
-                .setExpiration(new Date(now.getTime() + jwtExpirationMs))
+                .setExpiration(new Date(now.getTime() + securityProperties.getJwtProperties().getExpirationMs()))
                 .signWith(key(), SignatureAlgorithm.HS256)
                 .compact();
     }

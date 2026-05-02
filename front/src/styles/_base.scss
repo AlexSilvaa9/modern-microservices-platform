@@ -1,0 +1,134 @@
+@use 'variables' as *;
+
+// Reset básico
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+// Base
+body {
+    min-height: 100%;
+    margin: 0;
+    font-family: $font-family;
+    font-size: $font-size-base;
+    background: $bg;
+    background-attachment: fixed;
+    color: $text-color;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    z-index: 5;
+}
+
+// Layout
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: $space-4;
+}
+
+// Tipografía
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin: 0 0 $space-3 0;
+    font-weight: $font-weight-semibold;
+    color: $primary-color;
+}
+
+p {
+    margin: 0 0 $space-3 0;
+    color: $text-secondary;
+}
+
+// Links
+a {
+    color: $primary-color;
+    text-decoration: none;
+    transition: $transition-fast;
+
+    &:hover {
+        color: $primary-hover;
+    }
+}
+
+// Botones
+button {
+    font-family: inherit;
+    font-size: $font-size-sm;
+    border: none;
+    border-radius: $border-radius;
+    padding: $space-2 $space-4;
+    cursor: pointer;
+    transition: $transition-fast;
+    background: $primary-color;
+    color: $primary-contrast;
+
+    &:hover {
+        background: $primary-hover;
+    }
+
+    &:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+    }
+}
+
+// Inputs
+input,
+textarea,
+select {
+    font-family: inherit;
+    font-size: $font-size-sm;
+    padding: $space-2 $space-3;
+    border-radius: $border-radius;
+    border: 1px solid $border-color;
+    background: $surface-0;
+    color: $text-color;
+    outline: none;
+    transition: $transition-fast;
+
+    &:focus {
+        border-color: $primary-color;
+        box-shadow: 0 0 0 2px rgba(16, 44, 88, 0.1);
+    }
+}
+
+// Card
+.card {
+    background: $surface-0;
+    border-radius: $border-radius-md;
+    box-shadow: $card-shadow;
+    padding: $space-4;
+}
+
+// Separador
+hr {
+    border: none;
+    border-top: 1px solid $border-color;
+    margin: $space-4 0;
+}
+
+// Scroll
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: $surface-400;
+    border-radius: $border-radius-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: $surface-500;
+}

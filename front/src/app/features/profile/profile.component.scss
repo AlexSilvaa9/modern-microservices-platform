@@ -1,0 +1,138 @@
+@use '../../../styles/variables' as *;
+
+.profile-page {
+    margin: 0 auto;
+    padding: $space-8 5%;
+    background: $secondary-light;
+
+    .page-header {
+        display: flex;
+        align-items: center;
+        gap: $space-5;
+        margin-bottom: $space-6;
+        padding-bottom: $space-4;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+        .avatar-circle {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+
+            i {
+                font-size: 3rem;
+                color: $secondary-contrast;
+            }
+        }
+
+        .header-text {
+            h2 {
+                margin: 0 0 $space-1 0;
+                font-size: $font-size-xl;
+                color: $secondary-contrast;
+            }
+
+            p {
+                margin: 0;
+                color: $secondary-contrast;
+                font-size: $font-size-base;
+            }
+        }
+    }
+
+    .profile-content {
+        display: flex;
+        flex-direction: column;
+        gap: $space-6;
+    }
+
+    .section-container {
+        h3 {
+            margin: 0 0 $space-4 0;
+            color: $secondary-contrast;
+            font-size: $font-size-lg;
+            border-left: 4px solid $primary-color;
+            padding-left: $space-3;
+        }
+
+        form {
+            max-width: 600px;
+        }
+    }
+}
+
+.form-row {
+    display: flex;
+    gap: $space-4;
+
+    .form-group {
+        flex: 1;
+    }
+}
+
+.form-group {
+    margin-bottom: $space-4;
+
+    label {
+        display: block;
+        margin-bottom: $space-2;
+        font-weight: $font-weight-medium;
+        color: $secondary-contrast;
+        font-size: $font-size-sm;
+    }
+
+    .p-inputtext {
+        width: 100%;
+        padding: $space-3;
+        border-radius: $border-radius-md;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        background: rgba(0, 0, 0, 0.2);
+        color: $secondary-contrast;
+        font-size: $font-size-base;
+        transition: $transition-fast;
+
+        &:focus {
+            outline: none;
+            border-color: $primary-color;
+        }
+
+        &:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            background: rgba(0, 0, 0, 0.4);
+            border-color: transparent;
+        }
+    }
+}
+
+.p-button {
+    padding: $space-3 $space-5;
+    background: $primary-color;
+    color: $primary-contrast;
+    border: none;
+    border-radius: $border-radius-md;
+    font-size: $font-size-base;
+    font-weight: $font-weight-semibold;
+    cursor: pointer;
+    transition: $transition-fast;
+    margin-top: $space-2;
+
+    &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+        background: $text-secondary;
+    }
+
+    &:hover:not(:disabled) {
+        opacity: 0.9;
+    }
+}

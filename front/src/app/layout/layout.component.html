@@ -1,0 +1,10 @@
+<app-header></app-header>
+<div class="layout-container">
+    <app-sidebar [class.hidden]="sidebarService.visible()" class="sidebar"></app-sidebar>
+    <main class="main-content">
+        <router-outlet></router-outlet>
+    </main>
+</div>
+<app-footer></app-footer>
+<app-error></app-error>
+<app-loading></app-loading>

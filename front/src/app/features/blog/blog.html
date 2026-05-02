@@ -1,0 +1,116 @@
+<div class="blog">
+
+    <!-- HERO -->
+    <section class="hero">
+        <h1>Plantilla de Microservicios Moderna</h1>
+        <p>
+            Arquitectura basada en eventos con Kafka, orquestación con Kubernetes y seguridad con Spring Security.
+        </p>
+
+        <div class="status">
+            🚧 Proyecto en desarrollo — contenido en constante actualización
+        </div>
+    </section>
+
+    <!-- INTRO -->
+    <section class="intro">
+        <p>
+            Esta plantilla está diseñada como base para aplicaciones web escalables.
+            Integra múltiples tecnologías clave del ecosistema cloud-native con buenas prácticas desde el inicio.
+        </p>
+    </section>
+
+    <!-- GRID TECNOLOGÍAS -->
+    <section class="tech-grid">
+
+        <article class="tech">
+            <h3>Apache Kafka</h3>
+            <p class="desc">
+                Plataforma de mensajería distribuida basada en eventos que permite desacoplar servicios.
+            </p>
+            <p class="use">
+                Se utiliza para comunicar microservicios mediante eventos asíncronos,
+                mejorando la resiliencia y escalabilidad del sistema.
+            </p>
+        </article>
+
+        <article class="tech">
+            <h3>Kubernetes</h3>
+            <p class="desc">
+                Sistema de orquestación de contenedores que automatiza despliegue y escalado.
+            </p>
+            <p class="use">
+                Gestiona los microservicios, permitiendo escalado automático,
+                balanceo de carga y alta disponibilidad.
+            </p>
+        </article>
+
+        <article class="tech">
+            <h3>Spring Boot</h3>
+            <p class="desc">
+                Framework para crear microservicios en Java de forma rápida y estructurada.
+            </p>
+            <p class="use">
+                Se utiliza como base para cada servicio, facilitando APIs REST
+                y lógica de negocio desacoplada.
+            </p>
+        </article>
+
+        <article class="tech">
+            <h3>Spring Security</h3>
+            <p class="desc">
+                Framework de seguridad para autenticación y autorización.
+            </p>
+            <p class="use">
+                Protege endpoints mediante JWT, control de roles
+                y autenticación centralizada.
+            </p>
+        </article>
+
+        <article class="tech">
+            <h3>Docker</h3>
+            <p class="desc">
+                Plataforma de contenedores que permite empaquetar aplicaciones.
+            </p>
+            <p class="use">
+                Cada microservicio se ejecuta en su propio contenedor,
+                asegurando consistencia entre entornos.
+            </p>
+        </article>
+
+        <article class="tech">
+            <h3>API Gateway</h3>
+            <p class="desc">
+                Punto de entrada único para todos los servicios.
+            </p>
+            <p class="use">
+                Gestiona routing, autenticación y control de tráfico.
+            </p>
+        </article>
+
+    </section>
+
+    <!-- FLUJO -->
+    <section class="flow">
+        <h2>Flujo de la arquitectura</h2>
+        <p>
+            El cliente realiza una petición → pasa por el API Gateway →
+            se autentica con Spring Security → el servicio procesa la lógica →
+            se genera un evento en Kafka → otros servicios reaccionan.
+        </p>
+    </section>
+
+    <!-- ESTADO -->
+    <section class="roadmap">
+        <h2>Estado del proyecto</h2>
+        <ul>
+            <li>✔ Estructura base de microservicios</li>
+            <li>✔ Integración con Kafka</li>
+            <li>✔ Contenerización con Docker</li>
+            <li>🔄 Despliegue completo en Kubernetes</li>
+            <li>🔄 Seguridad avanzada con Spring Security</li>
+            <li>⏳ Observabilidad (logs, métricas, tracing)</li>
+        </ul>
+    </section>
+
+</div>

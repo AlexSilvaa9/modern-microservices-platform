@@ -1,0 +1,106 @@
+@use '../../../styles/variables' as *;
+
+.sidebar {
+    width: 100%;
+    height: 100vh;
+    background: $bg-soft;
+    color: $text-color;
+    transition: $transition-base;
+    display: flex;
+    flex-direction: column;
+
+
+
+}
+
+.sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    padding: $space-4;
+    background: $primary-color;
+    color: $primary-contrast;
+    box-shadow: $header-shadow;
+
+    .logo {
+        font-weight: $font-weight-bold;
+    }
+}
+
+.menu {
+    padding: $space-2;
+    flex: 1;
+}
+
+/* =========================
+   ITEM PRINCIPAL
+========================= */
+.menu-item {
+    display: flex;
+    align-items: center;
+    gap: $space-3;
+    padding: $space-3;
+    border-radius: $border-radius;
+    cursor: pointer;
+    transition: $transition-fast;
+
+    min-width: 0;
+
+    .icon {
+        width: 20px;
+        flex-shrink: 0;
+    }
+
+    .label {
+        flex: 1;
+        min-width: 0;
+
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .arrow {
+        flex-shrink: 0;
+    }
+}
+
+
+.menu-group {
+    margin-bottom: $space-2;
+}
+
+/* =========================
+   SUBMENU
+========================= */
+.submenu {
+    margin-left: $space-6;
+    border-left: 2px solid $border-color;
+    padding-left: $space-3;
+    display: flex;
+    flex-direction: column;
+}
+
+/* =========================
+   SUBITEMS
+========================= */
+.submenu-item {
+    display: flex;
+    align-items: center;
+    padding: $space-2;
+    border-radius: $border-radius;
+    cursor: pointer;
+    color: $text-secondary;
+    transition: $transition-fast;
+
+    min-width: 0;
+
+
+    .label {
+        flex: 1;
+        min-width: 0;
+
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+}

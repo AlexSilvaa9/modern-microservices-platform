@@ -1,0 +1,128 @@
+@use '../../../styles/variables' as *;
+
+
+.blog {
+  font-family: $font-family;
+  background: $bg;
+  min-height: 100vh;
+  padding: $space-6;
+}
+
+/* HERO */
+.hero {
+  text-align: center;
+  margin-bottom: $space-8;
+
+  h1 {
+    font-size: $font-size-2xl;
+    font-weight: $font-weight-bold;
+    color: $primary-dark;
+    margin-bottom: $space-3;
+  }
+
+  p {
+    color: $text-secondary;
+    font-size: $font-size-lg;
+  }
+
+  .status {
+    margin-top: $space-4;
+    display: inline-block;
+    background: $warning-bg;
+    color: $warning-color;
+    padding: $space-2 $space-4;
+    border-radius: $border-radius-full;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+  }
+}
+
+/* INTRO */
+.intro {
+  max-width: 700px;
+  margin: 0 auto $space-8;
+  text-align: center;
+  color: $text-secondary;
+}
+
+/* GRID */
+.tech-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: $space-6;
+}
+
+/* TECH BLOCK */
+.tech {
+  background: $surface-0;
+  border-radius: $border-radius-xl;
+  padding: $space-5;
+  box-shadow: $card-shadow;
+  transition: transform $transition-base;
+
+  &:hover {
+    transform: translateY(-5px);
+  }
+
+  h3 {
+    color: $primary-color;
+    margin-bottom: $space-2;
+    font-weight: $font-weight-semibold;
+  }
+
+  .desc {
+    font-size: $font-size-sm;
+    color: $text-color;
+    margin-bottom: $space-2;
+  }
+
+  .use {
+    font-size: $font-size-sm;
+    color: $text-secondary;
+  }
+}
+
+/* FLOW */
+.flow {
+  margin-top: $space-8;
+  background: $secondary-light;
+  padding: $space-6;
+  border-radius: $border-radius-xl;
+  text-align: center;
+
+  h2 {
+    margin-bottom: $space-3;
+    color: $primary-dark;
+  }
+
+  p {
+    color: $text-secondary;
+  }
+}
+
+/* ROADMAP */
+.roadmap {
+  margin-top: $space-8;
+
+  h2 {
+    text-align: center;
+    margin-bottom: $space-4;
+    color: $primary-dark;
+  }
+
+  ul {
+    max-width: 500px;
+    margin: 0 auto;
+    list-style: none;
+    padding: 0;
+
+    li {
+      background: $surface-0;
+      padding: $space-3;
+      border-radius: $border-radius-md;
+      margin-bottom: $space-2;
+      box-shadow: $shadow-sm;
+      font-size: $font-size-sm;
+    }
+  }
+}

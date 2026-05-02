@@ -1,0 +1,251 @@
+@use '../../../styles/variables' as *;
+
+.app-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: $primary-color;
+    padding: $space-3 $space-4;
+    color: $primary-contrast;
+    min-height: 80px;
+}
+
+.menu-button {
+    flex: 3.3;
+}
+
+.header-logo {
+    width: 30%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 3.3;
+
+    h2 {
+        margin: 0;
+        font-size: $font-size-lg;
+        font-weight: $font-weight-bold;
+        color: $primary-contrast;
+    }
+}
+
+
+
+
+
+/* LINKS */
+a {
+    position: relative;
+    color: $primary-contrast;
+    text-decoration: none;
+    font-weight: $font-weight-semibold;
+    font-size: $font-size-sm;
+    padding: $space-2 0;
+    transition: $transition-fast;
+}
+
+
+
+/* Hover bar */
+a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0%;
+    height: 2px;
+    background: $primary-contrast;
+    transition: width $transition-base;
+    border-radius: $border-radius-full;
+}
+
+a:hover::after {
+    width: 100%;
+}
+
+/* Hover color subtle */
+a:hover {
+    opacity: 0.85;
+}
+
+/* ACTIONS */
+.header-actions {
+    display: flex;
+    gap: $space-3;
+    align-items: center;
+    flex: 3.3;
+    justify-content: right;
+}
+
+.profile-actions {
+    display: flex;
+    gap: $space-3;
+    align-items: center;
+}
+
+.profile-switcher {
+    position: relative;
+    display: inline-block;
+
+    .profile-btn {
+        background: transparent;
+        border: none;
+        color: $primary-contrast;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: $space-2;
+        padding: 0;
+        transition: opacity $transition-fast;
+
+        &:hover {
+            opacity: 0.85;
+        }
+
+        .chevron {
+            font-size: 0.8rem;
+            transition: transform $transition-fast;
+        }
+
+        .bi-person-circle {
+            font-size: 1.5rem;
+        }
+    }
+
+    .profile-menu {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        background: $bg-dark;
+        min-width: 150px;
+        border-radius: $border-radius-md;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(10px);
+        transition: all $transition-fast;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        z-index: 100;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+
+        a {
+            padding: $space-3 $space-4;
+            color: $primary-contrast;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: $space-2;
+            cursor: pointer;
+            margin: 0;
+            font-weight: $font-weight-medium;
+
+            &:hover {
+                background: rgba(255, 255, 255, 0.05);
+            }
+
+            &::after {
+                display: none;
+            }
+
+            i {
+                font-size: 1.1rem;
+            }
+        }
+    }
+
+    &:hover {
+        .profile-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .profile-btn .chevron {
+            transform: rotate(180deg);
+        }
+    }
+}
+
+.lang-switcher {
+    position: relative;
+    display: inline-block;
+
+    .lang-btn {
+        background: transparent;
+        border: none;
+        color: $primary-contrast;
+        font-weight: $font-weight-semibold;
+        font-size: $font-size-sm;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: $space-1;
+        padding: $space-1 $space-2;
+        transition: opacity $transition-fast;
+
+        &:hover {
+            opacity: 0.85;
+        }
+
+        i {
+            font-size: 0.8rem;
+            transition: transform $transition-fast;
+        }
+    }
+
+    .lang-menu {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        background: $bg-dark;
+        min-width: 140px;
+        border-radius: $border-radius-md;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(10px);
+        transition: all $transition-fast;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        z-index: 100;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+
+        a {
+            padding: $space-3 $space-4;
+            color: $primary-contrast;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: $space-2;
+            cursor: pointer;
+            margin: 0;
+            font-weight: $font-weight-medium;
+
+            &:hover {
+                background: rgba(255, 255, 255, 0.05);
+                /* or your hover color */
+            }
+
+            &::after {
+                display: none;
+                /* override the global 'a' underline effect */
+            }
+        }
+    }
+
+    &:hover {
+        .lang-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .lang-btn i {
+            transform: rotate(180deg);
+        }
+    }
+}

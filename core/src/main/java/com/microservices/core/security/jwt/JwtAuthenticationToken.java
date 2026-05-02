@@ -1,13 +1,16 @@
-package com.microservices.core.security;
+package com.microservices.core.security.jwt;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import lombok.EqualsAndHashCode;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
 
 import java.util.Collection;
 
+@EqualsAndHashCode(callSuper = false)
 public class JwtAuthenticationToken extends AbstractAuthenticationToken {
 
-    private final Object principal;
+    private final transient Object principal;
     private final String token;
 
     // Constructor BEFORE authentication
