@@ -5,29 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5e77696f-e307-4867-83b6-44be6a0bf308" name="Changes" comment="implementado sistema de secretos k8">
-      <change afterPath="$PROJECT_DIR$/doc/diagrams/arquitectura.drawio" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/doc/diagrams/arquitectura.drawio.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/doc/diagrams/arquitectura.drawio.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/k8s/api-gateway-ingress.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/diagrams/arquitectura-fondo-blanco.drawio.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/devspace.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/devspace.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/public/resources/i18n/de.json" beforeDir="false" afterPath="$PROJECT_DIR$/front/public/resources/i18n/de.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/public/resources/i18n/en.json" beforeDir="false" afterPath="$PROJECT_DIR$/front/public/resources/i18n/en.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/public/resources/i18n/es.json" beforeDir="false" afterPath="$PROJECT_DIR$/front/public/resources/i18n/es.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/public/resources/i18n/fr.json" beforeDir="false" afterPath="$PROJECT_DIR$/front/public/resources/i18n/fr.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/app/core/services/api/auth.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/app/core/services/api/auth.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/app/core/services/api/catalog.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/app/core/services/api/catalog.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/app/core/services/api/user.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/app/core/services/api/user.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/app/core/services/global-state/cart.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/app/core/services/global-state/cart.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/app/features/blog/blog.html" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/app/features/blog/blog.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/app/features/blog/blog.scss" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/app/features/blog/blog.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/app/features/blog/blog.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/app/features/blog/blog.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/k8s/configmap.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/k8s/configmap.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/cart-service/src/main/java/com/microservices/cart/controller/CartController.java" beforeDir="false" afterPath="$PROJECT_DIR$/services/cart-service/src/main/java/com/microservices/cart/controller/CartController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/product-service/src/main/java/com/microservices/catalog/controller/ProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/services/product-service/src/main/java/com/microservices/catalog/controller/ProductController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/user-service/src/main/java/com/microservices/user/controller/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/services/user-service/src/main/java/com/microservices/user/controller/AuthController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/user-service/src/main/java/com/microservices/user/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/services/user-service/src/main/java/com/microservices/user/controller/UserController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

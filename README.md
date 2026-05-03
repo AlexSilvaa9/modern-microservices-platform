@@ -5,7 +5,7 @@ Este proyecto es una **plataforma de referencia basada en microservicios**. El f
 El diagrama de arquitectura describe dos bloques principales: contenido estático distribuido desde la nube y una zona de microservicios detrás de un **Nginx Ingress Controller**, con servicios como **user**, **cart**, **product**, **order** y **mail**.
 
 <p align="center">
-  <img src="./doc/diagrams/arquitectura.drawio.png" alt="Diagrama de arquitectura" width="900" />
+  <img src="./doc/diagrams/arquitectura-fondo-blanco.drawio.png" alt="Diagrama de arquitectura" width="900" />
 </p>
 
 ---
