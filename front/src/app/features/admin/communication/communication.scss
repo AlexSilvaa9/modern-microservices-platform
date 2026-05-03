@@ -1,0 +1,386 @@
+@import '../../../../styles/variables';
+
+.communication-shell {
+  min-height: 100vh;
+  padding: 2.5rem;
+  background:
+    radial-gradient(circle at top left, rgba($primary-light, 0.16), transparent 32%),
+    radial-gradient(circle at bottom right, rgba($secondary-dark, 0.18), transparent 28%),
+    $bg;
+}
+
+.communication-hero {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.eyebrow,
+.panel-eyebrow {
+  margin: 0 0 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-bold;
+  color: $primary-light;
+}
+
+.communication-hero h1 {
+  margin: 0;
+  font-size: clamp(2rem, 3.5vw, 3rem);
+  color: $primary-dark;
+}
+
+.subtitle {
+  margin: 0.75rem 0 0;
+  max-width: 48rem;
+  color: $text-secondary;
+  line-height: 1.7;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.85rem 1rem;
+  border-radius: $border-radius-full;
+  background: rgba($surface-0, 0.9);
+  border: 1px solid rgba($primary-color, 0.08);
+  box-shadow: $shadow-sm;
+  color: $text-color;
+  font-weight: $font-weight-semibold;
+}
+
+.hero-badge__icon {
+  width: 2rem;
+  height: 2rem;
+  display: grid;
+  place-items: center;
+  border-radius: 9999px;
+  background: rgba($primary-color, 0.08);
+  color: $primary-color;
+}
+
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.metric-card,
+.panel-card {
+  background: rgba($surface-0, 0.92);
+  border: 1px solid rgba($border-color, 0.85);
+  border-radius: $border-radius-xl;
+  box-shadow: $shadow-md;
+}
+
+.metric-card {
+  position: relative;
+  min-height: 120px;
+  overflow: hidden;
+}
+
+.metric-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  padding: 1.35rem 1.25rem;
+}
+
+.metric-value {
+  font-size: 2rem;
+  line-height: 1;
+  font-weight: $font-weight-bold;
+  color: $primary-color;
+}
+
+.metric-label {
+  color: $text-secondary;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+}
+
+.metric-icon {
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  font-weight: $font-weight-bold;
+}
+
+.metric-icon.sent { background: rgba($success-color, 0.12); color: $success-color; }
+.metric-icon.campaigns { background: rgba($primary-light, 0.12); color: $primary-light; }
+.metric-icon.scheduled { background: rgba($warning-color, 0.14); color: $warning-color; }
+.metric-icon.next { background: rgba($primary-color, 0.12); color: $primary-color; }
+
+.workspace-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(320px, 0.95fr);
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.panel-card {
+  padding: 1.25rem;
+}
+
+.panel-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.panel-header.compact { margin-bottom: 0.85rem; }
+
+.panel-card h2 {
+  margin: 0;
+  color: $text-color;
+  font-size: $font-size-lg;
+}
+
+.status-pill {
+  padding: 0.55rem 0.8rem;
+  border-radius: $border-radius-full;
+  background: rgba($primary-color, 0.08);
+  color: $primary-color;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-semibold;
+  text-align: right;
+}
+
+.composer-form {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.field.full-width { grid-column: 1 / -1; }
+
+.field label {
+  color: $text-color;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-semibold;
+}
+
+.field input,
+.field textarea,
+.audience-select {
+  width: 100%;
+  border-radius: $border-radius-lg;
+  border: 1px solid rgba($primary-color, 0.14);
+  background: $surface-0;
+  color: $text-color;
+  padding: 0.95rem 1rem;
+  font: inherit;
+  transition: border-color $transition-base, box-shadow $transition-base;
+}
+
+.field input:focus,
+.field textarea:focus,
+.audience-select:focus {
+  outline: none;
+  border-color: $primary-light;
+  box-shadow: 0 0 0 3px rgba($primary-light, 0.16);
+}
+
+.field textarea {
+  resize: vertical;
+  min-height: 9rem;
+}
+
+.audience-select { appearance: none; }
+
+.field-error {
+  color: $error-color;
+  font-size: 0.8rem;
+  font-weight: $font-weight-medium;
+}
+
+.action-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.15rem;
+}
+
+.action-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.9rem;
+  padding: 0.75rem 1rem;
+  border-radius: $border-radius-full;
+  border: 0;
+  cursor: pointer;
+  font: inherit;
+  font-weight: $font-weight-semibold;
+  transition: transform $transition-fast, box-shadow $transition-fast, background-color $transition-fast, color $transition-fast, border-color $transition-fast;
+}
+
+.action-btn:disabled {
+  cursor: wait;
+  opacity: 0.75;
+}
+
+.action-btn.primary {
+  background: $primary-color;
+  color: $primary-contrast;
+  box-shadow: $shadow-sm;
+}
+
+.action-btn.primary:hover:not(:disabled) {
+  transform: translateY(-1px);
+  background: $primary-hover;
+  box-shadow: $shadow-md;
+}
+
+.action-btn.secondary {
+  background: $surface-0;
+  border: 1px solid $border-color;
+  color: $primary-color;
+}
+
+.action-btn.secondary:hover:not(:disabled) {
+  transform: translateY(-1px);
+  border-color: $primary-light;
+  box-shadow: $shadow-sm;
+}
+
+.action-btn.tertiary {
+  background: rgba($warning-color, 0.12);
+  border: 1px solid rgba($warning-color, 0.18);
+  color: $warning-color;
+}
+
+.action-btn.tertiary:hover:not(:disabled) {
+  transform: translateY(-1px);
+  background: rgba($warning-color, 0.16);
+}
+
+.side-stack {
+  display: grid;
+  gap: 1rem;
+}
+
+.activity-list,
+.campaign-list,
+.schedule-list {
+  display: grid;
+  gap: 0.9rem;
+}
+
+.activity-item,
+.campaign-item,
+.schedule-item {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.95rem;
+  border-radius: $border-radius-lg;
+  background: linear-gradient(180deg, rgba($surface-50, 0.92), rgba($surface-0, 0.96));
+  border: 1px solid rgba($border-color, 0.75);
+}
+
+.activity-icon {
+  width: 2.6rem;
+  height: 2.6rem;
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  border-radius: 14px;
+  font-weight: $font-weight-bold;
+}
+
+.activity-icon[data-channel='instant'] { background: rgba($success-color, 0.12); color: $success-color; }
+.activity-icon[data-channel='campaign'] { background: rgba($primary-light, 0.12); color: $primary-light; }
+.activity-icon[data-channel='daily'] { background: rgba($warning-color, 0.14); color: $warning-color; }
+
+.activity-copy,
+.campaign-copy {
+  min-width: 0;
+  flex: 1;
+}
+
+.activity-topline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.activity-copy p,
+.campaign-copy p,
+.schedule-item p {
+  margin: 0.35rem 0 0;
+  color: $text-secondary;
+  line-height: 1.55;
+}
+
+.activity-copy small { color: $text-secondary; }
+
+.status-tag,
+.mini-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.35rem 0.65rem;
+  border-radius: $border-radius-full;
+  font-size: 0.72rem;
+  font-weight: $font-weight-bold;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.status-tag[data-status='sent'],
+.mini-pill.active { background: rgba($success-color, 0.12); color: $success-color; }
+.status-tag[data-status='queued'],
+.mini-pill.scheduled { background: rgba($warning-color, 0.14); color: $warning-color; }
+.status-tag[data-status='scheduled'],
+.mini-pill.muted { background: rgba($primary-color, 0.08); color: $text-secondary; }
+
+.campaign-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.45rem;
+}
+
+.empty-panel {
+  padding: 1.25rem;
+  border-radius: $border-radius-lg;
+  background: rgba($primary-color, 0.04);
+  color: $text-secondary;
+  text-align: center;
+}
+
+@media (max-width: 1080px) {
+  .workspace-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 720px) {
+  .communication-shell { padding: 1.25rem; }
+  .communication-hero { flex-direction: column; }
+  .composer-form { grid-template-columns: 1fr; }
+  .panel-header,
+  .activity-topline,
+  .campaign-item,
+  .schedule-item { flex-direction: column; align-items: flex-start; }
+  .campaign-meta { align-items: flex-start; }
+}

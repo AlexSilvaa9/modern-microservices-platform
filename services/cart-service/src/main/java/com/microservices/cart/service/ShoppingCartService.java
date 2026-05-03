@@ -1,17 +1,17 @@
 package com.microservices.cart.service;
 
-import java.util.ArrayList;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Collectors;
 
 
+import com.microservices.cart.client.ProductServiceClient;
 import com.microservices.cart.mapper.CartItemMapper;
 import com.microservices.cart.mapper.ShoppingCartMapper;
-import com.microservices.core.dto.UserDTO;
+import com.microservices.core.dto.ProductDTO;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.microservices.cart.client.UserServiceClient;
 import com.microservices.cart.dao.ShoppingCartDAO;
 import com.microservices.cart.dto.CartItemDTO;
 import com.microservices.cart.dto.ShoppingCartDTO;
@@ -29,164 +29,137 @@ import com.microservices.cart.model.ShoppingCartEntity;
 @Service
 @Transactional
 public class ShoppingCartService {
-    @Value("${app.environment}")
-    private String environment;
 
     private final ShoppingCartDAO dao;
     private final CartItemMapper cartItemMapper;
     private final ShoppingCartMapper shoppingCartMapper;
-    private final Optional<UserServiceClient> userClient;
+    private final ProductServiceClient productServiceClient;
 
-    public ShoppingCartService(ShoppingCartDAO dao, CartItemMapper cartItemMapper, ShoppingCartMapper shoppingCartMapper, Optional<UserServiceClient> userClient) {
+    public ShoppingCartService(ShoppingCartDAO dao, CartItemMapper cartItemMapper, ShoppingCartMapper shoppingCartMapper, ProductServiceClient productServiceClient) {
         this.dao = dao;
         this.shoppingCartMapper = shoppingCartMapper;
         this.cartItemMapper = cartItemMapper;
-        this.userClient = userClient;
+        this.productServiceClient = productServiceClient;
     }
 
-    /**
-     * Comprueba si un usuario está activo. Usa reflexión para tolerar getters generados por Lombok
-     * (puede ser isActive() para boolean primitivo o getActive() para Boolean wrapper) y también
-     * intenta leer el campo "active" si no hay getter disponible.
-     */
-    private boolean isUserActive(String userId) {
-        try {
-            // Si no hay cliente de UserService, permitimos la operación (se asume
-            // que la verificación se hará en otro punto en infra). Si prefieres
-            // denegar en ausencia del servicio, cambia el orElse a false.
-            return userClient.map(c -> {
-                if ("local".equals(environment)) {
-                    return true;
-                } else {
-                    try {
-                        UserDTO u = c.getUserById(userId);
-                        if (u == null) return false;
-
-                        // Intentar isActive()
-                        try {
-                            java.lang.reflect.Method m = u.getClass().getMethod("isActive");
-                            Object r = m.invoke(u);
-                            return r instanceof Boolean && (Boolean) r;
-                        } catch (NoSuchMethodException ignore) {
-                            // Intentar getActive()
-                            try {
-                                java.lang.reflect.Method m2 = u.getClass().getMethod("getActive");
-                                Object r2 = m2.invoke(u);
-                                return r2 instanceof Boolean && (Boolean) r2;
-                            } catch (NoSuchMethodException ignore2) {
-                                // Intentar acceso directo al campo "active"
-                                try {
-                                    java.lang.reflect.Field f = u.getClass().getDeclaredField("active");
-                                    f.setAccessible(true);
-                                    Object v = f.get(u);
-                                    return v instanceof Boolean && (Boolean) v;
-                                } catch (Exception ex) {
-                                    return false;
-                                }
-                            } catch (Exception ex) {
-                                return false;
-                            }
-                        } catch (Exception ex) {
-                            return false;
-                        }
-
-                    } catch (Exception e) {
-                        return false;
-                    }
-                }
-            }).orElse(true);
-        } catch (Exception ex) {
-            // En caso de error durante la llamada, se considera que el usuario no está activo
-            return false;
-        }
-    }
-
-    /**
-     * Crea un nuevo carrito para el usuario si no existe.
-     *
-     * @param userId identificador del usuario
-     * @return DTO del carrito creado o existente
-     */
-    public ShoppingCartDTO createCartIfAbsent(String userId) {
-        if (!isUserActive(userId)) {
-            throw new IllegalStateException("User not active or not found: " + userId);
-        }
-
-        Optional<ShoppingCartEntity> ex = dao.findByUserId(userId);
-        if (ex.isPresent()) {
-            return shoppingCartMapper.toDTO(ex.get());
-        }
-        ShoppingCartEntity cart = new ShoppingCartEntity();
-        cart.setUserId(userId);
-        cart.setItems(new ArrayList<>());
-        ShoppingCartEntity saved = dao.save(cart);
-        return shoppingCartMapper.toDTO(saved);
-    }
 
     /**
      * Obtiene el carrito del usuario si existe.
      *
-     * @param userId identificador del usuario
+     * @param userEmail identificador del usuario
      * @return Optional con el DTO del carrito
      */
-    public Optional<ShoppingCartDTO> getCartByUserId(String userId) {
-        return dao.findByUserId(userId).map(shoppingCartMapper::toDTO);
+    public ShoppingCartDTO getOrCreateCart(String userEmail) {
+
+        ShoppingCartEntity cart = dao.findByUserEmail(userEmail)
+                .orElseGet(() -> {
+                    ShoppingCartEntity newCart = new ShoppingCartEntity();
+                    newCart.setUserEmail(userEmail);
+                    newCart.setItems(new ArrayList<>());
+                    return dao.save(newCart);
+                });
+
+        ShoppingCartDTO dto = shoppingCartMapper.toDTO(cart);
+
+        enrichCart(dto);
+
+        return dto;
     }
 
+    private void enrichCart(ShoppingCartDTO cart) {
+
+        if (cart.getItems() == null || cart.getItems().isEmpty()) {
+            return;
+        }
+
+        List<UUID> productIds = cart.getItems().stream()
+                .map(CartItemDTO::getProductId)
+                .distinct()
+                .toList();
+
+        List<ProductDTO> products = productServiceClient.getProductsByIds(productIds);
+
+        Map<UUID, ProductDTO> productMap = products.stream()
+                .collect(Collectors.toMap(ProductDTO::getId, p -> p));
+
+        cart.getItems().forEach(item -> {
+            item.setProduct(productMap.get(item.getProductId()));
+        });
+    }
     /**
      * Añade un item al carrito del usuario (crea carrito si es necesario).
      *
-     * @param userId identificador del usuario
+     * @param userEmail identificador del usuario
      * @param itemDTO DTO del item a añadir
      * @return DTO del carrito actualizado
      */
-    public ShoppingCartDTO addItemToCart(String userId, CartItemDTO itemDTO) {
-        if (!isUserActive(userId)) {
-            throw new IllegalStateException("User not active or not found: " + userId);
+    public void addItemToCart(String userEmail, UUID productId, int quantity) {
+
+        ShoppingCartEntity cart = dao.findByUserEmail(userEmail)
+                .orElseGet(() -> {
+                    ShoppingCartEntity c = new ShoppingCartEntity();
+                    c.setUserEmail(userEmail);
+                    c.setItems(new ArrayList<>());
+                    return dao.save(c);
+                });
+
+        // 1. buscar si ya existe el producto en el carrito
+        Optional<CartItemEntity> existingItem = cart.getItems().stream()
+                .filter(i -> i.getProductId().equals(productId))
+                .findFirst();
+
+        if (existingItem.isPresent()) {
+            // 2. si existe → incrementar cantidad
+            CartItemEntity item = existingItem.get();
+            item.setQuantity(item.getQuantity() + quantity);
+        } else {
+            // 3. si no existe → crear nuevo item
+            CartItemEntity item = new CartItemEntity();
+            item.setId(null);
+            item.setProductId(productId);
+            item.setQuantity(quantity);
+            item.setCart(cart);
+
+            cart.getItems().add(item);
         }
 
-        ShoppingCartEntity cart = dao.findByUserId(userId).orElseGet(() -> {
-            ShoppingCartEntity c = new ShoppingCartEntity();
-            c.setUserId(userId);
-            c.setItems(new ArrayList<>());
-            return c;
-        });
-
-        CartItemEntity item = cartItemMapper.fromDTO(itemDTO);
-        // asegurar relación bidireccional
-        item.setCart(cart);
-        cart.getItems().add(item);
-        ShoppingCartEntity saved = dao.save(cart);
-        return shoppingCartMapper.toDTO(saved);
+        dao.save(cart);
     }
-
     /**
      * Elimina un item del carrito del usuario.
      *
-     * @param userId identificador del usuario
+     * @param userEmail identificador del usuario
      * @param itemId identificador del item
      * @return DTO del carrito actualizado
      */
-    public Optional<ShoppingCartDTO> removeItemFromCart(String userId, Long itemId) {
-        if (!isUserActive(userId)) {
-            return Optional.empty();
+    public void removeProductFromCart(String userEmail, UUID productId, Long quantity) {
+
+        ShoppingCartEntity cart = dao.findByUserEmail(userEmail)
+                .orElseThrow(() -> new IllegalStateException("Cart not found"));
+
+        CartItemEntity item = cart.getItems().stream()
+                .filter(i -> i.getProductId().equals(productId))
+                .findFirst()
+                .orElseThrow(() -> new IllegalStateException("Product not in cart"));
+
+        // 1. si hay más de 1 → restar cantidad
+        if (item.getQuantity() > quantity) {
+            item.setQuantity((int) (item.getQuantity() - quantity));
+        } else {
+            // 2. si es 1 → eliminar item completo
+            cart.getItems().remove(item);
         }
-        Optional<ShoppingCartEntity> maybe = dao.findByUserId(userId);
-        if (maybe.isEmpty()) return Optional.empty();
-        ShoppingCartEntity cart = maybe.get();
-        cart.getItems().removeIf(i -> i.getId() != null && i.getId().equals(itemId));
-        ShoppingCartEntity saved = dao.save(cart);
-        return Optional.of(shoppingCartMapper.toDTO(saved));
+
+        dao.save(cart);
     }
 
     /**
      * Limpia (vacía) el carrito del usuario.
      *
-     * @param userId identificador del usuario
+     * @param userEmail identificador del usuario
      */
-    public void clearCart(String userId) {
-        if (!isUserActive(userId)) return;
-        dao.findByUserId(userId).ifPresent(cart -> {
+    public void clearCart(String userEmail) {
+        dao.findByUserEmail(userEmail).ifPresent(cart -> {
             cart.getItems().clear();
             dao.save(cart);
         });

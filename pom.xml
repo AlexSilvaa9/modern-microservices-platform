@@ -22,7 +22,7 @@
     </properties>
 
     <modules>
-        <module>services/catalog-service</module>
+        <module>services/product-service</module>
         <module>services/cart-service</module>
         <module>services/user-service</module>
         <module>core</module>

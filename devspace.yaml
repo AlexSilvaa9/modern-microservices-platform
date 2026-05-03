@@ -3,7 +3,7 @@ name: devspace
 pipelines:
   dev:
     run: -|
-      start_dev user-service catalog-service
+      start_dev user-service product-service cart-service
 dev:
   user-service:
     imageSelector: "user-service:1.0.0"
@@ -20,11 +20,11 @@ dev:
     logs:
       enabled: true
 
-  catalog-service:
-    imageSelector: "catalog-service:1.0.0"
-    command: ["java", "-jar", "/app/catalog-service-1.0.0.jar"]
+  product-service:
+    imageSelector: "product-service:1.0.0"
+    command: ["java", "-jar", "/app/product-service-1.0.0.jar"]
     sync:
-      - path: ./services/catalog-service/target/catalog-service-1.0.0.jar:/app/catalog-service-1.0.0.jar
+      - path: ./services/product-service/target/product-service-1.0.0.jar:/app/product-service-1.0.0.jar
         disableDownload: true
         onUpload:
           restartContainer: true

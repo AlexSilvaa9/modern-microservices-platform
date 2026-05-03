@@ -1,11 +1,14 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { UserDTO } from '../../models/user.model';
+import { CartService } from './cart.service';
 
 @Injectable({
     providedIn: 'root'
 })
 export class UserStateService {
+    private cartService = inject(CartService);
+
     private readonly _currentUser = new BehaviorSubject<UserDTO | null>(null);
 
     /** Observable for components to subscribe to user changes */
@@ -14,6 +17,12 @@ export class UserStateService {
     /** Set the current logged-in user */
     setCurrentUser(user: UserDTO | null): void {
         this._currentUser.next(user);
+        if (user) {
+            // Optionally, load user-specific data like cart here
+            this.cartService.loadCart();
+        }
+
+
     }
 
     /** Get snapshot of the current user */

@@ -11,5 +11,5 @@ kubectl apply -f k8s/RBAC/
 
 kubectl delete deploy cart-service-devspace
 kubectl delete deploy user-service-devspace
-kubectl delete deploy catalog-service-devspace
+kubectl delete deploy product-service-devspace
 echo "¡Despliegue finalizado! Usa 'kubectl get pods' para ver su estado."

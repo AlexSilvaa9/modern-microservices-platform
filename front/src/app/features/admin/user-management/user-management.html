@@ -1,0 +1,70 @@
+<div class="user-management">
+  <div class="header">
+    <h1>{{ 'SIDEBAR.USERS' | translate }}</h1>
+  </div>
+
+  <!-- Tabla paginada de usuarios con PrimeNG -->
+  <p-table
+    [value]="users()"
+    [rows]="rows()"
+    [totalRecords]="totalRecords()"
+    [loading]="loading()"
+    [paginator]="true"
+    [globalFilterFields]="['name', 'email', 'username']"
+    responsiveLayout="scroll"
+    styleClass="p-datatable-striped"
+    currentPageReportTemplate="{{ 'USERS.PAGE_REPORT' | translate }}"
+    [showCurrentPageReport]="true"
+    (onLazyLoad)="onPageChange($event)"
+    [lazy]="true"
+  >
+    <!-- Columna: ID -->
+    <ng-template pTemplate="header">
+      <tr>
+        <th pSortableColumn="username">
+          {{ 'REGISTER.USERNAME' | translate }}
+          <p-sortIcon field="username"></p-sortIcon>
+        </th>
+        <th pSortableColumn="email">
+          {{ 'LOGIN.EMAIL' | translate }}
+          <p-sortIcon field="email"></p-sortIcon>
+        </th>
+        <th pSortableColumn="roles">
+          {{ 'PROFILE.ROLES' | translate }}
+        </th>
+      </tr>
+    </ng-template>
+
+    <!-- Body de la tabla -->
+    <ng-template pTemplate="body" let-user>
+      <tr>
+        <td>{{ user.username }}</td>
+        <td>{{ user.email }}</td>
+        <td>
+          <span *ngFor="let role of user.roles; let last = last">
+            {{ role }}<span *ngIf="!last">, </span>
+          </span>
+        </td>
+       
+      </tr>
+    </ng-template>
+
+    <!-- Template para cuando está vacío -->
+    <ng-template pTemplate="emptymessage">
+      <tr>
+        <td colspan="5" class="text-center">
+          {{ 'USERS.NO_USERS' | translate }}
+        </td>
+      </tr>
+    </ng-template>
+
+    <!-- Skeleton loading -->
+    <ng-template pTemplate="loadingbody">
+      <tr>
+        <td colspan="5">
+          <p-skeleton height="2rem"></p-skeleton>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>

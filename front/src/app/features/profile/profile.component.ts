@@ -44,7 +44,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
                     username: user.username || '',
                     roles: user.roles?.join(', ') || '',
                     imageUrl: user.imageUrl || '',
-                    provider: user.provider || 'LOCAL'
+                    provider: user.providers?.join(', ') || 'LOCAL'
                 });
                 this.avatarUrl = user.imageUrl || '';
             }

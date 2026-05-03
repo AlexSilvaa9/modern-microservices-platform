@@ -95,7 +95,6 @@ public class GoogleAuthService {
         body.add("client_secret", clientSecret);
         body.add("redirect_uri", redirectUri);
         body.add("grant_type", "authorization_code");
-        log.info("body de token {}",body);
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
 

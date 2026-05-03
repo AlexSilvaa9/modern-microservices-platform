@@ -1,0 +1,196 @@
+<section class="communication-shell">
+  <header class="communication-hero">
+    <div>
+      <p class="eyebrow">{{ 'COMMUNICATION.EYEBROW' | translate }}</p>
+      <h1>{{ 'COMMUNICATION.TITLE' | translate }}</h1>
+      <p class="subtitle">{{ 'COMMUNICATION.SUBTITLE' | translate }}</p>
+    </div>
+
+    <div class="hero-badge">
+      <span class="hero-badge__icon">✉</span>
+      <span>{{ 'COMMUNICATION.MOCK_BADGE' | translate }}</span>
+    </div>
+  </header>
+
+  <div class="metrics-grid">
+    <article class="metric-card">
+      <div class="metric-content">
+        <span class="metric-value">{{ todaySent() }}</span>
+        <span class="metric-label">{{ 'COMMUNICATION.TODAY_SENT' | translate }}</span>
+      </div>
+      <div class="metric-icon sent">↗</div>
+    </article>
+
+    <article class="metric-card">
+      <div class="metric-content">
+        <span class="metric-value">{{ activeCampaigns() }}</span>
+        <span class="metric-label">{{ 'COMMUNICATION.ACTIVE_CAMPAIGNS' | translate }}</span>
+      </div>
+      <div class="metric-icon campaigns">◎</div>
+    </article>
+
+    <article class="metric-card">
+      <div class="metric-content">
+        <span class="metric-value">{{ scheduledCount() }}</span>
+        <span class="metric-label">{{ 'COMMUNICATION.SCHEDULED' | translate }}</span>
+      </div>
+      <div class="metric-icon scheduled">◔</div>
+    </article>
+
+    <article class="metric-card">
+      <div class="metric-content">
+        <span class="metric-value">{{ nextDispatch() ? (nextDispatch() | date:'dd MMM') : '—' }}</span>
+        <span class="metric-label">{{ 'COMMUNICATION.NEXT_DISPATCH' | translate }}</span>
+      </div>
+      <div class="metric-icon next">⌛</div>
+    </article>
+  </div>
+
+  <div class="workspace-grid">
+    <section class="panel-card composer-card">
+      <div class="panel-header">
+        <div>
+          <p class="panel-eyebrow">{{ 'COMMUNICATION.COMPOSER_EYEBROW' | translate }}</p>
+          <h2>{{ 'COMMUNICATION.COMPOSER_TITLE' | translate }}</h2>
+        </div>
+        <span class="status-pill">{{ statusMessage() }}</span>
+      </div>
+
+      <form class="composer-form" [formGroup]="form">
+        <div class="field">
+          <label for="subject">{{ 'COMMUNICATION.SUBJECT' | translate }}</label>
+          <input
+            id="subject"
+            type="text"
+            formControlName="subject"
+            [placeholder]="'COMMUNICATION.SUBJECT_PLACEHOLDER' | translate"
+          />
+          @if (form.controls.subject.touched && form.controls.subject.invalid) {
+            <small class="field-error">{{ 'COMMUNICATION.SUBJECT_ERROR' | translate }}</small>
+          }
+        </div>
+
+        <div class="field">
+          <label for="audience">{{ 'COMMUNICATION.AUDIENCE' | translate }}</label>
+          <select id="audience" class="audience-select" formControlName="audience">
+            @for (option of audienceOptions; track option.value) {
+              <option [value]="option.value">{{ option.label }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="field full-width">
+          <label for="message">{{ 'COMMUNICATION.MESSAGE' | translate }}</label>
+          <textarea
+            id="message"
+            formControlName="message"
+            [rows]="7"
+            [placeholder]="'COMMUNICATION.MESSAGE_PLACEHOLDER' | translate"
+          ></textarea>
+          @if (form.controls.message.touched && form.controls.message.invalid) {
+            <small class="field-error">{{ 'COMMUNICATION.MESSAGE_ERROR' | translate }}</small>
+          }
+        </div>
+      </form>
+
+      <div class="action-row">
+        <button type="button" class="action-btn primary" [disabled]="isSubmitting()" (click)="sendNow()">
+          {{ isSubmitting() ? ('COMMUNICATION.SENDING' | translate) : ('COMMUNICATION.SEND_NOW' | translate) }}
+        </button>
+        <button type="button" class="action-btn secondary" [disabled]="isSubmitting()" (click)="launchCampaign()">
+          {{ 'COMMUNICATION.LAUNCH_CAMPAIGN' | translate }}
+        </button>
+        <button type="button" class="action-btn tertiary" [disabled]="isSubmitting()" (click)="scheduleDaily()">
+          {{ 'COMMUNICATION.SCHEDULE_DAILY' | translate }}
+        </button>
+      </div>
+    </section>
+
+    <div class="side-stack">
+      <section class="panel-card timeline-card">
+        <div class="panel-header compact">
+          <div>
+            <p class="panel-eyebrow">{{ 'COMMUNICATION.ACTIVITY_EYEBROW' | translate }}</p>
+            <h2>{{ 'COMMUNICATION.ACTIVITY_TITLE' | translate }}</h2>
+          </div>
+        </div>
+
+        <div class="activity-list">
+          @if (activities().length > 0) {
+            @for (activity of activities(); track trackByActivity($index, activity)) {
+              <article class="activity-item">
+                <div class="activity-icon" [attr.data-channel]="activity.channel">
+                  <span>
+                    {{ activity.channel === 'instant' ? '↗' : activity.channel === 'campaign' ? '◎' : '◔' }}
+                  </span>
+                </div>
+
+                <div class="activity-copy">
+                  <div class="activity-topline">
+                    <strong>{{ activity.title }}</strong>
+                    <span class="status-tag" [attr.data-status]="activity.status">{{ activity.status }}</span>
+                  </div>
+                  <p>{{ activity.detail }}</p>
+                  <small>
+                    {{ activity.recipients }}
+                    {{ 'COMMUNICATION.RECIPIENTS' | translate }} ·
+                    {{ activity.createdAt | date:'dd MMM, HH:mm' }}
+                  </small>
+                </div>
+              </article>
+            }
+          } @else {
+            <div class="empty-panel">
+              <p>{{ 'COMMUNICATION.NO_ACTIVITY' | translate }}</p>
+            </div>
+          }
+        </div>
+      </section>
+
+      <section class="panel-card campaigns-card">
+        <div class="panel-header compact">
+          <div>
+            <p class="panel-eyebrow">{{ 'COMMUNICATION.CAMPAIGNS_EYEBROW' | translate }}</p>
+            <h2>{{ 'COMMUNICATION.CAMPAIGNS_TITLE' | translate }}</h2>
+          </div>
+        </div>
+
+        <div class="campaign-list">
+          @for (campaign of campaigns(); track trackByCampaign($index, campaign)) {
+            <article class="campaign-item">
+              <div class="campaign-copy">
+                <strong>{{ campaign.name }}</strong>
+                <p>{{ campaign.recipients }} {{ 'COMMUNICATION.RECIPIENTS' | translate }}</p>
+              </div>
+              <div class="campaign-meta">
+                <span class="mini-pill">{{ campaign.cadence }}</span>
+                <span class="mini-pill muted">{{ campaign.nextRun | date:'dd MMM' }}</span>
+              </div>
+            </article>
+          }
+        </div>
+      </section>
+
+      <section class="panel-card schedule-card">
+        <div class="panel-header compact">
+          <div>
+            <p class="panel-eyebrow">{{ 'COMMUNICATION.SCHEDULE_EYEBROW' | translate }}</p>
+            <h2>{{ 'COMMUNICATION.SCHEDULE_TITLE' | translate }}</h2>
+          </div>
+        </div>
+
+        <div class="schedule-list">
+          @for (dispatch of scheduledDispatches(); track trackByDispatch($index, dispatch)) {
+            <div class="schedule-item">
+              <div>
+                <strong>{{ dispatch.subject }}</strong>
+                <p>{{ dispatch.recipients }} {{ 'COMMUNICATION.RECIPIENTS' | translate }}</p>
+              </div>
+              <span class="mini-pill scheduled">{{ dispatch.date | date:'dd MMM' }}</span>
+            </div>
+          }
+        </div>
+      </section>
+    </div>
+  </div>
+</section>

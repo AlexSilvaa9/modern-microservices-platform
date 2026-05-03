@@ -1,0 +1,319 @@
+@import '../../../styles/variables';
+
+.catalog-shell {
+  min-height: 100vh;
+  padding: 2rem clamp(1rem, 2.2vw, 2.5rem) 3rem;
+  background:
+    radial-gradient(circle at top right, rgba($primary-light, 0.14), transparent 26%),
+    radial-gradient(circle at bottom left, rgba($secondary-dark, 0.12), transparent 24%),
+    linear-gradient(180deg, rgba($surface-0, 0.88), rgba($surface-0, 0.72)),
+    $bg;
+}
+
+.catalog-hero {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 1.5rem;
+  padding-bottom: 1.25rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid rgba($border-color, 0.7);
+
+  .catalog-hero-copy {
+    max-width: 42rem;
+  }
+
+  .eyebrow {
+    margin: 0 0 0.35rem;
+    color: $primary-light;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-bold;
+  }
+
+  h1 {
+    margin: 0;
+    color: $primary-dark;
+    font-size: clamp(2.2rem, 4vw, 4rem);
+    line-height: 0.95;
+  }
+
+  .subtitle {
+    margin: 0.85rem 0 0;
+    color: $text-secondary;
+    max-width: 40rem;
+  }
+
+  .catalog-note {
+    margin: 1rem 0 0;
+    color: $text-color;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-semibold;
+  }
+}
+
+.catalog-container {
+  display: block;
+}
+
+.catalog-list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.catalog-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  transition: transform $transition-fast, opacity $transition-fast;
+
+  &:hover {
+    transform: translateY(-2px);
+    opacity: 0.98;
+  }
+}
+
+.catalog-media {
+  position: relative;
+  overflow: hidden;
+  background: $surface-100;
+  min-height: 14rem;
+  border-radius: $border-radius-xl;
+  border: 1px solid rgba($border-color, 0.8);
+  box-shadow: $shadow-sm;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+}
+
+.catalog-badge-overlay {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2.5rem;
+  min-height: 2.5rem;
+  padding: 0.4rem 0.6rem;
+  border-radius: $border-radius-full;
+  background: rgba($primary-color, 0.95);
+  color: white;
+  border: 2px solid white;
+  box-shadow: $shadow-md;
+  font-size: clamp(0.65rem, 1.2vw, 0.85rem);
+  font-weight: $font-weight-bold;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  text-align: center;
+  word-break: break-word;
+  backdrop-filter: blur(8px);
+}
+
+.product-description {
+  margin: 0.5rem 0 0;
+  color: $text-secondary;
+  font-size: $font-size-base;
+  line-height: 1.55;
+  max-width: none;
+}
+
+.catalog-content {
+  display: flex;
+  
+  flex-direction: column;
+  padding: 0 0.15rem;
+}
+
+
+
+.catalog-topline {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.catalog-price {
+  color: $primary-dark;
+  font-size: $font-size-base;
+  font-weight: $font-weight-bold;
+}
+
+.catalog-content h2 {
+  margin: 0.6rem 0 0;
+  color: $text-color;
+  font-size: clamp(flex-end, 1.35rem);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+.catalog-actions {
+  margin-top: 1rem;
+}
+
+.catalog-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.25rem 0 0;
+  margin-top: 1rem;
+}
+
+.pagination-summary {
+  color: $text-secondary;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+}
+
+.pagination-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.pagination-btn {
+  min-width: 2.5rem;
+  height: 2.5rem;
+  padding: 0 0.75rem;
+  border-radius: $border-radius-full;
+  border: 1px solid $border-color;
+  background: $surface-0;
+  color: $text-color;
+  font: inherit;
+  font-weight: $font-weight-semibold;
+  cursor: pointer;
+  transition: transform $transition-fast, background-color $transition-fast, border-color $transition-fast, color $transition-fast;
+
+  &:hover:not(:disabled) {
+    transform: translateY(-1px);
+    border-color: $primary-light;
+    color: $primary-color;
+  }
+
+  &:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+  }
+}
+
+.pagination-btn--page {
+  min-width: 2.75rem;
+
+  &.pagination-btn--active {
+    background: $primary-color;
+    border-color: $primary-color;
+    color: $primary-contrast;
+  }
+}
+
+.catalog-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.5rem;
+  padding: 0.65rem 0.9rem;
+  border-radius: $border-radius-full;
+  border: 1px solid transparent;
+  font: inherit;
+  font-weight: $font-weight-semibold;
+  cursor: pointer;
+  transition: transform $transition-fast, box-shadow $transition-fast, background-color $transition-fast, color $transition-fast, border-color $transition-fast;
+}
+
+.catalog-btn--primary {
+  background: rgba($primary-color, 0.94);
+  color: $primary-contrast;
+  box-shadow: none;
+
+  &:hover {
+    transform: translateY(-1px);
+    background: $primary-hover;
+  }
+}
+
+.empty-state {
+  padding: 4rem 1.5rem;
+  text-align: center;
+  border-top: 1px solid rgba($border-color, 0.7);
+  border-bottom: 1px solid rgba($border-color, 0.7);
+
+  .empty-icon {
+    font-size: 4rem;
+    margin: 0 0 1rem;
+  }
+
+  h2 {
+    margin: 0;
+    color: $primary-dark;
+    font-size: $font-size-xl;
+  }
+
+  p {
+    margin: 0.75rem auto 0;
+    max-width: 40rem;
+    color: $text-secondary;
+  }
+}
+
+@media (max-width: 1024px) {
+  .catalog-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .catalog-item {
+    height: 100%;
+  }
+
+  .catalog-media {
+    min-height: 12rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .catalog-shell {
+    padding: 1rem;
+  }
+
+  .catalog-hero {
+    align-items: start;
+    margin-bottom: 1.25rem;
+  }
+
+  .catalog-topline {
+    flex-direction: column;
+    align-items: start;
+  }
+
+  .catalog-list {
+    grid-template-columns: 1fr;
+  }
+
+  .catalog-media {
+    min-height: 14rem;
+  }
+
+  .catalog-btn {
+    width: 100%;
+  }
+
+  .catalog-pagination {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .pagination-controls {
+    justify-content: center;
+  }
+}

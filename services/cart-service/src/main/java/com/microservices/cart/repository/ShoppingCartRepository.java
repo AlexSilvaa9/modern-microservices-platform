@@ -3,6 +3,7 @@ package com.microservices.cart.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import java.util.Optional;
+import java.util.UUID;
 
 import com.microservices.cart.model.ShoppingCartEntity;
 
@@ -17,7 +18,7 @@ public interface ShoppingCartRepository extends JpaRepository<ShoppingCartEntity
      * @param userId ID del usuario
      * @return Optional con el carrito si existe
      */
-    Optional<ShoppingCartEntity> findByUserId(String userId);
+    Optional<ShoppingCartEntity> findByUserEmail(String userEmail);
 
 }
 

@@ -2,6 +2,7 @@ package com.microservices.cart.dto;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 
 import lombok.Data;
 import lombok.Builder;
@@ -16,8 +17,8 @@ import lombok.AllArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ShoppingCartDTO {
-    private Long id;
-    private String userId;
+    private UUID id;
+    private String userEmail;
     private List<CartItemDTO> items;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;

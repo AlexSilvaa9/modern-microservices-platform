@@ -1,0 +1,74 @@
+<section class="cart-shell">
+  <header class="cart-hero">
+    <div>
+      <p class="eyebrow">Shopping</p>
+      <h1>{{ 'CART.TITLE' | translate }}</h1>
+      <p class="subtitle">{{ 'CART.SUBTITLE' | translate }}</p>
+    </div>
+
+    <div class="cart-badge">
+      <span>{{ itemCount() }}</span>
+      <small>{{ 'CART.ITEMS' | translate }}</small>
+    </div>
+  </header>
+
+  @if (items().length) {
+    <div class="cart-layout">
+      <div class="cart-list">
+        @for (item of items(); track item.product.productId) {
+          <article class="cart-item">
+            <div class="item-image">
+              <img [src]="item.product.imageUrl" [alt]="item.product.name" />
+            </div>
+
+            <div class="item-info">
+              <h2>{{ item.product.name }}</h2>
+              <p>{{ item.product.description }}</p>
+            </div>
+
+            <div class="item-controls">
+              <div class="qty-controls">
+                <button type="button" class="qty-btn" (click)="decrease(item.product.productId)" [attr.aria-label]="'CART.DECREASE' | translate">-</button>
+                <span>{{ item.quantity }}</span>
+                <button type="button" class="qty-btn" (click)="increase(item.product.productId)" [attr.aria-label]="'CART.INCREASE' | translate">+</button>
+              </div>
+
+              <div class="item-pricing">
+                <strong>{{ item.product.price * item.quantity | currency }}</strong>
+                <button type="button" class="link-btn link-btn--danger" (click)="remove(item.product.productId)">{{ 'CART.REMOVE' | translate }}</button>
+              </div>
+            </div>
+          </article>
+        }
+      </div>
+
+      <aside class="cart-summary">
+        <h2>{{ 'CART.SUMMARY' | translate }}</h2>
+
+        <div class="summary-row">
+          <span>{{ 'CART.SUBTOTAL' | translate }}</span>
+          <strong>{{ subtotal() | currency }}</strong>
+        </div>
+        <div class="summary-row">
+          <span>{{ 'CART.SHIPPING' | translate }}</span>
+          <strong>{{ shipping() | currency }}</strong>
+        </div>
+        <div class="summary-row total">
+          <span>{{ 'CART.TOTAL' | translate }}</span>
+          <strong>{{ total() | currency }}</strong>
+        </div>
+
+        <div class="summary-actions">
+          <button type="button" class="action-btn action-btn--primary">{{ 'CART.CHECKOUT' | translate }}</button>
+          <button type="button" class="action-btn action-btn--secondary" (click)="clear()">{{ 'CART.CLEAR' | translate }}</button>
+        </div>
+      </aside>
+    </div>
+  } @else {
+    <div class="empty-cart">
+      <h2>{{ 'CART.EMPTY_TITLE' | translate }}</h2>
+      <p>{{ 'CART.EMPTY_TEXT' | translate }}</p>
+      <a routerLink="/home" class="action-btn action-btn--primary action-link">{{ 'CART.GO_HOME' | translate }}</a>
+    </div>
+  }
+</section>

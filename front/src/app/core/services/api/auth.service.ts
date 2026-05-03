@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { tap, switchMap, map } from 'rxjs/operators';
 import { BaseApiResponse, DataBaseLoginRequest, DataBaseRegistrationRequest, UserDTO } from '../../models/user.model';
 import { UserStateService } from '../global-state/user-state.service';
 
@@ -17,13 +17,15 @@ export class AuthService {
     private readonly AUTH_URL = `${this.GATEWAY_URL}/auth`;
     private readonly USERS_URL = `${this.GATEWAY_URL}/users`;
     private readonly CLIENT_ID = '531484178477-8dlo3be4j6t71d06maccfmanndnchthr.apps.googleusercontent.com';
-    login(req: DataBaseLoginRequest): Observable<BaseApiResponse<UserDTO>> {
+    /**
+     * Login: autentica al usuario (200 OK) y obtiene sus datos completos
+     * Si es exitoso: GET me para obtener datos y setear userState
+     * Retorna: void (solo setea el estado)
+     */
+    login(req: DataBaseLoginRequest) {
         return this.http.post<BaseApiResponse<UserDTO>>(`${this.AUTH_URL}/login`, req).pipe(
-            tap(res => {
-                if (res.data) {
-                    this.userState.setCurrentUser(res.data);
-                }
-            })
+            // Si post es exitoso (200), obtener datos completos
+            switchMap(() => this.getMe())
         );
     }
 

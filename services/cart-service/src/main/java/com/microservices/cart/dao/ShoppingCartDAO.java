@@ -23,8 +23,8 @@ public class ShoppingCartDAO {
         return repository.save(cart);
     }
 
-    public Optional<ShoppingCartEntity> findByUserId(String userId) {
-        return repository.findByUserId(userId);
+    public Optional<ShoppingCartEntity> findByUserEmail(String userEmail) {
+        return repository.findByUserEmail(userEmail);
     }
 }
 

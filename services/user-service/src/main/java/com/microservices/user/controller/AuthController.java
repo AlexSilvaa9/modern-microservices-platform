@@ -159,6 +159,6 @@ public class AuthController {
         response.addHeader(HttpHeaders.SET_COOKIE,
                 Objects.requireNonNull(headers.get(HttpHeaders.SET_COOKIE)).get(1));
 
-        response.sendRedirect("http://localhost:4200/");
+        response.sendRedirect("http://localhost:4200/home");
     }
 }

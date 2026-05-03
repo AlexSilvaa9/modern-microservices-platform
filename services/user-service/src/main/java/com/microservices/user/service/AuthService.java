@@ -64,7 +64,6 @@ public class AuthService {
                         passwordEncoder.matches(request.password(), u.getPasswordHash())
                 )
                 .orElseThrow(() -> new BadRequestException("Credenciales inválidas"));
-
         String token = jwtService.generateToken(user.getEmail(), user.getRoles());
         RefreshToken refreshToken = refreshTokenService.createRefreshToken(user.getEmail());
 

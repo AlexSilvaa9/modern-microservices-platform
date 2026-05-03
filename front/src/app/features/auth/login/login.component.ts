@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
-import { Router, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../../core/services/api/auth.service';
 import { ErrorService } from '../../../core/services/global-state/error.service';
 import { TranslatePipe } from '../../../shared/pipes/translate.pipe';
@@ -18,6 +18,7 @@ export class LoginComponent {
     private authService = inject(AuthService);
     private errorService = inject(ErrorService);
     private router = inject(Router);
+    private route = inject(ActivatedRoute);
 
     loginForm = this.fb.nonNullable.group({
         email: ['', [Validators.required, Validators.email]],
@@ -37,8 +38,8 @@ export class LoginComponent {
             this.authService.login(this.loginForm.getRawValue()).subscribe({
                 next: (res) => {
                     this.isLoading = false;
-                    // Successful login redirects to home or intended location
-                    this.router.navigate(['/']);
+                    const returnUrl = this.route.snapshot.queryParamMap.get('returnUrl') ?? '/home';
+                    this.router.navigateByUrl(returnUrl);
                 },
                 error: (err) => {
                     this.isLoading = false;

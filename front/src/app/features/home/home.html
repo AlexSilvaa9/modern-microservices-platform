@@ -1,1 +1,53 @@
-<p>home works!</p>
+<section class="home-shell">
+  <div class="hero-panel">
+    <div class="hero-copy">
+      <p class="eyebrow">Microservices Front</p>
+      <h1>{{ 'HOME.WELCOME_BACK' | translate }}</h1>
+      <p class="subtitle">{{ 'HOME.SUBTITLE' | translate }}</p>
+
+      <div class="hero-actions">
+        <a pButton routerLink="/cart" class="p-button-raised p-button-rounded">{{ 'HOME.GO_CART' | translate }}</a>
+        <a pButton routerLink="/blog" class="p-button-outlined p-button-rounded">{{ 'HOME.EXPLORE' | translate }}</a>
+      </div>
+    </div>
+
+    <div class="hero-stats">
+      <div class="stat-card">
+        <span class="stat-value">{{ cartCount() }}</span>
+        <span class="stat-label">{{ 'HOME.CART_ITEMS' | translate }}</span>
+      </div>
+      <div class="stat-card accent">
+        <span class="stat-value">{{ cartTotal() | currency }}</span>
+        <span class="stat-label">{{ 'HOME.CART_TOTAL' | translate }}</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="cards-grid">
+    @for (card of welcomeCards(); track card.titleKey) {
+      <article class="info-card">
+        <h2>{{ card.titleKey | translate }}</h2>
+        <p>{{ card.descriptionKey | translate }}</p>
+      </article>
+    }
+  </div>
+
+  <div class="cart-preview">
+    <div class="section-heading">
+      <h2>{{ 'HOME.PREVIEW_TITLE' | translate }}</h2>
+      <a routerLink="/cart">{{ 'HOME.VIEW_ALL' | translate }}</a>
+    </div>
+
+    <div class="preview-list">
+      @for (item of cartItems(); track item.product.productId) {
+        <div class="preview-item">
+          <div>
+            <strong>{{ item.product.name }}</strong>
+            <p>{{ item.product.description }}</p>
+          </div>
+          <span>{{ item.quantity }} x {{ item.product.price | currency }}</span>
+        </div>
+      }
+    </div>
+  </div>
+</section>

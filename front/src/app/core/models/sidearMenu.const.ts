@@ -13,12 +13,28 @@ export const SIDEBAR_MENU: SidebarGroup[] = [
         icon: PrimeIcons.BOOK,
         route: '/blog'
     },
+    {
+        label: 'HEADER.CATALOG',
+        icon: PrimeIcons.SEARCH,
+        route: '/catalog'
+    },
+    {
+        label: 'SIDEBAR.CART',
+        icon: PrimeIcons.SHOPPING_CART,
+        route: '/cart'
+    },
+
 
     {
         label: 'SIDEBAR.ADMINISTRATION',
         icon: PrimeIcons.CHART_BAR,
         roles: [Role.ADMIN],
         children: [
+            {
+                label: 'SIDEBAR.COMMUNICATION',
+                route: '/admin/communication',
+                icon: PrimeIcons.ENVELOPE
+            },
             {
                 label: 'SIDEBAR.SEO',
                 route: '/admin/seo',

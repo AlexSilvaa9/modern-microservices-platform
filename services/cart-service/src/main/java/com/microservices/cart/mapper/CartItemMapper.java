@@ -3,6 +3,7 @@ package com.microservices.cart.mapper;
 import com.microservices.cart.dto.CartItemDTO;
 import com.microservices.cart.model.CartItemEntity;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
 /**
  * Mapper MapStruct para convertir entre entidades del dominio y DTOs.
@@ -24,6 +25,8 @@ public interface CartItemMapper {
      * @param dto DTO del item
      * @return entidad correspondiente
      */
+
+
     CartItemEntity fromDTO(CartItemDTO dto);
 
 

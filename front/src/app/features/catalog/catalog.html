@@ -1,0 +1,87 @@
+<section class="catalog-shell">
+	<header class="catalog-hero">
+		<div class="catalog-hero-copy">
+			<p class="eyebrow">{{ 'CATALOG.EYEBROW' | translate }}</p>
+			<h1>{{ 'CATALOG.TITLE' | translate }}</h1>
+			<p class="subtitle">{{ 'CATALOG.SUBTITLE' | translate }}</p>
+			<p class="catalog-note">{{ 'CATALOG.CART_HINT' | translate }}</p>
+		</div>
+	</header>
+
+	<div class="catalog-container">
+		@if (isLoading()) {
+			<div class="empty-state">
+				<p class="empty-icon">⏳</p>
+				<h2>{{ 'GENERAL.LOADING' | translate }}</h2>
+			</div>
+		} @else if (error()) {
+			<div class="empty-state">
+				<p class="empty-icon">⚠</p>
+				<h2>{{ 'GENERAL.ERROR' | translate }}</h2>
+				<p>{{ error() }}</p>
+				<button type="button" class="catalog-btn catalog-btn--primary" (click)="retry()">
+					{{ 'GENERAL.RETRY' | translate }}
+				</button>
+			</div>
+		} @else if (pagedProducts().length > 0) {
+			<div class="catalog-list" role="list">
+				@for (product of pagedProducts(); track trackByProductId($index, product)) {
+					<article class="catalog-item" role="listitem">
+						<div class="catalog-media">
+							<img [src]="product.imageUrl" [alt]="product.name" />
+						</div>
+
+						<div class="catalog-content">
+							<div class="catalog-topline">
+								<span class="category-badge">{{ product.category }}</span>
+								<span class="catalog-price">{{ product.price | currency }}</span>
+							</div>
+
+							<h2>{{ product.name }}</h2>
+							<p class="product-description">{{ product.description }}</p>
+
+							<div class="catalog-actions">
+								<button type="button" class="catalog-btn catalog-btn--primary" (click)="addToCart(product)">
+									{{ 'CATALOG.ADD_TO_CART' | translate }}
+								</button>
+							</div>
+						</div>
+					</article>
+				}
+			</div>
+
+				<div class="catalog-pagination" aria-label="Catalog pagination">
+					<div class="pagination-summary">
+						{{ pageStart() }}-{{ pageEnd() }} / {{ totalItems() }}
+					</div>
+
+					<div class="pagination-controls">
+						<button type="button" class="pagination-btn" (click)="prevPage()" [disabled]="currentPage() === 1">
+							‹
+						</button>
+
+						@for (page of pageNumbers(); track trackByPage($index, page)) {
+							<button
+								type="button"
+								class="pagination-btn pagination-btn--page"
+								[class.pagination-btn--active]="page === currentPage()"
+								(click)="goToPage(page)"
+							>
+								{{ page }}
+							</button>
+						}
+
+						<button type="button" class="pagination-btn" (click)="nextPage()" [disabled]="currentPage() === totalPages()">
+							›
+						</button>
+					</div>
+				</div>
+		} @else {
+			<div class="empty-state">
+				<p class="empty-icon">🔍</p>
+				<h2>{{ 'CATALOG.NO_PRODUCTS' | translate }}</h2>
+				<p>{{ 'CATALOG.NO_PRODUCTS_TEXT' | translate }}</p>
+			</div>
+		}
+	</div>
+</section>

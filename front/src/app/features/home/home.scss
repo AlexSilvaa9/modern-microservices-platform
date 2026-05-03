@@ -1,0 +1,210 @@
+@import '../../../styles/variables';
+
+.home-shell {
+  min-height: 100vh;
+  padding: 2.5rem;
+  background: $bg;
+
+  .hero-panel {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr;
+    gap: 1.5rem;
+    align-items: stretch;
+    margin-bottom: 1.5rem;
+
+    .hero-copy,
+    .hero-stats,
+    .cart-preview {
+      background: rgba(255, 255, 255, 0.78);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.45);
+      border-radius: $border-radius-xl;
+      box-shadow: $shadow-lg;
+    }
+
+    .hero-copy {
+      padding: 2rem;
+
+      .eyebrow {
+        margin: 0 0 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.18em;
+        font-size: $font-size-xs;
+        color: $primary-light;
+        font-weight: $font-weight-bold;
+      }
+
+      h1 {
+        margin: 0;
+        color: $primary-dark;
+        font-size: clamp(2rem, 4vw, 3.5rem);
+        line-height: 1.05;
+        max-width: 12ch;
+      }
+
+      .subtitle {
+        margin: 1rem 0 0;
+        max-width: 48rem;
+        color: $text-secondary;
+        font-size: $font-size-lg;
+      }
+
+      .hero-actions {
+        display: flex;
+        gap: 0.75rem;
+        margin-top: 1.75rem;
+        flex-wrap: wrap;
+      }
+    }
+
+    .hero-stats {
+      padding: 1.5rem;
+      display: grid;
+      gap: 1rem;
+
+      .stat-card {
+        padding: 1.25rem;
+        border-radius: $border-radius-lg;
+        background: linear-gradient(135deg, $surface-0, $surface-50);
+        border: 1px solid $border-color;
+
+        &.accent {
+          background: linear-gradient(135deg, $primary-color, $primary-light);
+          border-color: transparent;
+
+          .stat-value,
+          .stat-label {
+            color: $primary-contrast;
+          }
+        }
+
+        .stat-value {
+          display: block;
+          color: $primary-dark;
+          font-size: 2rem;
+          font-weight: $font-weight-bold;
+        }
+
+        .stat-label {
+          display: block;
+          margin-top: 0.25rem;
+          color: $text-secondary;
+          font-size: $font-size-sm;
+        }
+      }
+    }
+  }
+
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+
+    .info-card {
+      padding: 1.25rem;
+      border-radius: $border-radius-lg;
+      background: $surface-0;
+      box-shadow: $shadow-md;
+      border: 1px solid $border-color;
+
+      h2 {
+        margin: 0 0 0.5rem;
+        color: $primary-color;
+        font-size: $font-size-lg;
+      }
+
+      p {
+        margin: 0;
+        color: $text-secondary;
+        line-height: 1.55;
+      }
+    }
+  }
+
+  .cart-preview {
+    padding: 1.5rem 2rem;
+
+    .section-heading {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 1rem;
+
+      h2 {
+        margin: 0;
+        color: $text-color;
+        font-size: $font-size-xl;
+      }
+
+      a {
+        color: $primary-color;
+        text-decoration: none;
+        font-weight: $font-weight-semibold;
+      }
+    }
+
+    .preview-list {
+      display: grid;
+      gap: 0.75rem;
+
+      .preview-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        padding: 1rem 1.1rem;
+        border-radius: $border-radius-lg;
+        border: 1px solid $border-color;
+        background: linear-gradient(135deg, $surface-0, $surface-50);
+
+        strong {
+          display: block;
+          color: $text-color;
+        }
+
+        p {
+          margin: 0.25rem 0 0;
+          color: $text-muted;
+          font-size: $font-size-sm;
+        }
+
+        span {
+          color: $primary-color;
+          font-weight: $font-weight-semibold;
+          white-space: nowrap;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 1024px) {
+  .home-shell {
+    .hero-panel {
+      grid-template-columns: 1fr;
+    }
+
+    .cards-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+}
+
+@media (max-width: 640px) {
+  .home-shell {
+    padding: 1rem;
+
+    .hero-panel .hero-copy,
+    .hero-panel .hero-stats,
+    .cart-preview {
+      padding: 1.25rem;
+    }
+
+    .cart-preview .section-heading {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+}

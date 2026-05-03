@@ -1,0 +1,135 @@
+<div class="seo-container">
+  <div class="seo-header">
+    <h1>{{ 'SIDEBAR.SEO' | translate }}</h1>
+    <p class="subtitle">{{ 'SEO.SUBTITLE' | translate }}</p>
+  </div>
+
+  <!-- Tarjetas de métricas -->
+  <div class="metrics-grid">
+    <p-card class="metric-card">
+      <div class="metric-content">
+        <span class="metric-value">{{ getTotalViews() | number }}</span>
+        <span class="metric-label">{{ 'SEO.TOTAL_VIEWS' | translate }}</span>
+      </div>
+      <div class="metric-icon published">
+        <i class="pi pi-eye"></i>
+      </div>
+    </p-card>
+
+    <p-card class="metric-card">
+      <div class="metric-content">
+        <span class="metric-value">{{ getPublishedCount() }}</span>
+        <span class="metric-label">{{ 'SEO.PUBLISHED' | translate }}</span>
+      </div>
+      <div class="metric-icon status-published">
+        <i class="pi pi-check-circle"></i>
+      </div>
+    </p-card>
+
+    <p-card class="metric-card">
+      <div class="metric-content">
+        <span class="metric-value">{{ getDraftCount() }}</span>
+        <span class="metric-label">{{ 'SEO.DRAFTS' | translate }}</span>
+      </div>
+      <div class="metric-icon status-draft">
+        <i class="pi pi-pencil"></i>
+      </div>
+    </p-card>
+
+    <p-card class="metric-card">
+      <div class="metric-content">
+        <span class="metric-value">{{ pages().length }}</span>
+        <span class="metric-label">{{ 'SEO.TOTAL_PAGES' | translate }}</span>
+      </div>
+      <div class="metric-icon pages">
+        <i class="pi pi-file"></i>
+      </div>
+    </p-card>
+  </div>
+
+  <!-- Gráficas -->
+  <div class="charts-grid">
+    <!-- Gráfica de vistas por página -->
+    <p-card class="chart-card">
+      <ng-template pTemplate="header">
+        <div class="chart-header">
+          <h3>{{ 'SEO.VIEWS_PER_PAGE' | translate }}</h3>
+          <i class="pi pi-chart-bar"></i>
+        </div>
+      </ng-template>
+      <div class="chart-wrapper">
+        <p-chart
+          *ngIf="viewsChartData()"
+          type="bar"
+          [data]="viewsChartData()"
+          [options]="viewsChartOptions()"
+        ></p-chart>
+      </div>
+    </p-card>
+
+    <!-- Gráfica de estado -->
+    <p-card class="chart-card">
+      <ng-template pTemplate="header">
+        <div class="chart-header">
+          <h3>{{ 'SEO.STATUS_DISTRIBUTION' | translate }}</h3>
+          <i class="pi pi-chart-pie"></i>
+        </div>
+      </ng-template>
+      <div class="chart-wrapper">
+        <p-chart
+          *ngIf="statusChartData()"
+          type="pie"
+          [data]="statusChartData()"
+          [options]="statusChartOptions()"
+        ></p-chart>
+      </div>
+    </p-card>
+  </div>
+
+  <!-- Gráfica de tendencia -->
+  <p-card class="chart-card full-width">
+    <ng-template pTemplate="header">
+      <div class="chart-header">
+        <h3>{{ 'SEO.TREND_7DAYS' | translate }}</h3>
+        <i class="pi pi-chart-line"></i>
+      </div>
+    </ng-template>
+    <div class="chart-wrapper trend-chart">
+      <p-chart
+        *ngIf="trendChartData()"
+        type="line"
+        [data]="trendChartData()"
+        [options]="trendChartOptions()"
+      ></p-chart>
+    </div>
+  </p-card>
+
+  <!-- Tabla de detalles -->
+  <p-card class="details-card full-width">
+    <ng-template pTemplate="header">
+      <div class="chart-header">
+        <h3>{{ 'SEO.PAGE_DETAILS' | translate }}</h3>
+        <i class="pi pi-list"></i>
+      </div>
+    </ng-template>
+    <div class="pages-list">
+      <div class="page-item" *ngFor="let page of pages()">
+        <div class="page-info">
+          <span class="page-title">{{ page.title }}</span>
+          <span class="page-slug">/{{ page.slug }}</span>
+        </div>
+        <div class="page-stats">
+          <span class="stat">
+            <i class="pi pi-eye"></i>
+            {{ page.views | number }}
+          </span>
+          <span [class]="'status-badge ' + (page.status === 'published' ? 'status-published' : 'status-draft')">
+            {{ page.status === 'published' ? ('SEO.STATUS_PUBLISHED' | translate) : ('SEO.STATUS_DRAFT' | translate) }}
+          </span>
+          <span class="date">{{ page.lastUpdated }}</span>
+        </div>
+      </div>
+    </div>
+  </p-card>
+</div>
+

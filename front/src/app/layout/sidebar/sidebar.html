@@ -41,23 +41,7 @@
                         </div>
 
                     </div>
-                </div>
-                <div *ngIf="item.children && item.roles?.includes(Role.ADMIN)" class="menu-group">
-
-                    <div class="menu-item group" (click)="toggleGroup(item.label)">
-                        <i [class]="item.icon"></i>
-                        <span class="label">{{ item.label | translate}}</span>
-                        <span class="arrow">›</span>
-                    </div>
-
-                    <div class="submenu" *ngIf="openGroup() === item.label">
-
-                        <div *ngFor="let child of item.children" class="submenu-item"
-                            [class.active]="isActive(child.route)" (click)="navigate(child.route!)">
-                            <span class="label">{{ child.label | translate}}</span>
-                        </div>
-
-                    </div>
+               
                 </div>
             </div>
 

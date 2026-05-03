@@ -40,7 +40,7 @@ a {
     color: $primary-contrast;
     text-decoration: none;
     font-weight: $font-weight-semibold;
-    font-size: $font-size-sm;
+    font-size: $font-size-base;
     padding: $space-2 0;
     transition: $transition-fast;
 }
@@ -76,6 +76,23 @@ a:hover {
     align-items: center;
     flex: 3.3;
     justify-content: right;
+}
+
+.shopping-cart {
+   
+    ::ng-deep .p-badge {
+        font-size: 0.6rem !important;
+        width: 0.95rem !important;
+        height: 0.95rem !important;
+        min-width: 0.95rem !important;
+        min-height: 0.95rem !important;
+        padding: 0 !important;
+        line-height: 0.95rem !important;
+        border-radius: 50% !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
 }
 
 .profile-actions {

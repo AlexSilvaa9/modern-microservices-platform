@@ -86,13 +86,31 @@ export const routes: Routes = [
         canActivate: [authGuard],
         loadComponent: () => import('./features/home/home').then(m => m.Home)
     },
+
     {
-        path: 'users',
+      path: 'cart',
+      canActivate: [authGuard],
+      loadComponent: () => import('./features/cart/cart').then(m => m.Cart)
+    },
+    {
+      path: 'catalog',
+      loadComponent: () => import('./features/catalog/catalog').then(m => m.Catalog)
+    },
+    {
+        path: 'admin',
         canActivate: [adminGuard],
         children: [
             {
-                path: '',
-                loadComponent: () => import('./features/user-management/user-management').then(m => m.UserManagement)
+                path: 'users',
+                loadComponent: () => import('./features/admin/user-management/user-management').then(m => m.UserManagement)
+            },
+            {
+                path: 'seo',
+                loadComponent: () => import('./features/admin/seo/seo').then(m => m.Seo)
+        },
+        {
+          path: 'communication',
+          loadComponent: () => import('./features/admin/communication/communication').then(m => m.Communication)
             }
         ]
     },

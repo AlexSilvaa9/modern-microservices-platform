@@ -2,8 +2,8 @@
 set -e
 
 
-echo "Construyendo catalog-service..."
-docker build --no-cache -t catalog-service:1.0.0 services/catalog-service
+echo "Construyendo product-service..."
+docker build --no-cache -t product-service:1.0.0 services/product-service
 
 echo "Construyendo cart-service..."
 docker build --no-cache -t cart-service:1.0.0 services/cart-service

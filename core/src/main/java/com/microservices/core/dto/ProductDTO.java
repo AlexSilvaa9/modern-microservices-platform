@@ -7,16 +7,16 @@ import lombok.Builder;
 import lombok.Data;
 
 import java.math.BigDecimal;
+import java.util.UUID;
 
 /**
  * DTO que representa los datos expuestos de un producto en la API.
  */
 @Data
-@Builder
 public class ProductDTO {
 
     /** Identificador del producto */
-    private Long id;
+    private UUID id;
 
     /** Nombre del producto */
     @NotBlank(message = "Product name is required")
@@ -30,16 +30,10 @@ public class ProductDTO {
     @Positive(message = "Price must be positive")
     private BigDecimal price;
 
-    /** Cantidad en stock */
-    @NotNull(message = "Stock is required")
-    private Integer stock;
-
     /** Categoría del producto */
     private String category;
 
     /** URL de la imagen */
     private String imageUrl;
 
-    /** Indica si el producto está activo (disponible) */
-    private boolean active;
 }

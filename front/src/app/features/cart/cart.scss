@@ -1,0 +1,351 @@
+@import '../../../styles/variables';
+
+.cart-shell {
+  min-height: 100vh;
+  padding: 2.5rem;
+  background:
+    radial-gradient(circle at top left, rgba($primary-light, 0.16), transparent 32%),
+    radial-gradient(circle at bottom right, rgba($secondary-dark, 0.18), transparent 28%),
+    $bg;
+}
+
+.cart-hero {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+
+  .eyebrow {
+    margin: 0 0 0.5rem;
+    color: $primary-light;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-bold;
+  }
+
+  h1 {
+    margin: 0;
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    color: $primary-dark;
+  }
+
+  .subtitle {
+    margin: 0.75rem 0 0;
+    color: $text-secondary;
+    max-width: 42rem;
+  }
+
+  .cart-badge {
+    min-width: 116px;
+    padding: 1rem 1.25rem;
+    border-radius: $border-radius-xl;
+    background: rgba($surface-0, 0.9);
+    border: 1px solid rgba($primary-color, 0.08);
+    box-shadow: $shadow-md;
+    text-align: center;
+
+    span {
+      display: block;
+      color: $primary-color;
+      font-size: 2rem;
+      font-weight: $font-weight-bold;
+      line-height: 1;
+    }
+
+    small {
+      color: $text-secondary;
+      font-weight: $font-weight-medium;
+    }
+  }
+}
+
+.cart-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.6fr) minmax(280px, 0.8fr);
+  gap: 1.5rem;
+}
+
+.cart-list,
+.cart-summary,
+.empty-cart {
+  background: rgba($surface-0, 0.9);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba($border-color, 0.7);
+  border-radius: $border-radius-xl;
+  box-shadow: $shadow-lg;
+}
+
+.cart-list {
+  padding: 1.25rem;
+  display: grid;
+  gap: 1rem;
+}
+
+.cart-item {
+  display: grid;
+  grid-template-columns: 108px minmax(0, 1fr) auto;
+  gap: 1rem;
+  align-items: start;
+  padding: 1rem;
+  border-radius: $border-radius-lg;
+  background: linear-gradient(180deg, $surface-0, $surface-50);
+  border: 1px solid $border-color;
+  transition: transform $transition-base, box-shadow $transition-base, border-color $transition-base;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: $shadow-md;
+    border-color: rgba($primary-light, 0.4);
+  }
+}
+
+.item-image {
+  width: 108px;
+  height: 108px;
+  border-radius: $border-radius-lg;
+  overflow: hidden;
+  background: $surface-100;
+  border: 1px solid $border-color;
+  box-shadow: $shadow-sm;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+}
+
+.item-info {
+  min-width: 0;
+
+  h2 {
+    margin: 0;
+    color: $text-color;
+    font-size: $font-size-lg;
+    line-height: 1.25;
+  }
+
+  p {
+    margin: 0.4rem 0 0;
+    color: $text-secondary;
+    line-height: 1.5;
+  }
+}
+
+.item-controls {
+  display: grid;
+  gap: 0.8rem;
+  justify-items: end;
+}
+
+.qty-controls {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.35rem 0.45rem;
+  border-radius: $border-radius-full;
+  background: $surface-100;
+  border: 1px solid $border-color;
+
+  span {
+    min-width: 2rem;
+    text-align: center;
+    font-weight: $font-weight-semibold;
+    color: $primary-dark;
+  }
+}
+
+.qty-btn,
+.link-btn,
+.action-btn {
+  font: inherit;
+  border: 0;
+  cursor: pointer;
+  transition: transform $transition-fast, box-shadow $transition-fast, background-color $transition-fast, color $transition-fast, border-color $transition-fast;
+}
+
+.qty-btn {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 9999px;
+  background: $surface-0;
+  color: $primary-color;
+  box-shadow: $shadow-sm;
+  border: 1px solid $border-color;
+
+  &:hover {
+    transform: translateY(-1px);
+    background: $primary-color;
+    color: $primary-contrast;
+    border-color: $primary-color;
+  }
+}
+
+.item-pricing {
+  display: grid;
+  gap: 0.35rem;
+  justify-items: end;
+
+  strong {
+    color: $primary-dark;
+    font-size: $font-size-lg;
+  }
+}
+
+.link-btn {
+  padding: 0;
+  background: transparent;
+  color: $text-secondary;
+  font-size: $font-size-sm;
+
+  &:hover {
+    color: $error-color;
+    text-decoration: underline;
+    text-underline-offset: 0.2rem;
+  }
+}
+
+.cart-summary {
+  padding: 1.5rem;
+  align-self: start;
+
+  h2 {
+    margin: 0 0 1rem;
+    color: $primary-dark;
+  }
+}
+
+.summary-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.85rem 0;
+  border-bottom: 1px solid $border-color;
+
+  span {
+    color: $text-secondary;
+  }
+
+  &.total {
+    border-bottom: none;
+    font-size: $font-size-lg;
+    color: $primary-dark;
+
+    strong {
+      color: $primary-dark;
+    }
+  }
+}
+
+.summary-actions {
+  display: grid;
+  gap: 0.75rem;
+  margin-top: 1.25rem;
+}
+
+.action-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.75rem;
+  padding: 0.75rem 1rem;
+  border-radius: $border-radius-full;
+  text-decoration: none;
+  font-weight: $font-weight-semibold;
+}
+
+.action-btn--primary {
+  background: $primary-color;
+  color: $primary-contrast;
+  box-shadow: $shadow-sm;
+
+  &:hover {
+    transform: translateY(-1px);
+    background: $primary-hover;
+    box-shadow: $shadow-md;
+  }
+}
+
+.action-btn--secondary {
+  background: $surface-0;
+  color: $primary-color;
+  border: 1px solid $border-color;
+
+  &:hover {
+    transform: translateY(-1px);
+    border-color: $primary-light;
+    color: $primary-dark;
+    box-shadow: $shadow-sm;
+  }
+}
+
+.empty-cart {
+  grid-column: 1 / -1;
+  padding: 2rem;
+  text-align: center;
+
+  h2 {
+    margin: 0;
+    color: $primary-dark;
+  }
+
+  p {
+    margin: 0.75rem auto 1.5rem;
+    max-width: 34rem;
+    color: $text-secondary;
+  }
+}
+
+.action-link {
+  min-width: 12rem;
+}
+
+@media (max-width: 1024px) {
+  .cart-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .cart-shell {
+    padding: 1.25rem;
+  }
+
+  .cart-hero {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .cart-item {
+    grid-template-columns: 88px minmax(0, 1fr);
+  }
+
+  .item-controls {
+    grid-column: 1 / -1;
+    justify-items: start;
+  }
+}
+
+@media (max-width: 560px) {
+  .cart-shell {
+    padding: 1rem;
+  }
+
+  .cart-list,
+  .cart-summary,
+  .empty-cart {
+    border-radius: $border-radius-lg;
+  }
+
+  .cart-item {
+    grid-template-columns: 72px minmax(0, 1fr);
+  }
+
+  .item-image {
+    width: 72px;
+    height: 72px;
+  }
+}

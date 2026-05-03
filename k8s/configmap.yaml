@@ -7,6 +7,7 @@ data:
     server:
       servlet:
         context-path: /api
+    
     management:
       endpoints:
         web:
@@ -15,25 +16,16 @@ data:
       endpoint:
         health:
           show-details: always
-    spring:
-      zipkin:
-        base-url: http://zipkin:9411
-        enabled: false
-        sleuth:
-          sampler:
-            probability: 1.0
+ 
     security:
       jwt-properties:
         secret: ${JWT_SECRET}
         expiration-ms: 3600000
-      whitelist: /auth/**,/oauth2/**,/swagger-ui/**,/v3/api-docs/**,/h2-console/**
+      whitelist: /auth/**,/oauth2/**,/swagger-ui/**,/v3/api-docs/**,/h2-console/**,/product/**
     logging:
       level:
         com:
-          microservices:
-            core:
-              security:
-                JwtFilter: TRACE
+          microservices: TRACE
         org:
           springframework:
             security: DEBUG
@@ -46,17 +38,15 @@ data:
                 bind: TRACE
 
 
-  catalog-service.yml: |-
-    server:
-      port: 8080
+  product-service.yml: |-
     spring:
       sql:
         init:
           mode: always
       application:
-        name: catalog-service
+        name: product-service
       datasource:
-        url: jdbc:h2:mem:catalogdb
+        url: jdbc:h2:mem:productdb
         driverClassName: org.h2.Driver
         username: ${DATABASE_USERNAME}
         password: ${DATABASE_PASSWORD}  
@@ -66,17 +56,13 @@ data:
           ddl-auto: create-drop
         show-sql: true
         defer-datasource-initialization: true
+    
       h2:
         console:
           enabled: true
-          path: /h2-console
-    logging:
-      level:
-        com.microservices.catalog: DEBUG
+
 
   cart-service.yml: |-
-    server:
-      port: 8080
     app:
       environment: prod
     spring:
@@ -99,6 +85,8 @@ data:
       h2:
         console:
           enabled: true
+          path: /h2-console
+
     feign:
       client:
         config:
@@ -108,18 +96,14 @@ data:
           user-service:
             connect-timeout: 5000
             read-timeout: 5000
-    logging:
-      level:
-        com.microservices.cart: DEBUG
+
 
   user-service.yml: |-
     google:
       client-id: ${GOOGLE_CLIENT_ID}
       client-secret: ${GOOGLE_CLIENT_SECRET}
       redirect-uri: http://localhost:8081/api/auth/google/callback
-    server:
-      port: 8080
-     
+ 
     spring:
       application:
         name: user-service
@@ -128,22 +112,19 @@ data:
         driverClassName: org.h2.Driver
         username: ${DATABASE_USERNAME}
         password: ${DATABASE_PASSWORD}  
-      h2:
-        console:
-          enabled: true
-          path: /h2-console
-
       jpa:
         hibernate:
           ddl-auto: create
         defer-datasource-initialization: true
         show-sql: true
+      h2:
+        console:
+          enabled: true
+          path: /h2-console
       sql:
         init:
           mode: always
 
-    logging:
-      level:
-        com.microservices.user: DEBUG
+
 
   

@@ -8,6 +8,8 @@ import { IsLoggedInDirective } from '../../shared/directives/isLoggedInDirective
 import { IsNotLoggedInDirective } from '../../shared/directives/isNotLoggedInDirective';
 import { ButtonModule } from 'primeng/button';
 import { SidebarService } from '../../core/services/global-state/sidebar.service';
+import { CartService } from '../../core/services/global-state/cart.service';
+import { OverlayBadgeModule } from 'primeng/overlaybadge';
 
 @Component({
     selector: 'app-header',
@@ -16,7 +18,8 @@ import { SidebarService } from '../../core/services/global-state/sidebar.service
         TranslatePipe,
         IsLoggedInDirective,
         IsNotLoggedInDirective,
-        ButtonModule
+        ButtonModule,
+        OverlayBadgeModule
     ],
     templateUrl: './header.component.html',
     styleUrl: './header.component.scss'
@@ -24,7 +27,7 @@ import { SidebarService } from '../../core/services/global-state/sidebar.service
 export class HeaderComponent {
     private authService = inject(AuthService);
     public translationService = inject(TranslationService);
-
+    public cartService = inject(CartService);
 
     logout() {
         this.authService.logout();

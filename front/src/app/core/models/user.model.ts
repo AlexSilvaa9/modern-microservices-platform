@@ -2,6 +2,12 @@ export enum Role {
     USER = 'USER',
     ADMIN = 'ADMIN'
 }
+export enum IdentityProvider {
+    LOCAL = 'DATABASE',
+    GOOGLE = 'GOOGLE',
+    FACEBOOK = 'FACEBOOK',
+    GITHUB = 'GITHUB'
+}
 
 export interface UserDTO {
     id?: string;
@@ -9,7 +15,7 @@ export interface UserDTO {
     username: string;
     roles: Role[];
     imageUrl?: string;
-    provider?: string;
+    providers?: IdentityProvider[];
 }
 
 export interface BaseApiResponse<T> {

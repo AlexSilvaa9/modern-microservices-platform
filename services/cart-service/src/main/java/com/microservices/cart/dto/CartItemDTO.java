@@ -1,7 +1,9 @@
 package com.microservices.cart.dto;
 
 import java.math.BigDecimal;
+import java.util.UUID;
 
+import com.microservices.core.dto.ProductDTO;
 import lombok.Data;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
@@ -15,9 +17,8 @@ import lombok.AllArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CartItemDTO {
-    private Long id;
-    private Long productId;
-    private String productName;
-    private BigDecimal price;
+    private UUID id;
+    private ProductDTO product;
+    private UUID productId;
     private Integer quantity;
 }
