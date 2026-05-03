@@ -45,6 +45,33 @@
   color: $text-secondary;
 }
 
+/* DIAGRAMA */
+.architecture-diagram {
+  margin: 0 auto $space-8;
+  max-width: 980px;
+  text-align: center;
+
+  h2 {
+    margin-bottom: $space-4;
+    color: $primary-dark;
+  }
+
+  img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: $border-radius-xl;
+    box-shadow: $card-shadow;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    background: $surface-0;
+  }
+
+  p {
+    margin-top: $space-3;
+    color: $text-secondary;
+  }
+}
+
 /* GRID */
 .tech-grid {
   display: grid;

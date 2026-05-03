@@ -12,10 +12,10 @@ export class AuthService {
     private http = inject(HttpClient);
     private userState = inject(UserStateService);
 
-    private readonly GATEWAY_URL = 'http://localhost:8081/api'; // Assuming gateway is heavily routing /api
+    private readonly GATEWAY_URL = 'http://localhost:8080/api'; // Assuming gateway is heavily routing /api
     // Adjust this depending exactly on the target Gateway or Service URL
-    private readonly AUTH_URL = `${this.GATEWAY_URL}/auth`;
-    private readonly USERS_URL = `${this.GATEWAY_URL}/users`;
+    private readonly AUTH_URL = `${this.GATEWAY_URL}/user/auth`;
+    private readonly USERS_URL = `${this.GATEWAY_URL}/user`;
     private readonly CLIENT_ID = '531484178477-8dlo3be4j6t71d06maccfmanndnchthr.apps.googleusercontent.com';
     /**
      * Login: autentica al usuario (200 OK) y obtiene sus datos completos

@@ -15,8 +15,8 @@ import { Page } from '../../models/page.model';
 export class UserService {
     private http = inject(HttpClient);
 
-    private readonly GATEWAY_URL = 'http://localhost:8081/api';
-    private readonly USERS_URL = `${this.GATEWAY_URL}/users`;
+    private readonly GATEWAY_URL = 'http://localhost:8080/api';
+    private readonly USERS_URL = `${this.GATEWAY_URL}/user`;
  
 
      

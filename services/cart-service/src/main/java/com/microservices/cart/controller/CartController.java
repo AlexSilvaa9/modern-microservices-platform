@@ -16,7 +16,6 @@ import java.util.UUID;
  * Controlador REST para operaciones del carrito de compras.
  */
 @RestController
-@RequestMapping("/cart")
 @CrossOrigin(origins = "*")
 public class CartController {
 

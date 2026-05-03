@@ -6,7 +6,7 @@ import { Cart, CartItem } from '../../models/cart.model';
   providedIn: 'root'
 })
 export class CartService {
-    private readonly CART_URL = 'http://localhost:8083/api/cart';
+    private readonly CART_URL = 'http://localhost:8080/api/cart/';
     private readonly itemsSignal = signal<CartItem[]>([]);
 
   readonly items = computed(() => this.itemsSignal());
@@ -23,14 +23,14 @@ export class CartService {
 
   increaseQuantity(itemId: string): void {
     // backend exposes an add endpoint that increases quantity by 1
-    this.http.get(`${this.CART_URL}/add/${itemId}`).subscribe({
+    this.http.get(`${this.CART_URL}add/${itemId}`).subscribe({
       next: () => this.loadCart(),
       error: () => this.loadCart()
     });
   }
 
   decreaseQuantity(itemId: string): void {
-   this.http.get(`${this.CART_URL}/delete/${itemId}?quantity=1`).subscribe({
+   this.http.get(`${this.CART_URL}delete/${itemId}?quantity=1`).subscribe({
       next: () => this.loadCart(),
       error: () => this.loadCart()
     });
@@ -38,7 +38,7 @@ export class CartService {
 
   removeItem(itemId: string): void {
 
-    this.http.get(`${this.CART_URL}/delete/${itemId}?quantity=1000`).subscribe({
+    this.http.get(`${this.CART_URL}delete/${itemId}?quantity=1000`).subscribe({
       next: () => this.loadCart(),
       error: () => this.loadCart()
     });
@@ -48,7 +48,7 @@ export class CartService {
     // backend provides add by productId (increments by 1), call repeatedly for quantity
     const calls: Array<Promise<any>> = [];
     for (let i = 0; i < item.quantity; i++) {
-      calls.push(this.http.get(`${this.CART_URL}/add/${item.product.productId}`).toPromise());
+      calls.push(this.http.get(`${this.CART_URL}add/${item.product.productId}`).toPromise());
     }
     Promise.all(calls)
       .then(() => this.loadCart())

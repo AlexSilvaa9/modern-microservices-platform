@@ -3,7 +3,6 @@ import {
   inject,
   OnInit,
 } from '@angular/core';
-
 import { CommonModule, Location } from '@angular/common';
 import { TranslatePipe } from '../../shared/pipes/translate.pipe';
 import { TranslationService } from '../../core/services/global-state/translation.service';

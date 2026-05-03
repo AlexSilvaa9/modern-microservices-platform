@@ -11,7 +11,7 @@ import { BaseApiResponse } from '../../models/user.model';
   providedIn: 'root'
 })
 export class CatalogService {
-  private apiUrl = 'http://localhost:8082/api/product';
+  private apiUrl = 'http://localhost:8080/api/product/';
   public products = signal<Product[]>([]);
   public isLoading = signal(false);
   public error = signal<string | null>(null);

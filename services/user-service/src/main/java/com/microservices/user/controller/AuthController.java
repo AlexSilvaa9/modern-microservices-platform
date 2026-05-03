@@ -54,7 +54,7 @@ public class AuthController {
                 .secure(true)
                 .path("/")
                 .maxAge(maxAge)
-                .sameSite(SAME_SITE_STRICT)
+                .sameSite("None")
                 .build();
 
         ResponseCookie refreshCookie = ResponseCookie.from("refresh_token", refreshToken)
@@ -62,7 +62,7 @@ public class AuthController {
                 .secure(true)
                 .path("/")
                 .maxAge(maxAge)
-                .sameSite(SAME_SITE_STRICT)
+                .sameSite("None")
                 .build();
 
         HttpHeaders headers = new HttpHeaders();

@@ -13,10 +13,9 @@ dev:
         disableDownload: true
         onUpload:
           restartContainer: true
-    ports:
-      - port: "8081:8080"
+
     open:
-      - url: http://localhost:8081/api/swagger-ui/index.html
+      - url: http://localhost:8080/api/user/swagger-ui/index.html
     logs:
       enabled: true
 
@@ -28,10 +27,9 @@ dev:
         disableDownload: true
         onUpload:
           restartContainer: true
-    ports:
-      - port: "8082:8080"
+
     open:
-      - url: http://localhost:8082/api/swagger-ui/index.html
+      - url: http://localhost:8080/api/product/swagger-ui/index.html
     logs:
       enabled: true
 
@@ -45,10 +43,9 @@ dev:
           restartContainer: true
     ssh:
       enabled: true
-    ports:
-      - port: "8083:8080"
+
     open:
-      - url: http://localhost:8083/api/swagger-ui/index.html
+      - url: http://localhost:8080/api/cart/swagger-ui/index.html
     logs:
       enabled: true
 

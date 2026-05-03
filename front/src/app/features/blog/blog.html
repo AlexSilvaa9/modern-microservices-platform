@@ -3,83 +3,63 @@
     <!-- HERO -->
     <section class="hero">
         <h1>{{ 'BLOG.HERO.TITLE' | translate }}</h1>
-        <p>
-            {{ 'BLOG.HERO.SUBTITLE' | translate }}
-        </p>
-
-        <div class="status">
-            {{ 'BLOG.STATUS' | translate }}
-        </div>
+        <p>{{ 'BLOG.HERO.SUBTITLE' | translate }}</p>
+        <div class="status">{{ 'BLOG.STATUS' | translate }}</div>
     </section>
 
     <!-- INTRO -->
     <section class="intro">
-        <p>
-            {{ 'BLOG.INTRO.TEXT' | translate }}
-        </p>
+        <p>{{ 'BLOG.INTRO.TEXT' | translate }}</p>
+    </section>
+
+    <!-- DIAGRAMA -->
+    <section class="architecture-diagram">
+        <h2>{{ 'BLOG.DIAGRAM.TITLE' | translate }}</h2>
+        <img
+            src="resources/images/arquitectura.png"
+            [alt]="'BLOG.DIAGRAM.ALT' | translate"
+            width="50%" style="padding: 3rem;"
+        />
+        <p>{{ 'BLOG.DIAGRAM.CAPTION' | translate }}</p>
     </section>
 
     <!-- GRID TECNOLOGÍAS -->
     <section class="tech-grid">
 
         <article class="tech">
-            <h3>{{ 'BLOG.TECH.KAFKA.TITLE' | translate }}</h3>
-            <p class="desc">
-                {{ 'BLOG.TECH.KAFKA.DESC' | translate }}
-            </p>
-            <p class="use">
-                {{ 'BLOG.TECH.KAFKA.USE' | translate }}
-            </p>
+            <h3>{{ 'BLOG.TECH.AWS.TITLE' | translate }}</h3>
+            <p class="desc">{{ 'BLOG.TECH.AWS.DESC' | translate }}</p>
+            <p class="use">{{ 'BLOG.TECH.AWS.USE' | translate }}</p>
+        </article>
+
+        <article class="tech">
+            <h3>{{ 'BLOG.TECH.INGRESS.TITLE' | translate }}</h3>
+            <p class="desc">{{ 'BLOG.TECH.INGRESS.DESC' | translate }}</p>
+            <p class="use">{{ 'BLOG.TECH.INGRESS.USE' | translate }}</p>
         </article>
 
         <article class="tech">
             <h3>{{ 'BLOG.TECH.KUBERNETES.TITLE' | translate }}</h3>
-            <p class="desc">
-                {{ 'BLOG.TECH.KUBERNETES.DESC' | translate }}
-            </p>
-            <p class="use">
-                {{ 'BLOG.TECH.KUBERNETES.USE' | translate }}
-            </p>
+            <p class="desc">{{ 'BLOG.TECH.KUBERNETES.DESC' | translate }}</p>
+            <p class="use">{{ 'BLOG.TECH.KUBERNETES.USE' | translate }}</p>
         </article>
 
         <article class="tech">
-            <h3>{{ 'BLOG.TECH.SPRINGBOOT.TITLE' | translate }}</h3>
-            <p class="desc">
-                {{ 'BLOG.TECH.SPRINGBOOT.DESC' | translate }}
-            </p>
-            <p class="use">
-                {{ 'BLOG.TECH.SPRINGBOOT.USE' | translate }}
-            </p>
+            <h3>{{ 'BLOG.TECH.MICROSERVICES.TITLE' | translate }}</h3>
+            <p class="desc">{{ 'BLOG.TECH.MICROSERVICES.DESC' | translate }}</p>
+            <p class="use">{{ 'BLOG.TECH.MICROSERVICES.USE' | translate }}</p>
         </article>
 
         <article class="tech">
-            <h3>{{ 'BLOG.TECH.SPRINGSECURITY.TITLE' | translate }}</h3>
-            <p class="desc">
-                {{ 'BLOG.TECH.SPRINGSECURITY.DESC' | translate }}
-            </p>
-            <p class="use">
-                {{ 'BLOG.TECH.SPRINGSECURITY.USE' | translate }}
-            </p>
+            <h3>{{ 'BLOG.TECH.AUTH.TITLE' | translate }}</h3>
+            <p class="desc">{{ 'BLOG.TECH.AUTH.DESC' | translate }}</p>
+            <p class="use">{{ 'BLOG.TECH.AUTH.USE' | translate }}</p>
         </article>
 
         <article class="tech">
-            <h3>{{ 'BLOG.TECH.DOCKER.TITLE' | translate }}</h3>
-            <p class="desc">
-                {{ 'BLOG.TECH.DOCKER.DESC' | translate }}
-            </p>
-            <p class="use">
-                {{ 'BLOG.TECH.DOCKER.USE' | translate }}
-            </p>
-        </article>
-
-        <article class="tech">
-            <h3>{{ 'BLOG.TECH.APIGATEWAY.TITLE' | translate }}</h3>
-            <p class="desc">
-                {{ 'BLOG.TECH.APIGATEWAY.DESC' | translate }}
-            </p>
-            <p class="use">
-                {{ 'BLOG.TECH.APIGATEWAY.USE' | translate }}
-            </p>
+            <h3>{{ 'BLOG.TECH.CONFIG.TITLE' | translate }}</h3>
+            <p class="desc">{{ 'BLOG.TECH.CONFIG.DESC' | translate }}</p>
+            <p class="use">{{ 'BLOG.TECH.CONFIG.USE' | translate }}</p>
         </article>
 
     </section>
@@ -87,9 +67,7 @@
     <!-- FLUJO -->
     <section class="flow">
         <h2>{{ 'BLOG.FLOW.TITLE' | translate }}</h2>
-        <p>
-            {{ 'BLOG.FLOW.TEXT' | translate }}
-        </p>
+        <p>{{ 'BLOG.FLOW.TEXT' | translate }}</p>
     </section>
 
     <!-- ESTADO -->

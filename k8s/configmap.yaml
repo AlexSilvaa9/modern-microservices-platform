@@ -4,9 +4,7 @@ metadata:
   name: microservices-config
 data:
   application.yml: |-
-    server:
-      servlet:
-        context-path: /api
+   
     
     management:
       endpoints:
@@ -21,7 +19,7 @@ data:
       jwt-properties:
         secret: ${JWT_SECRET}
         expiration-ms: 3600000
-      whitelist: /auth/**,/oauth2/**,/swagger-ui/**,/v3/api-docs/**,/h2-console/**,/product/**
+      whitelist: /auth/**,/oauth2/**,/swagger-ui/**,/v3/api-docs/**,/h2-console/**,/product/**, /batch
     logging:
       level:
         com:
@@ -39,6 +37,9 @@ data:
 
 
   product-service.yml: |-
+    server:
+     servlet:
+       context-path: /api/product
     spring:
       sql:
         init:
@@ -63,6 +64,9 @@ data:
 
 
   cart-service.yml: |-
+    server:
+     servlet:
+       context-path: /api/cart
     app:
       environment: prod
     spring:
@@ -99,10 +103,13 @@ data:
 
 
   user-service.yml: |-
+    server:
+     servlet:
+       context-path: /api/user
     google:
       client-id: ${GOOGLE_CLIENT_ID}
       client-secret: ${GOOGLE_CLIENT_SECRET}
-      redirect-uri: http://localhost:8081/api/auth/google/callback
+      redirect-uri: http://localhost:8080/api/user/auth/google/callback
  
     spring:
       application:

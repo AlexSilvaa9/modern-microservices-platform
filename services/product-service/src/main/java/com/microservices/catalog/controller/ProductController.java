@@ -22,7 +22,6 @@ import java.util.UUID;
  * Controlador REST para gestionar endpoints relacionados con productos.
  */
 @RestController
-@RequestMapping("/product")
 @Validated
 public class ProductController {
 
