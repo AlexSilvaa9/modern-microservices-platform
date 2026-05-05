@@ -8,7 +8,7 @@
 
     <div class="hero-badge">
       <span class="hero-badge__icon">✉</span>
-      <span>{{ 'COMMUNICATION.MOCK_BADGE' | translate }}</span>
+      <span>{{ hasRecipients() ? ('COMMUNICATION.LIVE_BADGE' | translate) : ('COMMUNICATION.MOCK_BADGE' | translate) }}</span>
     </div>
   </header>
 
@@ -79,6 +79,17 @@
           </select>
         </div>
 
+        <div class="field">
+          <label for="recipients">{{ 'COMMUNICATION.RECIPIENTS_FIELD' | translate }}</label>
+          <input
+            id="recipients"
+            type="text"
+            formControlName="recipients"
+            placeholder="email1@dominio.com, email2@dominio.com"
+          />
+          <small class="hint">{{ 'COMMUNICATION.RECIPIENTS_HELP' | translate }}</small>
+        </div>
+
         <div class="field full-width">
           <label for="message">{{ 'COMMUNICATION.MESSAGE' | translate }}</label>
           <textarea
@@ -96,12 +107,6 @@
       <div class="action-row">
         <button type="button" class="action-btn primary" [disabled]="isSubmitting()" (click)="sendNow()">
           {{ isSubmitting() ? ('COMMUNICATION.SENDING' | translate) : ('COMMUNICATION.SEND_NOW' | translate) }}
-        </button>
-        <button type="button" class="action-btn secondary" [disabled]="isSubmitting()" (click)="launchCampaign()">
-          {{ 'COMMUNICATION.LAUNCH_CAMPAIGN' | translate }}
-        </button>
-        <button type="button" class="action-btn tertiary" [disabled]="isSubmitting()" (click)="scheduleDaily()">
-          {{ 'COMMUNICATION.SCHEDULE_DAILY' | translate }}
         </button>
       </div>
     </section>

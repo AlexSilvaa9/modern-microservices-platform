@@ -1,9 +1,8 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
+
 import { BaseApiResponse, DataBaseLoginRequest, DataBaseRegistrationRequest, UserDTO } from '../../models/user.model';
-import { UserStateService } from '../global-state/user-state.service';
 import { Page } from '../../models/page.model';
 
 /** Interfaz para respuestas paginadas */
@@ -16,7 +15,7 @@ export class UserService {
     private http = inject(HttpClient);
 
     private readonly GATEWAY_URL = 'http://localhost:8080/api';
-    private readonly USERS_URL = `${this.GATEWAY_URL}/user`;
+    private readonly USERS_URL = `${this.GATEWAY_URL}/user/`;
  
 
      

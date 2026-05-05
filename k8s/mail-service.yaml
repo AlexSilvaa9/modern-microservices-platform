@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: user-service
+  name: mail-service
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: user-service
+      app: mail-service
   template:
     metadata:
       labels:
-        app: user-service
+        app: mail-service
     spec:
       containers:
-        - name: user-service
-          image: user-service:1.0.0
+        - name: mail-service
+          image: mail-service:1.0.0
           imagePullPolicy: Never
           resources:
             requests:
@@ -28,32 +28,18 @@ spec:
             - containerPort: 8080
           env:
             - name: SPRING_CONFIG_IMPORT
-              value: "optional:file:/workspace/config/application.yml,optional:file:/workspace/config/user-service.yml"
-            - name: DATABASE_USERNAME
+              value: "optional:file:/workspace/config/application.yml,optional:file:/workspace/config/mail-service.yml"
+            - name: MAIL_USERNAME
               valueFrom:
                 secretKeyRef:
-                  name: database-secrets
+                  name: mail-secrets
                   key: username
-            - name: DATABASE_PASSWORD
+            - name: MAIL_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: database-secrets
+                  name: mail-secrets
                   key: password
-            - name: JWT_SECRET
-              valueFrom:
-                secretKeyRef:
-                  name: jwt-secrets
-                  key: jwt-secret
-            - name: GOOGLE_CLIENT_ID
-              valueFrom:
-                secretKeyRef:
-                  name: google-secrets
-                  key: client-id
-            - name: GOOGLE_CLIENT_SECRET
-              valueFrom:
-                secretKeyRef:
-                  name: google-secrets
-                  key: client-secret
+
           volumeMounts:
             - name: config-volume
               mountPath: /workspace/config
@@ -65,10 +51,10 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: user-service
+  name: mail-service
 spec:
   selector:
-    app: user-service
+    app: mail-service
   ports:
     - protocol: TCP
       port: 8080

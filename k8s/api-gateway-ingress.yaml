@@ -30,3 +30,11 @@ spec:
                 name: cart-service
                 port:
                   number: 8080
+
+          - path: /api/mail
+            pathType: Prefix
+            backend:
+              service:
+                name: mail-service
+                port:
+                  number: 8080

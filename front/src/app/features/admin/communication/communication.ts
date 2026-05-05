@@ -29,7 +29,13 @@ export class Communication {
   readonly form = this.formBuilder.nonNullable.group({
     subject: ['', [Validators.required, Validators.minLength(4)]],
     audience: ['all' as CommunicationAudience, [Validators.required]],
+    recipients: [''],
     message: ['', [Validators.required, Validators.minLength(20)]]
+  });
+
+  readonly hasRecipients = computed(() => {
+    const raw = this.form.get('recipients')?.value ?? '';
+    return raw.toString().trim().length > 0;
   });
 
   readonly todaySent = computed(() => {
@@ -54,25 +60,30 @@ export class Communication {
       return;
     }
 
-    this.communicationService.sendImmediate(this.form.getRawValue()).subscribe();
+    const draft = this.form.getRawValue();
+    const rawRecipients = (draft.recipients ?? '').toString();
+    const recipientsList = rawRecipients
+      .split(/[;,\n]/)
+      .map((s: string) => s.trim())
+      .filter((s: string) => s.length > 0);
+
+    if (recipientsList.length === 0) {
+      this.form.get('recipients')?.setErrors({ required: true });
+      this.statusMessage.set('Introduce al menos un destinatario (email)');
+      return;
+    }
+
+    this.communicationService.sendImmediate(draft, recipientsList).subscribe();
   }
 
   launchCampaign() {
-    if (this.form.invalid) {
-      this.form.markAllAsTouched();
-      return;
-    }
-
-    this.communicationService.launchCampaign(this.form.getRawValue()).subscribe();
+    // Campaigns currently not supported; display status
+    this.statusMessage.set('Campañas no soportadas en esta versión');
   }
 
   scheduleDaily() {
-    if (this.form.invalid) {
-      this.form.markAllAsTouched();
-      return;
-    }
-
-    this.communicationService.scheduleDailyCampaign(this.form.getRawValue()).subscribe();
+    // Scheduling currently not supported; display status
+    this.statusMessage.set('Programación diaria no soportada en esta versión');
   }
 
   trackByActivity(index: number, item: { id: number }) {

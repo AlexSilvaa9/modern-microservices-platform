@@ -1,6 +1,7 @@
-import { Injectable, signal } from '@angular/core';
+import { Injectable, signal, inject } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { delay, finalize, tap } from 'rxjs/operators';
+import { delay, finalize, tap, map, catchError } from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
 
 export type CommunicationAudience = 'all' | 'active-customers' | 'new-users' | 'inactive-users';
 export type CommunicationChannel = 'instant' | 'campaign' | 'daily';
@@ -55,6 +56,9 @@ function nowIso() {
   providedIn: 'root'
 })
 export class CommunicationService {
+  private http = inject(HttpClient);
+  private readonly GATEWAY_URL = 'http://localhost:8080/api';
+  private readonly MAIL_URL = `${this.GATEWAY_URL}/mail`;
   private activityId = 4;
   private campaignId = 3;
   private dispatchId = 4;
@@ -154,112 +158,42 @@ export class CommunicationService {
     }
   }
 
-  sendImmediate(draft: CommunicationDraft): Observable<CommunicationActivity> {
-    const recipients = this.audienceSize(draft.audience);
-    const activity: CommunicationActivity = {
-      id: this.activityId++,
-      title: draft.subject,
-      detail: `Envío inmediato a ${recipients} usuarios`,
-      channel: 'instant',
-      status: 'sent',
-      recipients,
-      createdAt: nowIso()
+  sendImmediate(draft: CommunicationDraft, recipientsList: string[]): Observable<unknown> {
+    // Non-visual logic: only perform real API calls. Do NOT mutate visual mock state here.
+    if (!recipientsList || recipientsList.length === 0) {
+      this.statusMessage.set('Debe indicar al menos un destinatario');
+      return of(null);
+    }
+
+    const payload = {
+      recipients: recipientsList,
+      subject: draft.subject,
+      html: draft.message
     };
 
     this.isSubmitting.set(true);
-    this.statusMessage.set('Preparando envío inmediato...');
+    this.statusMessage.set('Enviando correo...');
 
-    return of(activity).pipe(
-      delay(700),
-      tap((result) => {
-        this.activities.update((current) => [result, ...current].slice(0, 8));
-        this.statusMessage.set(`Envío inmediato completado: ${draft.subject}`);
+    return this.http.post<string>(`${this.MAIL_URL}/batch`, payload).pipe(
+      tap(() => this.statusMessage.set(`Envío completado: ${draft.subject}`)),
+      catchError((err) => {
+        console.error('Error sending batch email', err);
+        this.statusMessage.set('Error enviando correo');
+        return of(null);
       }),
       finalize(() => this.isSubmitting.set(false))
     );
   }
 
   launchCampaign(draft: CommunicationDraft): Observable<CommunicationCampaign> {
-    const recipients = this.audienceSize(draft.audience);
-    const campaign: CommunicationCampaign = {
-      id: this.campaignId++,
-      name: draft.subject,
-      audience: draft.audience,
-      recipients,
-      cadence: 'once',
-      status: 'active',
-      progress: 12,
-      nextRun: addDays(new Date(), 1)
-    };
-
-    const activity: CommunicationActivity = {
-      id: this.activityId++,
-      title: draft.subject,
-      detail: `Campaña creada para ${recipients} usuarios`,
-      channel: 'campaign',
-      status: 'queued',
-      recipients,
-      createdAt: nowIso()
-    };
-
-    this.isSubmitting.set(true);
-    this.statusMessage.set('Generando campaña mock...');
-
-    return of(campaign).pipe(
-      delay(900),
-      tap(() => {
-        this.campaigns.update((current) => [campaign, ...current].slice(0, 6));
-        this.activities.update((current) => [activity, ...current].slice(0, 8));
-        this.statusMessage.set(`Campaña creada: ${draft.subject}`);
-      }),
-      finalize(() => this.isSubmitting.set(false))
-    );
+    // Campaigns currently not supported server-side. Keep UI mock data static; service does not create campaigns.
+    this.statusMessage.set('Campañas no disponibles');
+    return of(null as unknown as CommunicationCampaign);
   }
 
   scheduleDailyCampaign(draft: CommunicationDraft): Observable<ScheduledDispatch[]> {
-    const recipients = this.audienceSize(draft.audience);
-    const schedule = Array.from({ length: 7 }, (_, index) => ({
-      id: this.dispatchId++,
-      subject: `${draft.subject} · Día ${index + 1}`,
-      audience: draft.audience,
-      recipients,
-      date: addDays(new Date(), index + 1),
-      status: 'scheduled' as const
-    }));
-
-    const activity: CommunicationActivity = {
-      id: this.activityId++,
-      title: draft.subject,
-      detail: 'Secuencia diaria preparada para 7 días',
-      channel: 'daily',
-      status: 'scheduled',
-      recipients,
-      createdAt: nowIso()
-    };
-
-    const campaign: CommunicationCampaign = {
-      id: this.campaignId++,
-      name: `${draft.subject} · Secuencia diaria`,
-      audience: draft.audience,
-      recipients,
-      cadence: 'daily',
-      status: 'queued',
-      progress: 8,
-      nextRun: schedule[0].date
-    };
-
-    this.isSubmitting.set(true);
-    this.statusMessage.set('Programando una pieza por día...');
-
-    return of(schedule).pipe(
-      delay(1000),
-      tap((result) => {
-        this.scheduledDispatches.update((current) => [...result, ...current].slice(0, 10));
-        this.activities.update((current) => [activity, ...current].slice(0, 8));
-        this.campaigns.update((current) => [campaign, ...current].slice(0, 6));
-        this.statusMessage.set(`Secuencia diaria preparada: ${draft.subject}`);
-      }),
-      finalize(() => this.isSubmitting.set(false))
-    );
+    // Scheduling not available server-side. Service does not mutate visual mock lists.
+    this.statusMessage.set('Programación no disponible');
+    return of([] as ScheduledDispatch[]);
   }
 }

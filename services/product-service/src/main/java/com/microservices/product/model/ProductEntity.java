@@ -1,4 +1,4 @@
-package com.microservices.catalog.model;
+package com.microservices.product.model;
 
 import java.math.BigDecimal;
 import java.util.UUID;

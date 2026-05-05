@@ -1,4 +1,4 @@
-package com.microservices.catalog.repository;
+package com.microservices.product.repository;
 
 import java.util.List;
 import java.util.Optional;
@@ -11,7 +11,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import com.microservices.catalog.model.ProductEntity;
+import com.microservices.product.model.ProductEntity;
 
 /**
  * Repositorio Spring Data para operaciones CRUD y consultas específicas sobre

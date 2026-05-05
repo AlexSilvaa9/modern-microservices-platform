@@ -1,4 +1,4 @@
-package com.microservices.catalog.dao;
+package com.microservices.product.dao;
 
 import java.util.List;
 import java.util.Optional;
@@ -8,8 +8,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
-import com.microservices.catalog.model.ProductEntity;
-import com.microservices.catalog.repository.ProductRepository;
+import com.microservices.product.model.ProductEntity;
+import com.microservices.product.repository.ProductRepository;
 
 /**
  * DAO (Data Access Object) que expone métodos de acceso a datos mediante

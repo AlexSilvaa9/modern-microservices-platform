@@ -1,4 +1,4 @@
-package com.microservices.catalog.service;
+package com.microservices.product.service;
 
 import java.util.List;
 import java.util.Optional;
@@ -12,9 +12,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.microservices.catalog.dao.ProductDAO;
-import com.microservices.catalog.mapper.ProductMapper;
-import com.microservices.catalog.model.ProductEntity;
+import com.microservices.product.dao.ProductDAO;
+import com.microservices.product.mapper.ProductMapper;
+import com.microservices.product.model.ProductEntity;
 
 /**
  * Servicio de dominio encargado de operaciones sobre productos.

@@ -6,8 +6,11 @@ echo "Aplicando los manifiestos de Kubernetes..."
 kubectl delete -f k8s/
 kubectl apply -f k8s/
 
-kubectl delete -f k8s/RBAC
+kubectl delete -f k8s/RBAC/
 kubectl apply -f k8s/RBAC/
+
+kubectl delete -f k8s/kafka/
+kubectl apply -f k8s/kafka/
 
 kubectl delete deploy cart-service-devspace
 kubectl delete deploy user-service-devspace

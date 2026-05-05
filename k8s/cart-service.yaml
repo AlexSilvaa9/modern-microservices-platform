@@ -23,7 +23,7 @@ spec:
               ephemeral-storage: "1Gi"
             limits:
               cpu: "600m"
-              memory: "1024Mi"
+              memory: "512Mi"
           ports:
             - containerPort: 8080
           env:

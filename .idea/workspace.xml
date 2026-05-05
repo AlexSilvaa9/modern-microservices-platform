@@ -4,10 +4,39 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5e77696f-e307-4867-83b6-44be6a0bf308" name="Changes" comment="implementado sistema de secretos k8">
-      <change afterPath="$PROJECT_DIR$/doc/diagrams/arquitectura-fondo-blanco.drawio.png" afterDir="false" />
+    <list default="true" id="5e77696f-e307-4867-83b6-44be6a0bf308" name="Changes" comment="feat: implementada api-gateway Nginx ingress controller">
+      <change afterPath="$PROJECT_DIR$/core/src/main/java/com/microservices/core/config/KafkaProducerConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/src/main/java/com/microservices/core/dto/MailBatchRequestDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/k8s/infra/kafka-strimzi.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/k8s/kafka/topics.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/k8s/mail-service.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/mail-service/src/main/java/com/microservices/mail/config/KafkaConsumerConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/mail-service/src/main/java/com/microservices/mail/service/KafkaMailConsumer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/core/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-build.sh" beforeDir="false" afterPath="$PROJECT_DIR$/docker-build.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/app/core/services/api/communication.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/app/core/services/api/communication.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/app/core/services/api/user.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/app/core/services/api/user.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/app/features/admin/communication/communication.html" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/app/features/admin/communication/communication.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/app/features/admin/communication/communication.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/app/features/admin/communication/communication.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/k8s/api-gateway-ingress.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/k8s/api-gateway-ingress.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/k8s/cart-service.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/k8s/cart-service.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/k8s/configmap.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/k8s/configmap.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/k8s/product-service.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/k8s/product-service.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/k8s/user-service.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/k8s/user-service.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/reload.sh" beforeDir="false" afterPath="$PROJECT_DIR$/reload.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/product-service/src/main/java/com/microservices/catalog/CatalogServiceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/services/product-service/src/main/java/com/microservices/product/ProductServiceApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/product-service/src/main/java/com/microservices/catalog/controller/ProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/services/product-service/src/main/java/com/microservices/product/controller/ProductController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/product-service/src/main/java/com/microservices/catalog/dao/ProductDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/services/product-service/src/main/java/com/microservices/product/dao/ProductDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/product-service/src/main/java/com/microservices/catalog/mapper/ProductMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/services/product-service/src/main/java/com/microservices/product/mapper/ProductMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/product-service/src/main/java/com/microservices/catalog/model/ProductEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/services/product-service/src/main/java/com/microservices/product/model/ProductEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/product-service/src/main/java/com/microservices/catalog/repository/ProductRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/services/product-service/src/main/java/com/microservices/product/repository/ProductRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/product-service/src/main/java/com/microservices/catalog/service/ProductService.java" beforeDir="false" afterPath="$PROJECT_DIR$/services/product-service/src/main/java/com/microservices/product/service/ProductService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/user-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/services/user-service/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/user-service/src/main/java/com/microservices/user/service/GoogleAuthService.java" beforeDir="false" afterPath="$PROJECT_DIR$/services/user-service/src/main/java/com/microservices/user/service/GoogleAuthService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,13 +54,14 @@
         <option value="Enum" />
         <option value="Record" />
         <option value="HTML File" />
-        <option value="Class" />
         <option value="Exception" />
+        <option value="Class" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
   &quot;lastFilter&quot;: {
@@ -42,7 +72,7 @@
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/AlexSilvaa9/springcloud-microservices-template.git&quot;,
-    &quot;accountId&quot;: &quot;da9dfbd0-a863-448d-9627-04ba25d59e15&quot;
+    &quot;accountId&quot;: &quot;35aa524e-a86a-49ce-9317-56360429f900&quot;
   }
 }</component>
   <component name="HighlightingSettingsPerFile">
@@ -56,54 +86,54 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.CartServiceApplication.executor": "Run",
-    "Application.CartServiceApplicationLocal.executor": "Run",
-    "Application.CatalogServiceApplication.executor": "Debug",
-    "Application.ConfigServerApplication.executor": "Run",
-    "Application.EurekaServerApplication.executor": "Run",
-    "Application.GatewayApplication.executor": "Run",
-    "Application.UserServiceApplication.executor": "Run",
-    "DefaultHtmlFileTemplate": "HTML File",
-    "Maven.cart-service [clean].executor": "Run",
-    "Maven.cart-service [install].executor": "Run",
-    "Maven.catalog-service [install].executor": "Run",
-    "Maven.core [clean].executor": "Run",
-    "Maven.core [install].executor": "Run",
-    "Maven.gateway-service [install].executor": "Run",
-    "Maven.microservices-template [clean,install].executor": "Run",
-    "Maven.microservices-template [clean].executor": "Run",
-    "Maven.microservices-template [install].executor": "Run",
-    "Maven.product-service [install].executor": "Run",
-    "Maven.user-service [clean].executor": "Run",
-    "Maven.user-service [install].executor": "Run",
-    "Maven.user-service [package].executor": "Run",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "SONARLINT_PRECOMMIT_ANALYSIS": "true",
-    "git-widget-placeholder": "main",
-    "ignore.virus.scanning.warn.message": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/home/alex/Documents/apuntes_extra/microservices-template/doc/diagrams",
-    "onboarding.tips.debug.path": "/home/alex/Documents/apuntes_extra/microservices-template/front/src/Main.java",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "preferences.pluginManager"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.CartServiceApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Application.CartServiceApplicationLocal.executor&quot;: &quot;Run&quot;,
+    &quot;Application.CatalogServiceApplication.executor&quot;: &quot;Debug&quot;,
+    &quot;Application.ConfigServerApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Application.EurekaServerApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Application.GatewayApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Application.UserServiceApplication.executor&quot;: &quot;Run&quot;,
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;Maven.cart-service [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.cart-service [install].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.catalog-service [install].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.core [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.core [install].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.gateway-service [install].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.microservices-template [clean,install].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.microservices-template [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.microservices-template [install].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.product-service [install].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.user-service [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.user-service [install].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.user-service [package].executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;SONARLINT_PRECOMMIT_ANALYSIS&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/alex/Documents/apuntes_extra/microservices-template/services&quot;,
+    &quot;onboarding.tips.debug.path&quot;: &quot;/home/alex/Documents/apuntes_extra/microservices-template/front/src/Main.java&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/services" />
       <recent name="$PROJECT_DIR$/doc/diagrams" />
       <recent name="$PROJECT_DIR$/services/catalog-service" />
       <recent name="$PROJECT_DIR$/infrastructure/config-repo" />
       <recent name="$PROJECT_DIR$/services/user-service/src/main/resources" />
-      <recent name="$PROJECT_DIR$/services/catalog-service/src/main/resources" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/services" />
@@ -130,11 +160,11 @@
       </method>
     </configuration>
     <configuration name="CatalogServiceApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.microservices.catalog.CatalogServiceApplication" />
+      <option name="MAIN_CLASS_NAME" value="com.microservices.mail.CatalogServiceApplication" />
       <module name="product-service" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.microservices.catalog.*" />
+          <option name="PATTERN" value="com.microservices.mail.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -278,7 +308,15 @@
       <option name="project" value="LOCAL" />
       <updated>1776968478988</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="feat: implementada api-gateway Nginx ingress controller">
+      <option name="closed" value="true" />
+      <created>1777841066931</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1777841066931</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -312,7 +350,8 @@
     <MESSAGE value="debug logging en springSecurity" />
     <MESSAGE value="chore: eliminado front" />
     <MESSAGE value="implementado sistema de secretos k8" />
-    <option name="LAST_COMMIT_MESSAGE" value="implementado sistema de secretos k8" />
+    <MESSAGE value="feat: implementada api-gateway Nginx ingress controller" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: implementada api-gateway Nginx ingress controller" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -323,7 +362,7 @@
           <option name="timeStamp" value="1" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/services/product-service/src/main/java/com/microservices/catalog/service/ProductService.java</url>
+          <url>file://$PROJECT_DIR$/services/product-service/src/main/java/com/microservices/product/service/ProductService.java</url>
           <line>39</line>
           <option name="timeStamp" value="4" />
         </line-breakpoint>

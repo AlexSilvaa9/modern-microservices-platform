@@ -1,6 +1,6 @@
-package com.microservices.catalog.controller;
+package com.microservices.product.controller;
 
-import com.microservices.catalog.service.ProductService;
+import com.microservices.product.service.ProductService;
 import com.microservices.core.dto.BaseApiResponse;
 import com.microservices.core.dto.ProductDTO;
 import org.springframework.data.domain.Page;
@@ -10,10 +10,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Positive;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.UUID;

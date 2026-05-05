@@ -1,5 +1,6 @@
 package com.microservices.user.service;
 
+import com.microservices.core.dto.MailBatchRequestDTO;
 import com.microservices.core.dto.enums.IdentityProvider;
 import com.microservices.core.dto.enums.Role;
 import com.microservices.core.security.jwt.JwtService;
@@ -12,6 +13,7 @@ import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
@@ -40,13 +42,14 @@ public class GoogleAuthService {
     private final JwtService jwtService;
     private final RestTemplate restTemplate = new RestTemplate();
     private final RefreshTokenService refreshTokenService;
-
+    private final KafkaTemplate<String, Object> kafkaTemplate;
     public GoogleAuthService(UserRepository userRepository, UserService userService,
-                             JwtService jwtService, RefreshTokenService refreshTokenService) {
+                             JwtService jwtService, RefreshTokenService refreshTokenService, KafkaTemplate<String, Object> kafkaTemplate) {
         this.userRepository = userRepository;
         this.userService = userService;
         this.jwtService = jwtService;
         this.refreshTokenService = refreshTokenService;
+        this.kafkaTemplate = kafkaTemplate;
     }
     @Transactional
     public AuthDTO handleGoogleLogin(String code) {
@@ -63,6 +66,8 @@ public class GoogleAuthService {
         // 3. Upsert user
         UserEntity user = userRepository.findByEmail(email)
                 .orElseGet(() -> {
+                    MailBatchRequestDTO mailBatchRequestDTO = new MailBatchRequestDTO(List.of(email),"Bienvenido a mi app","Buenas, quiero venderte dinero");
+                    kafkaTemplate.send("mail-topic", mailBatchRequestDTO);
                     UserEntity newUser = new UserEntity();
                     newUser.setEmail(email);
                     newUser.setProviders(List.of(IdentityProvider.GOOGLE));

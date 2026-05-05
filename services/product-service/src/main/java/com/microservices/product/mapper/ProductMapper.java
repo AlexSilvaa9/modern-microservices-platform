@@ -1,9 +1,9 @@
-package com.microservices.catalog.mapper;
+package com.microservices.product.mapper;
 
 import com.microservices.core.dto.ProductDTO;
 import org.mapstruct.Mapper;
 
-import com.microservices.catalog.model.ProductEntity;
+import com.microservices.product.model.ProductEntity;
 
 /**
  * Mapper interfaz para convertir entre {@link ProductEntity} y {@link ProductDTO}.

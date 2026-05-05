@@ -25,6 +25,7 @@
         <module>services/product-service</module>
         <module>services/cart-service</module>
         <module>services/user-service</module>
+        <module>services/mail-service</module>
         <module>core</module>
     </modules>
     <dependencyManagement>

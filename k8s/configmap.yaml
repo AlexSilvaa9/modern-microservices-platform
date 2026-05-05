@@ -4,7 +4,10 @@ metadata:
   name: microservices-config
 data:
   application.yml: |-
-   
+    
+    spring:
+      kafka:
+        bootstrap-servers: kafka-kafka-bootstrap.kafka:9092
     
     management:
       endpoints:
@@ -29,11 +32,14 @@ data:
             security: DEBUG
             security.web.FilterChainProxy: DEBUG
             security.authorization: TRACE
+            kafka: DEBUG
+            kafka.clients.consumer: INFO
+            kafka.listener: DEBUG
           hibernate:
             SQL: DEBUG
             orm:
               jdbc:
-                bind: TRACE
+                bind: TRACE   
 
 
   product-service.yml: |-
@@ -133,5 +139,21 @@ data:
           mode: always
 
 
-
+  mail-service.yml: |-
+    server:
+      servlet:
+        context-path: /api/mail
+    
+    spring:
+      mail:
+        host: smtp.gmail.com
+        port: 587
+        username: ${MAIL_USERNAME}
+        password: ${MAIL_PASSWORD}
+        properties:
+          mail:
+            smtp:
+              auth: true
+              starttls:
+                enable: true
   

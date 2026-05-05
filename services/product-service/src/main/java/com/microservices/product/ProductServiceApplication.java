@@ -1,4 +1,4 @@
-package com.microservices.catalog;
+package com.microservices.product;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -11,12 +11,12 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 @SpringBootApplication(
         scanBasePackages = {
                 "com.microservices.core",
-                "com.microservices.catalog"
+                "com.microservices.product"
         }
 )
 @EnableDiscoveryClient
 @EnableFeignClients
-public class CatalogServiceApplication {
+public class ProductServiceApplication {
 
     /**
      * Punto de entrada de la aplicación Spring Boot.
@@ -24,7 +24,7 @@ public class CatalogServiceApplication {
      * @param args argumentos de la línea de comandos
      */
     public static void main(String[] args) {
-        SpringApplication.run(CatalogServiceApplication.class, args);
+        SpringApplication.run(ProductServiceApplication.class, args);
     }
 
 }
