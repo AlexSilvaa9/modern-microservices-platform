@@ -39,7 +39,7 @@ public class SecurityConfig {
     }
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http,
-                                                             JwtHttpOnlyCookieFilter jwtHttpOnlyCookieFilter){
+                                                   JwtHttpOnlyCookieFilter jwtHttpOnlyCookieFilter){
 
         String[] whiteList = Optional.ofNullable(securityProperties.getWhitelist())
                 .orElse(List.of())
@@ -54,11 +54,10 @@ public class SecurityConfig {
 
                 .cors(cors -> cors.configurationSource(request -> {
                     var configuration = new org.springframework.web.cors.CorsConfiguration();
-                    configuration.setAllowedOrigins(List.of("*")); // Permitir cualquier origen
                     configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
                     configuration.setAllowedHeaders(List.of("*"));
                     configuration.setAllowCredentials(true); // Permitir cookies/autenticación
-                    configuration.setAllowedOrigins(List.of("http://localhost:4200"));
+                    configuration.setAllowedOrigins(List.of("http://localhost:4200","http://localhost:8080"));
 
                     return configuration;
                 }))

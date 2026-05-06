@@ -21,16 +21,12 @@ public class MailService {
         this.mailSender = mailSender;
     }
 
-    // =========================
-    // 1. EMAIL HTML SIMPLE
-    // =========================
+
     public void sendEmail(String to, String subject, String htmlBody) {
         sendHtml(to, subject, htmlBody);
     }
 
-    // =========================
-    // 2. BATCH EMAILS
-    // =========================
+
     public void sendBatchEmails(List<String> recipients,
                                 String subject,
                                 String htmlBody) {
@@ -40,9 +36,7 @@ public class MailService {
         }
     }
 
-    // =========================
-    // CORE METHOD (HTML EMAIL)
-    // =========================
+
     private void sendHtml(String to, String subject, String htmlBody) {
         try {
             MimeMessage message = mailSender.createMimeMessage();

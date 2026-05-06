@@ -5,38 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5e77696f-e307-4867-83b6-44be6a0bf308" name="Changes" comment="feat: implementada api-gateway Nginx ingress controller">
-      <change afterPath="$PROJECT_DIR$/core/src/main/java/com/microservices/core/config/KafkaProducerConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core/src/main/java/com/microservices/core/dto/MailBatchRequestDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/k8s/infra/kafka-strimzi.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/k8s/kafka/topics.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/k8s/mail-service.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/services/mail-service/src/main/java/com/microservices/mail/config/KafkaConsumerConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/services/mail-service/src/main/java/com/microservices/mail/service/KafkaMailConsumer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/core/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-build.sh" beforeDir="false" afterPath="$PROJECT_DIR$/docker-build.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/app/core/services/api/communication.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/app/core/services/api/communication.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/app/core/services/api/user.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/app/core/services/api/user.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/app/features/admin/communication/communication.html" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/app/features/admin/communication/communication.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/app/features/admin/communication/communication.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/app/features/admin/communication/communication.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/k8s/api-gateway-ingress.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/k8s/api-gateway-ingress.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/k8s/cart-service.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/k8s/cart-service.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/microservices/core/security/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/microservices/core/security/SecurityConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/k8s/configmap.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/k8s/configmap.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/k8s/product-service.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/k8s/product-service.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/k8s/user-service.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/k8s/user-service.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/reload.sh" beforeDir="false" afterPath="$PROJECT_DIR$/reload.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/product-service/src/main/java/com/microservices/catalog/CatalogServiceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/services/product-service/src/main/java/com/microservices/product/ProductServiceApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/product-service/src/main/java/com/microservices/catalog/controller/ProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/services/product-service/src/main/java/com/microservices/product/controller/ProductController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/product-service/src/main/java/com/microservices/catalog/dao/ProductDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/services/product-service/src/main/java/com/microservices/product/dao/ProductDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/product-service/src/main/java/com/microservices/catalog/mapper/ProductMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/services/product-service/src/main/java/com/microservices/product/mapper/ProductMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/product-service/src/main/java/com/microservices/catalog/model/ProductEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/services/product-service/src/main/java/com/microservices/product/model/ProductEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/product-service/src/main/java/com/microservices/catalog/repository/ProductRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/services/product-service/src/main/java/com/microservices/product/repository/ProductRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/product-service/src/main/java/com/microservices/catalog/service/ProductService.java" beforeDir="false" afterPath="$PROJECT_DIR$/services/product-service/src/main/java/com/microservices/product/service/ProductService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/user-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/services/user-service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/user-service/src/main/java/com/microservices/user/service/GoogleAuthService.java" beforeDir="false" afterPath="$PROJECT_DIR$/services/user-service/src/main/java/com/microservices/user/service/GoogleAuthService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/mail-service/src/main/java/com/microservices/mail/config/KafkaConsumerConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/mail-service/src/main/java/com/microservices/mail/controller/MailController.java" beforeDir="false" afterPath="$PROJECT_DIR$/services/mail-service/src/main/java/com/microservices/mail/controller/MailController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/mail-service/src/main/java/com/microservices/mail/service/MailService.java" beforeDir="false" afterPath="$PROJECT_DIR$/services/mail-service/src/main/java/com/microservices/mail/service/MailService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

@@ -1,7 +1,10 @@
 package com.microservices.mail.controller;
 
+import com.microservices.core.dto.BaseApiResponse;
 import com.microservices.core.dto.MailBatchRequestDTO;
 import com.microservices.mail.service.MailService;
+import org.jspecify.annotations.NullMarked;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,16 +19,21 @@ public class MailController {
     }
 
     @PostMapping("/send")
-    public String send(@RequestParam(name = "to") String to,
+    @NullMarked
+    public ResponseEntity<BaseApiResponse<Object>> send(@RequestParam(name = "to") String to,
                        @RequestParam(name = "subject") String subject,
                        @RequestBody String html) {
 
         mailService.sendEmail(to, subject, html);
-        return "sent";
+
+        BaseApiResponse<Object> baseApiResponse = new BaseApiResponse<>("MAIL.SENT","");
+
+        return ResponseEntity.ok().body(baseApiResponse);
     }
 
     @PostMapping("/batch")
-    public String batch(@RequestBody MailBatchRequestDTO request) {
+    @NullMarked
+    public ResponseEntity<BaseApiResponse<Object>> batch(@RequestBody MailBatchRequestDTO request) {
 
         mailService.sendBatchEmails(
                 request.recipients(),
@@ -33,6 +41,8 @@ public class MailController {
                 request.html()
         );
 
-        return "batch sent";
+        BaseApiResponse<Object> baseApiResponse = new BaseApiResponse<>("MAIL.SENT","");
+
+        return ResponseEntity.ok().body(baseApiResponse);
     }
 }

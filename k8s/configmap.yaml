@@ -8,6 +8,30 @@ data:
     spring:
       kafka:
         bootstrap-servers: kafka-kafka-bootstrap.kafka:9092
+
+        producer:
+          key-serializer: org.apache.kafka.common.serialization.StringSerializer
+          value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+          properties:
+            spring:
+              json:
+                add:
+                  type:
+                    headers: true 
+        consumer:
+          auto-offset-reset: earliest
+    
+          key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+          value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+    
+          properties:
+            spring:
+              json:
+                trusted:
+                  packages: "*"    
+                use:
+                  type:
+                    headers: true 
     
     management:
       endpoints:
@@ -22,7 +46,7 @@ data:
       jwt-properties:
         secret: ${JWT_SECRET}
         expiration-ms: 3600000
-      whitelist: /auth/**,/oauth2/**,/swagger-ui/**,/v3/api-docs/**,/h2-console/**,/product/**, /batch
+      whitelist: /auth/**,/oauth2/**,/swagger-ui/**,/v3/api-docs/**,/h2-console/**,/product/**,/batch
     logging:
       level:
         com:
