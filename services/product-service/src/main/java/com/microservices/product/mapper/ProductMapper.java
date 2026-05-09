@@ -6,24 +6,24 @@ import org.mapstruct.Mapper;
 import com.microservices.product.model.ProductEntity;
 
 /**
- * Mapper interfaz para convertir entre {@link ProductEntity} y {@link ProductDTO}.
- * Implementada por MapStruct con "componentModel = \"spring\"" para inyección.
+ * MapStruct interface for converting between ProductEntity and ProductDTO.
+ * Automatically generates the implementation at compile time.
  */
 @Mapper(componentModel = "spring")
 public interface ProductMapper {
     /**
-     * Convierte una entidad de producto a su DTO correspondiente.
+     * Converts a database ProductEntity into a data transfer object.
      *
-     * @param producto la entidad de producto (no nula)
-     * @return el DTO correspondiente
+     * @param producto the product entity
+     * @return the mapped product DTO
      */
     ProductDTO toDTO(ProductEntity producto);
 
     /**
-     * Convierte un DTO de producto a su entidad persistible.
+     * Converts a product data transfer object back into a database entity.
      *
-     * @param dto el DTO de producto (no nulo)
-     * @return la entidad de producto para persistencia
+     * @param dto the product DTO
+     * @return the mapped product entity
      */
     ProductEntity fromDTO(ProductDTO dto);
 }

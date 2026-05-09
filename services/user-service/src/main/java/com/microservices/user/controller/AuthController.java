@@ -16,6 +16,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 
+import org.jspecify.annotations.NullMarked;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseCookie;
@@ -29,16 +30,31 @@ import java.io.IOException;
 import java.util.Collections;
 import java.util.Objects;
 
+/**
+ * REST controller managing authentication operations.
+ * Handles user registration, login, logout, token refresh, and OAuth2 callbacks.
+ */
 @Slf4j
 @RestController
 @RequestMapping("/auth")
 @Tag(name = "Authentication", description = "Endpoints para autenticación (login / register)")
 public class AuthController {
 
+    /** Service handling Google OAuth2 authentication. */
     private final GoogleAuthService googleAuthService;
+    /** Service handling traditional username/password authentication and registration. */
     private final AuthService service;
+    /** Service managing refresh tokens in the database. */
     private final RefreshTokenService refreshTokenService;
-    private static final String SAME_SITE_STRICT = "Strict";
+    private static final String SAME_SITE_POLICY = "Strict";
+
+    /**
+     * Constructs a new AuthController with necessary dependencies.
+     *
+     * @param googleAuthService   the Google authentication service
+     * @param service             the standard authentication service
+     * @param refreshTokenService the refresh token service
+     */
     public AuthController(GoogleAuthService googleAuthService,
                           AuthService service,
                           RefreshTokenService refreshTokenService) {
@@ -54,7 +70,7 @@ public class AuthController {
                 .secure(true)
                 .path("/")
                 .maxAge(maxAge)
-                .sameSite("None")
+                .sameSite(SAME_SITE_POLICY)
                 .build();
 
         ResponseCookie refreshCookie = ResponseCookie.from("refresh_token", refreshToken)
@@ -62,7 +78,7 @@ public class AuthController {
                 .secure(true)
                 .path("/")
                 .maxAge(maxAge)
-                .sameSite("None")
+                .sameSite(SAME_SITE_POLICY)
                 .build();
 
         HttpHeaders headers = new HttpHeaders();
@@ -72,6 +88,13 @@ public class AuthController {
         return headers;
     }
 
+    /**
+     * Authenticates a user using credentials (email and password).
+     * Returns the JWT tokens in HTTP-only cookies.
+     *
+     * @param req the login request containing credentials
+     * @return a successful response containing the public user details
+     */
     @PostMapping("/login")
     public ResponseEntity<BaseApiResponse<UserDTO>> login(@Valid @RequestBody DataBaseLoginRequest req) {
 
@@ -86,6 +109,12 @@ public class AuthController {
                 .body(body);
     }
 
+    /**
+     * Logs out the user by invalidating their refresh token and clearing authentication cookies.
+     *
+     * @param refreshToken the active refresh token from cookies
+     * @return a successful logout confirmation
+     */
     @PostMapping("/logout")
     public ResponseEntity<BaseApiResponse<Object>> logout(
             @CookieValue(name = "refresh_token", required = false) String refreshToken) {
@@ -103,6 +132,13 @@ public class AuthController {
                 .body(new BaseApiResponse<>("Logout successful", null));
     }
 
+    /**
+     * Refreshes the user's access token using a valid refresh token.
+     * Issues a new pair of access and refresh tokens.
+     *
+     * @param requestedToken the refresh token from cookies
+     * @return a successful response with new tokens attached as cookies
+     */
     @PostMapping("/refresh")
     public ResponseEntity<BaseApiResponse<Object>> refreshToken(
             @CookieValue(name = "refresh_token", required = false) String requestedToken) {
@@ -122,7 +158,14 @@ public class AuthController {
     }
 
 
+    /**
+     * Registers a new user account in the system using database identity provider.
+     *
+     * @param req the registration request containing user details and password
+     * @return a successful response containing the newly registered user's details
+     */
     @PostMapping("/register")
+    @NullMarked
     public ResponseEntity<BaseApiResponse<UserDTO>> register(
             @Valid @RequestBody DataBaseRegistrationRequest req) {
 
@@ -140,6 +183,14 @@ public class AuthController {
         return ResponseEntity.status(HttpStatus.OK).body(body);
     }
 
+    /**
+     * Handles the Google OAuth2 authorization callback.
+     * Exchanges the authorization code for tokens, fetches user info, and redirects to the frontend.
+     *
+     * @param code     the authorization code returned by Google
+     * @param response the HTTP response to attach cookies and send redirect
+     * @throws IOException if a redirection error occurs
+     */
     @GetMapping("/google/callback")
     public void callback(@RequestParam("code") String code,
                          HttpServletResponse response) throws IOException {

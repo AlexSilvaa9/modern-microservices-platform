@@ -4,6 +4,13 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
+/**
+ * Data Transfer Object representing a new user registration request.
+ *
+ * @param email    the email address for the new user account
+ * @param username the desired display name for the new user account
+ * @param password the desired plain-text password for the new user account
+ */
 public record DataBaseRegistrationRequest(
         @NotBlank(message = "El email no puede estar vacío")
         @Email(message = "El email no tiene un formato válido")

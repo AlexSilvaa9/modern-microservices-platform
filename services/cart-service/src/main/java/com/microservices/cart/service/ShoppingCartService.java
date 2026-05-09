@@ -5,10 +5,8 @@ import java.util.stream.Collectors;
 
 
 import com.microservices.cart.client.ProductServiceClient;
-import com.microservices.cart.mapper.CartItemMapper;
 import com.microservices.cart.mapper.ShoppingCartMapper;
 import com.microservices.core.dto.ProductDTO;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,35 +17,41 @@ import com.microservices.cart.model.CartItemEntity;
 import com.microservices.cart.model.ShoppingCartEntity;
 
 /**
- * Servicio público que expone operaciones sobre carritos para clientes.
- *
- * Si existe un User Service disponible, se valida que el usuario esté activo
- * antes de crear o modificar carritos. El cliente de UserService se inyecta
- * opcionalmente, de forma que el servicio de carrito puede funcionar sin
- * depender del User Service durante pruebas locales o despliegues parciales.
+ * Core business logic service for managing shopping carts.
+ * Interfaces with the Product Service via Feign Client to enrich cart items with product details.
  */
 @Service
 @Transactional
 public class ShoppingCartService {
 
+    /** Data access object for cart database operations. */
     private final ShoppingCartDAO dao;
-    private final CartItemMapper cartItemMapper;
+    /** Mapper for converting ShoppingCart entities to DTOs. */
     private final ShoppingCartMapper shoppingCartMapper;
+    /** Feign client for fetching product metadata from the Product Service. */
     private final ProductServiceClient productServiceClient;
 
-    public ShoppingCartService(ShoppingCartDAO dao, CartItemMapper cartItemMapper, ShoppingCartMapper shoppingCartMapper, ProductServiceClient productServiceClient) {
+    /**
+     * Constructs a new ShoppingCartService.
+     *
+     * @param dao                  the shopping cart DAO
+     * @param shoppingCartMapper   the shopping cart mapper
+     * @param productServiceClient the product service client
+     */
+    public ShoppingCartService(ShoppingCartDAO dao, ShoppingCartMapper shoppingCartMapper, ProductServiceClient productServiceClient) {
         this.dao = dao;
         this.shoppingCartMapper = shoppingCartMapper;
-        this.cartItemMapper = cartItemMapper;
         this.productServiceClient = productServiceClient;
     }
 
 
     /**
-     * Obtiene el carrito del usuario si existe.
+     * Retrieves the active shopping cart for a user.
+     * If the user does not have a cart, a new empty cart is initialized.
+     * The returned DTO is enriched with product metadata from the Product Service.
      *
-     * @param userEmail identificador del usuario
-     * @return Optional con el DTO del carrito
+     * @param userEmail the email of the user owning the cart
+     * @return the enriched shopping cart DTO
      */
     public ShoppingCartDTO getOrCreateCart(String userEmail) {
 
@@ -66,6 +70,12 @@ public class ShoppingCartService {
         return dto;
     }
 
+    /**
+     * Enriches a shopping cart DTO by fetching product details for its items
+     * via the Product Service Client in a batch request.
+     *
+     * @param cart the cart DTO to enrich
+     */
     private void enrichCart(ShoppingCartDTO cart) {
 
         if (cart.getItems() == null || cart.getItems().isEmpty()) {
@@ -82,16 +92,17 @@ public class ShoppingCartService {
         Map<UUID, ProductDTO> productMap = products.stream()
                 .collect(Collectors.toMap(ProductDTO::getId, p -> p));
 
-        cart.getItems().forEach(item -> {
-            item.setProduct(productMap.get(item.getProductId()));
-        });
+        cart.getItems().forEach(item ->
+            item.setProduct(productMap.get(item.getProductId()))
+        );
     }
     /**
-     * Añade un item al carrito del usuario (crea carrito si es necesario).
+     * Adds a specific quantity of a product to the user's shopping cart.
+     * Creates a cart if it doesn't exist, or increments the quantity if the product is already in the cart.
      *
-     * @param userEmail identificador del usuario
-     * @param itemDTO DTO del item a añadir
-     * @return DTO del carrito actualizado
+     * @param userEmail the email of the user
+     * @param productId the unique identifier of the product
+     * @param quantity  the number of units to add
      */
     public void addItemToCart(String userEmail, UUID productId, int quantity) {
 
@@ -126,11 +137,13 @@ public class ShoppingCartService {
         dao.save(cart);
     }
     /**
-     * Elimina un item del carrito del usuario.
+     * Removes a specific quantity of a product from the user's cart.
+     * If the quantity to remove exceeds or equals the current amount, the item is removed entirely.
      *
-     * @param userEmail identificador del usuario
-     * @param itemId identificador del item
-     * @return DTO del carrito actualizado
+     * @param userEmail the email of the user
+     * @param productId the unique identifier of the product
+     * @param quantity  the number of units to remove
+     * @throws IllegalStateException if the cart or product is not found
      */
     public void removeProductFromCart(String userEmail, UUID productId, Long quantity) {
 
@@ -154,9 +167,9 @@ public class ShoppingCartService {
     }
 
     /**
-     * Limpia (vacía) el carrito del usuario.
+     * Completely empties the user's shopping cart, removing all items.
      *
-     * @param userEmail identificador del usuario
+     * @param userEmail the email of the user
      */
     public void clearCart(String userEmail) {
         dao.findByUserEmail(userEmail).ifPresent(cart -> {

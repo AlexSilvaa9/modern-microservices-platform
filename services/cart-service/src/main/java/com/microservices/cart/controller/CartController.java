@@ -1,39 +1,46 @@
 package com.microservices.cart.controller;
 
-import com.microservices.cart.dto.CartItemDTO;
 import com.microservices.cart.dto.ShoppingCartDTO;
 import com.microservices.cart.service.ShoppingCartService;
 import com.microservices.core.dto.BaseApiResponse;
-import com.microservices.core.dto.ProductDTO;
+import org.jspecify.annotations.NullMarked;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
 import java.util.UUID;
 
 /**
- * Controlador REST para operaciones del carrito de compras.
+ * REST controller managing shopping cart operations.
+ * Exposes endpoints for retrieving, updating, and clearing a user's cart.
  */
 @RestController
 @CrossOrigin(origins = "*")
 public class CartController {
 
+    /** Service handling core shopping cart business logic. */
     private final ShoppingCartService cartService;
 
+    /**
+     * Constructs a new CartController.
+     *
+     * @param cartService the shopping cart service
+     */
     public CartController(ShoppingCartService cartService) {
         this.cartService = cartService;
     }
 
     /**
-     * Obtiene el carrito del usuario.
+     * Retrieves the shopping cart for the currently authenticated user.
+     * If a cart does not exist, a new empty cart is created.
      *
-     * @param authentication con  ID del usuario
-     * @return ResponseEntity con el carrito o 404 si no existe
+     * @param authentication the current security context containing the user's email
+     * @return a successful response containing the user's shopping cart
      */
     @GetMapping
+    @NullMarked
     public ResponseEntity<BaseApiResponse<ShoppingCartDTO>> getCart(Authentication authentication) {
-        if (authentication == null || !authentication.isAuthenticated()) {
+        if (!authentication.isAuthenticated()) {
             return ResponseEntity.status(401).build();
         }
 
@@ -47,14 +54,16 @@ public class CartController {
     }
 
     /**
-     * Añade un item al carrito del usuario.
+     * Adds a single unit of a product to the user's shopping cart.
      *
-     * @param item DTO del item a añadir
-     * @return ResponseEntity con el carrito actualizado
+     * @param authentication the current security context containing the user's email
+     * @param productId      the unique identifier of the product to add
+     * @return a successful response indicating the item was added
      */
     @GetMapping("/add/{productId}")
+    @NullMarked
     public ResponseEntity<BaseApiResponse<Object>> addItem(Authentication authentication, @PathVariable(name = "productId") UUID productId) {
-        if (authentication == null || !authentication.isAuthenticated()) {
+        if (!authentication.isAuthenticated()) {
             return ResponseEntity.status(401).build();
         }
 
@@ -68,22 +77,22 @@ public class CartController {
     }
 
     /**
-     * Elimina un item del carrito del usuario.
+     * Removes a specified quantity of a product from the user's shopping cart.
      *
-     * @param userId ID del usuario
-     * @param itemId ID del item a eliminar
-     * @return ResponseEntity con el carrito actualizado o 404 si no existe
+     * @param authentication the current security context containing the user's email
+     * @param productId      the unique identifier of the product to remove
+     * @param quantity       the quantity to remove (defaults to 1 if not provided)
+     * @return a successful response indicating the item was removed
      */
     @GetMapping("/delete/{productId}")
     public ResponseEntity<BaseApiResponse<Object>> removeItem(
             Authentication authentication,
             @PathVariable(name = "productId") UUID productId,
-            @RequestParam(name = "quantity", required = false) Long quantity) {
-        if (authentication == null || !authentication.isAuthenticated()) {
+            @RequestParam(name = "quantity", required = true) Long quantity) {
+        if (!authentication.isAuthenticated()) {
             return ResponseEntity.status(401).build();
         }
         String email = authentication.getName();
-        quantity = quantity == null ? 1: quantity;
         cartService.removeProductFromCart(email, productId, quantity);
         BaseApiResponse<Object> body = new BaseApiResponse<>(
                 "OK",
@@ -92,9 +101,10 @@ public class CartController {
     }
 
     /**
-     * Limpia el carrito del usuario.
+     * Clears all items from the user's shopping cart.
      *
-     * @return ResponseEntity sin contenido
+     * @param authentication the current security context containing the user's email
+     * @return a successful response indicating the cart was emptied
      */
     @DeleteMapping
     public ResponseEntity<BaseApiResponse<Object>> clearCart(Authentication authentication) {

@@ -7,8 +7,18 @@ import io.swagger.v3.oas.models.security.SecurityScheme;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+/**
+ * Configuration class for OpenAPI (Swagger) documentation generation.
+ * Sets up global security requirements and schemes for the API endpoints.
+ */
 @Configuration
 public class OpenAPIConfig {
+    /**
+     * Configures the custom OpenAPI definition, enabling Bearer (JWT) authentication
+     * across all documented endpoints.
+     *
+     * @return the customized OpenAPI instance
+     */
     @Bean
     public OpenAPI customOpenAPI() {
         return new OpenAPI()

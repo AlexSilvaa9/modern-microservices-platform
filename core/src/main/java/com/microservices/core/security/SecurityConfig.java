@@ -23,23 +23,49 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * Configuración de seguridad: habilita JWT filter y desactiva sesiones.
+ * Global security configuration for the application.
+ * Enables JWT-based authentication filter and disables session management
+ * to ensure a stateless, stateless security architecture.
  */
 @Slf4j
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
 
+    /**
+     * Properties containing security configuration such as whitelisted endpoints.
+     */
     private final SecurityProperties securityProperties;
+
+    /**
+     * Provider responsible for validating JWT tokens.
+     */
     private final JwtAuthenticationProvider jwtAuthenticationProvider;
 
+    /**
+     * Constructs a new SecurityConfig with the required dependencies.
+     *
+     * @param securityProperties        the security configuration properties
+     * @param jwtAuthenticationProvider the JWT authentication provider
+     */
     public SecurityConfig(SecurityProperties securityProperties, JwtAuthenticationProvider jwtAuthenticationProvider) {
         this.securityProperties = securityProperties;
         this.jwtAuthenticationProvider = jwtAuthenticationProvider;
     }
+
+    /**
+     * Configures the main security filter chain.
+     * Disables CSRF, sets stateless sessions, configures CORS, allows whitelisted endpoints,
+     * and adds the JWT cookie filter before the standard authentication filter.
+     *
+     * @param http                     the HttpSecurity to modify
+     * @param jwtHttpOnlyCookieFilter  the filter to extract and validate JWTs from cookies
+     * @return the configured SecurityFilterChain
+     * @throws Exception if an error occurs during configuration
+     */
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http,
-                                                   JwtHttpOnlyCookieFilter jwtHttpOnlyCookieFilter){
+                                                   JwtHttpOnlyCookieFilter jwtHttpOnlyCookieFilter) throws Exception {
 
         String[] whiteList = Optional.ofNullable(securityProperties.getWhitelist())
                 .orElse(List.of())
@@ -86,12 +112,24 @@ public class SecurityConfig {
 
         return http.build();
     }
+    /**
+     * Provides the AuthenticationManager bean used to authenticate requests.
+     *
+     * @param config the authentication configuration
+     * @return the configured AuthenticationManager
+     */
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration config) {
         return config.getAuthenticationManager();
     }
 
 
+    /**
+     * Provides the PasswordEncoder bean used to hash and verify passwords.
+     * Defaults to BCryptPasswordEncoder.
+     *
+     * @return the configured PasswordEncoder
+     */
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();

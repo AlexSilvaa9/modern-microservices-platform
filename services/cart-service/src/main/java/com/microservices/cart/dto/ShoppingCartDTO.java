@@ -10,16 +10,21 @@ import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
 
 /**
- * DTO que representa un carrito de compras para el cliente.
+ * Data Transfer Object exposing shopping cart details to the client.
  */
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class ShoppingCartDTO {
+    /** The unique identifier of the shopping cart. */
     private UUID id;
+    /** The email of the user who owns the cart. */
     private String userEmail;
+    /** The list of items currently in the cart. */
     private List<CartItemDTO> items;
+    /** Timestamp of cart creation. */
     private LocalDateTime createdAt;
+    /** Timestamp of last cart update. */
     private LocalDateTime updatedAt;
 }

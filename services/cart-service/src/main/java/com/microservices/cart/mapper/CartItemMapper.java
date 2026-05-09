@@ -2,31 +2,35 @@ package com.microservices.cart.mapper;
 
 import com.microservices.cart.dto.CartItemDTO;
 import com.microservices.cart.model.CartItemEntity;
+import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.ReportingPolicy;
 
 /**
- * Mapper MapStruct para convertir entre entidades del dominio y DTOs.
+ * MapStruct interface for mapping CartItem entities to DTOs and vice versa.
  */
-@Mapper(componentModel = "spring")
-public interface CartItemMapper {
+@Mapper(componentModel = "spring", unmappedSourcePolicy = ReportingPolicy.IGNORE)public interface CartItemMapper {
 
     /**
-     * Convierte una entidad de item a su DTO.
+     * Converts a CartItem entity to a DTO.
+     * The product field is ignored and populated later via the Product Service.
      *
-     * @param entity entidad de item
-     * @return DTO correspondiente
+     * @param entity the cart item entity
+     * @return the mapped DTO
      */
+    @Mapping(target = "product", ignore = true)
     CartItemDTO toDTO(CartItemEntity entity);
 
     /**
-     * Convierte un DTO de item a su entidad.
+     * Converts a CartItem DTO back to an entity.
+     * Uses inverse configuration from the toDTO method.
      *
-     * @param dto DTO del item
-     * @return entidad correspondiente
+     * @param dto the cart item DTO
+     * @return the mapped entity
      */
 
-
+    @InheritInverseConfiguration
     CartItemEntity fromDTO(CartItemDTO dto);
 
 

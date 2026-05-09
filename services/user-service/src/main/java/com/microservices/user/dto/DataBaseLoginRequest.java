@@ -6,7 +6,10 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
 /**
- * DTO para petición de autenticación.
+ * Data Transfer Object representing a user login request with email and password credentials.
+ *
+ * @param email    the registered email address of the user
+ * @param password the plain-text password provided for authentication
  */
 public record DataBaseLoginRequest(
 

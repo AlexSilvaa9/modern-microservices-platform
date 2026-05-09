@@ -3,37 +3,49 @@ package com.microservices.core.dto;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
-import lombok.Builder;
 import lombok.Data;
 
 import java.math.BigDecimal;
 import java.util.UUID;
 
 /**
- * DTO que representa los datos expuestos de un producto en la API.
+ * Data Transfer Object representing a product exposed by the API.
+ * Contains validation constraints for incoming requests.
  */
 @Data
 public class ProductDTO {
 
-    /** Identificador del producto */
+    /**
+     * The unique identifier of the product.
+     */
     private UUID id;
 
-    /** Nombre del producto */
+    /**
+     * The name of the product. Must not be blank.
+     */
     @NotBlank(message = "Product name is required")
     private String name;
 
-    /** Descripción corta o larga del producto */
+    /**
+     * A short or detailed description of the product.
+     */
     private String description;
 
-    /** Precio del producto */
+    /**
+     * The price of the product. Must be a positive value.
+     */
     @NotNull(message = "Price is required")
     @Positive(message = "Price must be positive")
     private BigDecimal price;
 
-    /** Categoría del producto */
+    /**
+     * The category to which the product belongs.
+     */
     private String category;
 
-    /** URL de la imagen */
+    /**
+     * The URL pointing to the product's image.
+     */
     private String imageUrl;
 
 }

@@ -7,24 +7,25 @@ import com.microservices.cart.dto.ShoppingCartDTO;
 import com.microservices.cart.model.ShoppingCartEntity;
 
 /**
- * Mapper MapStruct para convertir entre entidades del dominio y DTOs.
+ * MapStruct interface for mapping ShoppingCart entities to DTOs and vice versa.
  */
 @Mapper(componentModel = "spring")
 public interface ShoppingCartMapper {
 
     /**
-     * Convierte una entidad de carrito a su DTO. MapStruct mapeará la lista de items.
+     * Converts a ShoppingCart entity to its corresponding DTO.
+     * Automatically maps the collection of items.
      *
-     * @param entity entidad de carrito
-     * @return DTO del carrito
+     * @param entity the shopping cart entity
+     * @return the mapped DTO
      */
     ShoppingCartDTO toDTO(ShoppingCartEntity entity);
 
     /**
-     * Convierte un DTO de carrito a su entidad.
+     * Converts a ShoppingCart DTO back into an entity.
      *
-     * @param dto DTO del carrito
-     * @return entidad correspondiente
+     * @param dto the shopping cart DTO
+     * @return the mapped entity
      */
     ShoppingCartEntity fromDTO(ShoppingCartDTO dto);
 

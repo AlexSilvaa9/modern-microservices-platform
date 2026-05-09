@@ -4,6 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
+/**
+ * Main entry point for the User Service Spring Boot application.
+ * Bootstraps the application context and starts the embedded web server.
+ */
 @SpringBootApplication
 @ComponentScan(
         basePackages = {
@@ -12,6 +16,11 @@ import org.springframework.context.annotation.ComponentScan;
         }
 )
 public class UserServiceApplication {
+    /**
+     * The main method that launches the Spring Boot application.
+     *
+     * @param args command-line arguments
+     */
     public static void main(String[] args) {
         SpringApplication.run(UserServiceApplication.class, args);
     }

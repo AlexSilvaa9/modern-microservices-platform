@@ -1,8 +1,10 @@
 package com.microservices.core.dto.enums;
 /**
- * Enum para los roles de usuario.
+ * Enumeration representing the system security roles assigned to users.
  */
 public enum Role {
+    /** Standard end-user with basic privileges. */
     USER,
+    /** Administrator user with elevated privileges. */
     ADMIN
 }

@@ -16,24 +16,30 @@ import java.util.NoSuchElementException;
 import java.util.UUID;
 
 /**
- * Controlador REST para gestionar endpoints relacionados con productos.
+ * REST controller managing product catalog endpoints.
+ * Handles HTTP requests for retrieving and searching active products.
  */
 @RestController
 @Validated
 public class ProductController {
 
+    /** Service providing core product business logic. */
     private final ProductService productService;
 
+    /**
+     * Constructs a new ProductController.
+     *
+     * @param productService the product service
+     */
     public ProductController(ProductService productService) {
         this.productService = productService;
     }
 
     /**
-     * Obtiene todos los productos activos.
-     * Devuelve 200 con lista (vacía si no hay productos) en un ApiResponse
-     * consistente.
+     * Retrieves a paginated list of all active products in the catalog.
      *
-     * @return ResponseEntity con la lista de {@link ProductDTO}
+     * @param pageable pagination and sorting parameters
+     * @return a successful response containing a page of product DTOs
      */
     @GetMapping
     public ResponseEntity<BaseApiResponse<Page<ProductDTO>>> getAllProducts(Pageable pageable) {
@@ -46,13 +52,11 @@ public class ProductController {
     }
 
     /**
-     * Obtiene un producto por id.
-     * Valida que el id sea positivo.
-     * Si no existe, se lanza NoSuchElementException y el handler global lo
-     * convertirá en 404.
+     * Retrieves a specific product by its unique identifier.
      *
-     * @param id identificador del producto
-     * @return ResponseEntity con el {@link ProductDTO}
+     * @param id the UUID of the product
+     * @return a successful response containing the product DTO
+     * @throws NoSuchElementException if the product is not found
      */
     @GetMapping("/{id}")
     public ResponseEntity<BaseApiResponse<ProductDTO>> getProductById(@PathVariable(name = "id", required = true)  UUID id) {
@@ -64,17 +68,22 @@ public class ProductController {
         return ResponseEntity.ok(body);
     }
 
+    /**
+     * Retrieves a batch of products by their identifiers.
+     * Used internally by other microservices via Feign clients.
+     *
+     * @param ids the list of product UUIDs
+     * @return a list of matching product DTOs
+     */
     @PostMapping("/batch")
     List<ProductDTO> getProductsByIds(@RequestBody List<UUID> ids){
         return  productService.getProductsById(ids);
     }
     /**
-     * Obtiene productos por categoría.
-     * Valida que la categoría no sea vacía.
+     * Retrieves a list of active products filtered by category.
      *
-     * @param category nombre de la categoría
-     * @return ResponseEntity con la lista de {@link ProductDTO} (200 con lista
-     *         vacía si no hay coincidencias)
+     * @param category the exact category name to filter by
+     * @return a successful response containing the list of matching product DTOs
      */
     @GetMapping("/category/{category}")
     public ResponseEntity<BaseApiResponse<List<ProductDTO>>> getProductsByCategory(
@@ -89,12 +98,10 @@ public class ProductController {
     }
 
     /**
-     * Busca productos por nombre.
-     * Si no hay resultados, devuelve 200 con lista vacía en ApiResponse para
-     * mantener contrato uniforme.
+     * Searches for active products whose name contains the specified search term.
      *
-     * @param name parámetro de búsqueda (fragmento)
-     * @return ResponseEntity con los resultados (lista vacía si no hay resultados)
+     * @param name the substring to search for within product names
+     * @return a successful response containing the list of matching product DTOs
      */
     @GetMapping("/search")
     public ResponseEntity<BaseApiResponse<List<ProductDTO>>> searchProducts(
@@ -107,9 +114,9 @@ public class ProductController {
     }
 
     /**
-     * Obtiene las categorías distintas de productos activos.
+     * Retrieves all distinct categories currently assigned to active products.
      *
-     * @return ResponseEntity con la lista de categorías
+     * @return a successful response containing a list of category names
      */
     @GetMapping("/categories")
     public ResponseEntity<BaseApiResponse<List<String>>> getCategories() {

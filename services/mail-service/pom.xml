@@ -14,9 +14,7 @@
     <artifactId>mail-service</artifactId>
     <name>Mail Service</name>
     <description>Mail Microservice</description>
-    <properties>
-        <swagger.version>3.0.0</swagger.version>
-    </properties>
+
     <dependencies>
         <!-- Mail -->
         <dependency>
@@ -50,23 +48,19 @@
         <dependency>
             <groupId>org.springdoc</groupId>
             <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
-            <version>${swagger.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
         </dependency>
     </dependencies>
+
 
     <build>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>3.2.0</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>repackage</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
         </plugins>
     </build>

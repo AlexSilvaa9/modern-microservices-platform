@@ -12,66 +12,79 @@ import com.microservices.product.model.ProductEntity;
 import com.microservices.product.repository.ProductRepository;
 
 /**
- * DAO (Data Access Object) que expone métodos de acceso a datos mediante
- * el {@link ProductRepository} de Spring Data.
+ * Data Access Object abstracting Spring Data repository calls for products.
+ * Encapsulates the JPA repository to provide clean data access interfaces.
  */
 @Component
 public class ProductDAO {
 
+    /** Underlying Spring Data JPA repository. */
     private final ProductRepository productRepository;
 
+    /**
+     * Constructs a new ProductDAO.
+     *
+     * @param productRepository the JPA repository for products
+     */
     public ProductDAO(ProductRepository productRepository) {
         this.productRepository = productRepository;
     }
 
     /**
-     * Devuelve todos los productos marcados como activos.
+     * Retrieves all products marked as active, applying pagination.
      *
-     * @return lista de entidades {@link ProductEntity} activas
+     * @param pageable pagination parameters
+     * @return a page of active product entities
      */
     public Page<ProductEntity> findAllActive(Pageable pageable) {
         return productRepository.findByActiveTrue(pageable);
     }
 
     /**
-     * Busca un producto por su id.
+     * Finds a product entity by its UUID.
      *
-     * @param id identificador del producto
-     * @return Optional con la entidad si existe
+     * @param id the UUID of the product
+     * @return an Optional containing the entity if found
      */
     public Optional<ProductEntity> findById(UUID id) {
         return productRepository.findById(id);
     }
 
     /**
-     * Busca productos por categoría (solo activos).
+     * Retrieves all active products belonging to the specified category.
      *
-     * @param category nombre de la categoría
-     * @return lista de entidades en la categoría
+     * @param category the category name
+     * @return a list of matching product entities
      */
     public List<ProductEntity> findByCategory(String category) {
         return productRepository.findByCategoryAndActiveTrue(category);
     }
 
     /**
-     * Busca productos cuyo nombre contiene el texto dado.
+     * Searches for active products containing the given substring in their name.
      *
-     * @param name fragmento a buscar
-     * @return lista de entidades coincidentes
+     * @param name the name substring to match
+     * @return a list of matching product entities
      */
     public List<ProductEntity> searchByName(String name) {
         return productRepository.findByNameContainingAndActiveTrue(name);
     }
 
     /**
-     * Devuelve las categorías distintas de productos activos.
+     * Retrieves all distinct category names from active products.
      *
-     * @return lista de nombres de categoría
+     * @return a list of unique category names
      */
     public List<String> findDistinctCategories() {
         return productRepository.findDistinctCategories();
     }
 
+    /**
+     * Retrieves multiple products by a list of their UUIDs.
+     *
+     * @param ids the list of UUIDs to query
+     * @return a list of found product entities
+     */
     public List<ProductEntity> findAllById(List<UUID> ids){
         return productRepository.findByIdIn(ids);
     }

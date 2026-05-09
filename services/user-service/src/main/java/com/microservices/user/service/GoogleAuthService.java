@@ -10,6 +10,7 @@ import com.microservices.user.model.UserEntity;
 import com.microservices.user.repository.UserRepository;
 import jakarta.annotation.Nullable;
 import jakarta.transaction.Transactional;
+import jakarta.validation.constraints.NotNull;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
@@ -22,27 +23,51 @@ import org.springframework.web.client.RestTemplate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
+/**
+ * Service managing Google OAuth2 authentication flow.
+ * Handles exchanging authorization codes for tokens and upserting users based on Google data.
+ */
 @Service
 @Slf4j
 @Transactional
 public class GoogleAuthService {
 
+    /** Google Client ID retrieved from configuration. */
     @Value("${google.client-id}")
     private String clientId;
 
+    /** Google Client Secret retrieved from configuration. */
     @Value("${google.client-secret}")
     private String clientSecret;
 
+    /** Allowed redirect URI registered with Google. */
     @Value("${google.redirect-uri}")
     private String redirectUri;
 
+    /** Repository for direct database access of users. */
     private final UserRepository userRepository;
+    /** Service for general user operations. */
     private final UserService userService;
+    /** Service for internal JWT generation. */
     private final JwtService jwtService;
+    /** Standard Spring RestTemplate for synchronous HTTP requests. */
     private final RestTemplate restTemplate = new RestTemplate();
+    /** Service managing refresh tokens. */
     private final RefreshTokenService refreshTokenService;
+    /** Kafka producer template for triggering asynchronous emails. */
     private final KafkaTemplate<String, Object> kafkaTemplate;
+
+    /**
+     * Constructs a new GoogleAuthService.
+     *
+     * @param userRepository      the user repository
+     * @param userService         the user service
+     * @param jwtService          the internal JWT service
+     * @param refreshTokenService the internal refresh token service
+     * @param kafkaTemplate       the Kafka template for asynchronous messaging
+     */
     public GoogleAuthService(UserRepository userRepository, UserService userService,
                              JwtService jwtService, RefreshTokenService refreshTokenService, KafkaTemplate<String, Object> kafkaTemplate) {
         this.userRepository = userRepository;
@@ -51,19 +76,27 @@ public class GoogleAuthService {
         this.refreshTokenService = refreshTokenService;
         this.kafkaTemplate = kafkaTemplate;
     }
+
+    /**
+     * Orchestrates the Google login flow: exchanges the code, fetches user info,
+     * registers/updates the user, and issues internal JWTs.
+     *
+     * @param code the short-lived authorization code from Google
+     * @return an AuthDTO containing the generated internal tokens
+     */
     @Transactional
     public AuthDTO handleGoogleLogin(String code) {
-        // 1. Code → Access Token
+
         String accessToken = getAccessToken(code);
 
-        // 2. UserInfo
         Map<String, Object> userInfo = getUserInfo(accessToken);
 
+        String email = Optional.ofNullable(userInfo)
+                .map(map -> map.get("email"))
+                .map(Object::toString)
+                .orElseThrow(() ->
+                        new IllegalStateException("Email not found in user info"));
 
-        String email = (String) userInfo.get("email");
-
-
-        // 3. Upsert user
         UserEntity user = userRepository.findByEmail(email)
                 .orElseGet(() -> {
                     MailBatchRequestDTO mailBatchRequestDTO = new MailBatchRequestDTO(List.of(email),"Bienvenido a mi app","Buenas, quiero venderte dinero");
@@ -90,7 +123,13 @@ public class GoogleAuthService {
 
     }
 
-    private String getAccessToken(String code) {
+    /**
+     * Exchanges the authorization code for a Google access token using the token endpoint.
+     *
+     * @param code the authorization code
+     * @return the extracted Google access token
+     */
+    private @NotNull String getAccessToken(String code) {
 
         String url = "https://oauth2.googleapis.com/token";
 
@@ -110,10 +149,20 @@ public class GoogleAuthService {
                 request,
                 Map.class
         );
-
-        return (String) response.get("access_token");
+        return Optional.ofNullable(response)
+                .filter(map -> !map.isEmpty())
+                .map(map -> map.get("access_token"))
+                .map(Object::toString)
+                .orElseThrow(() ->
+                        new IllegalStateException("Access token not found"));
     }
 
+    /**
+     * Fetches user profile details from Google's UserInfo endpoint using the access token.
+     *
+     * @param token the Google access token
+     * @return a map containing the parsed user information attributes
+     */
     private @Nullable Map<String, Object> getUserInfo(String token) {
 
         String url = "https://openidconnect.googleapis.com/v1/userinfo";

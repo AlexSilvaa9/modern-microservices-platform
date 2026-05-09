@@ -17,8 +17,8 @@ import com.microservices.product.mapper.ProductMapper;
 import com.microservices.product.model.ProductEntity;
 
 /**
- * Servicio de dominio encargado de operaciones sobre productos.
- * Encapsula la lógica de consulta y transformación entre entidades y DTO.
+ * Core domain service handling product catalog business logic.
+ * Encapsulates operations for retrieving and searching active products.
  */
 @Service
 @Transactional
@@ -26,20 +26,28 @@ import com.microservices.product.model.ProductEntity;
 public class ProductService {
 
 
+    /** Data access object for database interactions. */
     private final ProductDAO productDAO;
 
-
+    /** Mapper for transforming entities to DTOs. */
     private final ProductMapper productMapper;
 
+    /**
+     * Constructs a new ProductService.
+     *
+     * @param productDAO    the product data access object
+     * @param productMapper the product entity-DTO mapper
+     */
     public ProductService(ProductDAO productDAO, ProductMapper productMapper) {
         this.productDAO = productDAO;
         this.productMapper = productMapper;
     }
 
     /**
-     * Obtiene todos los productos marcados como activos y los transforma a DTOs.
+     * Retrieves a paginated list of all products currently marked as active.
      *
-     * @return lista de {@link ProductDTO} activos (puede estar vacía, no nula)
+     * @param pageable pagination configuration
+     * @return a page containing the mapped product DTOs
      */
     public Page<ProductDTO> getAllActiveProducts(Pageable pageable) {
         Page<ProductEntity> entities = productDAO.findAllActive(pageable);
@@ -48,20 +56,20 @@ public class ProductService {
     }
 
     /**
-     * Obtiene un producto por su identificador.
+     * Retrieves a specific product by its UUID.
      *
-     * @param id identificador del producto
-     * @return Optional con el {@link ProductDTO} si existe, o empty si no
+     * @param id the UUID of the product
+     * @return an Optional containing the mapped product DTO if found
      */
     public Optional<ProductDTO> getProductById(UUID id) {
         return productDAO.findById(id).map(productMapper::toDTO);
     }
 
     /**
-     * Obtiene un producto por su identificador.
+     * Retrieves multiple products by their exact UUIDs.
      *
-     * @param uuids identificador del producto
-     * @return Optional con el {@link ProductDTO} si existe, o empty si no
+     * @param uuids the list of product UUIDs to fetch
+     * @return a list of mapped product DTOs
      */
     public List<ProductDTO> getProductsById(List<UUID> uuids) {
         return productDAO.findAllById(uuids)
@@ -72,10 +80,10 @@ public class ProductService {
 
 
     /**
-     * Obtiene los productos activos de una categoría dada.
+     * Retrieves all active products belonging to a specific category.
      *
-     * @param category nombre de la categoría
-     * @return lista de {@link ProductDTO} en la categoría (puede estar vacía)
+     * @param category the category name to filter by
+     * @return a list of matching product DTOs
      */
     public @NotNull List<ProductDTO> getProductsByCategory(String category) {
         List<ProductEntity> entities = productDAO.findByCategory(category);
@@ -85,10 +93,10 @@ public class ProductService {
     }
 
     /**
-     * Busca productos por nombre (contiene, case-sensitive según configuración de BD).
+     * Searches for active products whose name contains the specified string.
      *
-     * @param name fragmento de nombre a buscar
-     * @return lista de {@link ProductDTO} cuyos nombres contienen el fragmento
+     * @param name the substring to search for within product names
+     * @return a list of matching product DTOs
      */
     public @NotNull List<ProductDTO> searchProductsByName(String name) {
         List<ProductEntity> entities = productDAO.searchByName(name);
@@ -98,9 +106,9 @@ public class ProductService {
     }
 
     /**
-     * Obtiene la lista de categorías distintas presentes en productos activos.
+     * Retrieves a unique list of all categories that currently have active products.
      *
-     * @return lista de nombres de categoría (puede estar vacía)
+     * @return a distinct list of category names
      */
     public @NotNull List<String> getAllCategories() {
         return productDAO.findDistinctCategories();

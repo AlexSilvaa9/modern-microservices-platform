@@ -16,7 +16,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * Entidad JPA que representa la tabla "products" en la base de datos.
+ * JPA Entity representing a product in the catalog database.
  */
 @Getter
 @Setter
@@ -24,31 +24,33 @@ import lombok.Setter;
 @Table(name = "product")
 public class ProductEntity {
 
-    /** Clave primaria autogenerada */
+    /** The internal unique identifier of the product. */
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    /** Nombre del producto (no nulo) */
+    /** The display name of the product. */
     @NotBlank(message = "Product name is required")
     @Column(nullable = false)
     private String name;
 
-    /** Descripción del producto */
+    /** A descriptive text about the product. */
     @Column(length = 1000)
     private String description;
 
-    /** Precio (no nulo y positivo) */
+    /** The monetary price of the product. */
     @NotNull(message = "Price is required")
     @Positive(message = "Price must be positive")
     @Column(nullable = false, precision = 10, scale = 2)
     private BigDecimal price;
 
-    /** Categoría del producto */
+    /** The category string classifying the product. */
     private String category;
-    /** URL de la imagen */
+    
+    /** The URL pointing to the product's image resource. */
     private String imageUrl;
-    /** Indicador de producto activo */
+    
+    /** A flag indicating if the product is active and visible in the catalog. */
     private boolean active;
 
 

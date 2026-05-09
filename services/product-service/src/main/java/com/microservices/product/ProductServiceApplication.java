@@ -5,8 +5,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 /**
- * Aplicación Spring Boot para el servicio de catálogo.
- * Habilita registro en servicio de descubrimiento y clientes Feign.
+ * Main entry point for the Product Service application.
+ * Bootstraps the context, enables service discovery, and configures Feign clients.
  */
 @SpringBootApplication(
         scanBasePackages = {
@@ -19,9 +19,9 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 public class ProductServiceApplication {
 
     /**
-     * Punto de entrada de la aplicación Spring Boot.
+     * The main method that launches the Spring Boot application.
      *
-     * @param args argumentos de la línea de comandos
+     * @param args command-line arguments
      */
     public static void main(String[] args) {
         SpringApplication.run(ProductServiceApplication.class, args);

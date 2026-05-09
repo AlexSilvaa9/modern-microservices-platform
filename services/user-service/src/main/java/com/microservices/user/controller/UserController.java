@@ -18,10 +18,15 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 
+/**
+ * REST controller for managing user profiles and querying user records.
+ * Provides endpoints for both authenticated users and administrators.
+ */
 @RestController
 @SecurityScheme(
         name = "bearerAuth",
@@ -31,14 +36,27 @@ import org.springframework.web.bind.annotation.*;
 )
 public class UserController {
 
+    /** Service providing user data operations. */
     private final UserService service;
 
+    /**
+     * Constructs a new UserController with the specified user service.
+     *
+     * @param service the user service dependency
+     */
     public UserController(UserService service) {
         this.service = service;
     }
 
 
-
+    /**
+     * Retrieves the profile information of the currently authenticated user.
+     *
+     * @param authentication the current security context authentication
+     * @return a successful response containing the current user's profile details
+     * @throws AccessDeniedException if the user is not authenticated
+     * @throws UsernameNotFoundException if the authenticated user no longer exists
+     */
     @GetMapping("/me")
     @Operation(summary = "Get current authenticated user")
     @ApiResponses(value = {
@@ -69,7 +87,15 @@ public class UserController {
         return ResponseEntity.ok(body);
     }
 
+    /**
+     * Retrieves a paginated list of all registered users.
+     * Requires the ADMIN role.
+     *
+     * @param pageable pagination and sorting parameters
+     * @return a successful response containing a page of user profiles
+     */
     @GetMapping
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "Get all users paginated")
     @ApiResponses(value = {
             @ApiResponse(
