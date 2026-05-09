@@ -7,12 +7,14 @@ import java.util.stream.Collectors;
 import com.microservices.cart.client.ProductServiceClient;
 import com.microservices.cart.mapper.ShoppingCartMapper;
 import com.microservices.core.dto.ProductDTO;
+import com.microservices.core.dto.ShoppingCartDTO;
+import com.microservices.core.dto.order.OrderDTO;
+import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.microservices.cart.dao.ShoppingCartDAO;
-import com.microservices.cart.dto.CartItemDTO;
-import com.microservices.cart.dto.ShoppingCartDTO;
+import com.microservices.core.dto.CartItemDTO;
 import com.microservices.cart.model.CartItemEntity;
 import com.microservices.cart.model.ShoppingCartEntity;
 
@@ -176,6 +178,11 @@ public class ShoppingCartService {
             cart.getItems().clear();
             dao.save(cart);
         });
+    }
+
+    @KafkaListener(topics = "order-paid-topic", groupId = "cart-group")
+    public void handleOrderPaid(OrderDTO orderDTO) {
+        clearCart(orderDTO.userEmail());
     }
 
 }

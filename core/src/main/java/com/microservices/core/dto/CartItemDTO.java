@@ -1,8 +1,7 @@
-package com.microservices.cart.dto;
+package com.microservices.core.dto;
 
 import java.util.UUID;
 
-import com.microservices.core.dto.ProductDTO;
 import lombok.Data;
 import lombok.Builder;
 import lombok.NoArgsConstructor;

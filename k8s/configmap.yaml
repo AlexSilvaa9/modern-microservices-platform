@@ -4,7 +4,8 @@ metadata:
   name: microservices-config
 data:
   application.yml: |-
-    
+    server:
+      port: 8080
     spring:
       kafka:
         bootstrap-servers: kafka-kafka-bootstrap.kafka:9092
@@ -119,7 +120,6 @@ data:
       h2:
         console:
           enabled: true
-          path: /h2-console
 
     feign:
       client:
@@ -127,10 +127,42 @@ data:
           catalog-service:
             connect-timeout: 5000
             read-timeout: 5000
-          user-service:
+ 
+
+  order-service.yml: |-
+    server:
+     servlet:
+       context-path: /api/order
+    app:
+      environment: prod
+    spring:
+      application:
+        name: order-service
+      cloud:
+        kubernetes:
+          discovery:
+            enabled: true
+      datasource:
+        url: jdbc:h2:mem:orderdb
+        driverClassName: org.h2.Driver
+        username: ${DATABASE_USERNAME}
+        password: ${DATABASE_PASSWORD}  
+      jpa:
+        database-platform: org.hibernate.dialect.H2Dialect
+        hibernate:
+          ddl-auto: create-drop
+        show-sql: true
+      h2:
+        console:
+          enabled: true
+    
+    feign:
+      client:
+        config:
+          cart-service:
             connect-timeout: 5000
             read-timeout: 5000
-
+         
 
   user-service.yml: |-
     server:
@@ -157,7 +189,6 @@ data:
       h2:
         console:
           enabled: true
-          path: /h2-console
       sql:
         init:
           mode: always

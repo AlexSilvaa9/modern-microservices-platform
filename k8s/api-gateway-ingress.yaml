@@ -31,6 +31,14 @@ spec:
                 port:
                   number: 8080
 
+          - path: /api/order
+            pathType: Prefix
+            backend:
+              service:
+                name: order-service
+                port:
+                  number: 8080
+
           - path: /api/mail
             pathType: Prefix
             backend:

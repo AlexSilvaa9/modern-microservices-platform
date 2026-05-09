@@ -1,9 +1,9 @@
 package com.microservices.cart.mapper;
 
+import com.microservices.core.dto.ShoppingCartDTO;
 import org.mapstruct.Mapper;
 
 
-import com.microservices.cart.dto.ShoppingCartDTO;
 import com.microservices.cart.model.ShoppingCartEntity;
 
 /**

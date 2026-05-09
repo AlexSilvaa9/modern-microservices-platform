@@ -1,6 +1,6 @@
 package com.microservices.cart.mapper;
 
-import com.microservices.cart.dto.CartItemDTO;
+import com.microservices.core.dto.CartItemDTO;
 import com.microservices.cart.model.CartItemEntity;
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;

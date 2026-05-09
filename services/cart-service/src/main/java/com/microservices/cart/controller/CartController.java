@@ -1,8 +1,8 @@
 package com.microservices.cart.controller;
 
-import com.microservices.cart.dto.ShoppingCartDTO;
 import com.microservices.cart.service.ShoppingCartService;
 import com.microservices.core.dto.BaseApiResponse;
+import com.microservices.core.dto.ShoppingCartDTO;
 import org.jspecify.annotations.NullMarked;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -15,7 +15,6 @@ import java.util.UUID;
  * Exposes endpoints for retrieving, updating, and clearing a user's cart.
  */
 @RestController
-@CrossOrigin(origins = "*")
 public class CartController {
 
     /** Service handling core shopping cart business logic. */

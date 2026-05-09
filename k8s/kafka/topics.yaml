@@ -8,3 +8,29 @@ metadata:
 spec:
   partitions: 1
   replicas: 1
+
+---
+
+apiVersion: kafka.strimzi.io/v1
+kind: KafkaTopic
+metadata:
+  name: success-payment-topic
+  namespace: kafka
+  labels:
+    strimzi.io/cluster: kafka
+spec:
+  partitions: 1
+  replicas: 1
+
+---
+
+apiVersion: kafka.strimzi.io/v1
+kind: KafkaTopic
+metadata:
+  name: order-paid-topic
+  namespace: kafka
+  labels:
+    strimzi.io/cluster: kafka
+spec:
+  partitions: 1
+  replicas: 1

@@ -20,6 +20,7 @@
         <module name="core" />
         <module name="product-service" />
         <module name="cart-service" />
+        <module name="order-service" />
         <module name="user-service" />
         <module name="mail-service" />
       </profile>
