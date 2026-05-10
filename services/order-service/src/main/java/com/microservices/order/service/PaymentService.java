@@ -8,12 +8,16 @@ import org.springframework.stereotype.Service;
 public class PaymentService {
     /** Kafka producer template for triggering asynchronous emails. */
     private final KafkaTemplate<String, Object> kafkaTemplate;
-
-    public PaymentService(KafkaTemplate<String, Object> kafkaTemplate) {
+    private final IdempotencyService idempotencyService;
+    public PaymentService(KafkaTemplate<String, Object> kafkaTemplate, IdempotencyService idempotencyService) {
         this.kafkaTemplate = kafkaTemplate;
+        this.idempotencyService = idempotencyService;
     }
 
     public void handleSuccess(MockPaymentWebhook mockPaymentWebhook){
-        kafkaTemplate.send("success-payment-topic", mockPaymentWebhook);
+        if(idempotencyService.checkAndSaveEvent(mockPaymentWebhook.uuid().toString(), "payment-success","stripe")){
+            kafkaTemplate.send("success-payment-topic", mockPaymentWebhook);
+
+        }
     }
 }

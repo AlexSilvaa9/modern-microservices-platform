@@ -5,47 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5e77696f-e307-4867-83b6-44be6a0bf308" name="Changes" comment="feat: implementado servicio de pedidos order-service">
-      <change afterPath="$PROJECT_DIR$/services/mail-service/src/main/java/com/microservices/mail/service/EmailTemplateService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/services/mail-service/src/main/resources/templates/emails/order-paid.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/services/mail-service/src/main/resources/templates/emails/user-created.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/services/user-service/src/main/java/com/microservices/user/controller/AnalyticsController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/services/user-service/src/main/java/com/microservices/user/controller/DatabaseAuthController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/services/user-service/src/main/java/com/microservices/user/controller/GoogleAuthController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/services/user-service/src/main/java/com/microservices/user/controller/UserEventController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/services/user-service/src/main/java/com/microservices/user/dto/seo/AnalyticsSummaryDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/services/user-service/src/main/java/com/microservices/user/dto/seo/MonthlyVisitsDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/services/user-service/src/main/java/com/microservices/user/dto/seo/PageVisitsDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/services/user-service/src/main/java/com/microservices/user/dto/seo/UserEventDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/services/user-service/src/main/java/com/microservices/user/model/UserEventEntity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/services/user-service/src/main/java/com/microservices/user/repository/UserEventRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/services/user-service/src/main/java/com/microservices/user/service/AnalyticsService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/services/user-service/src/main/java/com/microservices/user/service/UserEventService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/order-service/src/main/java/com/microservices/order/model/IdempotentProcessedEventEntity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/order-service/src/main/java/com/microservices/order/repository/IdempotentProcessedEventEntityRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/order-service/src/main/java/com/microservices/order/service/IdempotencyService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/microservices/core/dto/UserDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/microservices/core/dto/UserDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/public/resources/i18n/de.json" beforeDir="false" afterPath="$PROJECT_DIR$/front/public/resources/i18n/de.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/public/resources/i18n/en.json" beforeDir="false" afterPath="$PROJECT_DIR$/front/public/resources/i18n/en.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/public/resources/i18n/es.json" beforeDir="false" afterPath="$PROJECT_DIR$/front/public/resources/i18n/es.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/public/resources/i18n/fr.json" beforeDir="false" afterPath="$PROJECT_DIR$/front/public/resources/i18n/fr.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/app/app.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/app/app.config.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/app/app.html" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/app/app.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/app/app.routes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/app/app.routes.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/app/app.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/app/app.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/app/core/models/sidearMenu.const.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/app/core/models/sidearMenu.const.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/app/core/services/global-state/cart.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/app/core/services/global-state/cart.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/app/features/admin/seo/seo.html" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/app/features/admin/seo/seo.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/app/features/admin/seo/seo.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/app/features/admin/seo/seo.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/app/features/cart/cart.html" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/app/features/cart/cart.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/app/features/cart/cart.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/app/features/cart/cart.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/main.server.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/main.server.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/k8s/configmap.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/k8s/configmap.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/k8s/kafka/topics.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/k8s/kafka/topics.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/mail-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/services/mail-service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/mail-service/src/main/java/com/microservices/mail/service/KafkaMailConsumer.java" beforeDir="false" afterPath="$PROJECT_DIR$/services/mail-service/src/main/java/com/microservices/mail/service/KafkaMailConsumer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/order-service/src/main/java/com/microservices/order/controller/OrderController.java" beforeDir="false" afterPath="$PROJECT_DIR$/services/order-service/src/main/java/com/microservices/order/controller/OrderController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/order-service/src/main/java/com/microservices/order/service/OrderService.java" beforeDir="false" afterPath="$PROJECT_DIR$/services/order-service/src/main/java/com/microservices/order/service/OrderService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/user-service/src/main/java/com/microservices/user/controller/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/services/user-service/src/main/java/com/microservices/user/controller/AuthController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/user-service/src/main/java/com/microservices/user/service/GoogleAuthService.java" beforeDir="false" afterPath="$PROJECT_DIR$/services/user-service/src/main/java/com/microservices/user/service/GoogleAuthService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/user-service/src/main/resources/data.sql" beforeDir="false" afterPath="$PROJECT_DIR$/services/user-service/src/main/resources/data.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/order-service/src/main/java/com/microservices/order/service/PaymentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/services/order-service/src/main/java/com/microservices/order/service/PaymentService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -152,11 +116,11 @@
       <recent name="$PROJECT_DIR$/services" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.microservices.order.repository" />
       <recent name="com.microservices.user.repository" />
       <recent name="com.microservices.core.dto" />
       <recent name="com.microservices.user.config.security" />
       <recent name="com.microservices.cart.mapper" />
-      <recent name="dto" />
     </key>
   </component>
   <component name="RunManager" selected="Maven.microservices-template [clean,install]">
