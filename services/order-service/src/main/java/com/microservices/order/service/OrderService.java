@@ -38,7 +38,7 @@ public class OrderService {
     }
 
     @Transactional
-    public void createOrderFromCart() {
+    public UUID createOrderFromCart() {
         var cart = cartServiceClient.getCart();
         OrderEntity orderEntity = Optional.ofNullable(cart.data()).map(orderMapper::fromCartToEntity).orElseThrow(() -> new RuntimeException("Error al obtener carrito"));
         orderEntity.setStatus(OrderStatus.CREATED);
@@ -55,6 +55,7 @@ public class OrderService {
         orderEntity.getItems().forEach(orderItemEntity -> orderItemEntity.setOrder(orderEntity));
 
         dao.save(orderEntity);
+        return orderEntity.getId();
     }
     @Transactional
     public void markAsPaid(OrderEntity orderEntity){
@@ -62,13 +63,24 @@ public class OrderService {
         dao.save(orderEntity);
 
     }
+
+    @Transactional
+    public void markAsCompleted(UUID orderUuid){
+        OrderEntity orderEntity = dao.findById(orderUuid)
+                .orElseThrow(() -> new IllegalStateException("Order no encontrado"));
+
+        orderEntity.setStatus(OrderStatus.COMPLETED);
+        dao.save(orderEntity);
+
+    }
     @KafkaListener(topics = "success-payment-topic", groupId = "order-group")
+    @Transactional
     public void handleSuccessPayment(MockPaymentWebhook mockPaymentWebhook) {
         Optional<OrderEntity> orderEntityOptional = dao.findById(mockPaymentWebhook.uuid());
         if (orderEntityOptional.isEmpty()){
             log.error("No se ha encontrado el order con uuid: {}", mockPaymentWebhook.uuid());
         } else {
-            markAsPaid(orderEntityOptional.get());
+            this.markAsPaid(orderEntityOptional.get());
             kafkaTemplate.send("order-paid-topic", orderMapper.toDTO(orderEntityOptional.get()));
         }
 
@@ -79,7 +91,7 @@ public class OrderService {
         return dao.findByUserEmail(email, pageable).map(orderMapper::toDTO);
     }
     @Transactional(readOnly = true)
-    public Page<OrderDTO> getPaidOrders(Pageable pageable){
-        return dao.findByStatus(OrderStatus.PAID, pageable).map(orderMapper::toDTO);
+    public Page<OrderDTO> getOrderByStatus(OrderStatus orderStatus,Pageable pageable){
+        return dao.findByStatus(orderStatus, pageable).map(orderMapper::toDTO);
     }
 }

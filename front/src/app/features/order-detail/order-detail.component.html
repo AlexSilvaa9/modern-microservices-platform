@@ -1,0 +1,79 @@
+<div class="order-detail-shell">
+  <div class="detail-header">
+    <button class="back-btn" (click)="goBack()">← Back</button>
+    <h1>Order Details</h1>
+  </div>
+
+  @if (error()) {
+    <div class="error-state">
+      <p>{{ error() }}</p>
+      <button class="btn btn-secondary" (click)="goBack()">Go back</button>
+    </div>
+  } @else if (order()) {
+    <div class="detail-container">
+      <div class="order-summary">
+        <div class="summary-item">
+          <span class="label">Order ID</span>
+          <span class="value">{{ order()!.id }}</span>
+        </div>
+        <div class="summary-item">
+          <span class="label">Status</span>
+          <span class="value" [class]="'status-badge ' + getStatusClass(order()!.status)">
+            {{ order()!.status }}
+          </span>
+        </div>
+        <div class="summary-item">
+          <span class="label">Customer</span>
+          <span class="value">{{ order()!.userEmail }}</span>
+        </div>
+        <div class="summary-item">
+          <span class="label">Created</span>
+          <span class="value">{{ order()!.createdAt | date: 'medium' }}</span>
+        </div>
+      </div>
+
+      <div class="order-items">
+        <h2>Items</h2>
+        <div class="items-list">
+          @for (item of order()!.items; track item.id) {
+            <div class="item-card">
+              <div class="item-image">
+                <img [src]="item.productSnapshotEntity.imageUrl" [alt]="item.productSnapshotEntity.name" />
+              </div>
+              <div class="item-info">
+                <h3>{{ item.productSnapshotEntity.name }}</h3>
+                <p class="item-desc">{{ item.productSnapshotEntity.description }}</p>
+                <div class="item-meta">
+                  <span class="qty">Qty: {{ item.quantity }}</span>
+                  <span class="price">{{ item.productSnapshotEntity.price | currency }}</span>
+                </div>
+              </div>
+              <div class="item-total">
+                {{ (item.productSnapshotEntity.price * item.quantity) | currency }}
+              </div>
+            </div>
+          }
+        </div>
+      </div>
+
+      <div class="order-summary-footer">
+        <div class="total-row">
+          <span>Total Amount</span>
+          <span class="total-amount">{{ order()!.totalAmount | currency }}</span>
+        </div>
+        @if (order()!.paymentIntentId) {
+          <div class="payment-row">
+            <span>Payment Intent</span>
+            <span class="payment-id">{{ order()!.paymentIntentId }}</span>
+          </div>
+        }
+      </div>
+
+      @if (isAdmin() && !isCompleted(order()!)) {
+        <div class="admin-actions">
+          <button pButton type="button" label="Mark as Completed" icon="pi pi-check" (click)="completeOrder()"></button>
+        </div>
+      }
+    </div>
+  }
+</div>

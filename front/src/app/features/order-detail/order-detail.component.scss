@@ -1,0 +1,322 @@
+@import '../../../styles/variables';
+
+.order-detail-shell {
+  padding: 2rem;
+  background: $bg;
+  min-height: 100vh;
+}
+
+.detail-header {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+
+  h1 {
+    margin: 0;
+    color: $primary-dark;
+    font-size: 2.2rem;
+  }
+}
+
+.back-btn {
+  padding: 0.5rem 1rem;
+  border: none;
+  background: transparent;
+  color: $primary-light;
+  font-weight: 600;
+  cursor: pointer;
+  transition: color $transition-base;
+
+  &:hover {
+    color: $primary-color;
+  }
+}
+
+.loading-state,
+.error-state {
+  background: rgba($surface-0, 0.95);
+  padding: 2rem;
+  border-radius: $border-radius-xl;
+  text-align: center;
+  box-shadow: $shadow-md;
+
+  p {
+    margin: 0 0 1rem;
+    color: $text-secondary;
+  }
+}
+
+.error-state {
+  border-left: 4px solid $error-color;
+}
+
+.btn {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: $border-radius-lg;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all $transition-base;
+
+  &-secondary {
+    background: $surface-100;
+    color: $text-color;
+
+    &:hover {
+      background: $surface-200;
+    }
+  }
+}
+
+.detail-container {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.order-summary {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  background: rgba($surface-0, 0.95);
+  padding: 1.5rem;
+  border-radius: $border-radius-xl;
+  box-shadow: $shadow-md;
+}
+
+.summary-item {
+  display: grid;
+  gap: 0.4rem;
+
+  .label {
+    font-size: 0.85rem;
+    color: $text-secondary;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 600;
+  }
+
+  .value {
+    font-size: 1.1rem;
+    color: $text-color;
+    font-weight: 600;
+    word-break: break-word;
+  }
+}
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.4rem 0.75rem;
+  border-radius: $border-radius-full;
+  font-size: 0.9rem;
+  font-weight: 600;
+  width: fit-content;
+
+  &.status-completed {
+    background: rgba($success-color, 0.15);
+    color: #22c55e;
+  }
+
+  &.status-shipped {
+    background: rgba($info-color, 0.15);
+    color: #3b82f6;
+  }
+
+  &.status-paid {
+    background: rgba($primary-light, 0.15);
+    color: $primary-light;
+  }
+
+  &.status-pending {
+    background: rgba($warning-color, 0.15);
+    color: #f59e0b;
+  }
+
+  &.status-error {
+    background: rgba($error-color, 0.15);
+    color: $error-color;
+  }
+
+  &.status-default {
+    background: rgba($text-secondary, 0.1);
+    color: $text-secondary;
+  }
+}
+
+.order-items {
+  background: rgba($surface-0, 0.95);
+  padding: 1.5rem;
+  border-radius: $border-radius-xl;
+  box-shadow: $shadow-md;
+
+  h2 {
+    margin: 0 0 1rem;
+    color: $primary-dark;
+    font-size: 1.3rem;
+  }
+}
+
+.items-list {
+  display: grid;
+  gap: 1rem;
+}
+
+.item-card {
+  display: grid;
+  grid-template-columns: 120px minmax(0, 1fr) auto;
+  gap: 1.5rem;
+  align-items: start;
+  padding: 1rem;
+  border-radius: $border-radius-lg;
+  background: linear-gradient(180deg, $surface-50, $surface-100);
+  border: 1px solid $border-color;
+  transition: all $transition-base;
+
+  &:hover {
+    box-shadow: $shadow-md;
+    border-color: rgba($primary-light, 0.3);
+  }
+}
+
+.item-image {
+  width: 120px;
+  height: 120px;
+  border-radius: $border-radius-lg;
+  overflow: hidden;
+  background: $surface-200;
+  border: 1px solid $border-color;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+}
+
+.item-info {
+  min-width: 0;
+
+  h3 {
+    margin: 0 0 0.4rem;
+    color: $text-color;
+    font-size: 1.05rem;
+  }
+
+  .item-desc {
+    margin: 0 0 0.75rem;
+    color: $text-secondary;
+    font-size: 0.9rem;
+    line-height: 1.4;
+  }
+}
+
+.item-meta {
+  display: flex;
+  gap: 1rem;
+  font-size: 0.9rem;
+
+  .qty {
+    color: $text-secondary;
+  }
+
+  .price {
+    font-weight: 600;
+    color: $primary-light;
+  }
+}
+
+.item-total {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: $primary-color;
+  text-align: right;
+}
+
+.order-summary-footer {
+  background: rgba($surface-0, 0.95);
+  padding: 1.5rem;
+  border-radius: $border-radius-xl;
+  box-shadow: $shadow-md;
+  border-top: 2px solid $border-color;
+}
+
+.total-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0;
+  border-bottom: 1px solid $border-color;
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  span:first-child {
+    color: $text-secondary;
+    font-weight: 600;
+  }
+}
+
+.total-amount {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: $primary-color;
+}
+
+.payment-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 0;
+
+  span:first-child {
+    color: $text-secondary;
+    font-weight: 600;
+    font-size: 0.9rem;
+  }
+}
+
+.payment-id {
+  font-family: monospace;
+  font-size: 0.85rem;
+  color: $text-secondary;
+  background: $surface-100;
+  padding: 0.35rem 0.6rem;
+  border-radius: $border-radius;
+}
+
+.admin-actions {
+  display: flex;
+  gap: 1rem;
+  padding: 1.5rem;
+  background: rgba($primary-light, 0.08);
+  border-radius: $border-radius-xl;
+  border: 1px solid rgba($primary-light, 0.15);
+}
+
+:host ::ng-deep .admin-actions {
+  button {
+    border-radius: $border-radius-lg;
+  }
+}
+
+@media (max-width: 768px) {
+  .item-card {
+    grid-template-columns: 80px minmax(0, 1fr);
+    gap: 1rem;
+
+    .item-total {
+      grid-column: 1 / -1;
+      text-align: left;
+      padding-top: 0.5rem;
+      border-top: 1px solid $border-color;
+    }
+  }
+
+  .item-image {
+    width: 80px;
+    height: 80px;
+  }
+}

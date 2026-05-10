@@ -1,0 +1,67 @@
+@import '../../../../styles/variables';
+
+.order-management {
+  padding: 2rem;
+  background: $bg;
+  min-height: 100vh;
+}
+
+.header {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.header h1 {
+  margin: 0;
+}
+
+.header p {
+  margin: 0.35rem 0 0;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.status-filter {
+  display: grid;
+  gap: 0.35rem;
+  min-width: 220px;
+}
+
+.status-filter span {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.status-filter select {
+  width: 100%;
+  padding: 0.75rem 0.9rem;
+  border-radius: 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.06);
+  color: inherit;
+}
+
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.35rem 0.65rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.status-pill--completed {
+  background: rgba(46, 204, 113, 0.18);
+  color: #9ff0bc;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 2rem 1rem;
+}
+
+.order-id-cell {
+  color: $primary-light;
+  font-weight: 600;
+}

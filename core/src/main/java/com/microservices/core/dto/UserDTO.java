@@ -2,8 +2,10 @@ package com.microservices.core.dto;
 
 import com.microservices.core.dto.enums.IdentityProvider;
 import com.microservices.core.dto.enums.Role;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 import java.util.UUID;
@@ -15,6 +17,8 @@ import java.util.UUID;
  */
 @Data
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class UserDTO {
     /**
      * The unique identifier of the user.

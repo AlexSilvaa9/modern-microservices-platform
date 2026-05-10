@@ -1,10 +1,10 @@
 package com.microservices.user.service;
 
-import com.microservices.core.dto.MailBatchRequestDTO;
 import com.microservices.core.dto.enums.IdentityProvider;
 import com.microservices.core.dto.enums.Role;
 import com.microservices.core.security.jwt.JwtService;
 import com.microservices.user.dto.AuthDTO;
+import com.microservices.user.mapper.UserMapper;
 import com.microservices.user.model.RefreshToken;
 import com.microservices.user.model.UserEntity;
 import com.microservices.user.repository.UserRepository;
@@ -13,6 +13,7 @@ import jakarta.transaction.Transactional;
 import jakarta.validation.constraints.NotNull;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.http.*;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
@@ -32,6 +33,7 @@ import java.util.Optional;
 @Service
 @Slf4j
 @Transactional
+@ConditionalOnProperty(name = "user-management.google.enable", havingValue = "true")
 public class GoogleAuthService {
 
     /** Google Client ID retrieved from configuration. */
@@ -50,6 +52,7 @@ public class GoogleAuthService {
     private final UserRepository userRepository;
     /** Service for general user operations. */
     private final UserService userService;
+    private final UserMapper userMapper;
     /** Service for internal JWT generation. */
     private final JwtService jwtService;
     /** Standard Spring RestTemplate for synchronous HTTP requests. */
@@ -68,10 +71,11 @@ public class GoogleAuthService {
      * @param refreshTokenService the internal refresh token service
      * @param kafkaTemplate       the Kafka template for asynchronous messaging
      */
-    public GoogleAuthService(UserRepository userRepository, UserService userService,
+    public GoogleAuthService(UserRepository userRepository, UserService userService, UserMapper userMapper,
                              JwtService jwtService, RefreshTokenService refreshTokenService, KafkaTemplate<String, Object> kafkaTemplate) {
         this.userRepository = userRepository;
         this.userService = userService;
+        this.userMapper = userMapper;
         this.jwtService = jwtService;
         this.refreshTokenService = refreshTokenService;
         this.kafkaTemplate = kafkaTemplate;
@@ -99,14 +103,14 @@ public class GoogleAuthService {
 
         UserEntity user = userRepository.findByEmail(email)
                 .orElseGet(() -> {
-                    MailBatchRequestDTO mailBatchRequestDTO = new MailBatchRequestDTO(List.of(email),"Bienvenido a mi app","Buenas, quiero venderte dinero");
-                    kafkaTemplate.send("mail-topic", mailBatchRequestDTO);
                     UserEntity newUser = new UserEntity();
                     newUser.setEmail(email);
                     newUser.setProviders(List.of(IdentityProvider.GOOGLE));
                     newUser.setRoles(List.of(Role.USER));
                     newUser.setCreatedAt(LocalDateTime.now());
                     newUser.setUsername(email);
+                    kafkaTemplate.send("user-created-topic",userMapper.toDTO(newUser));
+
                     return userRepository.save(newUser);
                 });
         if (!user.getProviders().contains(IdentityProvider.GOOGLE)){

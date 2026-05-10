@@ -1,13 +1,17 @@
 package com.microservices.order.controller;
 
+import com.microservices.core.dto.enums.OrderStatus;
 import com.microservices.core.dto.order.OrderDTO;
 import com.microservices.order.service.OrderService;
 import com.microservices.core.dto.BaseApiResponse;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.UUID;
 
 
 /**
@@ -31,10 +35,10 @@ public class OrderController {
 
     @GetMapping
     public ResponseEntity<BaseApiResponse<Object>> createOrder() {
-        orderService.createOrderFromCart();
+        UUID orderId = orderService.createOrderFromCart();
         BaseApiResponse<Object> body = new BaseApiResponse<>(
                 "OK",
-                null);
+                orderId);
         return ResponseEntity.ok(body);
 
     }
@@ -50,13 +54,30 @@ public class OrderController {
 
         return ResponseEntity.ok(baseApiResponse);
     }
+    @PreAuthorize("hasRole('ADMIN')")
+    @PostMapping("getByStatus")
+    public ResponseEntity<BaseApiResponse<Page<OrderDTO>>> getByStatus(
+            Pageable pageable,
+            @RequestParam(name = "orderStatus") OrderStatus status
+            ){
 
-    @PostMapping("paidOrders")
-    public ResponseEntity<BaseApiResponse<Page<OrderDTO>>> paidOrders(Pageable pageable){
+        var response = orderService.getOrderByStatus(status, pageable);
 
-        var response = orderService.getPaidOrders(pageable);
+        BaseApiResponse<Page<OrderDTO>> baseApiResponse = new BaseApiResponse("Orders fetched successfully", response);
 
-        BaseApiResponse<Page<OrderDTO>> baseApiResponse = new BaseApiResponse("Paid orders fetched successfully", response);
+        return ResponseEntity.ok(baseApiResponse);
+    }
+
+
+    @PreAuthorize("hasRole('ADMIN')")
+    @GetMapping("markAsCompleted")
+    public ResponseEntity<BaseApiResponse<Page<OrderDTO>>> markAsCompleted(
+            @RequestParam(name = "orderUuid")UUID orderUuid
+            ){
+
+        orderService.markAsCompleted(orderUuid);
+
+        BaseApiResponse<Page<OrderDTO>> baseApiResponse = new BaseApiResponse("Order updated succesfully", null);
 
         return ResponseEntity.ok(baseApiResponse);
     }

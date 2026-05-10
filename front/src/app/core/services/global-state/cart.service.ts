@@ -1,4 +1,5 @@
-import { Injectable, computed, signal } from '@angular/core';
+import { Injectable, PLATFORM_ID, computed, inject, signal } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Cart, CartItem } from '../../models/cart.model';
 
@@ -6,63 +7,62 @@ import { Cart, CartItem } from '../../models/cart.model';
   providedIn: 'root'
 })
 export class CartService {
-    private readonly CART_URL = 'http://localhost:8080/api/cart/';
-    private readonly itemsSignal = signal<CartItem[]>([]);
+  private readonly CART_URL = 'http://localhost:8080/api/cart/';
+  private readonly STORAGE_KEY = 'microservices-template.cart';
+  private readonly itemsSignal = signal<CartItem[]>([]);
+  private readonly platformId = inject(PLATFORM_ID);
+  private readonly isBrowser = isPlatformBrowser(this.platformId);
 
   readonly items = computed(() => this.itemsSignal());
   readonly itemCount = computed(() => this.itemsSignal().reduce((sum, item) => sum + item.quantity, 0));
-  readonly subtotal = computed(() =>
+  readonly total = computed(() =>
     this.itemsSignal().reduce((sum, item) => sum + item.product.price * item.quantity, 0)
   );
-  readonly shipping = computed(() => (this.subtotal() > 80 ? 0 : 7.9));
-  readonly total = computed(() => this.subtotal() + this.shipping());
 
   constructor(private http: HttpClient) {
     this.loadCart();
   }
 
   increaseQuantity(itemId: string): void {
-    // backend exposes an add endpoint that increases quantity by 1
-    this.http.get(`${this.CART_URL}add/${itemId}`).subscribe({
-      next: () => this.loadCart(),
-      error: () => this.loadCart()
-    });
+    this.patchLocalQuantity(itemId, 1);
+    this.http.get(`${this.CART_URL}add/${itemId}`).subscribe();
   }
 
   decreaseQuantity(itemId: string): void {
-   this.http.get(`${this.CART_URL}delete/${itemId}?quantity=1`).subscribe({
-      next: () => this.loadCart(),
-      error: () => this.loadCart()
-    });
+    this.patchLocalQuantity(itemId, -1);
+    this.http.get(`${this.CART_URL}delete/${itemId}?quantity=1`).subscribe();
   }
 
   removeItem(itemId: string): void {
-
-    this.http.get(`${this.CART_URL}delete/${itemId}?quantity=1000`).subscribe({
-      next: () => this.loadCart(),
-      error: () => this.loadCart()
-    });
+    this.removeLocalItem(itemId);
+    this.http.get(`${this.CART_URL}delete/${itemId}?quantity=1000`).subscribe();
   }
 
   addItem(item: CartItem): void {
-    // backend provides add by productId (increments by 1), call repeatedly for quantity
-    const calls: Array<Promise<any>> = [];
+    this.upsertLocalItem(item);
+
     for (let i = 0; i < item.quantity; i++) {
-      calls.push(this.http.get(`${this.CART_URL}add/${item.product.productId}`).toPromise());
+      this.http.get(`${this.CART_URL}add/${item.product.productId}`).subscribe();
     }
-    Promise.all(calls)
-      .then(() => this.loadCart())
-      .catch(() => this.loadCart());
   }
 
   clearCart(): void {
-    this.http.delete(`${this.CART_URL}`).subscribe({
-      next: () => this.loadCart(),
-      error: () => this.loadCart()
-    });
+    this.itemsSignal.set([]);
+    this.persistCart([]);
+    this.http.delete(`${this.CART_URL}`).subscribe();
+  }
+
+  clearLocalCart(): void {
+    this.itemsSignal.set([]);
+    this.persistCart([]);
   }
 
   public loadCart(): void {
+    if (!this.isBrowser) {
+      return;
+    }
+ 
+
     this.http.get<any>(this.CART_URL).subscribe({
       next: (resp) => {
         // BaseApiResponse<ShoppingCartDTO> -> { message, data }
@@ -79,10 +79,57 @@ export class CartService {
           quantity: it?.quantity ?? 0
         }));
         this.itemsSignal.set(items);
+        this.persistCart(items);
       },
       error: () => {
         // keep local state unchanged on error
       }
     });
+  }
+
+  private persistCart(items: CartItem[]): void {
+    if (!this.isBrowser) {
+      return;
+    }
+
+    localStorage.setItem(this.STORAGE_KEY, JSON.stringify(items));
+  }
+
+  private upsertLocalItem(item: CartItem): void {
+    const currentItems = this.itemsSignal();
+    const existingItem = currentItems.find((current) => current.product.productId === item.product.productId);
+
+    let nextItems: CartItem[];
+    if (existingItem) {
+      nextItems = currentItems.map((current) =>
+        current.product.productId === item.product.productId
+          ? { ...current, quantity: current.quantity + item.quantity }
+          : current
+      );
+    } else {
+      nextItems = [...currentItems, item];
+    }
+
+    this.itemsSignal.set(nextItems);
+    this.persistCart(nextItems);
+  }
+
+  private patchLocalQuantity(itemId: string, delta: number): void {
+    const nextItems = this.itemsSignal()
+      .map((item) =>
+        item.product.productId === itemId
+          ? { ...item, quantity: item.quantity + delta }
+          : item
+      )
+      .filter((item) => item.quantity > 0);
+
+    this.itemsSignal.set(nextItems);
+    this.persistCart(nextItems);
+  }
+
+  private removeLocalItem(itemId: string): void {
+    const nextItems = this.itemsSignal().filter((item) => item.product.productId !== itemId);
+    this.itemsSignal.set(nextItems);
+    this.persistCart(nextItems);
   }
 }

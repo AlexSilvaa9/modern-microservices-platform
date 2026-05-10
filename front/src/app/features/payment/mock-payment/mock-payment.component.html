@@ -1,0 +1,63 @@
+<div class="payment-gateway">
+  <div class="gateway-container">
+    <div class="gateway-header">
+      <div class="gateway-logo">Mock Stripe</div>
+      <div class="gateway-secure">🔒 SECURE PAYMENT</div>
+    </div>
+
+    <div class="gateway-content">
+      <h1>Complete your payment</h1>
+      <p class="gateway-desc">Order ID: <code>{{ orderUuid() }}</code></p>
+
+      @if (error()) {
+        <div class="alert alert-error">{{ error() }}</div>
+      }
+
+      @if (success()) {
+        <div class="success-state">
+          <div class="checkmark">✓</div>
+          <h2>Payment successful</h2>
+          <p>Your transaction has been processed.</p>
+          <button class="btn btn-primary" (click)="goToHistory()">View order</button>
+        </div>
+      } @else {
+        <div class="payment-form">
+          <div class="form-group">
+            <label>Card number</label>
+            <input type="text" placeholder="4242 4242 4242 4242" disabled />
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label>Expires</label>
+              <input type="text" placeholder="12/25" disabled />
+            </div>
+            <div class="form-group">
+              <label>CVC</label>
+              <input type="text" placeholder="123" disabled />
+            </div>
+          </div>
+
+          @if (loading()) {
+            <div class="processing">
+              <div class="progress-bar">
+                <div class="progress-fill" [style.width.%]="processingPercent()"></div>
+              </div>
+              <p>Processing payment...</p>
+            </div>
+          } @else {
+            <button class="btn btn-submit" (click)="confirmPayment()" [disabled]="!orderUuid()">
+              Pay now
+            </button>
+          }
+        </div>
+      }
+    </div>
+
+    <div class="gateway-footer">
+      <a href="#" class="footer-link">Privacy policy</a>
+      <span class="separator">•</span>
+      <a href="#" class="footer-link">Terms of service</a>
+    </div>
+  </div>
+</div>

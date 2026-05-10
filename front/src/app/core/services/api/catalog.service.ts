@@ -17,7 +17,6 @@ export class CatalogService {
   public error = signal<string | null>(null);
 
   constructor(private http: HttpClient) {
-    this.loadProducts();
   }
 
   private loadProducts() {

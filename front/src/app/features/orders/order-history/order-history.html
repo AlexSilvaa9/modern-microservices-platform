@@ -1,0 +1,74 @@
+<div class="order-history">
+  <div class="header">
+    <div>
+      <h1>My orders</h1>
+      <p>Your order history. Orders that are not completed are highlighted.</p>
+    </div>
+  </div>
+
+  <p-table
+    [value]="orders()"
+    [rows]="rows()"
+    [totalRecords]="totalRecords()"
+    [loading]="loading()"
+    [paginator]="true"
+    responsiveLayout="scroll"
+    styleClass="p-datatable-striped"
+    [showCurrentPageReport]="true"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} orders"
+    (onLazyLoad)="onPageChange($event)"
+    [lazy]="true"
+  >
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Order</th>
+        <th>Status</th>
+        <th>Total</th>
+        <th>Created</th>
+        <th>Updated</th>
+        <th>Items</th>
+        <th>Actions</th>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-order>
+      <tr [class.not-completed]="isNotCompleted(order)">
+        <td class="order-id-cell">{{ order.id }}</td>
+        <td>
+          <span class="status-pill" [class.status-pill--completed]="order.status === OrderStatus.COMPLETED">
+            {{ order.status }}
+          </span>
+        </td>
+        <td>{{ order.totalAmount | currency }}</td>
+        <td>{{ order.createdAt | date: 'short' }}</td>
+        <td>{{ order.updatedAt | date: 'short' }}</td>
+        <td>{{ order.items?.length || 0 }}</td>
+        <td>
+          <button
+            pButton
+            type="button"
+            icon="pi pi-eye"
+            class="p-button-rounded p-button-text"
+            (click)="viewOrderDetail(order)"
+            pTooltip="View details"
+            tooltipPosition="left"
+          ></button>
+        </td>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="emptymessage">
+      <tr>
+        <td colspan="7" class="empty-state">You do not have orders yet.</td>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="loadingbody">
+      <tr>
+        <td colspan="7">
+          <p-skeleton height="2rem"></p-skeleton>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>

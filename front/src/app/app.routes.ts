@@ -97,6 +97,21 @@ export const routes: Routes = [
       loadComponent: () => import('./features/catalog/catalog').then(m => m.Catalog)
     },
     {
+      path: 'orders/history',
+      canActivate: [authGuard],
+      loadComponent: () => import('./features/orders/order-history/order-history').then(m => m.OrderHistoryComponent)
+    },
+    {
+      path: 'order-detail',
+      canActivate: [authGuard],
+      loadComponent: () => import('./features/order-detail/order-detail.component').then(m => m.OrderDetailComponent)
+    },
+    {
+      path: 'payment/mock/:uuid',
+      canActivate: [authGuard],
+      loadComponent: () => import('./features/payment/mock-payment/mock-payment.component').then(m => m.MockPaymentComponent)
+    },
+    {
         path: 'admin',
         canActivate: [adminGuard],
         children: [
@@ -105,12 +120,20 @@ export const routes: Routes = [
                 loadComponent: () => import('./features/admin/user-management/user-management').then(m => m.UserManagement)
             },
             {
+                path: 'orders',
+                loadComponent: () => import('./features/admin/order-management/order-management').then(m => m.OrderManagementComponent)
+            },
+            {
                 path: 'seo',
                 loadComponent: () => import('./features/admin/seo/seo').then(m => m.Seo)
-        },
-        {
-          path: 'communication',
-          loadComponent: () => import('./features/admin/communication/communication').then(m => m.Communication)
+            },
+            {
+              path: 'analytics',
+              loadComponent: () => import('./features/admin/seo/seo').then(m => m.Seo)
+            },
+            {
+                path: 'communication',
+                loadComponent: () => import('./features/admin/communication/communication').then(m => m.Communication)
             }
         ]
     },

@@ -1,59 +1,64 @@
 <div class="seo-container">
   <div class="seo-header">
-    <h1>{{ 'SIDEBAR.SEO' | translate }}</h1>
-    <p class="subtitle">{{ 'SEO.SUBTITLE' | translate }}</p>
+    <h1>Analytics Dashboard</h1>
+    <p class="subtitle">Visualización de eventos y visitas de tu aplicación</p>
+  </div>
+
+  <!-- Loading state -->
+  <div *ngIf="isLoading()" class="loading-state">
+    <p>Cargando datos de analytics...</p>
   </div>
 
   <!-- Tarjetas de métricas -->
-  <div class="metrics-grid">
+  <div class="metrics-grid" *ngIf="!isLoading()">
     <p-card class="metric-card">
       <div class="metric-content">
-        <span class="metric-value">{{ getTotalViews() | number }}</span>
-        <span class="metric-label">{{ 'SEO.TOTAL_VIEWS' | translate }}</span>
+        <span class="metric-value">{{ summary()?.totalVisits | number }}</span>
+        <span class="metric-label">Total de Visitas</span>
       </div>
-      <div class="metric-icon published">
+      <div class="metric-icon visits">
         <i class="pi pi-eye"></i>
       </div>
     </p-card>
 
     <p-card class="metric-card">
       <div class="metric-content">
-        <span class="metric-value">{{ getPublishedCount() }}</span>
-        <span class="metric-label">{{ 'SEO.PUBLISHED' | translate }}</span>
-      </div>
-      <div class="metric-icon status-published">
-        <i class="pi pi-check-circle"></i>
-      </div>
-    </p-card>
-
-    <p-card class="metric-card">
-      <div class="metric-content">
-        <span class="metric-value">{{ getDraftCount() }}</span>
-        <span class="metric-label">{{ 'SEO.DRAFTS' | translate }}</span>
-      </div>
-      <div class="metric-icon status-draft">
-        <i class="pi pi-pencil"></i>
-      </div>
-    </p-card>
-
-    <p-card class="metric-card">
-      <div class="metric-content">
         <span class="metric-value">{{ pages().length }}</span>
-        <span class="metric-label">{{ 'SEO.TOTAL_PAGES' | translate }}</span>
+        <span class="metric-label">Páginas Visitadas</span>
       </div>
       <div class="metric-icon pages">
         <i class="pi pi-file"></i>
       </div>
     </p-card>
+
+    <p-card class="metric-card">
+      <div class="metric-content">
+        <span class="metric-value">{{ summary()?.visitsByMonth?.length || 0 }}</span>
+        <span class="metric-label">Meses con Datos</span>
+      </div>
+      <div class="metric-icon months">
+        <i class="pi pi-calendar"></i>
+      </div>
+    </p-card>
+
+    <p-card class="metric-card">
+      <div class="metric-content">
+        <span class="metric-value">{{ getMostVisitedPage() }}</span>
+        <span class="metric-label">Visitas (Top Page)</span>
+      </div>
+      <div class="metric-icon trending">
+        <i class="pi pi-arrow-up"></i>
+      </div>
+    </p-card>
   </div>
 
   <!-- Gráficas -->
-  <div class="charts-grid">
+  <div class="charts-grid" *ngIf="!isLoading()">
     <!-- Gráfica de vistas por página -->
     <p-card class="chart-card">
       <ng-template pTemplate="header">
         <div class="chart-header">
-          <h3>{{ 'SEO.VIEWS_PER_PAGE' | translate }}</h3>
+          <h3>Visitas por Página</h3>
           <i class="pi pi-chart-bar"></i>
         </div>
       </ng-template>
@@ -67,66 +72,46 @@
       </div>
     </p-card>
 
-    <!-- Gráfica de estado -->
+    <!-- Gráfica de visitas por mes -->
     <p-card class="chart-card">
       <ng-template pTemplate="header">
         <div class="chart-header">
-          <h3>{{ 'SEO.STATUS_DISTRIBUTION' | translate }}</h3>
-          <i class="pi pi-chart-pie"></i>
+          <h3>Visitas por Mes</h3>
+          <i class="pi pi-chart-line"></i>
         </div>
       </ng-template>
       <div class="chart-wrapper">
         <p-chart
-          *ngIf="statusChartData()"
-          type="pie"
-          [data]="statusChartData()"
-          [options]="statusChartOptions()"
+          *ngIf="monthlyChartData()"
+          type="line"
+          [data]="monthlyChartData()"
+          [options]="monthlyChartOptions()"
         ></p-chart>
       </div>
     </p-card>
   </div>
 
-  <!-- Gráfica de tendencia -->
-  <p-card class="chart-card full-width">
-    <ng-template pTemplate="header">
-      <div class="chart-header">
-        <h3>{{ 'SEO.TREND_7DAYS' | translate }}</h3>
-        <i class="pi pi-chart-line"></i>
-      </div>
-    </ng-template>
-    <div class="chart-wrapper trend-chart">
-      <p-chart
-        *ngIf="trendChartData()"
-        type="line"
-        [data]="trendChartData()"
-        [options]="trendChartOptions()"
-      ></p-chart>
-    </div>
-  </p-card>
+
 
   <!-- Tabla de detalles -->
-  <p-card class="details-card full-width">
+  <p-card class="details-card full-width" *ngIf="!isLoading()">
     <ng-template pTemplate="header">
       <div class="chart-header">
-        <h3>{{ 'SEO.PAGE_DETAILS' | translate }}</h3>
+        <h3>Detalle de Páginas Visitadas</h3>
         <i class="pi pi-list"></i>
       </div>
     </ng-template>
     <div class="pages-list">
       <div class="page-item" *ngFor="let page of pages()">
         <div class="page-info">
-          <span class="page-title">{{ page.title }}</span>
-          <span class="page-slug">/{{ page.slug }}</span>
+          <span class="page-title">{{ page.path }}</span>
+          <span class="page-slug">Ruta visitada</span>
         </div>
         <div class="page-stats">
           <span class="stat">
             <i class="pi pi-eye"></i>
-            {{ page.views | number }}
+            {{ page.visits | number }} visitas
           </span>
-          <span [class]="'status-badge ' + (page.status === 'published' ? 'status-published' : 'status-draft')">
-            {{ page.status === 'published' ? ('SEO.STATUS_PUBLISHED' | translate) : ('SEO.STATUS_DRAFT' | translate) }}
-          </span>
-          <span class="date">{{ page.lastUpdated }}</span>
         </div>
       </div>
     </div>

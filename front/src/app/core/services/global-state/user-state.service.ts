@@ -33,5 +33,6 @@ export class UserStateService {
     /** Clear user state (Logout) */
     clearState(): void {
         this._currentUser.next(null);
+        this.cartService.clearLocalCart();
     }
 }

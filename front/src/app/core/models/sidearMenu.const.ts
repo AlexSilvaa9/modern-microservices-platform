@@ -23,6 +23,11 @@ export const SIDEBAR_MENU: SidebarGroup[] = [
         icon: PrimeIcons.SHOPPING_CART,
         route: '/cart'
     },
+    {
+        label: 'SIDEBAR.ORDERS',
+        icon: PrimeIcons.RECEIPT,
+        route: '/orders/history',
+    },
 
 
     {
@@ -31,19 +36,24 @@ export const SIDEBAR_MENU: SidebarGroup[] = [
         roles: [Role.ADMIN],
         children: [
             {
-                label: 'SIDEBAR.COMMUNICATION',
+                label: 'SIDEBAR.ADMINISTRATION.COMMUNICATION',
                 route: '/admin/communication',
                 icon: PrimeIcons.ENVELOPE
             },
             {
-                label: 'SIDEBAR.SEO',
+                label: 'SIDEBAR.ADMINISTRATION.SEO',
                 route: '/admin/seo',
                 icon: PrimeIcons.SEARCH
             },
             {
-                label: 'SIDEBAR.USERS',
+                label: 'SIDEBAR.ADMINISTRATION.USERS',
                 route: '/admin/users',
                 icon: PrimeIcons.USERS
+            },
+                        {
+                label: 'SIDEBAR.ADMINISTRATION.ORDERS',
+                route: '/admin/orders',
+                icon: PrimeIcons.BOOK
             }
         ]
     }

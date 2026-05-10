@@ -45,21 +45,13 @@
       <aside class="cart-summary">
         <h2>{{ 'CART.SUMMARY' | translate }}</h2>
 
-        <div class="summary-row">
-          <span>{{ 'CART.SUBTOTAL' | translate }}</span>
-          <strong>{{ subtotal() | currency }}</strong>
-        </div>
-        <div class="summary-row">
-          <span>{{ 'CART.SHIPPING' | translate }}</span>
-          <strong>{{ shipping() | currency }}</strong>
-        </div>
         <div class="summary-row total">
           <span>{{ 'CART.TOTAL' | translate }}</span>
           <strong>{{ total() | currency }}</strong>
         </div>
 
         <div class="summary-actions">
-          <button type="button" class="action-btn action-btn--primary">{{ 'CART.CHECKOUT' | translate }}</button>
+          <button type="button" class="action-btn action-btn--primary" (click)="checkout()">{{ 'CART.CHECKOUT' | translate }}</button>
           <button type="button" class="action-btn action-btn--secondary" (click)="clear()">{{ 'CART.CLEAR' | translate }}</button>
         </div>
       </aside>

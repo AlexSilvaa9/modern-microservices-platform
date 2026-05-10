@@ -1,0 +1,47 @@
+@import '../../../../styles/variables';
+
+.order-history {
+  padding: 2rem;
+  background: $bg;
+  min-height: 100vh;
+}
+
+.header {
+  margin-bottom: 1.5rem;
+}
+
+.header h1 {
+  margin: 0;
+}
+
+.header p {
+  margin: 0.35rem 0 0;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.not-completed {
+  background: rgba(255, 193, 7, 0.12) !important;
+}
+
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.35rem 0.65rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.status-pill--completed {
+  background: rgba(46, 204, 113, 0.18);
+  color: #9ff0bc;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 2rem 1rem;
+}
+
+.order-id-cell {
+  color: #5b98fa;
+  font-weight: 600;
+}
