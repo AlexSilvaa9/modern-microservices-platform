@@ -1,47 +1,197 @@
 @import '../../../../styles/variables';
 
 .order-history {
-  padding: 2rem;
-  background: $bg;
+  position: relative;
   min-height: 100vh;
+  padding: clamp(1.25rem, 3vw, 2.5rem);
+  background:
+    radial-gradient(circle at top left, rgba($primary-light, 0.15), transparent 26%),
+    radial-gradient(circle at top right, rgba($secondary-dark, 0.16), transparent 24%),
+    linear-gradient(180deg, #f8fbff 0%, #edf4fb 100%);
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image: linear-gradient(rgba($primary-color, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba($primary-color, 0.03) 1px, transparent 1px);
+    background-size: 30px 30px;
+    mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.55), transparent 90%);
+  }
+
+  .page-hero,
+  .table-shell {
+    position: relative;
+    z-index: 1;
+  }
+
+  .page-hero {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1.25rem;
+    padding: 1.5rem;
+    border-radius: $border-radius-xl;
+    border: 1px solid rgba($border-color-strong, 0.65);
+    background: rgba($surface-0, 0.9);
+    box-shadow: $shadow-lg;
+
+    .eyebrow {
+      margin: 0 0 0.35rem;
+      color: $primary-light;
+      font-size: $font-size-xs;
+      font-weight: $font-weight-bold;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      color: $primary-dark;
+      font-size: clamp(1.6rem, 2.5vw, 2.3rem);
+    }
+
+    .subtitle {
+      margin: 0.5rem 0 0;
+      color: $text-secondary;
+      max-width: 48rem;
+      line-height: 1.55;
+    }
+  }
+
+  .hero-chip {
+    min-width: 8.5rem;
+    padding: 1rem 1.1rem;
+    border-radius: $border-radius-lg;
+    background: linear-gradient(135deg, $primary-color, $primary-light);
+    color: $primary-contrast;
+    box-shadow: $shadow-sm;
+
+    span {
+      display: block;
+      margin-bottom: 0.35rem;
+      font-size: $font-size-xs;
+      font-weight: $font-weight-bold;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      opacity: 0.85;
+    }
+
+    strong {
+      font-size: 1.75rem;
+    }
+  }
+
+  .table-shell {
+    padding: 1rem;
+    border-radius: $border-radius-xl;
+    border: 1px solid rgba($border-color-strong, 0.65);
+    background: rgba($surface-0, 0.84);
+    box-shadow: $shadow-lg;
+    backdrop-filter: blur(12px);
+  }
+
+  :host ::ng-deep .history-table {
+    .p-datatable-wrapper {
+      border-radius: $border-radius-lg;
+      overflow: hidden;
+    }
+
+    .p-datatable-thead > tr > th {
+      background: linear-gradient(180deg, $surface-50, $surface-100);
+      color: $primary-dark;
+      border-color: $border-color;
+      font-weight: $font-weight-semibold;
+    }
+
+    .p-datatable-tbody > tr {
+      background: $surface-0;
+
+      > td {
+        border-color: $border-color;
+        color: $text-color;
+      }
+
+      &:hover {
+        background: rgba($primary-light, 0.05);
+      }
+    }
+
+    .p-paginator {
+      border-top: 1px solid $border-color;
+      background: $surface-0;
+    }
+  }
+
+  .not-completed {
+    background: rgba($warning-color, 0.08) !important;
+  }
+
+  .status-pill {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.35rem 0.7rem;
+    border-radius: $border-radius-full;
+    background: rgba($warning-color, 0.15);
+    color: #a16207;
+    font-weight: $font-weight-semibold;
+
+    &--completed {
+      background: rgba($success-color, 0.15);
+      color: #166534;
+    }
+  }
+
+  .order-id-cell {
+    color: $primary-light;
+    font-weight: $font-weight-semibold;
+  }
+
+  .action-cell {
+    white-space: nowrap;
+  }
+
+  .action-icon.p-button,
+  .action-icon {
+    color: $primary-color;
+  }
+
+  .empty-state {
+    display: grid;
+    place-items: center;
+    gap: 0.5rem;
+    padding: 2rem 1rem;
+    color: $text-secondary;
+
+    i {
+      font-size: 1.6rem;
+      color: $primary-light;
+    }
+
+    p {
+      margin: 0;
+    }
+  }
 }
 
-.header {
-  margin-bottom: 1.5rem;
+@media (max-width: 900px) {
+  .order-history {
+    .page-hero {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
 }
 
-.header h1 {
-  margin: 0;
-}
+@media (max-width: 640px) {
+  .order-history {
+    padding: 1rem;
 
-.header p {
-  margin: 0.35rem 0 0;
-  color: rgba(255, 255, 255, 0.7);
-}
-
-.not-completed {
-  background: rgba(255, 193, 7, 0.12) !important;
-}
-
-.status-pill {
-  display: inline-flex;
-  align-items: center;
-  padding: 0.35rem 0.65rem;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.08);
-}
-
-.status-pill--completed {
-  background: rgba(46, 204, 113, 0.18);
-  color: #9ff0bc;
-}
-
-.empty-state {
-  text-align: center;
-  padding: 2rem 1rem;
-}
-
-.order-id-cell {
-  color: #5b98fa;
-  font-weight: 600;
+    .page-hero,
+    .table-shell {
+      padding: 1rem;
+      border-radius: $border-radius-lg;
+    }
+  }
 }

@@ -1,15 +1,28 @@
 @import '../../../styles/variables';
 
 .cart-shell {
+  position: relative;
   min-height: 100vh;
   padding: 2.5rem;
   background:
     radial-gradient(circle at top left, rgba($primary-light, 0.16), transparent 32%),
     radial-gradient(circle at bottom right, rgba($secondary-dark, 0.18), transparent 28%),
     $bg;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image: linear-gradient(rgba($primary-color, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba($primary-color, 0.03) 1px, transparent 1px);
+    background-size: 30px 30px;
+    mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.55), transparent 92%);
+  }
 }
 
 .cart-hero {
+  position: relative;
+  z-index: 1;
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
@@ -35,6 +48,7 @@
     margin: 0.75rem 0 0;
     color: $text-secondary;
     max-width: 42rem;
+    line-height: 1.55;
   }
 
   .cart-badge {
@@ -62,6 +76,8 @@
 }
 
 .cart-layout {
+  position: relative;
+  z-index: 1;
   display: grid;
   grid-template-columns: minmax(0, 1.6fr) minmax(280px, 0.8fr);
   gap: 1.5rem;
@@ -120,6 +136,32 @@
 
 .item-info {
   min-width: 0;
+
+  .item-topline {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    margin-bottom: 0.55rem;
+
+    .item-category {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.32rem 0.6rem;
+      border-radius: $border-radius-full;
+      background: rgba($primary-color, 0.1);
+      color: $primary-dark;
+      font-size: $font-size-xs;
+      font-weight: $font-weight-semibold;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    strong {
+      color: $primary-dark;
+      font-size: $font-size-sm;
+    }
+  }
 
   h2 {
     margin: 0;
@@ -216,6 +258,30 @@
     margin: 0 0 1rem;
     color: $primary-dark;
   }
+
+  .summary-chip {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.85rem 1rem;
+    margin-bottom: 0.75rem;
+    border-radius: $border-radius-lg;
+    background: linear-gradient(135deg, $surface-50, $surface-100);
+    border: 1px solid $border-color;
+
+    span {
+      color: $text-secondary;
+      font-size: $font-size-xs;
+      font-weight: $font-weight-bold;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    strong {
+      color: $primary-dark;
+      font-size: 1.2rem;
+    }
+  }
 }
 
 .summary-row {
@@ -287,6 +353,11 @@
   padding: 2rem;
   text-align: center;
 
+  .empty-icon {
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
+  }
+
   h2 {
     margin: 0;
     color: $primary-dark;
@@ -296,6 +367,7 @@
     margin: 0.75rem auto 1.5rem;
     max-width: 34rem;
     color: $text-secondary;
+    line-height: 1.55;
   }
 }
 
@@ -321,6 +393,10 @@
 
   .cart-item {
     grid-template-columns: 88px minmax(0, 1fr);
+  }
+
+  .item-info .item-topline {
+    flex-wrap: wrap;
   }
 
   .item-controls {

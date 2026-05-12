@@ -7,11 +7,12 @@ import { TableModule } from 'primeng/table';
 import { TooltipModule } from 'primeng/tooltip';
 import { OrderDTO, OrderStatus } from '../../../core/models/order.model';
 import { OrderService } from '../../../core/services/api/order.service';
+import { TranslatePipe } from '../../../shared/pipes/translate.pipe';
 
 @Component({
   selector: 'app-order-history',
   standalone: true,
-  imports: [CommonModule, TableModule, SkeletonModule, ButtonModule, TooltipModule],
+  imports: [CommonModule, TableModule, SkeletonModule, ButtonModule, TooltipModule, TranslatePipe],
   templateUrl: './order-history.html',
   styleUrl: './order-history.scss'
 })

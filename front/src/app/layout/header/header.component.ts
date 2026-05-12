@@ -1,8 +1,9 @@
 import { Component, inject, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Router } from '@angular/router';
 import { AuthService } from '../../core/services/api/auth.service';
 import { TranslationService } from '../../core/services/global-state/translation.service';
+import { UserStateService } from '../../core/services/global-state/user-state.service';
 import { TranslatePipe } from '../../shared/pipes/translate.pipe';
 import { IsLoggedInDirective } from '../../shared/directives/isLoggedInDirective';
 import { IsNotLoggedInDirective } from '../../shared/directives/isNotLoggedInDirective';
@@ -28,6 +29,8 @@ export class HeaderComponent {
     private authService = inject(AuthService);
     public translationService = inject(TranslationService);
     public cartService = inject(CartService);
+    public userState = inject(UserStateService);
+    private router = inject(Router);
 
     logout() {
         this.authService.logout();
@@ -40,4 +43,10 @@ export class HeaderComponent {
         console.log('toggleSidebar');
         this.sidebar.toggle();
     }
+
+    goToUserDetail() {
+        const current = this.userState.getCurrentUserValue();
+        this.router.navigate(['/userdetail'], { state: { user: current } });
+    }
+  
 }

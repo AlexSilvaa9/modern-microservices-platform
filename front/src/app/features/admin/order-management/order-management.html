@@ -1,89 +1,105 @@
 <div class="order-management">
-  <div class="header">
+  <section class="page-hero">
     <div>
-      <h1>Order management</h1>
-      <p>Filter by status and complete orders from here.</p>
+      <p class="eyebrow">{{ 'ORDER_MANAGEMENT.EYEBROW' | translate }}</p>
+      <h1>{{ 'ORDER_MANAGEMENT.TITLE' | translate }}</h1>
+      <p class="subtitle">{{ 'ORDER_MANAGEMENT.SUBTITLE' | translate }}</p>
     </div>
 
-    <label class="status-filter">
-      <span>Status</span>
-      <select [ngModel]="selectedStatus()" (ngModelChange)="onStatusChange($event)">
-        <option *ngFor="let status of statuses" [value]="status">{{ status }}</option>
-      </select>
-    </label>
-  </div>
+    <div class="hero-controls">
+      <label class="status-filter">
+        <span>{{ 'ORDER_MANAGEMENT.STATUS_FILTER' | translate }}</span>
+        <select [ngModel]="selectedStatus()" (ngModelChange)="onStatusChange($event)">
+          <option *ngFor="let status of statuses" [value]="status">{{ 'ORDER_STATUS.' + status | translate }}</option>
+        </select>
+      </label>
+    </div>
+  </section>
 
-  <p-table
-    [value]="orders()"
-    [rows]="rows()"
-    [totalRecords]="totalRecords()"
-    [loading]="loading()"
-    [paginator]="true"
-    responsiveLayout="scroll"
-    styleClass="p-datatable-striped"
-    [showCurrentPageReport]="true"
-    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} orders"
-    (onLazyLoad)="onPageChange($event)"
-    [lazy]="true"
-  >
-    <ng-template pTemplate="header">
-      <tr>
-        <th>Order</th>
-        <th>User</th>
-        <th>Status</th>
-        <th>Total</th>
-        <th>Created</th>
-        <th>Items</th>
-        <th>Actions</th>
-      </tr>
-    </ng-template>
+  <section class="table-shell">
+    <p-table
+      [value]="orders()"
+      [rows]="rows()"
+      [totalRecords]="totalRecords()"
+      [loading]="loading()"
+      [paginator]="true"
+      responsiveLayout="scroll"
+      styleClass="p-datatable-striped order-table"
+      [showCurrentPageReport]="true"
+      [currentPageReportTemplate]="'ORDER_MANAGEMENT.PAGE_REPORT' | translate"
+      (onLazyLoad)="onPageChange($event)"
+      [lazy]="true"
+    >
+      <ng-template pTemplate="header">
+        <tr>
+          <th>{{ 'ORDER_MANAGEMENT.TABLE.ORDER' | translate }}</th>
+          <th>{{ 'ORDER_MANAGEMENT.TABLE.USER' | translate }}</th>
+          <th>{{ 'ORDER_MANAGEMENT.TABLE.STATUS' | translate }}</th>
+          <th>{{ 'ORDER_MANAGEMENT.TABLE.TOTAL' | translate }}</th>
+          <th>{{ 'ORDER_MANAGEMENT.TABLE.CREATED' | translate }}</th>
+          <th>{{ 'ORDER_MANAGEMENT.TABLE.ITEMS' | translate }}</th>
+          <th>{{ 'GENERAL.ACTIONS' | translate }}</th>
+        </tr>
+      </ng-template>
 
-    <ng-template pTemplate="body" let-order>
-      <tr>
-        <td class="order-id-cell">{{ order.id }}</td>
-        <td>{{ order.userEmail }}</td>
-        <td>
-          <span class="status-pill" [class.status-pill--completed]="order.status === OrderStatus.COMPLETED">
-            {{ order.status }}
-          </span>
-        </td>
-        <td>{{ order.totalAmount | currency }}</td>
-        <td>{{ order.createdAt | date: 'short' }}</td>
-        <td>{{ order.items?.length || 0 }}</td>
-        <td>
-          <button
-            pButton
-            type="button"
-            icon="pi pi-eye"
-            class="p-button-rounded p-button-text"
-            (click)="viewOrderDetail(order)"
-            pTooltip="View details"
-            tooltipPosition="left"
-          ></button>
-          <button
-            pButton
-            type="button"
-            label="Complete"
-            icon="pi pi-check"
-            [disabled]="isCompleted(order)"
-            (click)="completeOrder(order)"
-          ></button>
-        </td>
-      </tr>
-    </ng-template>
+      <ng-template pTemplate="body" let-order>
+        <tr>
+          <td class="order-id-cell">#{{ order.id }}</td>
+          <td>
+            <div class="primary-cell">
+              <span class="cell-title">{{ order.userEmail }}</span>
+              <span class="cell-subtitle">{{ order.items?.length || 0 }} {{ 'ORDER_MANAGEMENT.ITEMS_SUFFIX' | translate }}</span>
+            </div>
+          </td>
+          <td>
+            <span class="status-pill" [class.status-pill--completed]="order.status === OrderStatus.COMPLETED">
+              {{ order.status }}
+            </span>
+          </td>
+          <td>{{ order.totalAmount | currency }}</td>
+          <td>{{ order.createdAt | date: 'short' }}</td>
+          <td>{{ order.items?.length || 0 }}</td>
+          <td class="action-cell">
+            <button
+              pButton
+              type="button"
+              icon="pi pi-eye"
+              class="p-button-rounded p-button-text action-icon"
+              (click)="viewOrderDetail(order)"
+              [pTooltip]="'ORDER_MANAGEMENT.VIEW_DETAILS' | translate"
+              tooltipPosition="left"
+            ></button>
+            <button
+              pButton
+              type="button"
+              [label]="'ORDER_MANAGEMENT.COMPLETE' | translate"
+              icon="pi pi-check"
+              [disabled]="isCompleted(order)"
+              (click)="completeOrder(order)"
+              class="complete-btn"
+            ></button>
+          </td>
+        </tr>
+      </ng-template>
 
-    <ng-template pTemplate="emptymessage">
-      <tr>
-        <td colspan="7" class="empty-state">No orders found for the selected status.</td>
-      </tr>
-    </ng-template>
+      <ng-template pTemplate="emptymessage">
+        <tr>
+          <td colspan="7">
+            <div class="empty-state">
+              <i class="pi pi-inbox"></i>
+              <p>{{ 'ORDER_MANAGEMENT.EMPTY' | translate }}</p>
+            </div>
+          </td>
+        </tr>
+      </ng-template>
 
-    <ng-template pTemplate="loadingbody">
-      <tr>
-        <td colspan="7">
-          <p-skeleton height="2rem"></p-skeleton>
-        </td>
-      </tr>
-    </ng-template>
-  </p-table>
+      <ng-template pTemplate="loadingbody">
+        <tr>
+          <td colspan="7">
+            <p-skeleton height="2rem"></p-skeleton>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </section>
 </div>

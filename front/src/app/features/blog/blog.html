@@ -1,86 +1,137 @@
-<div class="blog">
-
-    <!-- HERO -->
+<div class="blog-shell">
     <section class="hero">
-        <h1>{{ 'BLOG.HERO.TITLE' | translate }}</h1>
-        <p>{{ 'BLOG.HERO.SUBTITLE' | translate }}</p>
-        <div class="status">{{ 'BLOG.STATUS' | translate }}</div>
+        <div class="hero-copy">
+            <p class="eyebrow">{{ 'BLOG.EYEBROW' | translate }}</p>
+            <h1>{{ 'BLOG.HERO.TITLE' | translate }}</h1>
+            <p class="lead">{{ 'BLOG.HERO.SUBTITLE' | translate }}</p>
+            <div class="status">{{ 'BLOG.STATUS' | translate }}</div>
+        </div>
+
+        <aside class="hero-notes">
+            <div class="note-card note-card--highlight">
+                <span>{{ 'BLOG.OVERVIEW.KICKER' | translate }}</span>
+                <strong>{{ 'BLOG.OVERVIEW.TITLE' | translate }}</strong>
+                <p>{{ 'BLOG.OVERVIEW.TEXT' | translate }}</p>
+            </div>
+
+            <div class="value-props">
+                @for (prop of valueProps; track prop) {
+                    <div class="value-pill">{{ prop | translate }}</div>
+                }
+            </div>
+        </aside>
     </section>
 
-    <!-- INTRO -->
-    <section class="intro">
-        <p>{{ 'BLOG.INTRO.TEXT' | translate }}</p>
-    </section>
+    <section class="diagram-panel">
+        <div class="section-heading">
+            <div>
+                <p class="section-kicker">{{ 'BLOG.DIAGRAM.KICKER' | translate }}</p>
+                <h2>{{ 'BLOG.DIAGRAM.TITLE' | translate }}</h2>
+            </div>
+            <p>{{ 'BLOG.DIAGRAM.CAPTION' | translate }}</p>
+        </div>
 
-    <!-- DIAGRAMA -->
-    <section class="architecture-diagram">
-        <h2>{{ 'BLOG.DIAGRAM.TITLE' | translate }}</h2>
         <img
             src="resources/images/arquitectura.png"
             [alt]="'BLOG.DIAGRAM.ALT' | translate"
-            width="50%" style="padding: 3rem;"
+            class="diagram-image"
         />
-        <p>{{ 'BLOG.DIAGRAM.CAPTION' | translate }}</p>
     </section>
 
-    <!-- GRID TECNOLOGÍAS -->
-    <section class="tech-grid">
+    <section class="section-block">
+        <div class="section-heading">
+            <div>
+                <p class="section-kicker">{{ 'BLOG.BACKEND.KICKER' | translate }}</p>
+                <h2>{{ 'BLOG.BACKEND.TITLE' | translate }}</h2>
+            </div>
+            <p>{{ 'BLOG.BACKEND.SUBTITLE' | translate }}</p>
+        </div>
 
-        <article class="tech">
-            <h3>{{ 'BLOG.TECH.AWS.TITLE' | translate }}</h3>
-            <p class="desc">{{ 'BLOG.TECH.AWS.DESC' | translate }}</p>
-            <p class="use">{{ 'BLOG.TECH.AWS.USE' | translate }}</p>
-        </article>
-
-        <article class="tech">
-            <h3>{{ 'BLOG.TECH.INGRESS.TITLE' | translate }}</h3>
-            <p class="desc">{{ 'BLOG.TECH.INGRESS.DESC' | translate }}</p>
-            <p class="use">{{ 'BLOG.TECH.INGRESS.USE' | translate }}</p>
-        </article>
-
-        <article class="tech">
-            <h3>{{ 'BLOG.TECH.KUBERNETES.TITLE' | translate }}</h3>
-            <p class="desc">{{ 'BLOG.TECH.KUBERNETES.DESC' | translate }}</p>
-            <p class="use">{{ 'BLOG.TECH.KUBERNETES.USE' | translate }}</p>
-        </article>
-
-        <article class="tech">
-            <h3>{{ 'BLOG.TECH.MICROSERVICES.TITLE' | translate }}</h3>
-            <p class="desc">{{ 'BLOG.TECH.MICROSERVICES.DESC' | translate }}</p>
-            <p class="use">{{ 'BLOG.TECH.MICROSERVICES.USE' | translate }}</p>
-        </article>
-
-        <article class="tech">
-            <h3>{{ 'BLOG.TECH.AUTH.TITLE' | translate }}</h3>
-            <p class="desc">{{ 'BLOG.TECH.AUTH.DESC' | translate }}</p>
-            <p class="use">{{ 'BLOG.TECH.AUTH.USE' | translate }}</p>
-        </article>
-
-        <article class="tech">
-            <h3>{{ 'BLOG.TECH.CONFIG.TITLE' | translate }}</h3>
-            <p class="desc">{{ 'BLOG.TECH.CONFIG.DESC' | translate }}</p>
-            <p class="use">{{ 'BLOG.TECH.CONFIG.USE' | translate }}</p>
-        </article>
-
+        <div class="tech-grid">
+            @for (card of backendCards; track card.titleKey) {
+                <article class="tech tech--backend">
+                    <h3>{{ card.titleKey | translate }}</h3>
+                    <p class="desc">{{ card.descKey | translate }}</p>
+                    <p class="use">{{ card.noteKey | translate }}</p>
+                </article>
+            }
+        </div>
     </section>
 
-    <!-- FLUJO -->
-    <section class="flow">
-        <h2>{{ 'BLOG.FLOW.TITLE' | translate }}</h2>
-        <p>{{ 'BLOG.FLOW.TEXT' | translate }}</p>
+    <section class="section-block">
+        <div class="section-heading">
+            <div>
+                <p class="section-kicker">{{ 'BLOG.FRONTEND.KICKER' | translate }}</p>
+                <h2>{{ 'BLOG.FRONTEND.TITLE' | translate }}</h2>
+            </div>
+            <p>{{ 'BLOG.FRONTEND.SUBTITLE' | translate }}</p>
+        </div>
+
+        <div class="tech-grid">
+            @for (card of frontendCards; track card.titleKey) {
+                <article class="tech tech--frontend">
+                    <h3>{{ card.titleKey | translate }}</h3>
+                    <p class="desc">{{ card.descKey | translate }}</p>
+                    <p class="use">{{ card.noteKey | translate }}</p>
+                </article>
+            }
+        </div>
     </section>
 
-    <!-- ESTADO -->
+    <section class="section-block">
+        <div class="section-heading">
+            <div>
+                <p class="section-kicker">{{ 'BLOG.FLOWS.KICKER' | translate }}</p>
+                <h2>{{ 'BLOG.FLOWS.TITLE' | translate }}</h2>
+            </div>
+            <p>{{ 'BLOG.FLOWS.SUBTITLE' | translate }}</p>
+        </div>
+
+        <div class="flow-grid">
+            @for (flow of flowCards; track flow.titleKey) {
+                <article class="flow-card">
+                    <strong>{{ flow.titleKey | translate }}</strong>
+                    <p>{{ flow.descKey | translate }}</p>
+                </article>
+            }
+        </div>
+    </section>
+
+    <section class="section-block">
+        <div class="section-heading">
+            <div>
+                <p class="section-kicker">{{ 'BLOG.HIGHLIGHTS.KICKER' | translate }}</p>
+                <h2>{{ 'BLOG.HIGHLIGHTS.TITLE' | translate }}</h2>
+            </div>
+            <p>{{ 'BLOG.HIGHLIGHTS.SUBTITLE' | translate }}</p>
+        </div>
+
+        <div class="highlight-grid">
+            @for (highlight of highlights; track highlight.titleKey) {
+                <article class="highlight-card">
+                    <strong>{{ highlight.titleKey | translate }}</strong>
+                    <p>{{ highlight.descKey | translate }}</p>
+                </article>
+            }
+        </div>
+    </section>
+
     <section class="roadmap">
-        <h2>{{ 'BLOG.ROADMAP.TITLE' | translate }}</h2>
+        <div class="section-heading section-heading--center">
+            <div>
+                <p class="section-kicker">{{ 'BLOG.CLOSING.KICKER' | translate }}</p>
+                <h2>{{ 'BLOG.CLOSING.TITLE' | translate }}</h2>
+            </div>
+            <p>{{ 'BLOG.CLOSING.SUBTITLE' | translate }}</p>
+        </div>
+
         <ul>
-            <li>{{ 'BLOG.ROADMAP.ITEM1' | translate }}</li>
-            <li>{{ 'BLOG.ROADMAP.ITEM2' | translate }}</li>
-            <li>{{ 'BLOG.ROADMAP.ITEM3' | translate }}</li>
-            <li>{{ 'BLOG.ROADMAP.ITEM4' | translate }}</li>
-            <li>{{ 'BLOG.ROADMAP.ITEM5' | translate }}</li>
-            <li>{{ 'BLOG.ROADMAP.ITEM6' | translate }}</li>
+            <li>{{ 'BLOG.CLOSING.ITEM1' | translate }}</li>
+            <li>{{ 'BLOG.CLOSING.ITEM2' | translate }}</li>
+            <li>{{ 'BLOG.CLOSING.ITEM3' | translate }}</li>
+            <li>{{ 'BLOG.CLOSING.ITEM4' | translate }}</li>
+            <li>{{ 'BLOG.CLOSING.ITEM5' | translate }}</li>
+            <li>{{ 'BLOG.CLOSING.ITEM6' | translate }}</li>
         </ul>
     </section>
-
 </div>

@@ -1,74 +1,87 @@
 <div class="order-history">
-  <div class="header">
+  <section class="page-hero">
     <div>
-      <h1>My orders</h1>
-      <p>Your order history. Orders that are not completed are highlighted.</p>
+      <p class="eyebrow">{{ 'ORDER_HISTORY.EYEBROW' | translate }}</p>
+      <h1>{{ 'ORDER_HISTORY.TITLE' | translate }}</h1>
+      <p class="subtitle">{{ 'ORDER_HISTORY.SUBTITLE' | translate }}</p>
     </div>
-  </div>
 
-  <p-table
-    [value]="orders()"
-    [rows]="rows()"
-    [totalRecords]="totalRecords()"
-    [loading]="loading()"
-    [paginator]="true"
-    responsiveLayout="scroll"
-    styleClass="p-datatable-striped"
-    [showCurrentPageReport]="true"
-    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} orders"
-    (onLazyLoad)="onPageChange($event)"
-    [lazy]="true"
-  >
-    <ng-template pTemplate="header">
-      <tr>
-        <th>Order</th>
-        <th>Status</th>
-        <th>Total</th>
-        <th>Created</th>
-        <th>Updated</th>
-        <th>Items</th>
-        <th>Actions</th>
-      </tr>
-    </ng-template>
+    <div class="hero-chip">
+      <span>{{ 'ORDER_HISTORY.HERO_LABEL' | translate }}</span>
+      <strong>{{ totalRecords() }}</strong>
+    </div>
+  </section>
 
-    <ng-template pTemplate="body" let-order>
-      <tr [class.not-completed]="isNotCompleted(order)">
-        <td class="order-id-cell">{{ order.id }}</td>
-        <td>
-          <span class="status-pill" [class.status-pill--completed]="order.status === OrderStatus.COMPLETED">
-            {{ order.status }}
-          </span>
-        </td>
-        <td>{{ order.totalAmount | currency }}</td>
-        <td>{{ order.createdAt | date: 'short' }}</td>
-        <td>{{ order.updatedAt | date: 'short' }}</td>
-        <td>{{ order.items?.length || 0 }}</td>
-        <td>
-          <button
-            pButton
-            type="button"
-            icon="pi pi-eye"
-            class="p-button-rounded p-button-text"
-            (click)="viewOrderDetail(order)"
-            pTooltip="View details"
-            tooltipPosition="left"
-          ></button>
-        </td>
-      </tr>
-    </ng-template>
+  <section class="table-shell">
+    <p-table
+      [value]="orders()"
+      [rows]="rows()"
+      [totalRecords]="totalRecords()"
+      [loading]="loading()"
+      [paginator]="true"
+      responsiveLayout="scroll"
+      styleClass="p-datatable-striped history-table"
+      [showCurrentPageReport]="true"
+      [currentPageReportTemplate]="'ORDER_HISTORY.PAGE_REPORT' | translate"
+      (onLazyLoad)="onPageChange($event)"
+      [lazy]="true"
+    >
+      <ng-template pTemplate="header">
+        <tr>
+          <th>{{ 'ORDER_HISTORY.TABLE.ORDER' | translate }}</th>
+          <th>{{ 'ORDER_HISTORY.TABLE.STATUS' | translate }}</th>
+          <th>{{ 'ORDER_HISTORY.TABLE.TOTAL' | translate }}</th>
+          <th>{{ 'ORDER_HISTORY.TABLE.CREATED' | translate }}</th>
+          <th>{{ 'ORDER_HISTORY.TABLE.UPDATED' | translate }}</th>
+          <th>{{ 'ORDER_HISTORY.TABLE.ITEMS' | translate }}</th>
+          <th>{{ 'GENERAL.ACTIONS' | translate }}</th>
+        </tr>
+      </ng-template>
 
-    <ng-template pTemplate="emptymessage">
-      <tr>
-        <td colspan="7" class="empty-state">You do not have orders yet.</td>
-      </tr>
-    </ng-template>
+      <ng-template pTemplate="body" let-order>
+        <tr [class.not-completed]="isNotCompleted(order)">
+          <td class="order-id-cell">#{{ order.id }}</td>
+          <td>
+            <span class="status-pill" [class.status-pill--completed]="order.status === OrderStatus.COMPLETED">
+              {{ order.status }}
+            </span>
+          </td>
+          <td>{{ order.totalAmount | currency }}</td>
+          <td>{{ order.createdAt | date: 'short' }}</td>
+          <td>{{ order.updatedAt | date: 'short' }}</td>
+          <td>{{ order.items?.length || 0 }}</td>
+          <td class="action-cell">
+            <button
+              pButton
+              type="button"
+              icon="pi pi-eye"
+              class="p-button-rounded p-button-text action-icon"
+              (click)="viewOrderDetail(order)"
+              [pTooltip]="'ORDER_HISTORY.VIEW_DETAILS' | translate"
+              tooltipPosition="left"
+            ></button>
+          </td>
+        </tr>
+      </ng-template>
 
-    <ng-template pTemplate="loadingbody">
-      <tr>
-        <td colspan="7">
-          <p-skeleton height="2rem"></p-skeleton>
-        </td>
-      </tr>
-    </ng-template>
-  </p-table>
+      <ng-template pTemplate="emptymessage">
+        <tr>
+          <td colspan="7">
+            <div class="empty-state">
+              <i class="pi pi-inbox"></i>
+              <p>{{ 'ORDER_HISTORY.EMPTY' | translate }}</p>
+            </div>
+          </td>
+        </tr>
+      </ng-template>
+
+      <ng-template pTemplate="loadingbody">
+        <tr>
+          <td colspan="7">
+            <p-skeleton height="2rem"></p-skeleton>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </section>
 </div>

@@ -8,6 +8,7 @@ import { TooltipModule } from 'primeng/tooltip';
 import { UserService } from '../../../core/services/api/user.service';
 import { UserDTO } from '../../../core/models/user.model';
 import { TranslatePipe } from '../../../shared/pipes/translate.pipe';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-management',
@@ -26,7 +27,7 @@ import { TranslatePipe } from '../../../shared/pipes/translate.pipe';
 })
 export class UserManagement implements OnInit {
   private userService = inject(UserService);
-
+  private router = inject(Router);
   // Estado reactivo
   users = signal<UserDTO[]>([]);
   totalRecords = signal(0);
@@ -68,5 +69,9 @@ export class UserManagement implements OnInit {
     const sortOrder = event.sortOrder === 1 ? 'asc' : 'desc';
 
     this.loadUsers(page, pageSize, `${sortField},${sortOrder}`);
+  }
+
+  viewUserDetail(user: UserDTO): void {
+    this.router.navigate(['/userdetail'], { state: { user } });
   }
 }

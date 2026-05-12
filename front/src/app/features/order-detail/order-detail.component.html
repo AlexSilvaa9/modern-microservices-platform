@@ -1,39 +1,53 @@
 <div class="order-detail-shell">
-  <div class="detail-header">
-    <button class="back-btn" (click)="goBack()">← Back</button>
-    <h1>Order Details</h1>
-  </div>
+  <header class="detail-hero">
+    <button class="back-btn" (click)="goBack()">← {{ 'ORDER_DETAIL.BACK' | translate }}</button>
+
+    <div class="hero-copy">
+      <p class="eyebrow">{{ 'ORDER_DETAIL.EYEBROW' | translate }}</p>
+      <h1>{{ 'ORDER_DETAIL.TITLE' | translate }}</h1>
+      <p class="subtitle">{{ 'ORDER_DETAIL.SUBTITLE' | translate }}</p>
+    </div>
+
+    @if (order()) {
+      <div class="hero-pill">
+        <span>{{ 'ORDER_DETAIL.STATUS' | translate }}</span>
+        <strong [class]="'status-badge ' + getStatusClass(order()!.status)">{{ order()!.status }}</strong>
+      </div>
+    }
+  </header>
 
   @if (error()) {
     <div class="error-state">
+      <div class="state-icon">⚠</div>
       <p>{{ error() }}</p>
-      <button class="btn btn-secondary" (click)="goBack()">Go back</button>
+      <button class="btn btn-secondary" (click)="goBack()">{{ 'ORDER_DETAIL.GO_BACK' | translate }}</button>
     </div>
   } @else if (order()) {
     <div class="detail-container">
-      <div class="order-summary">
+      <section class="order-summary">
         <div class="summary-item">
-          <span class="label">Order ID</span>
-          <span class="value">{{ order()!.id }}</span>
+          <span class="label">{{ 'ORDER_DETAIL.ORDER_ID' | translate }}</span>
+          <span class="value">#{{ order()!.id }}</span>
         </div>
         <div class="summary-item">
-          <span class="label">Status</span>
-          <span class="value" [class]="'status-badge ' + getStatusClass(order()!.status)">
-            {{ order()!.status }}
-          </span>
-        </div>
-        <div class="summary-item">
-          <span class="label">Customer</span>
+          <span class="label">{{ 'ORDER_DETAIL.CUSTOMER' | translate }}</span>
           <span class="value">{{ order()!.userEmail }}</span>
         </div>
         <div class="summary-item">
-          <span class="label">Created</span>
+          <span class="label">{{ 'ORDER_DETAIL.CREATED' | translate }}</span>
           <span class="value">{{ order()!.createdAt | date: 'medium' }}</span>
         </div>
-      </div>
+        <div class="summary-item summary-item--highlight">
+          <span class="label">{{ 'ORDER_DETAIL.TOTAL' | translate }}</span>
+          <span class="value">{{ order()!.totalAmount | currency }}</span>
+        </div>
+      </section>
 
-      <div class="order-items">
-        <h2>Items</h2>
+      <section class="order-items">
+        <div class="section-heading">
+          <h2>{{ 'ORDER_DETAIL.ITEMS' | translate }}</h2>
+          <span>{{ order()!.items.length }} {{ 'ORDER_DETAIL.LINES' | translate }}</span>
+        </div>
         <div class="items-list">
           @for (item of order()!.items; track item.id) {
             <div class="item-card">
@@ -44,7 +58,7 @@
                 <h3>{{ item.productSnapshotEntity.name }}</h3>
                 <p class="item-desc">{{ item.productSnapshotEntity.description }}</p>
                 <div class="item-meta">
-                  <span class="qty">Qty: {{ item.quantity }}</span>
+                  <span class="qty">{{ 'ORDER_DETAIL.QUANTITY' | translate }}: {{ item.quantity }}</span>
                   <span class="price">{{ item.productSnapshotEntity.price | currency }}</span>
                 </div>
               </div>
@@ -54,24 +68,24 @@
             </div>
           }
         </div>
-      </div>
+      </section>
 
-      <div class="order-summary-footer">
+      <section class="order-summary-footer">
         <div class="total-row">
-          <span>Total Amount</span>
+          <span>{{ 'ORDER_DETAIL.TOTAL_AMOUNT' | translate }}</span>
           <span class="total-amount">{{ order()!.totalAmount | currency }}</span>
         </div>
         @if (order()!.paymentIntentId) {
           <div class="payment-row">
-            <span>Payment Intent</span>
+            <span>{{ 'ORDER_DETAIL.PAYMENT_INTENT' | translate }}</span>
             <span class="payment-id">{{ order()!.paymentIntentId }}</span>
           </div>
         }
-      </div>
+      </section>
 
       @if (isAdmin() && !isCompleted(order()!)) {
         <div class="admin-actions">
-          <button pButton type="button" label="Mark as Completed" icon="pi pi-check" (click)="completeOrder()"></button>
+          <button pButton type="button" [label]="'ORDER_DETAIL.MARK_COMPLETED' | translate" icon="pi pi-check" (click)="completeOrder()"></button>
         </div>
       }
     </div>

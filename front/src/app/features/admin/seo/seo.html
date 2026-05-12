@@ -1,12 +1,12 @@
 <div class="seo-container">
   <div class="seo-header">
-    <h1>Analytics Dashboard</h1>
-    <p class="subtitle">Visualización de eventos y visitas de tu aplicación</p>
+    <h1>{{ 'SEO.TITLE' | translate }}</h1>
+    <p class="subtitle">{{ 'SEO.SUBTITLE' | translate }}</p>
   </div>
 
   <!-- Loading state -->
   <div *ngIf="isLoading()" class="loading-state">
-    <p>Cargando datos de analytics...</p>
+    <p>{{ 'SEO.LOADING' | translate }}</p>
   </div>
 
   <!-- Tarjetas de métricas -->
@@ -14,7 +14,7 @@
     <p-card class="metric-card">
       <div class="metric-content">
         <span class="metric-value">{{ summary()?.totalVisits | number }}</span>
-        <span class="metric-label">Total de Visitas</span>
+        <span class="metric-label">{{ 'SEO.TOTAL_VISITS' | translate }}</span>
       </div>
       <div class="metric-icon visits">
         <i class="pi pi-eye"></i>
@@ -24,7 +24,7 @@
     <p-card class="metric-card">
       <div class="metric-content">
         <span class="metric-value">{{ pages().length }}</span>
-        <span class="metric-label">Páginas Visitadas</span>
+        <span class="metric-label">{{ 'SEO.PAGES_VISITED' | translate }}</span>
       </div>
       <div class="metric-icon pages">
         <i class="pi pi-file"></i>
@@ -34,7 +34,7 @@
     <p-card class="metric-card">
       <div class="metric-content">
         <span class="metric-value">{{ summary()?.visitsByMonth?.length || 0 }}</span>
-        <span class="metric-label">Meses con Datos</span>
+        <span class="metric-label">{{ 'SEO.MONTHS_WITH_DATA' | translate }}</span>
       </div>
       <div class="metric-icon months">
         <i class="pi pi-calendar"></i>
@@ -44,7 +44,7 @@
     <p-card class="metric-card">
       <div class="metric-content">
         <span class="metric-value">{{ getMostVisitedPage() }}</span>
-        <span class="metric-label">Visitas (Top Page)</span>
+        <span class="metric-label">{{ 'SEO.TOP_PAGE_VISITS' | translate }}</span>
       </div>
       <div class="metric-icon trending">
         <i class="pi pi-arrow-up"></i>
@@ -58,7 +58,7 @@
     <p-card class="chart-card">
       <ng-template pTemplate="header">
         <div class="chart-header">
-          <h3>Visitas por Página</h3>
+          <h3>{{ 'SEO.VISITS_BY_PAGE' | translate }}</h3>
           <i class="pi pi-chart-bar"></i>
         </div>
       </ng-template>
@@ -76,7 +76,7 @@
     <p-card class="chart-card">
       <ng-template pTemplate="header">
         <div class="chart-header">
-          <h3>Visitas por Mes</h3>
+          <h3>{{ 'SEO.VISITS_BY_MONTH' | translate }}</h3>
           <i class="pi pi-chart-line"></i>
         </div>
       </ng-template>
@@ -97,7 +97,7 @@
   <p-card class="details-card full-width" *ngIf="!isLoading()">
     <ng-template pTemplate="header">
       <div class="chart-header">
-        <h3>Detalle de Páginas Visitadas</h3>
+        <h3>{{ 'SEO.PAGE_DETAILS' | translate }}</h3>
         <i class="pi pi-list"></i>
       </div>
     </ng-template>
@@ -105,12 +105,12 @@
       <div class="page-item" *ngFor="let page of pages()">
         <div class="page-info">
           <span class="page-title">{{ page.path }}</span>
-          <span class="page-slug">Ruta visitada</span>
+          <span class="page-slug">{{ 'SEO.VISITED_ROUTE' | translate }}</span>
         </div>
         <div class="page-stats">
           <span class="stat">
             <i class="pi pi-eye"></i>
-            {{ page.visits | number }} visitas
+            {{ page.visits | number }} {{ 'SEO.VISITS_SUFFIX' | translate }}
           </span>
         </div>
       </div>

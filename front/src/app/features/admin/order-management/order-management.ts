@@ -8,11 +8,12 @@ import { TableModule } from 'primeng/table';
 import { TooltipModule } from 'primeng/tooltip';
 import { OrderDTO, OrderStatus } from '../../../core/models/order.model';
 import { OrderService } from '../../../core/services/api/order.service';
+import { TranslatePipe } from '../../../shared/pipes/translate.pipe';
 
 @Component({
   selector: 'app-order-management',
   standalone: true,
-  imports: [CommonModule, FormsModule, TableModule, ButtonModule, SkeletonModule, TooltipModule],
+  imports: [CommonModule, FormsModule, TableModule, ButtonModule, SkeletonModule, TooltipModule, TranslatePipe],
   templateUrl: './order-management.html',
   styleUrl: './order-management.scss'
 })

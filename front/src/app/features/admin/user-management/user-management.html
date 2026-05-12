@@ -1,70 +1,101 @@
 <div class="user-management">
-  <div class="header">
-    <h1>{{ 'SIDEBAR.USERS' | translate }}</h1>
-  </div>
+  <section class="page-hero">
+    <div>
+      <p class="eyebrow">{{ 'USER_MANAGEMENT.EYEBROW' | translate }}</p>
+      <h1>{{ 'SIDEBAR.USERS' | translate }}</h1>
+      <p class="subtitle">{{ 'USER_MANAGEMENT.SUBTITLE' | translate }}</p>
+    </div>
 
-  <!-- Tabla paginada de usuarios con PrimeNG -->
-  <p-table
-    [value]="users()"
-    [rows]="rows()"
-    [totalRecords]="totalRecords()"
-    [loading]="loading()"
-    [paginator]="true"
-    [globalFilterFields]="['name', 'email', 'username']"
-    responsiveLayout="scroll"
-    styleClass="p-datatable-striped"
-    currentPageReportTemplate="{{ 'USERS.PAGE_REPORT' | translate }}"
-    [showCurrentPageReport]="true"
-    (onLazyLoad)="onPageChange($event)"
-    [lazy]="true"
-  >
-    <!-- Columna: ID -->
-    <ng-template pTemplate="header">
-      <tr>
-        <th pSortableColumn="username">
-          {{ 'REGISTER.USERNAME' | translate }}
-          <p-sortIcon field="username"></p-sortIcon>
-        </th>
-        <th pSortableColumn="email">
-          {{ 'LOGIN.EMAIL' | translate }}
-          <p-sortIcon field="email"></p-sortIcon>
-        </th>
-        <th pSortableColumn="roles">
-          {{ 'PROFILE.ROLES' | translate }}
-        </th>
-      </tr>
-    </ng-template>
+    <div class="hero-metrics">
+      <div class="metric-card">
+        <span class="metric-label">{{ 'USER_MANAGEMENT.LOADED' | translate }}</span>
+        <strong>{{ users().length }}</strong>
+      </div>
+      <div class="metric-card accent">
+        <span class="metric-label">{{ 'USER_MANAGEMENT.TOTAL' | translate }}</span>
+        <strong>{{ totalRecords() }}</strong>
+      </div>
+    </div>
+  </section>
 
-    <!-- Body de la tabla -->
-    <ng-template pTemplate="body" let-user>
-      <tr>
-        <td>{{ user.username }}</td>
-        <td>{{ user.email }}</td>
-        <td>
-          <span *ngFor="let role of user.roles; let last = last">
-            {{ role }}<span *ngIf="!last">, </span>
-          </span>
-        </td>
-       
-      </tr>
-    </ng-template>
+  <section class="table-shell">
+    <p-table
+      [value]="users()"
+      [rows]="rows()"
+      [totalRecords]="totalRecords()"
+      [loading]="loading()"
+      [paginator]="true"
+      [globalFilterFields]="['name', 'email', 'username']"
+      responsiveLayout="scroll"
+      styleClass="p-datatable-striped user-table"
+      currentPageReportTemplate="{{ 'USERS.PAGE_REPORT' | translate }}"
+      [showCurrentPageReport]="true"
+      (onLazyLoad)="onPageChange($event)"
+      [lazy]="true"
+    >
+      <ng-template pTemplate="header">
+        <tr>
+          <th pSortableColumn="username">
+            {{ 'REGISTER.USERNAME' | translate }}
+            <p-sortIcon field="username"></p-sortIcon>
+          </th>
+          <th pSortableColumn="email">
+            {{ 'LOGIN.EMAIL' | translate }}
+            <p-sortIcon field="email"></p-sortIcon>
+          </th>
+          <th pSortableColumn="roles">
+            {{ 'PROFILE.ROLES' | translate }}
+          </th>
+          <th>{{ 'ACTIONS' | translate }}</th>
+        </tr>
+      </ng-template>
 
-    <!-- Template para cuando está vacío -->
-    <ng-template pTemplate="emptymessage">
-      <tr>
-        <td colspan="5" class="text-center">
-          {{ 'USERS.NO_USERS' | translate }}
-        </td>
-      </tr>
-    </ng-template>
+      <ng-template pTemplate="body" let-user>
+        <tr>
+          <td>
+            <div class="user-cell">
+              <span class="user-avatar">{{ user.username?.charAt(0) || 'U' }}</span>
+              <span>{{ user.username }}</span>
+            </div>
+          </td>
+          <td>{{ user.email }}</td>
+          <td>
+            <div class="role-list">
+              <span *ngFor="let role of user.roles" class="role-chip">{{ role }}</span>
+            </div>
+          </td>
+          <td class="action-cell">
+            <button
+              pButton
+              type="button"
+              icon="pi pi-eye"
+              class="p-button-rounded p-button-text action-icon"
+              (click)="viewUserDetail(user)"
+              pTooltip="{{ 'USER_MANAGEMENT.VIEW_DETAILS' | translate }}"
+              tooltipPosition="left"
+            ></button>
+          </td>
+        </tr>
+      </ng-template>
 
-    <!-- Skeleton loading -->
-    <ng-template pTemplate="loadingbody">
-      <tr>
-        <td colspan="5">
-          <p-skeleton height="2rem"></p-skeleton>
-        </td>
-      </tr>
-    </ng-template>
-  </p-table>
+      <ng-template pTemplate="emptymessage">
+        <tr>
+          <td colspan="4">
+            <div class="empty-state">
+              <i class="pi pi-users"></i>
+              <p>{{ 'USER_MANAGEMENT.EMPTY' | translate }}</p>
+            </div>
+          </td>
+        </tr>
+      </ng-template>
+
+      <ng-template pTemplate="loadingbody">
+        <tr>
+          <td colspan="4">
+            <p-skeleton height="2rem"></p-skeleton>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </section>
 </div>

@@ -5,9 +5,11 @@ import { CardModule } from 'primeng/card';
 import { ButtonModule } from 'primeng/button';
 import { FormsModule } from '@angular/forms';
 import { AnalyticsService } from '../../../core/services/api/analytics.service';
+import { TranslationService } from '../../../core/services/global-state/translation.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { AnalyticsSummaryDTO, MonthlyVisitsDTO, PageVisitsDTO } from '../../../core/models/analytics-summary.model';
+import { TranslatePipe } from '../../../shared/pipes/translate.pipe';
 
 @Component({
   selector: 'app-seo',
@@ -17,13 +19,15 @@ import { AnalyticsSummaryDTO, MonthlyVisitsDTO, PageVisitsDTO } from '../../../c
     ChartModule,
     CardModule,
     ButtonModule,
-    FormsModule
+    FormsModule,
+    TranslatePipe
   ],
   templateUrl: './seo.html',
   styleUrl: './seo.scss',
 })
 export class Seo implements OnInit, OnDestroy {
   private analyticsService = inject(AnalyticsService);
+  private translationService = inject(TranslationService);
   private destroy$ = new Subject<void>();
 
   // Datos de analytics
@@ -85,7 +89,7 @@ export class Seo implements OnInit, OnDestroy {
       labels: pages.map((p: any) => p.path?.substring(0, 20) + (p.path?.length > 20 ? '...' : '')),
       datasets: [
         {
-          label: 'Visitas',
+          label: this.translationService.translate('SEO.CHART_VISITS'),
           data: pages.map((p: any) => p.visits),
           backgroundColor: [
             '#102c58',
@@ -137,7 +141,7 @@ export class Seo implements OnInit, OnDestroy {
       labels: months.map((m: MonthlyVisitsDTO) => m.month),
       datasets: [
         {
-          label: 'Visitas mensuales',
+          label: this.translationService.translate('SEO.CHART_MONTHLY_VISITS'),
             data: months.map((m: MonthlyVisitsDTO) => m.visits),
           borderColor: '#102c58',
           backgroundColor: 'rgba(16, 44, 88, 0.1)',
@@ -226,5 +230,9 @@ export class Seo implements OnInit, OnDestroy {
     const pages = this.pages();
     if (pages.length === 0) return 0;
     return Math.max(...pages.map((p: any) => p.visits));
+  }
+
+  getTopPageVisitsLabel(): string {
+    return `${this.getMostVisitedPage()} ${this.translationService.translate('SEO.VISITS_SUFFIX')}`;
   }
 }

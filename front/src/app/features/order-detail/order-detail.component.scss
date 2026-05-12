@@ -1,45 +1,116 @@
 @import '../../../styles/variables';
 
 .order-detail-shell {
-  padding: 2rem;
-  background: $bg;
   min-height: 100vh;
+  padding: 2rem;
+  background:
+    radial-gradient(circle at top left, rgba($primary-light, 0.16), transparent 32%),
+    radial-gradient(circle at bottom right, rgba($secondary-dark, 0.18), transparent 28%),
+    $bg;
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image: linear-gradient(rgba($primary-color, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba($primary-color, 0.03) 1px, transparent 1px);
+    background-size: 30px 30px;
+    mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.55), transparent 92%);
+  }
 }
 
-.detail-header {
+.detail-hero {
+  position: relative;
+  z-index: 1;
   display: flex;
   align-items: center;
-  gap: 1.5rem;
-  margin-bottom: 2rem;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  padding: 1.5rem;
+  border-radius: $border-radius-xl;
+  background: rgba($surface-0, 0.92);
+  border: 1px solid rgba($border-color-strong, 0.65);
+  box-shadow: $shadow-lg;
+
+  .hero-copy {
+    min-width: 0;
+  }
+
+  .eyebrow {
+    margin: 0 0 0.35rem;
+    color: $primary-light;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-bold;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
 
   h1 {
     margin: 0;
     color: $primary-dark;
-    font-size: 2.2rem;
+    font-size: clamp(1.6rem, 2.5vw, 2.3rem);
+  }
+
+  .subtitle {
+    margin: 0.5rem 0 0;
+    color: $text-secondary;
+    max-width: 46rem;
+    line-height: 1.55;
+  }
+
+  .hero-pill {
+    min-width: 10rem;
+    padding: 1rem 1.1rem;
+    border-radius: $border-radius-lg;
+    background: linear-gradient(135deg, $primary-color, $primary-light);
+    color: $primary-contrast;
+    box-shadow: $shadow-sm;
+
+    span {
+      display: block;
+      margin-bottom: 0.35rem;
+      font-size: $font-size-xs;
+      font-weight: $font-weight-bold;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      opacity: 0.85;
+    }
   }
 }
 
 .back-btn {
-  padding: 0.5rem 1rem;
-  border: none;
-  background: transparent;
+  padding: 0.65rem 1rem;
+  border: 1px solid rgba($border-color-strong, 0.85);
+  background: $surface-0;
   color: $primary-light;
   font-weight: 600;
   cursor: pointer;
-  transition: color $transition-base;
+  border-radius: $border-radius-full;
+  transition: transform $transition-base, border-color $transition-base, color $transition-base, box-shadow $transition-base;
 
   &:hover {
     color: $primary-color;
+    transform: translateY(-1px);
+    border-color: rgba($primary-light, 0.4);
+    box-shadow: $shadow-sm;
   }
 }
 
 .loading-state,
 .error-state {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  justify-items: center;
+  gap: 0.75rem;
   background: rgba($surface-0, 0.95);
   padding: 2rem;
   border-radius: $border-radius-xl;
   text-align: center;
   box-shadow: $shadow-md;
+  border: 1px solid rgba($border-color, 0.85);
 
   p {
     margin: 0 0 1rem;
@@ -48,7 +119,10 @@
 }
 
 .error-state {
-  border-left: 4px solid $error-color;
+  .state-icon {
+    font-size: 2.4rem;
+    color: $error-color;
+  }
 }
 
 .btn {
@@ -70,6 +144,8 @@
 }
 
 .detail-container {
+  position: relative;
+  z-index: 1;
   display: grid;
   gap: 1.5rem;
 }
@@ -82,6 +158,7 @@
   padding: 1.5rem;
   border-radius: $border-radius-xl;
   box-shadow: $shadow-md;
+  border: 1px solid rgba($border-color, 0.85);
 }
 
 .summary-item {
@@ -102,6 +179,17 @@
     font-weight: 600;
     word-break: break-word;
   }
+
+  &--highlight {
+    background: linear-gradient(135deg, rgba($primary-color, 0.12), rgba($primary-light, 0.16));
+    border-radius: $border-radius-lg;
+    padding: 0.9rem;
+
+    .value {
+      font-size: 1.4rem;
+      color: $primary-dark;
+    }
+  }
 }
 
 .status-badge {
@@ -115,12 +203,12 @@
 
   &.status-completed {
     background: rgba($success-color, 0.15);
-    color: #22c55e;
+    color: #166534;
   }
 
   &.status-shipped {
     background: rgba($info-color, 0.15);
-    color: #3b82f6;
+    color: #1d4ed8;
   }
 
   &.status-paid {
@@ -130,7 +218,7 @@
 
   &.status-pending {
     background: rgba($warning-color, 0.15);
-    color: #f59e0b;
+    color: #a16207;
   }
 
   &.status-error {
@@ -149,11 +237,26 @@
   padding: 1.5rem;
   border-radius: $border-radius-xl;
   box-shadow: $shadow-md;
+  border: 1px solid rgba($border-color, 0.85);
 
-  h2 {
-    margin: 0 0 1rem;
-    color: $primary-dark;
-    font-size: 1.3rem;
+  .section-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+
+    h2 {
+      margin: 0;
+      color: $primary-dark;
+      font-size: 1.3rem;
+    }
+
+    span {
+      color: $text-secondary;
+      font-size: $font-size-sm;
+      font-weight: $font-weight-semibold;
+    }
   }
 }
 
@@ -232,6 +335,7 @@
   font-weight: 700;
   color: $primary-color;
   text-align: right;
+  padding-top: 0.2rem;
 }
 
 .order-summary-footer {
@@ -239,7 +343,7 @@
   padding: 1.5rem;
   border-radius: $border-radius-xl;
   box-shadow: $shadow-md;
-  border-top: 2px solid $border-color;
+  border: 1px solid rgba($border-color, 0.85);
 }
 
 .total-row {
@@ -303,6 +407,11 @@
 }
 
 @media (max-width: 768px) {
+  .detail-hero {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
   .item-card {
     grid-template-columns: 80px minmax(0, 1fr);
     gap: 1rem;
@@ -318,5 +427,14 @@
   .item-image {
     width: 80px;
     height: 80px;
+  }
+
+  .item-meta {
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+
+  .admin-actions {
+    flex-direction: column;
   }
 }

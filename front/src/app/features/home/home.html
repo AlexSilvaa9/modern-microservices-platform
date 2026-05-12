@@ -1,7 +1,7 @@
 <section class="home-shell">
   <div class="hero-panel">
     <div class="hero-copy">
-      <p class="eyebrow">Microservices Front</p>
+      <p class="eyebrow">{{ 'HOME.EYEBROW' | translate }}</p>
       <h1>{{ 'HOME.WELCOME_BACK' | translate }}</h1>
       <p class="subtitle">{{ 'HOME.SUBTITLE' | translate }}</p>
 
@@ -13,10 +13,12 @@
 
     <div class="hero-stats">
       <div class="stat-card">
+        <span class="stat-kicker">{{ 'HOME.CARD1_KICKER' | translate }}</span>
         <span class="stat-value">{{ cartCount() }}</span>
         <span class="stat-label">{{ 'HOME.CART_ITEMS' | translate }}</span>
       </div>
       <div class="stat-card accent">
+        <span class="stat-kicker">{{ 'HOME.CARD2_KICKER' | translate }}</span>
         <span class="stat-value">{{ cartTotal() | currency }}</span>
         <span class="stat-label">{{ 'HOME.CART_TOTAL' | translate }}</span>
       </div>
@@ -38,14 +40,24 @@
       <a routerLink="/cart">{{ 'HOME.VIEW_ALL' | translate }}</a>
     </div>
 
-    <div class="preview-list">
-      @for (item of cartItems(); track item.product.productId) {
-        <div class="preview-item">
-          <div>
-            <strong>{{ item.product.name }}</strong>
-            <p>{{ item.product.description }}</p>
+    <div class="preview-list" [class.preview-list--empty]="!cartItems().length">
+      @if (cartItems().length) {
+        @for (item of cartItems(); track item.product.productId) {
+          <div class="preview-item">
+            <div>
+              <strong>{{ item.product.name }}</strong>
+              <p>{{ item.product.description }}</p>
+            </div>
+            <span>{{ item.quantity }} x {{ item.product.price | currency }}</span>
           </div>
-          <span>{{ item.quantity }} x {{ item.product.price | currency }}</span>
+        }
+      } @else {
+        <div class="preview-empty">
+          <i class="pi pi-shopping-cart"></i>
+          <div>
+            <strong>{{ 'HOME.PREVIEW_EMPTY_TITLE' | translate }}</strong>
+            <p>{{ 'HOME.PREVIEW_EMPTY_TEXT' | translate }}</p>
+          </div>
         </div>
       }
     </div>

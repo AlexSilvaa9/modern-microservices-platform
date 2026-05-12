@@ -1,9 +1,234 @@
 @import '../../../../styles/variables';
 
 .user-management {
-  padding: 2rem;
-  background: $bg;
+  position: relative;
+  min-height: 100vh;
+  padding: clamp(1.25rem, 3vw, 2.5rem);
+  background:
+    radial-gradient(circle at top left, rgba($primary-light, 0.15), transparent 26%),
+    radial-gradient(circle at top right, rgba($secondary-dark, 0.16), transparent 24%),
+    linear-gradient(180deg, #f8fbff 0%, #edf4fb 100%);
   min-height: 100vh;
 
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image: linear-gradient(rgba($primary-color, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba($primary-color, 0.03) 1px, transparent 1px);
+    background-size: 30px 30px;
+    mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.55), transparent 90%);
+  }
 
+  .page-hero,
+  .table-shell {
+    position: relative;
+    z-index: 1;
+  }
+
+  .page-hero {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1.25rem;
+    padding: 1.5rem;
+    border-radius: $border-radius-xl;
+    border: 1px solid rgba($border-color-strong, 0.65);
+    background: rgba($surface-0, 0.9);
+    box-shadow: $shadow-lg;
+
+    .eyebrow {
+      margin: 0 0 0.35rem;
+      color: $primary-light;
+      font-size: $font-size-xs;
+      font-weight: $font-weight-bold;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      color: $primary-dark;
+      font-size: clamp(1.6rem, 2.5vw, 2.3rem);
+    }
+
+    .subtitle {
+      margin: 0.5rem 0 0;
+      color: $text-secondary;
+      max-width: 48rem;
+      line-height: 1.55;
+    }
+
+    .hero-metrics {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .metric-card {
+      min-width: 9rem;
+      padding: 1rem 1.1rem;
+      border-radius: $border-radius-lg;
+      background: linear-gradient(180deg, $surface-0, $surface-50);
+      border: 1px solid $border-color;
+      box-shadow: $shadow-sm;
+
+      .metric-label {
+        display: block;
+        margin-bottom: 0.35rem;
+        color: $text-muted;
+        font-size: $font-size-xs;
+        font-weight: $font-weight-bold;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+
+      strong {
+        color: $primary-dark;
+        font-size: 1.65rem;
+      }
+
+      &.accent {
+        background: linear-gradient(135deg, $primary-color, $primary-light);
+        border-color: transparent;
+
+        .metric-label,
+        strong {
+          color: $primary-contrast;
+        }
+      }
+    }
+  }
+
+  .table-shell {
+    padding: 1rem;
+    border-radius: $border-radius-xl;
+    border: 1px solid rgba($border-color-strong, 0.65);
+    background: rgba($surface-0, 0.84);
+    box-shadow: $shadow-lg;
+    backdrop-filter: blur(12px);
+  }
+
+  :host ::ng-deep .user-table {
+    .p-datatable-wrapper {
+      border-radius: $border-radius-lg;
+      overflow: hidden;
+    }
+
+    .p-datatable-thead > tr > th {
+      background: linear-gradient(180deg, $surface-50, $surface-100);
+      color: $primary-dark;
+      border-color: $border-color;
+      font-weight: $font-weight-semibold;
+    }
+
+    .p-datatable-tbody > tr {
+      background: $surface-0;
+
+      > td {
+        border-color: $border-color;
+        color: $text-color;
+      }
+
+      &:hover {
+        background: rgba($primary-light, 0.05);
+      }
+    }
+
+    .p-paginator {
+      border-top: 1px solid $border-color;
+      background: $surface-0;
+    }
+  }
+
+  .user-cell {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+
+    .user-avatar {
+      width: 2.1rem;
+      height: 2.1rem;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, $primary-color, $primary-light);
+      color: $primary-contrast;
+      font-weight: $font-weight-bold;
+      box-shadow: $shadow-sm;
+      flex-shrink: 0;
+    }
+  }
+
+  .role-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .role-chip {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.35rem 0.65rem;
+    border-radius: $border-radius-full;
+    background: rgba($primary-color, 0.1);
+    color: $primary-dark;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-semibold;
+    border: 1px solid rgba($primary-color, 0.12);
+  }
+
+  .action-cell {
+    white-space: nowrap;
+  }
+
+  .action-icon.p-button,
+  .action-icon {
+    color: $primary-color;
+  }
+
+  .empty-state {
+    display: grid;
+    place-items: center;
+    gap: 0.5rem;
+    padding: 2rem 1rem;
+    color: $text-secondary;
+
+    i {
+      font-size: 1.6rem;
+      color: $primary-light;
+    }
+
+    p {
+      margin: 0;
+    }
+  }
+
+
+@media (max-width: 900px) {
+  .user-management {
+    .page-hero {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+
+    .hero-metrics {
+      justify-content: flex-start;
+    }
+  }
+}
+
+@media (max-width: 640px) {
+  .user-management {
+    padding: 1rem;
+
+    .page-hero,
+    .table-shell {
+      padding: 1rem;
+      border-radius: $border-radius-lg;
+    }
+  }
+}
 }

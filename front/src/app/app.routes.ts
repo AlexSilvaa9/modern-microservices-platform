@@ -146,9 +146,9 @@ export const routes: Routes = [
         ]
     },
     {
-        path: 'profile',
+        path: 'userdetail',
         canActivate: [authGuard],
-        loadComponent: () => import('./features/profile/profile.component').then(m => m.ProfileComponent)
+        loadComponent: () => import('./features/user-detail/user-detail.component').then(m => m.UserDetailComponent)
     },
     { path: '**', redirectTo: 'es' }
 ];

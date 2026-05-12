@@ -50,7 +50,7 @@
 				}
 			</div>
 
-				<div class="catalog-pagination" aria-label="Catalog pagination">
+				<div class="catalog-pagination" [attr.aria-label]="'CATALOG.PAGINATION' | translate">
 					<div class="pagination-summary">
 						{{ pageStart() }}-{{ pageEnd() }} / {{ totalItems() }}
 					</div>

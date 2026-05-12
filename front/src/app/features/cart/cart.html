@@ -1,7 +1,7 @@
 <section class="cart-shell">
   <header class="cart-hero">
     <div>
-      <p class="eyebrow">Shopping</p>
+      <p class="eyebrow">{{ 'CART.EYEBROW' | translate }}</p>
       <h1>{{ 'CART.TITLE' | translate }}</h1>
       <p class="subtitle">{{ 'CART.SUBTITLE' | translate }}</p>
     </div>
@@ -22,6 +22,10 @@
             </div>
 
             <div class="item-info">
+              <div class="item-topline">
+                <span class="item-category">{{ item.product.category || ('CART.PRODUCT_LABEL' | translate) }}</span>
+                <strong>{{ item.product.price | currency }}</strong>
+              </div>
               <h2>{{ item.product.name }}</h2>
               <p>{{ item.product.description }}</p>
             </div>
@@ -45,6 +49,11 @@
       <aside class="cart-summary">
         <h2>{{ 'CART.SUMMARY' | translate }}</h2>
 
+        <div class="summary-chip">
+          <span>{{ 'CART.SUMMARY_ITEMS' | translate }}</span>
+          <strong>{{ itemCount() }}</strong>
+        </div>
+
         <div class="summary-row total">
           <span>{{ 'CART.TOTAL' | translate }}</span>
           <strong>{{ total() | currency }}</strong>
@@ -58,6 +67,7 @@
     </div>
   } @else {
     <div class="empty-cart">
+      <div class="empty-icon">🛒</div>
       <h2>{{ 'CART.EMPTY_TITLE' | translate }}</h2>
       <p>{{ 'CART.EMPTY_TEXT' | translate }}</p>
       <a routerLink="/home" class="action-btn action-btn--primary action-link">{{ 'CART.GO_HOME' | translate }}</a>

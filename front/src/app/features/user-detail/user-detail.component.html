@@ -1,0 +1,147 @@
+<div class="userdetail-page">
+    <p-toast></p-toast>
+
+    <ng-container *ngIf="user; else emptyState">
+    <section class="hero-panel">
+        <button pButton type="button" icon="pi pi-arrow-left" [label]="'USER_DETAIL.BACK' | translate" class="back-btn p-button-text" (click)="back()"></button>
+
+        <div class="hero-copy">
+            <p class="eyebrow">{{ 'USER_DETAIL.EYEBROW' | translate }}</p>
+            <h1>{{ user!.username }}</h1>
+            <p class="hero-description">
+                {{ user!.email }}
+            </p>
+
+            <div class="hero-badges">
+                <span class="hero-badge hero-badge--primary">{{ selectedRoles.length }} {{ 'USER_DETAIL.ROLES' | translate }}</span>
+                <span class="hero-badge hero-badge--soft" *ngIf="user!.providers?.length">{{ user!.providers?.length }} {{ 'USER_DETAIL.PROVIDERS' | translate }}</span>
+                <span class="hero-badge hero-badge--soft" *ngIf="showActions">{{ 'USER_DETAIL.EDITING_ACTIVE' | translate }}</span>
+            </div>
+        </div>
+
+        <div class="hero-avatar" *ngIf="user!.imageUrl; else emptyAvatar">
+            <img [src]="user!.imageUrl" alt="avatar" />
+        </div>
+
+        <ng-template #emptyAvatar>
+            <div class="hero-avatar hero-avatar--empty">
+                <i class="bi bi-person-circle"></i>
+            </div>
+        </ng-template>
+    </section>
+
+    <div class="content-grid">
+        <section class="panel summary-panel">
+            <div class="panel-heading">
+                <div>
+                    <p class="panel-kicker">{{ 'USER_DETAIL.SUMMARY' | translate }}</p>
+                    <h2>{{ 'USER_DETAIL.GENERAL_DATA' | translate }}</h2>
+                </div>
+            </div>
+
+            <div class="info-grid">
+                <article class="info-card">
+                    <span class="info-label">{{ 'USER_DETAIL.EMAIL' | translate }}</span>
+                    <strong class="info-value">{{ user!.email }}</strong>
+                </article>
+
+                <article class="info-card">
+                    <span class="info-label">{{ 'USER_DETAIL.USERNAME' | translate }}</span>
+                    <strong class="info-value">{{ user!.username }}</strong>
+                </article>
+
+                <article class="info-card">
+                    <span class="info-label">{{ 'USER_DETAIL.ID' | translate }}</span>
+                    <strong class="info-value">{{ user!.id || ('USER_DETAIL.NO_ID' | translate) }}</strong>
+                </article>
+
+                <article class="info-card">
+                    <span class="info-label">{{ 'USER_DETAIL.PROVIDERS' | translate }}</span>
+                    <strong class="info-value">{{ user!.providers?.join(', ') || ('USER_DETAIL.NO_PROVIDER' | translate) }}</strong>
+                </article>
+            </div>
+
+            <div class="roles-block">
+                <div class="panel-subheading">
+                    <h3>{{ 'USER_DETAIL.AVAILABLE_ROLES' | translate }}</h3>
+                    <span>{{ selectedRoles.length }}/{{ roleOptions.length }}</span>
+                </div>
+
+                <div class="role-grid">
+                    <button
+                        *ngFor="let role of roleOptions"
+                        type="button"
+                        class="role-chip"
+                        [class.is-active]="isRoleAssigned(role)"
+                        [class.is-editable]="showActions"
+                        [disabled]="!showActions"
+                        (click)="toggleRole(role)">
+                        <span>{{ role }}</span>
+                        <i class="pi" [ngClass]="isRoleAssigned(role) ? 'pi-check' : 'pi-plus'"></i>
+                    </button>
+                </div>
+
+                <p class="role-hint" *ngIf="showActions">{{ 'USER_DETAIL.ROLE_HINT' | translate }}</p>
+                <p class="role-hint role-hint--muted" *ngIf="!showActions">{{ 'USER_DETAIL.READ_ONLY' | translate }}</p>
+            </div>
+        </section>
+
+        <section class="panel editor-panel">
+            <div class="panel-heading">
+                <div>
+                    <p class="panel-kicker">{{ 'USER_DETAIL.EDITING' | translate }}</p>
+                    <h2>{{ 'USER_DETAIL.PROFILE_ACTIONS' | translate }}</h2>
+                </div>
+            </div>
+
+            <form class="detail-form">
+                <div class="field-row">
+                    <div class="field-group">
+                        <label for="username">{{ 'USER_DETAIL.USERNAME' | translate }}</label>
+                        <input pInputText id="username" type="text" [(ngModel)]="editingUsername" name="username" />
+                    </div>
+                    <button pButton type="button" [label]="'USER_DETAIL.SAVE_USERNAME' | translate" icon="pi pi-save" (click)="saveUsername()" [loading]="isProcessing" class="action-btn action-btn--primary"></button>
+                </div>
+
+                <div class="field-row field-row--stacked">
+                    <div class="field-group">
+                        <label>{{ 'USER_DETAIL.EMAIL' | translate }}</label>
+                        <input pInputText type="email" [value]="user!.email" readonly />
+                    </div>
+                </div>
+
+                <div class="field-row field-row--stacked">
+                    <div class="field-group">
+                        <label>{{ 'USER_DETAIL.IMAGE_URL' | translate }}</label>
+                        <input pInputText type="text" [value]="user!.imageUrl || ('USER_DETAIL.NOT_DEFINED' | translate)" readonly />
+                    </div>
+                </div>
+
+                <div class="action-strip" *ngIf="showActions">
+                    <button pButton type="button" [label]="'USER_DETAIL.UPDATE_ROLES' | translate" icon="pi pi-users" (click)="saveRoles()" [loading]="isProcessing" class="action-btn action-btn--secondary"></button>
+                    <button pButton type="button" [label]="'USER_DETAIL.DELETE_USER' | translate" icon="pi pi-trash" (click)="deleteUser()" [loading]="isProcessing" class="action-btn action-btn--danger"></button>
+                </div>
+
+                <div class="note-card" *ngIf="!showActions">
+                    <i class="pi pi-lock"></i>
+                    <div>
+                        <strong>{{ 'USER_DETAIL.READ_ONLY_MODE' | translate }}</strong>
+                        <p>{{ 'USER_DETAIL.READ_ONLY_TEXT' | translate }}</p>
+                    </div>
+                </div>
+            </form>
+        </section>
+    </div>
+    </ng-container>
+
+    <ng-template #emptyState>
+    <section class="empty-state">
+        <div class="empty-card">
+            <i class="pi pi-user"></i>
+            <h2>{{ 'USER_DETAIL.EMPTY_TITLE' | translate }}</h2>
+            <p>{{ 'USER_DETAIL.EMPTY_TEXT' | translate }}</p>
+            <button pButton type="button" [label]="'USER_DETAIL.BACK' | translate" icon="pi pi-arrow-left" (click)="back()" class="action-btn action-btn--primary"></button>
+        </div>
+    </section>
+    </ng-template>
+</div>

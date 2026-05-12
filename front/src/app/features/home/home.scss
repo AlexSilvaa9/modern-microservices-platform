@@ -1,11 +1,27 @@
 @import '../../../styles/variables';
 
 .home-shell {
+  position: relative;
   min-height: 100vh;
-  padding: 2.5rem;
-  background: $bg;
+  padding: clamp(1.25rem, 3vw, 2.5rem);
+  background:
+    radial-gradient(circle at top left, rgba($primary-light, 0.16), transparent 30%),
+    radial-gradient(circle at top right, rgba($secondary-dark, 0.2), transparent 26%),
+    linear-gradient(180deg, #f8fbff 0%, #edf4fb 100%);
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image: linear-gradient(rgba($primary-color, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba($primary-color, 0.03) 1px, transparent 1px);
+    background-size: 30px 30px;
+    mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.55), transparent 92%);
+  }
 
   .hero-panel {
+    position: relative;
+    z-index: 1;
     display: grid;
     grid-template-columns: 1.6fr 1fr;
     gap: 1.5rem;
@@ -24,6 +40,19 @@
 
     .hero-copy {
       padding: 2rem;
+      position: relative;
+
+      &::after {
+        content: '';
+        position: absolute;
+        inset: auto 1.25rem 1.25rem auto;
+        width: 8rem;
+        height: 8rem;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba($primary-light, 0.18), transparent 70%);
+        filter: blur(4px);
+        pointer-events: none;
+      }
 
       .eyebrow {
         margin: 0 0 0.75rem;
@@ -65,8 +94,19 @@
       .stat-card {
         padding: 1.25rem;
         border-radius: $border-radius-lg;
-        background: linear-gradient(135deg, $surface-0, $surface-50);
+        background: linear-gradient(135deg, rgba($surface-0, 0.95), rgba($surface-50, 0.98));
         border: 1px solid $border-color;
+        box-shadow: $shadow-sm;
+
+        .stat-kicker {
+          display: block;
+          margin-bottom: 0.55rem;
+          color: $text-muted;
+          font-size: $font-size-xs;
+          font-weight: $font-weight-bold;
+          letter-spacing: 0.12em;
+          text-transform: uppercase;
+        }
 
         &.accent {
           background: linear-gradient(135deg, $primary-color, $primary-light);
@@ -100,13 +140,22 @@
     grid-template-columns: repeat(3, 1fr);
     gap: 1rem;
     margin-bottom: 1.5rem;
+    position: relative;
+    z-index: 1;
 
     .info-card {
-      padding: 1.25rem;
+      padding: 1.35rem;
       border-radius: $border-radius-lg;
-      background: $surface-0;
-      box-shadow: $shadow-md;
+      background: linear-gradient(180deg, rgba($surface-0, 0.96), rgba($surface-50, 0.95));
+      box-shadow: $shadow-sm;
       border: 1px solid $border-color;
+      transition: transform $transition-base, box-shadow $transition-base, border-color $transition-base;
+
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow: $shadow-md;
+        border-color: rgba($primary-light, 0.25);
+      }
 
       h2 {
         margin: 0 0 0.5rem;
@@ -124,6 +173,8 @@
 
   .cart-preview {
     padding: 1.5rem 2rem;
+    position: relative;
+    z-index: 1;
 
     .section-heading {
       display: flex;
@@ -148,6 +199,10 @@
     .preview-list {
       display: grid;
       gap: 0.75rem;
+
+      &--empty {
+        gap: 0;
+      }
 
       .preview-item {
         display: flex;
@@ -176,6 +231,32 @@
           white-space: nowrap;
         }
       }
+
+      .preview-empty {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        padding: 1rem 1.1rem;
+        border-radius: $border-radius-lg;
+        border: 1px dashed rgba($border-color-strong, 0.8);
+        background: rgba($surface-50, 0.85);
+
+        i {
+          font-size: 1.25rem;
+          color: $primary-light;
+        }
+
+        strong {
+          display: block;
+          color: $text-color;
+        }
+
+        p {
+          margin: 0.2rem 0 0;
+          color: $text-secondary;
+          font-size: $font-size-sm;
+        }
+      }
     }
   }
 }
@@ -200,6 +281,10 @@
     .hero-panel .hero-stats,
     .cart-preview {
       padding: 1.25rem;
+    }
+
+    .hero-panel .hero-copy h1 {
+      max-width: none;
     }
 
     .cart-preview .section-heading {

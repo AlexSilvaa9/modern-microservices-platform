@@ -6,7 +6,7 @@ export const SIDEBAR_MENU: SidebarGroup[] = [
     {
         label: 'SIDEBAR.HOME',
         icon: PrimeIcons.HOME,
-        route: '/'
+        route: '/home'
     },
     {
         label: 'SIDEBAR.BLOG',
