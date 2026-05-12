@@ -3,8 +3,9 @@ package com.microservices.user.service;
 import java.util.Optional;
 import java.util.UUID;
 
-import com.microservices.core.dto.UserDTO;
-import com.microservices.core.dto.enums.IdentityProvider;
+import com.microservices.core.common.exception.NotFoundException;
+import com.microservices.core.common.dto.UserDTO;
+import com.microservices.core.common.dto.enums.IdentityProvider;
 import jakarta.transaction.Transactional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -70,7 +71,7 @@ public class UserService {
      *
      * @param email    the email of the user to update
      * @param provider the identity provider to add
-     * @throws com.microservices.core.exception.NotFoundException if the user is not found
+     * @throws NotFoundException if the user is not found
      */
     @Transactional
     public void addProvider(String email, IdentityProvider provider){

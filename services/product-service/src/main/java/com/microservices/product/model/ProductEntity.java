@@ -14,14 +14,16 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.envers.Audited;
 
 /**
  * JPA Entity representing a product in the catalog database.
  */
-@Getter
-@Setter
+@Audited
 @Entity
 @Table(name = "product")
+@Getter
+@Setter
 public class ProductEntity {
 
     /** The internal unique identifier of the product. */

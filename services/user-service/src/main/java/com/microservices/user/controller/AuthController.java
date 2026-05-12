@@ -1,6 +1,6 @@
 package com.microservices.user.controller;
 
-import com.microservices.core.dto.BaseApiResponse;
+import com.microservices.core.common.dto.BaseApiResponse;
 import com.microservices.user.model.RefreshToken;
 
 import com.microservices.user.service.RefreshTokenService;

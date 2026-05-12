@@ -20,8 +20,8 @@
         <module name="core" />
         <module name="product-service" />
         <module name="cart-service" />
-        <module name="order-service" />
         <module name="user-service" />
+        <module name="order-service" />
         <module name="mail-service" />
       </profile>
     </annotationProcessing>
@@ -31,5 +31,15 @@
       <module name="gateway-service" target="17" />
       <module name="log-service" target="17" />
     </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="cart-service" options="-parameters" />
+      <module name="core" options="-parameters" />
+      <module name="mail-service" options="-parameters" />
+      <module name="order-service" options="-parameters" />
+      <module name="product-service" options="-parameters" />
+      <module name="user-service" options="-parameters" />
+    </option>
   </component>
 </project>

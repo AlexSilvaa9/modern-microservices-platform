@@ -4,17 +4,19 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
-import com.microservices.core.dto.enums.IdentityProvider;
-import com.microservices.core.dto.enums.Role;
+import com.microservices.core.common.dto.enums.IdentityProvider;
+import com.microservices.core.common.dto.enums.Role;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.envers.Audited;
 
 
 /**
  * JPA Entity representing a user in the system database.
  * Holds authentication credentials, roles, and status flags required by Spring Security.
  */
+@Audited
 @Entity
 @Getter
 @Setter

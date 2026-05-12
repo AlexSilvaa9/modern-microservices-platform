@@ -1,9 +1,9 @@
 package com.microservices.user.controller;
 
-import com.microservices.core.dto.BaseApiResponse;
-import com.microservices.core.dto.UserDTO;
-import com.microservices.core.dto.enums.IdentityProvider;
-import com.microservices.core.dto.enums.Role;
+import com.microservices.core.common.dto.BaseApiResponse;
+import com.microservices.core.common.dto.UserDTO;
+import com.microservices.core.common.dto.enums.IdentityProvider;
+import com.microservices.core.common.dto.enums.Role;
 import com.microservices.user.dto.DataBaseRegistrationRequest;
 import com.microservices.user.service.AuthService;
 

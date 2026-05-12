@@ -3,8 +3,8 @@ package com.microservices.user.dao;
 import java.util.Optional;
 import java.util.UUID;
 
-import com.microservices.core.dto.enums.IdentityProvider;
-import com.microservices.core.exception.NotFoundException;
+import com.microservices.core.common.dto.enums.IdentityProvider;
+import com.microservices.core.common.exception.NotFoundException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;

@@ -1,8 +1,7 @@
 package com.microservices.mail.service;
 
-import com.microservices.core.dto.MailBatchRequestDTO;
-import com.microservices.core.dto.UserDTO;
-import com.microservices.core.dto.order.OrderDTO;
+import com.microservices.core.common.dto.UserDTO;
+import com.microservices.core.common.dto.order.OrderDTO;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
 

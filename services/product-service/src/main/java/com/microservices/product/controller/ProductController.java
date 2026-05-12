@@ -1,8 +1,8 @@
 package com.microservices.product.controller;
 
 import com.microservices.product.service.ProductService;
-import com.microservices.core.dto.BaseApiResponse;
-import com.microservices.core.dto.ProductDTO;
+import com.microservices.core.common.dto.BaseApiResponse;
+import com.microservices.core.common.dto.ProductDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;

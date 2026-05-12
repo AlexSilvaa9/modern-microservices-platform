@@ -1,34 +1,20 @@
 package com.microservices.user.controller;
 
-import com.microservices.core.dto.BaseApiResponse;
-import com.microservices.core.dto.UserDTO;
-import com.microservices.core.dto.enums.IdentityProvider;
-import com.microservices.core.dto.enums.Role;
-import com.microservices.user.dto.DataBaseRegistrationRequest;
-import com.microservices.user.model.RefreshToken;
-import com.microservices.user.service.AuthService;
 import com.microservices.user.service.GoogleAuthService;
-import com.microservices.user.service.RefreshTokenService;
-import com.microservices.user.dto.DataBaseLoginRequest;
 import com.microservices.user.dto.AuthDTO;
 
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 
-import org.jspecify.annotations.NullMarked;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseCookie;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 
 import java.io.IOException;
-import java.util.Collections;
 import java.util.Objects;
 
 /**

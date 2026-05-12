@@ -1,8 +1,8 @@
 package com.microservices.user.service;
 
-import com.microservices.core.dto.enums.IdentityProvider;
-import com.microservices.core.dto.enums.Role;
-import com.microservices.core.security.jwt.JwtService;
+import com.microservices.core.common.dto.enums.IdentityProvider;
+import com.microservices.core.common.dto.enums.Role;
+import com.microservices.core.common.security.jwt.JwtService;
 import com.microservices.user.dto.AuthDTO;
 import com.microservices.user.mapper.UserMapper;
 import com.microservices.user.model.RefreshToken;

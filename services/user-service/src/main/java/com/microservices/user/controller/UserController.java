@@ -1,8 +1,8 @@
 package com.microservices.user.controller;
 
 
-import com.microservices.core.dto.BaseApiResponse;
-import com.microservices.core.dto.UserDTO;
+import com.microservices.core.common.dto.BaseApiResponse;
+import com.microservices.core.common.dto.UserDTO;
 
 import com.microservices.user.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;

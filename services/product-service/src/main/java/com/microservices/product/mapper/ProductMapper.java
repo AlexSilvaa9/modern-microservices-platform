@@ -1,6 +1,6 @@
 package com.microservices.product.mapper;
 
-import com.microservices.core.dto.ProductDTO;
+import com.microservices.core.common.dto.ProductDTO;
 import org.mapstruct.Mapper;
 
 import com.microservices.product.model.ProductEntity;

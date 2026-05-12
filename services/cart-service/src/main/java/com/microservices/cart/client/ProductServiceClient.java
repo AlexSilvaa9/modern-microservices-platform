@@ -1,6 +1,6 @@
 package com.microservices.cart.client;
 
-import com.microservices.core.dto.ProductDTO;
+import com.microservices.core.common.dto.ProductDTO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 

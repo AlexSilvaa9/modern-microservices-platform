@@ -10,7 +10,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
  */
 @SpringBootApplication(
         scanBasePackages = {
-                "com.microservices.core",
+                "com.microservices.core.common",
                 "com.microservices.cart"
         }
 )

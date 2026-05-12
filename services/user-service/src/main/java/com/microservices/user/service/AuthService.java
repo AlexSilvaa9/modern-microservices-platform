@@ -1,10 +1,10 @@
 package com.microservices.user.service;
 
-import com.microservices.core.dto.UserDTO;
-import com.microservices.core.dto.enums.IdentityProvider;
-import com.microservices.core.exception.BadRequestException;
-import com.microservices.core.exception.UserAlreadyExistsException;
-import com.microservices.core.security.jwt.JwtService;
+import com.microservices.core.common.dto.UserDTO;
+import com.microservices.core.common.dto.enums.IdentityProvider;
+import com.microservices.core.common.exception.BadRequestException;
+import com.microservices.core.common.exception.UserAlreadyExistsException;
+import com.microservices.core.common.security.jwt.JwtService;
 import com.microservices.user.dao.UserDAO;
 import com.microservices.user.dto.DataBaseLoginRequest;
 import com.microservices.user.dto.AuthDTO;

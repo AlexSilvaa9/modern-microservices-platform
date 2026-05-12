@@ -9,7 +9,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  */
 @SpringBootApplication(
         scanBasePackages = {
-                "com.microservices.core",
+                "com.microservices.core.common",
                 "com.microservices.mail"
         }
 )

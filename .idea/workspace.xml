@@ -4,12 +4,87 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5e77696f-e307-4867-83b6-44be6a0bf308" name="Changes" comment="feat: implementado servicio de pedidos order-service">
-      <change afterPath="$PROJECT_DIR$/services/order-service/src/main/java/com/microservices/order/model/IdempotentProcessedEventEntity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/services/order-service/src/main/java/com/microservices/order/repository/IdempotentProcessedEventEntityRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/services/order-service/src/main/java/com/microservices/order/service/IdempotencyService.java" afterDir="false" />
+    <list default="true" id="5e77696f-e307-4867-83b6-44be6a0bf308" name="Changes" comment="feat: implementado servicio idempotencia para transacciones críticas">
+      <change afterPath="$PROJECT_DIR$/core/src/main/java/com/microservices/core/audit/AuditRevisionEntity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/src/main/java/com/microservices/core/audit/AuditRevisionListener.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/src/main/java/com/microservices/core/common/exception/DuplicatedEventException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/order-service/src/main/java/com/microservices/order/idempotency/aop/Idempotency.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/order-service/src/main/java/com/microservices/order/idempotency/aop/IdempotencyAspect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/order-service/src/main/java/com/microservices/order/service/PaymentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/services/order-service/src/main/java/com/microservices/order/service/PaymentService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/core/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/microservices/core/config/OpenAPIConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/microservices/core/common/config/OpenAPIConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/microservices/core/dto/BaseApiResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/microservices/core/common/dto/BaseApiResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/microservices/core/dto/CartItemDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/microservices/core/common/dto/CartItemDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/microservices/core/dto/MailBatchRequestDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/microservices/core/common/dto/MailBatchRequestDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/microservices/core/dto/ProductDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/microservices/core/common/dto/ProductDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/microservices/core/dto/ShoppingCartDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/microservices/core/common/dto/ShoppingCartDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/microservices/core/dto/UserDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/microservices/core/common/dto/UserDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/microservices/core/dto/enums/IdentityProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/microservices/core/common/dto/enums/IdentityProvider.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/microservices/core/dto/enums/OrderStatus.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/microservices/core/common/dto/enums/OrderStatus.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/microservices/core/dto/enums/ProductStatus.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/microservices/core/common/dto/enums/ProductStatus.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/microservices/core/dto/enums/Role.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/microservices/core/common/dto/enums/Role.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/microservices/core/dto/order/OrderDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/microservices/core/common/dto/order/OrderDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/microservices/core/dto/order/OrderItemDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/microservices/core/common/dto/order/OrderItemDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/microservices/core/dto/order/ProductSnapshotDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/microservices/core/common/dto/order/ProductSnapshotDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/microservices/core/exception/BadRequestException.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/microservices/core/common/exception/BadRequestException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/microservices/core/exception/GlobalExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/microservices/core/common/exception/GlobalExceptionHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/microservices/core/exception/InvalidRefreshTokenException.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/microservices/core/common/exception/InvalidRefreshTokenException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/microservices/core/exception/NotFoundException.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/microservices/core/common/exception/NotFoundException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/microservices/core/exception/UserAlreadyExistsException.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/microservices/core/common/exception/UserAlreadyExistsException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/microservices/core/security/FeignCookieInterceptor.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/microservices/core/common/security/FeignCookieInterceptor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/microservices/core/security/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/microservices/core/common/security/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/microservices/core/security/jwt/JwtAuthenticationProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/microservices/core/common/security/jwt/JwtAuthenticationProvider.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/microservices/core/security/jwt/JwtAuthenticationToken.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/microservices/core/common/security/jwt/JwtAuthenticationToken.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/microservices/core/security/jwt/JwtHttpOnlyCookieFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/microservices/core/common/security/jwt/JwtHttpOnlyCookieFilter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/microservices/core/security/jwt/JwtService.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/microservices/core/common/security/jwt/JwtService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/microservices/core/security/properties/SecurityJwtProperties.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/microservices/core/common/security/properties/SecurityJwtProperties.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/microservices/core/security/properties/SecurityProperties.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/microservices/core/common/security/properties/SecurityProperties.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/k8s/configmap.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/k8s/configmap.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/cart-service/src/main/java/com/microservices/cart/CartServiceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/services/cart-service/src/main/java/com/microservices/cart/CartServiceApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/cart-service/src/main/java/com/microservices/cart/client/ProductServiceClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/services/cart-service/src/main/java/com/microservices/cart/client/ProductServiceClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/cart-service/src/main/java/com/microservices/cart/controller/CartController.java" beforeDir="false" afterPath="$PROJECT_DIR$/services/cart-service/src/main/java/com/microservices/cart/controller/CartController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/cart-service/src/main/java/com/microservices/cart/mapper/CartItemMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/services/cart-service/src/main/java/com/microservices/cart/mapper/CartItemMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/cart-service/src/main/java/com/microservices/cart/mapper/ShoppingCartMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/services/cart-service/src/main/java/com/microservices/cart/mapper/ShoppingCartMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/cart-service/src/main/java/com/microservices/cart/model/CartItemEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/services/cart-service/src/main/java/com/microservices/cart/model/CartItemEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/cart-service/src/main/java/com/microservices/cart/service/ShoppingCartService.java" beforeDir="false" afterPath="$PROJECT_DIR$/services/cart-service/src/main/java/com/microservices/cart/service/ShoppingCartService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/mail-service/src/main/java/com/microservices/mail/MailServiceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/services/mail-service/src/main/java/com/microservices/mail/MailServiceApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/mail-service/src/main/java/com/microservices/mail/controller/MailController.java" beforeDir="false" afterPath="$PROJECT_DIR$/services/mail-service/src/main/java/com/microservices/mail/controller/MailController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/mail-service/src/main/java/com/microservices/mail/service/KafkaMailConsumer.java" beforeDir="false" afterPath="$PROJECT_DIR$/services/mail-service/src/main/java/com/microservices/mail/service/KafkaMailConsumer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/order-service/src/main/java/com/microservices/order/OrderServiceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/services/order-service/src/main/java/com/microservices/order/OrderServiceApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/order-service/src/main/java/com/microservices/order/client/CartServiceClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/services/order-service/src/main/java/com/microservices/order/order/client/CartServiceClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/order-service/src/main/java/com/microservices/order/controller/OrderController.java" beforeDir="false" afterPath="$PROJECT_DIR$/services/order-service/src/main/java/com/microservices/order/order/controller/OrderController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/order-service/src/main/java/com/microservices/order/controller/PaymentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/services/order-service/src/main/java/com/microservices/order/payment/controller/PaymentController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/order-service/src/main/java/com/microservices/order/dao/OrderDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/services/order-service/src/main/java/com/microservices/order/order/dao/OrderDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/order-service/src/main/java/com/microservices/order/dto/MockPaymentWebhook.java" beforeDir="false" afterPath="$PROJECT_DIR$/services/order-service/src/main/java/com/microservices/order/payment/dto/MockPaymentWebhook.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/order-service/src/main/java/com/microservices/order/mapper/OrderMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/services/order-service/src/main/java/com/microservices/order/order/mapper/OrderMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/order-service/src/main/java/com/microservices/order/model/IdempotentProcessedEventEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/services/order-service/src/main/java/com/microservices/order/idempotency/model/IdempotentProcessedEventEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/order-service/src/main/java/com/microservices/order/model/OrderEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/services/order-service/src/main/java/com/microservices/order/order/model/OrderEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/order-service/src/main/java/com/microservices/order/model/OrderItemEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/services/order-service/src/main/java/com/microservices/order/order/model/OrderItemEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/order-service/src/main/java/com/microservices/order/model/ProductSnapshot.java" beforeDir="false" afterPath="$PROJECT_DIR$/services/order-service/src/main/java/com/microservices/order/order/model/ProductSnapshot.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/order-service/src/main/java/com/microservices/order/repository/IdempotentProcessedEventEntityRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/services/order-service/src/main/java/com/microservices/order/idempotency/repository/IdempotentProcessedEventEntityRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/order-service/src/main/java/com/microservices/order/repository/OrderRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/services/order-service/src/main/java/com/microservices/order/order/repository/OrderRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/order-service/src/main/java/com/microservices/order/service/IdempotencyService.java" beforeDir="false" afterPath="$PROJECT_DIR$/services/order-service/src/main/java/com/microservices/order/idempotency/service/IdempotencyService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/order-service/src/main/java/com/microservices/order/service/OrderService.java" beforeDir="false" afterPath="$PROJECT_DIR$/services/order-service/src/main/java/com/microservices/order/order/service/OrderService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/order-service/src/main/java/com/microservices/order/service/PaymentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/services/order-service/src/main/java/com/microservices/order/payment/service/PaymentService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/product-service/src/main/java/com/microservices/product/ProductServiceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/services/product-service/src/main/java/com/microservices/product/ProductServiceApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/product-service/src/main/java/com/microservices/product/controller/ProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/services/product-service/src/main/java/com/microservices/product/controller/ProductController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/product-service/src/main/java/com/microservices/product/mapper/ProductMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/services/product-service/src/main/java/com/microservices/product/mapper/ProductMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/product-service/src/main/java/com/microservices/product/model/ProductEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/services/product-service/src/main/java/com/microservices/product/model/ProductEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/product-service/src/main/java/com/microservices/product/service/ProductService.java" beforeDir="false" afterPath="$PROJECT_DIR$/services/product-service/src/main/java/com/microservices/product/service/ProductService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/user-service/src/main/java/com/microservices/user/UserServiceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/services/user-service/src/main/java/com/microservices/user/UserServiceApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/user-service/src/main/java/com/microservices/user/controller/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/services/user-service/src/main/java/com/microservices/user/controller/AuthController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/user-service/src/main/java/com/microservices/user/controller/DatabaseAuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/services/user-service/src/main/java/com/microservices/user/controller/DatabaseAuthController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/user-service/src/main/java/com/microservices/user/controller/GoogleAuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/services/user-service/src/main/java/com/microservices/user/controller/GoogleAuthController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/user-service/src/main/java/com/microservices/user/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/services/user-service/src/main/java/com/microservices/user/controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/user-service/src/main/java/com/microservices/user/dao/UserDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/services/user-service/src/main/java/com/microservices/user/dao/UserDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/user-service/src/main/java/com/microservices/user/mapper/UserMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/services/user-service/src/main/java/com/microservices/user/mapper/UserMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/user-service/src/main/java/com/microservices/user/model/UserEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/services/user-service/src/main/java/com/microservices/user/model/UserEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/user-service/src/main/java/com/microservices/user/service/AuthService.java" beforeDir="false" afterPath="$PROJECT_DIR$/services/user-service/src/main/java/com/microservices/user/service/AuthService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/user-service/src/main/java/com/microservices/user/service/GoogleAuthService.java" beforeDir="false" afterPath="$PROJECT_DIR$/services/user-service/src/main/java/com/microservices/user/service/GoogleAuthService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/user-service/src/main/java/com/microservices/user/service/RefreshTokenService.java" beforeDir="false" afterPath="$PROJECT_DIR$/services/user-service/src/main/java/com/microservices/user/service/RefreshTokenService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/user-service/src/main/java/com/microservices/user/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/services/user-service/src/main/java/com/microservices/user/service/UserService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,9 +100,9 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="HTML File" />
-        <option value="Exception" />
         <option value="Enum" />
         <option value="Record" />
+        <option value="Exception" />
         <option value="Class" />
       </list>
     </option>
@@ -62,55 +137,55 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.CartServiceApplication.executor&quot;: &quot;Run&quot;,
-    &quot;Application.CartServiceApplicationLocal.executor&quot;: &quot;Run&quot;,
-    &quot;Application.CatalogServiceApplication.executor&quot;: &quot;Debug&quot;,
-    &quot;Application.ConfigServerApplication.executor&quot;: &quot;Run&quot;,
-    &quot;Application.EurekaServerApplication.executor&quot;: &quot;Run&quot;,
-    &quot;Application.GatewayApplication.executor&quot;: &quot;Run&quot;,
-    &quot;Application.UserServiceApplication.executor&quot;: &quot;Run&quot;,
-    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
-    &quot;Maven.cart-service [clean].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.cart-service [install].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.catalog-service [install].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.core [clean].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.core [install].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.gateway-service [install].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.microservices-template [clean,install].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.microservices-template [clean].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.microservices-template [install].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.microservices-template [site].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.product-service [install].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.user-service [clean].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.user-service [install].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.user-service [package].executor&quot;: &quot;Run&quot;,
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;SONARLINT_PRECOMMIT_ANALYSIS&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/alex/Documents/apuntes_extra/microservices-template/k8s/RBAC&quot;,
-    &quot;onboarding.tips.debug.path&quot;: &quot;/home/alex/Documents/apuntes_extra/microservices-template/front/src/Main.java&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.CartServiceApplication.executor": "Run",
+    "Application.CartServiceApplicationLocal.executor": "Run",
+    "Application.CatalogServiceApplication.executor": "Debug",
+    "Application.ConfigServerApplication.executor": "Run",
+    "Application.EurekaServerApplication.executor": "Run",
+    "Application.GatewayApplication.executor": "Run",
+    "Application.UserServiceApplication.executor": "Run",
+    "DefaultHtmlFileTemplate": "HTML File",
+    "Maven.cart-service [clean].executor": "Run",
+    "Maven.cart-service [install].executor": "Run",
+    "Maven.catalog-service [install].executor": "Run",
+    "Maven.core [clean].executor": "Run",
+    "Maven.core [install].executor": "Run",
+    "Maven.gateway-service [install].executor": "Run",
+    "Maven.microservices-template [clean,install].executor": "Run",
+    "Maven.microservices-template [clean].executor": "Run",
+    "Maven.microservices-template [install].executor": "Run",
+    "Maven.microservices-template [site].executor": "Run",
+    "Maven.product-service [install].executor": "Run",
+    "Maven.user-service [clean].executor": "Run",
+    "Maven.user-service [install].executor": "Run",
+    "Maven.user-service [package].executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "SONARLINT_PRECOMMIT_ANALYSIS": "true",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/home/alex/Documents/apuntes_extra/microservices-template/services/user-service/src/main/java/com/microservices/user/model",
+    "onboarding.tips.debug.path": "/home/alex/Documents/apuntes_extra/microservices-template/front/src/Main.java",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "preferences.pluginManager"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/services/user-service/src/main/java/com/microservices/user/model" />
       <recent name="$PROJECT_DIR$/k8s/RBAC" />
       <recent name="$PROJECT_DIR$/k8s" />
       <recent name="$PROJECT_DIR$/services" />
       <recent name="$PROJECT_DIR$/doc/diagrams" />
-      <recent name="$PROJECT_DIR$/services/catalog-service" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/services" />
@@ -318,7 +393,15 @@
       <option name="project" value="LOCAL" />
       <updated>1778361323511</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="feat: implementado servicio idempotencia para transacciones críticas">
+      <option name="closed" value="true" />
+      <created>1778453068354</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1778453068354</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -356,7 +439,8 @@
     <MESSAGE value="feat(kafka): corregida autoconfiguración de kafka" />
     <MESSAGE value="refactor: organización de poms.xml. Documentación Javadoc. Ajustes para pasar Sonar" />
     <MESSAGE value="feat: implementado servicio de pedidos order-service" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: implementado servicio de pedidos order-service" />
+    <MESSAGE value="feat: implementado servicio idempotencia para transacciones críticas" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: implementado servicio idempotencia para transacciones críticas" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

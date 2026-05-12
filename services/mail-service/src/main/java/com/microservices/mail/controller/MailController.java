@@ -1,7 +1,7 @@
 package com.microservices.mail.controller;
 
-import com.microservices.core.dto.BaseApiResponse;
-import com.microservices.core.dto.MailBatchRequestDTO;
+import com.microservices.core.common.dto.BaseApiResponse;
+import com.microservices.core.common.dto.MailBatchRequestDTO;
 import com.microservices.mail.service.MailService;
 import org.jspecify.annotations.NullMarked;
 import org.springframework.http.ResponseEntity;

@@ -1,9 +1,9 @@
 package com.microservices.user.service;
 
 
-import com.microservices.core.dto.UserDTO;
-import com.microservices.core.exception.InvalidRefreshTokenException;
-import com.microservices.core.security.jwt.JwtService;
+import com.microservices.core.common.dto.UserDTO;
+import com.microservices.core.common.exception.InvalidRefreshTokenException;
+import com.microservices.core.common.security.jwt.JwtService;
 import com.microservices.user.dto.AuthDTO;
 import com.microservices.user.model.RefreshToken;
 import com.microservices.user.repository.RefreshTokenRepository;
