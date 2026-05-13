@@ -345,11 +345,11 @@ Admin → Users/Orders/SEO → Ver detalles → Editar → Auditado en BD → Ev
 
 ## 📚 Documentación
 
-- **[Blog Técnico](/front/src/app/features/blog/)** – Explicación detallada de servicios y patrones
+- **[Blog Técnico](/frontend/src/app/features/blog/)** – Explicación detallada de servicios y patrones
 - **[OpenAPI Docs]** – Swagger generado automáticamente (`/swagger-ui.html`)
 - **[Diagrama de Arquitectura](./doc/diagrams/)** – Visual de la topología
 - **[Kubernetes Manifests](./k8s/)** – YAML comentado para despliegue
-- **[Core DTOs](./services/core/)** – Contratos entre servicios
+- **[Core DTOs](backend/services/core/)** – Contratos entre servicios
 
 ---
 
