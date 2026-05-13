@@ -41,7 +41,11 @@
 							<p class="product-description">{{ product.description }}</p>
 
 							<div class="catalog-actions">
-								<button type="button" class="catalog-btn catalog-btn--primary" (click)="addToCart(product)">
+							<button 
+								type="button" 
+								class="catalog-btn catalog-btn--primary" 
+								(click)="addToCart(product, $event)"
+							>
 									{{ 'CATALOG.ADD_TO_CART' | translate }}
 								</button>
 							</div>

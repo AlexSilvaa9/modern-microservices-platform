@@ -6,6 +6,7 @@ import { OrderDTO, OrderStatus } from '../../core/models/order.model';
 import { OrderService } from '../../core/services/api/order.service';
 import { UserStateService } from '../../core/services/global-state/user-state.service';
 import { TranslationService } from '../../core/services/global-state/translation.service';
+import { ErrorService } from '../../core/services/global-state/error.service';
 import { Role } from '../../core/models/user.model';
 import { TranslatePipe } from '../../shared/pipes/translate.pipe';
 
@@ -21,6 +22,7 @@ export class OrderDetailComponent implements OnInit {
   private readonly orderService = inject(OrderService);
   private readonly userState = inject(UserStateService);
   private readonly translationService = inject(TranslationService);
+  private readonly errorService = inject(ErrorService);
 
   readonly order = signal<OrderDTO | null>(null);
   readonly error = signal<string | null>(null);
@@ -50,7 +52,11 @@ export class OrderDetailComponent implements OnInit {
         this.error.set(null);
         this.goBack();
       },
-      error: () => this.error.set(this.translationService.translate('ORDER_DETAIL.COMPLETE_ERROR'))
+      error: (err) => this.errorService.showError({
+        message: err.error?.message || this.translationService.translate('ORDER_DETAIL.COMPLETE_ERROR'),
+        errors: err.error?.errors,
+        timestamp: err.error?.timestamp
+      })
     });
   }
 

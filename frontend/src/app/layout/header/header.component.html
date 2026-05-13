@@ -32,11 +32,11 @@
 
         <div *appIsLoggedIn class="shopping-cart">
              <p-overlaybadge [value]="cartService.itemCount()" severity="danger">
-                <a routerLink="/cart"><i class="pi pi-shopping-cart" style="font-size: 1.35rem"></i></a>
+                <a routerLink="/cart"><i class="pi pi-shopping-cart cart-icon" style="font-size: 1.35rem"></i></a>
             </p-overlaybadge>
         </div>
         <div *appIsNotLoggedIn class="shopping-cart">
-            <a routerLink="/auth/login"><i class="pi pi-shopping-cart"  style="font-size: 1.35rem"></i></a>
+            <a routerLink="/auth/login"><i class="pi pi-shopping-cart cart-icon"  style="font-size: 1.35rem"></i></a>
         </div>
 
 

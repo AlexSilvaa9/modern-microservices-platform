@@ -4,6 +4,7 @@ import { Router, RouterLink } from '@angular/router';
 import { TranslatePipe } from '../../shared/pipes/translate.pipe';
 import { CartService } from '../../core/services/global-state/cart.service';
 import { OrderService } from '../../core/services/api/order.service';
+import { ErrorService } from '../../core/services/global-state/error.service';
 
 @Component({
   selector: 'app-cart',
@@ -17,6 +18,7 @@ export class Cart {
   private cartService = inject(CartService);
   private orderService = inject(OrderService);
   private router = inject(Router);
+  private errorService = inject(ErrorService);
   readonly items = this.cartService.items;
   readonly itemCount = this.cartService.itemCount;
   readonly total = this.cartService.total;
@@ -42,13 +44,17 @@ export class Cart {
         const orderUuid = response.data;
 
         if (!orderUuid) {
-          alert('Checkout returned an empty order id.');
+          this.errorService.showError({ message: 'Checkout returned an empty order id.' });
           return;
         }
 
         this.router.navigate(['/payment/mock', orderUuid]);
       },
-      error: () => alert('Checkout failed. Please try again.')
+      error: (err) => this.errorService.showError({
+        message: err.error?.message || 'Checkout failed. Please try again.',
+        errors: err.error?.errors,
+        timestamp: err.error?.timestamp
+      })
     });
   }
 }

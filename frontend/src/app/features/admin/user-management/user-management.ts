@@ -7,6 +7,7 @@ import { SkeletonModule } from 'primeng/skeleton';
 import { TooltipModule } from 'primeng/tooltip';
 import { UserService } from '../../../core/services/api/user.service';
 import { UserDTO } from '../../../core/models/user.model';
+import { ErrorService } from '../../../core/services/global-state/error.service';
 import { TranslatePipe } from '../../../shared/pipes/translate.pipe';
 import { Router } from '@angular/router';
 
@@ -28,6 +29,7 @@ import { Router } from '@angular/router';
 export class UserManagement implements OnInit {
   private userService = inject(UserService);
   private router = inject(Router);
+  private errorService = inject(ErrorService);
   // Estado reactivo
   users = signal<UserDTO[]>([]);
   totalRecords = signal(0);
@@ -53,7 +55,11 @@ export class UserManagement implements OnInit {
         this.loading.set(false);
       },
       error: (error) => {
-        console.error('Error loading users:', error);
+        this.errorService.showError({
+          message: error.error?.message || 'Error loading users',
+          errors: error.error?.errors,
+          timestamp: error.error?.timestamp
+        });
         this.loading.set(false);
       }
     });

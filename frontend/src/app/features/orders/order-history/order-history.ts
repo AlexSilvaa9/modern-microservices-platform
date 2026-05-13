@@ -7,6 +7,7 @@ import { TableModule } from 'primeng/table';
 import { TooltipModule } from 'primeng/tooltip';
 import { OrderDTO, OrderStatus } from '../../../core/models/order.model';
 import { OrderService } from '../../../core/services/api/order.service';
+import { ErrorService } from '../../../core/services/global-state/error.service';
 import { TranslatePipe } from '../../../shared/pipes/translate.pipe';
 
 @Component({
@@ -19,6 +20,7 @@ import { TranslatePipe } from '../../../shared/pipes/translate.pipe';
 export class OrderHistoryComponent{
   private readonly orderService = inject(OrderService);
   private readonly router = inject(Router);
+  private readonly errorService = inject(ErrorService);
 
   OrderStatus = OrderStatus;
 
@@ -40,7 +42,11 @@ export class OrderHistoryComponent{
         this.loading.set(false);
       },
       error: (error) => {
-        console.error('Error loading order history:', error);
+        this.errorService.showError({
+          message: error.error?.message || 'Error loading order history',
+          errors: error.error?.errors,
+          timestamp: error.error?.timestamp
+        });
         this.orders.set([]);
         this.totalRecords.set(0);
         this.loading.set(false);

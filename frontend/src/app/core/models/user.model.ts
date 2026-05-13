@@ -14,6 +14,7 @@ export interface UserDTO {
     email: string;
     username: string;
     roles: Role[];
+    enabled?: boolean;
     imageUrl?: string;
     providers?: IdentityProvider[];
 }

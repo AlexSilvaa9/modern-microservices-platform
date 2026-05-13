@@ -1,9 +1,8 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
-import { catchError, delay } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
-import { BaseApiResponse, DataBaseLoginRequest, DataBaseRegistrationRequest, Role, UserDTO } from '../../models/user.model';
+import { BaseApiResponse, Role, UserDTO } from '../../models/user.model';
 import { Page } from '../../models/page.model';
 
 /** Interfaz para respuestas paginadas */
@@ -41,61 +40,23 @@ export class UserService {
         );
     }
 
-    /** Obtener usuario por id (o fallback mock) */
-    getUserById(userId: string): Observable<BaseApiResponse<UserDTO>> {
-        const url = `${this.USERS_URL}${userId}`;
-        return this.http.get<BaseApiResponse<UserDTO>>(url).pipe(
-            catchError(err => {
-                console.warn('getUserById: endpoint no disponible, usando mock', err);
-                const mock: BaseApiResponse<UserDTO> = {
-                    message: 'mocked',
-                    data: { id: userId, email: 'unknown@example.com', username: `user-${userId}`, roles: [Role.USER] }
-                };
-                return of(mock).pipe(delay(300));
-            })
-        );
+
+    /** Habilita un usuario usando el endpoint real del backend. */
+    enableUser(userId: string): Observable<BaseApiResponse<null>> {
+        const url = `${this.USERS_URL}enable?uuid=${userId}`;
+        return this.http.patch<BaseApiResponse<null>>(url, null);
     }
 
-    /** Actualiza roles de un usuario. Si el endpoint falla, devuelve un mock. */
-    updateUserRoles(userId: string, roles: Role[] = []): Observable<BaseApiResponse<UserDTO>> {
-        const url = `${this.USERS_URL}${userId}/roles`;
-        return this.http.put<BaseApiResponse<UserDTO>>(url, { roles }).pipe(
-            catchError(err => {
-                console.warn('updateUserRoles: endpoint no disponible, usando mock', err);
-                // Mock: devolver usuario con roles actualizados
-                const mock: BaseApiResponse<UserDTO> = {
-                    message: 'mocked',
-                    data: { id: userId, email: 'unknown', username: 'unknown', roles: roles }
-                };
-                return of(mock).pipe(delay(300));
-            })
-        );
+    /** Deshabilita un usuario usando el endpoint real del backend. */
+    disableUser(userId: string): Observable<BaseApiResponse<null>> {
+        const url = `${this.USERS_URL}disable?uuid=${userId}`;
+        return this.http.patch<BaseApiResponse<null>>(url, null);
     }
 
-    /** Actualiza username de un usuario. Fallback mock si falla. */
-    updateUsername(userId: string, username: string): Observable<BaseApiResponse<UserDTO>> {
-        const url = `${this.USERS_URL}${userId}/username`;
-        return this.http.put<BaseApiResponse<UserDTO>>(url, { username }).pipe(
-            catchError(err => {
-                console.warn('updateUsername: endpoint no disponible, usando mock', err);
-                const mock: BaseApiResponse<UserDTO> = {
-                    message: 'mocked',
-                    data: { id: userId, email: 'unknown', username: username, roles: [] }
-                };
-                return of(mock).pipe(delay(300));
-            })
-        );
+    /** Actualiza los roles de un usuario usando el endpoint real del backend. */
+    setRoles(userId: string, roles: Role[] = []): Observable<BaseApiResponse<null>> {
+        const url = `${this.USERS_URL}setRoles?uuid=${userId}`;
+        return this.http.patch<BaseApiResponse<null>>(url, roles);
     }
-
-    /** Elimina un usuario. Fallback mock si falla. */
-    deleteUser(userId: string): Observable<BaseApiResponse<null>> {
-        const url = `${this.USERS_URL}${userId}`;
-        return this.http.delete<BaseApiResponse<null>>(url).pipe(
-            catchError(err => {
-                console.warn('deleteUser: endpoint no disponible, usando mock', err);
-                const mock: BaseApiResponse<null> = { message: 'mocked', data: null };
-                return of(mock).pipe(delay(300));
-            })
-        );
-    }
+   
 }

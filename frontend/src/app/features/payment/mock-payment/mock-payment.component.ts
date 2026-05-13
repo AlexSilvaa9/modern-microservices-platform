@@ -3,6 +3,7 @@ import { ChangeDetectionStrategy, Component, OnInit, inject, signal } from '@ang
 import { ActivatedRoute, Router } from '@angular/router';
 import { PaymentMockService } from '../../../core/services/api/payment-mock.service';
 import { CartService } from '../../../core/services/global-state/cart.service';
+import { ErrorService } from '../../../core/services/global-state/error.service';
 
 @Component({
   selector: 'app-mock-payment',
@@ -17,6 +18,7 @@ export class MockPaymentComponent implements OnInit {
   private readonly router = inject(Router);
   private readonly paymentMockService = inject(PaymentMockService);
   private readonly cartService = inject(CartService);
+  private readonly errorService = inject(ErrorService);
 
   readonly orderUuid = signal<string>('');
   readonly loading = signal(false);
@@ -54,10 +56,14 @@ export class MockPaymentComponent implements OnInit {
           this.cartService.clearCart();
         }, 400);
       },
-      error: () => {
+      error: (err) => {
         clearInterval(progressInterval);
         this.loading.set(false);
-        this.error.set('Transaction declined. Please try again.');
+        this.errorService.showError({
+          message: err.error?.message || 'Transaction declined. Please try again.',
+          errors: err.error?.errors,
+          timestamp: err.error?.timestamp
+        });
       }
     });
   }

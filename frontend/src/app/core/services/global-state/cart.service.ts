@@ -2,6 +2,7 @@ import { Injectable, PLATFORM_ID, computed, inject, signal } from '@angular/core
 import { isPlatformBrowser } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Cart, CartItem } from '../../models/cart.model';
+import { ErrorService } from './error.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +13,7 @@ export class CartService {
   private readonly itemsSignal = signal<CartItem[]>([]);
   private readonly platformId = inject(PLATFORM_ID);
   private readonly isBrowser = isPlatformBrowser(this.platformId);
+  private readonly errorService = inject(ErrorService);
 
   readonly items = computed(() => this.itemsSignal());
   readonly itemCount = computed(() => this.itemsSignal().reduce((sum, item) => sum + item.quantity, 0));
@@ -61,7 +63,6 @@ export class CartService {
     if (!this.isBrowser) {
       return;
     }
- 
 
     this.http.get<any>(this.CART_URL).subscribe({
       next: (resp) => {
@@ -80,9 +81,7 @@ export class CartService {
         }));
         this.itemsSignal.set(items);
         this.persistCart(items);
-      },
-      error: () => {
-        // keep local state unchanged on error
+      
       }
     });
   }

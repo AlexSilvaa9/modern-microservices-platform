@@ -15,6 +15,9 @@
             <div class="hero-badges">
                 <span class="hero-badge hero-badge--primary">{{ selectedRoles.length }} {{ 'USER_DETAIL.ROLES' | translate }}</span>
                 <span class="hero-badge hero-badge--soft" *ngIf="user!.providers?.length">{{ user!.providers?.length }} {{ 'USER_DETAIL.PROVIDERS' | translate }}</span>
+                <span class="hero-badge" [class.hero-badge--success]="isUserEnabled" [class.hero-badge--danger]="!isUserEnabled">
+                    {{ isUserEnabled ? ('USER_DETAIL.ACTIVE' | translate) : ('USER_DETAIL.INACTIVE' | translate) }}
+                </span>
                 <span class="hero-badge hero-badge--soft" *ngIf="showActions">{{ 'USER_DETAIL.EDITING_ACTIVE' | translate }}</span>
             </div>
         </div>
@@ -48,6 +51,11 @@
                 <article class="info-card">
                     <span class="info-label">{{ 'USER_DETAIL.USERNAME' | translate }}</span>
                     <strong class="info-value">{{ user!.username }}</strong>
+                </article>
+
+                <article class="info-card">
+                    <span class="info-label">{{ 'USER_DETAIL.STATUS' | translate }}</span>
+                    <strong class="info-value">{{ isUserEnabled ? ('USER_DETAIL.ACTIVE' | translate) : ('USER_DETAIL.INACTIVE' | translate) }}</strong>
                 </article>
 
                 <article class="info-card">
@@ -95,14 +103,6 @@
             </div>
 
             <form class="detail-form">
-                <div class="field-row">
-                    <div class="field-group">
-                        <label for="username">{{ 'USER_DETAIL.USERNAME' | translate }}</label>
-                        <input pInputText id="username" type="text" [(ngModel)]="editingUsername" name="username" />
-                    </div>
-                    <button pButton type="button" [label]="'USER_DETAIL.SAVE_USERNAME' | translate" icon="pi pi-save" (click)="saveUsername()" [loading]="isProcessing" class="action-btn action-btn--primary"></button>
-                </div>
-
                 <div class="field-row field-row--stacked">
                     <div class="field-group">
                         <label>{{ 'USER_DETAIL.EMAIL' | translate }}</label>
@@ -119,7 +119,8 @@
 
                 <div class="action-strip" *ngIf="showActions">
                     <button pButton type="button" [label]="'USER_DETAIL.UPDATE_ROLES' | translate" icon="pi pi-users" (click)="saveRoles()" [loading]="isProcessing" class="action-btn action-btn--secondary"></button>
-                    <button pButton type="button" [label]="'USER_DETAIL.DELETE_USER' | translate" icon="pi pi-trash" (click)="deleteUser()" [loading]="isProcessing" class="action-btn action-btn--danger"></button>
+                    <button pButton *ngIf="!isUserEnabled" type="button" [label]="'USER_DETAIL.ACTIVATE_USER' | translate" icon="pi pi-check-circle" (click)="enableUser()" [loading]="isProcessing" class="action-btn action-btn--primary"></button>
+                    <button pButton *ngIf="isUserEnabled" type="button" [label]="'USER_DETAIL.DEACTIVATE_USER' | translate" icon="pi pi-ban" (click)="disableUser()" [loading]="isProcessing" class="action-btn action-btn--secondary"></button>
                 </div>
 
                 <div class="note-card" *ngIf="!showActions">

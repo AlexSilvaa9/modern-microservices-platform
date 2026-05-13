@@ -6,6 +6,7 @@ import { ButtonModule } from 'primeng/button';
 import { FormsModule } from '@angular/forms';
 import { AnalyticsService } from '../../../core/services/api/analytics.service';
 import { TranslationService } from '../../../core/services/global-state/translation.service';
+import { ErrorService } from '../../../core/services/global-state/error.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { AnalyticsSummaryDTO, MonthlyVisitsDTO, PageVisitsDTO } from '../../../core/models/analytics-summary.model';
@@ -28,6 +29,7 @@ import { TranslatePipe } from '../../../shared/pipes/translate.pipe';
 export class Seo implements OnInit, OnDestroy {
   private analyticsService = inject(AnalyticsService);
   private translationService = inject(TranslationService);
+  private errorService = inject(ErrorService);
   private destroy$ = new Subject<void>();
 
   // Datos de analytics
@@ -67,7 +69,11 @@ export class Seo implements OnInit, OnDestroy {
           this.isLoading.set(false);
         },
         error: (err: any) => {
-          console.error('Error loading analytics:', err);
+          this.errorService.showError({
+            message: err.error?.message || 'Error loading analytics',
+            errors: err.error?.errors,
+            timestamp: err.error?.timestamp
+          });
           this.isLoading.set(false);
         }
       });

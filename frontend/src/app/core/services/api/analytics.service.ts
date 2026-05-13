@@ -7,12 +7,14 @@ import { isPlatformBrowser } from '@angular/common';
 import { EventDTO } from '../../models/event.model';
 import { AnalyticsSummaryDTO } from '../../models/analytics-summary.model';
 import { SKIP_LOADING } from '../../interceptors/loading.interceptor';
+import { ErrorService } from '../global-state/error.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AnalyticsService implements OnDestroy {
-  private readonly http = inject(HttpClient);
+  private readonly http = inject(HttpClient);  
+  private errorService = inject(ErrorService);  
   private readonly router = inject(Router);
   private readonly platformId = inject(PLATFORM_ID);
 
@@ -95,7 +97,11 @@ export class AnalyticsService implements OnDestroy {
           console.log('✅ Analytics batch sent successfully');
         },
         error: (err) => {
-          console.error('❌ Error sending analytics batch:', err);
+          this.errorService.showError({
+            message: err.error?.message || 'Error sending analytics batch',
+            errors: err.error?.errors,
+            timestamp: err.error?.timestamp
+          });
           this.eventQueue.unshift(...eventsToSend);
         }
       });
