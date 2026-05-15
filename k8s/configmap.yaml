@@ -47,7 +47,7 @@ data:
       jwt-properties:
         secret: ${JWT_SECRET}
         expiration-ms: 3600000
-      whitelist: /auth/**,/oauth2/**,/swagger-ui/**,/v3/api-docs/**,/h2-console/**,/product/**,/batch, /error/**
+      whitelist: /auth/**,/oauth2/**,/swagger-ui/**,/v3/api-docs/**,/h2-console/**,/getProducts,/batch, /error/**, /events/**
     logging:
       level:
         com:
@@ -176,7 +176,7 @@ data:
       redirect-uri: http://localhost:8080/api/user/auth/google/callback
     user-management:
       database:
-        enable: false
+        enable: true
       google:
         enable: true
     spring:

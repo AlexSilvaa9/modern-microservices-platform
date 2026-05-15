@@ -24,9 +24,9 @@
 				</button>
 			</div>
 		} @else if (pagedProducts().length > 0) {
-			<div class="catalog-list" role="list">
+			<div data-testid="catalog-list" class="catalog-list" role="list">
 				@for (product of pagedProducts(); track trackByProductId($index, product)) {
-					<article class="catalog-item" role="listitem">
+					<article data-testid="catalog-item" class="catalog-item" role="listitem">
 						<div class="catalog-media">
 							<img [src]="product.imageUrl" [alt]="product.name" />
 						</div>
@@ -42,6 +42,7 @@
 
 							<div class="catalog-actions">
 							<button 
+								data-testid="add-to-cart-button"
 								type="button" 
 								class="btn primary" 
 								(click)="addToCart(product, $event)"
@@ -60,12 +61,13 @@
 					</div>
 
 					<div class="pagination-controls">
-						<button type="button" class="pagination-btn" (click)="prevPage()" [disabled]="currentPage() === 1">
+						<button data-testid="catalog-prev-page" type="button" class="pagination-btn" (click)="prevPage()" [disabled]="currentPage() === 1">
 							‹
 						</button>
 
 						@for (page of pageNumbers(); track trackByPage($index, page)) {
 							<button
+								data-testid="catalog-page-number"
 								type="button"
 								class="pagination-btn pagination-btn--page"
 								[class.pagination-btn--active]="page === currentPage()"
@@ -75,7 +77,7 @@
 							</button>
 						}
 
-						<button type="button" class="pagination-btn" (click)="nextPage()" [disabled]="currentPage() === totalPages()">
+						<button data-testid="catalog-next-page" type="button" class="pagination-btn" (click)="nextPage()" [disabled]="currentPage() === totalPages()">
 							›
 						</button>
 					</div>

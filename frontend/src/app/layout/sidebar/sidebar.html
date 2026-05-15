@@ -7,7 +7,7 @@
             <!-- ITEM CON HIJOS sin admin-->
             <div *ngIf="item.children && !item.roles?.includes(Role.ADMIN)" class="menu-group">
 
-                <div class="menu-item group" (click)="toggleGroup(item.label)">
+                <div data-testid="sidebar-group" class="menu-item group" (click)="toggleGroup(item.label)">
                     <i [class]="item.icon"></i>
                     <span class="label">{{ item.label | translate }}</span>
                     <span class="arrow">›</span>
@@ -15,7 +15,7 @@
 
                 <div class="submenu" *ngIf="openGroup() === item.label">
 
-                    <div *ngFor="let child of item.children" class="submenu-item" [class.active]="isActive(child.route)"
+                    <div data-testid="sidebar-item" *ngFor="let child of item.children" class="submenu-item" [class.active]="isActive(child.route)"
                         (click)="navigate(child.route!)">
                         <span class="label">{{ child.label | translate}}</span>
                     </div>
@@ -27,7 +27,7 @@
             <div *appIsAdmin>
                 <div *ngIf="item.children && item.roles?.includes(Role.ADMIN)" class="menu-group">
 
-                    <div class="menu-item group" (click)="toggleGroup(item.label)">
+                    <div data-testid="sidebar-admin-group" class="menu-item group" (click)="toggleGroup(item.label)">
                         <i [class]="item.icon"></i>
                         <span class="label">{{ item.label | translate }}</span>
                         <span class="arrow">›</span>
@@ -35,7 +35,7 @@
 
                     <div class="submenu" *ngIf="openGroup() === item.label">
 
-                        <div *ngFor="let child of item.children" class="submenu-item"
+                        <div data-testid="sidebar-admin-item" *ngFor="let child of item.children" class="submenu-item"
                             [class.active]="isActive(child.route)" (click)="navigate(child.route!)">
                             <span class="label">{{ child.label | translate}}</span>
                         </div>
@@ -46,7 +46,7 @@
             </div>
 
             <!-- ITEM SIMPLE -->
-            <div *ngIf="!item.children" class="menu-item" [class.active]="isActive(item.route)"
+            <div data-testid="sidebar-item" *ngIf="!item.children" class="menu-item" [class.active]="isActive(item.route)"
                 (click)="navigate(item.route!)">
                 <i [class]="item.icon"></i>
                 <span class="label">{{ item.label | translate}}</span>

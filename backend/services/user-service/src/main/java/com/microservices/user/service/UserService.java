@@ -1,11 +1,15 @@
 package com.microservices.user.service;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+import com.microservices.core.common.dto.enums.Language;
+import com.microservices.core.common.dto.enums.Role;
 import com.microservices.core.common.exception.NotFoundException;
 import com.microservices.core.common.dto.UserDTO;
 import com.microservices.core.common.dto.enums.IdentityProvider;
+import com.microservices.user.model.UserEntity;
 import jakarta.transaction.Transactional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -78,6 +82,31 @@ public class UserService {
         dao.addProvider(email, provider);
     }
 
+    @Transactional
+    public void setRoles(UUID uuid, List<Role> roleList){
+        UserEntity userEntity = dao.findById(uuid).orElseThrow(() -> new NotFoundException("usuario no existe"));
+        userEntity.setRoles(roleList);
+        dao.save(userEntity);
+    }
+    @Transactional
+    public void enableUser(UUID uuid){
+        UserEntity userEntity = dao.findById(uuid).orElseThrow(() -> new NotFoundException("usuario no existe"));
+        userEntity.setEnabled(true);
+        dao.save(userEntity);
+    }
+    @Transactional
+    public void disableUser(UUID uuid){
+        UserEntity userEntity = dao.findById(uuid).orElseThrow(() -> new NotFoundException("usuario no existe"));
+        userEntity.setEnabled(false);
+        dao.save(userEntity);
+    }
+
+    @Transactional
+    public void setPreferredLanguage(UUID uuid, Language language){
+        UserEntity userEntity = dao.findById(uuid).orElseThrow(() -> new NotFoundException("usuario no existe"));
+        userEntity.setPreferredLanguage(language);
+        dao.save(userEntity);
+    }
 }
 
 

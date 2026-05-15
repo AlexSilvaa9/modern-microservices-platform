@@ -12,7 +12,7 @@
     <div class="cart-layout">
       <div class="card">
         @for (item of items(); track item.product.productId) {
-          <article class="cart-item">
+          <article data-testid="cart-item" class="cart-item">
             <div class="item-image">
               <img [src]="item.product.imageUrl" [alt]="item.product.name" />
             </div>
@@ -28,14 +28,14 @@
 
             <div class="item-controls">
               <div class="qty-controls">
-                <button type="button" class="qty-btn" (click)="decrease(item.product.productId)" [attr.aria-label]="'CART.DECREASE' | translate">-</button>
+                <button data-testid="decrease-qty-btn" type="button" class="qty-btn" (click)="decrease(item.product.productId)" [attr.aria-label]="'CART.DECREASE' | translate">-</button>
                 <span>{{ item.quantity }}</span>
-                <button type="button" class="qty-btn" (click)="increase(item.product.productId)" [attr.aria-label]="'CART.INCREASE' | translate">+</button>
+                <button data-testid="increase-qty-btn" type="button" class="qty-btn" (click)="increase(item.product.productId)" [attr.aria-label]="'CART.INCREASE' | translate">+</button>
               </div>
 
               <div class="item-pricing">
                 <strong>{{ item.product.price * item.quantity | currency }}</strong>
-                <button type="button" class="link-btn link-btn--danger" (click)="remove(item.product.productId)">{{ 'CART.REMOVE' | translate }}</button>
+                <button data-testid="remove-item-btn" type="button" class="link-btn link-btn--danger" (click)="remove(item.product.productId)">{{ 'CART.REMOVE' | translate }}</button>
               </div>
             </div>
           </article>
@@ -56,13 +56,13 @@
         </div>
 
         <div class="summary-actions">
-          <button type="button" class="btn primary" (click)="checkout()">{{ 'CART.CHECKOUT' | translate }}</button>
-          <button type="button" class="btn secondary" (click)="clear()">{{ 'CART.CLEAR' | translate }}</button>
+          <button data-testid="checkout-btn" type="button" class="btn primary" (click)="checkout()">{{ 'CART.CHECKOUT' | translate }}</button>
+          <button data-testid="clear-cart-btn" type="button" class="btn secondary" (click)="clear()">{{ 'CART.CLEAR' | translate }}</button>
         </div>
       </aside>
     </div>
   } @else {
-    <div class="empty-cart">
+    <div data-testid="empty-cart-message" class="empty-cart">
       <div class="empty-icon">🛒</div>
       <h2>{{ 'CART.EMPTY_TITLE' | translate }}</h2>
       <p>{{ 'CART.EMPTY_TEXT' | translate }}</p>

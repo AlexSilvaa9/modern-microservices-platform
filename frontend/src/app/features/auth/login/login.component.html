@@ -10,7 +10,7 @@
 
             <div class="form-group">
                 <label for="email">{{ 'LOGIN.EMAIL' | translate }}</label>
-                <input id="email" type="email" class="p-inputtext" formControlName="email" />
+                <input data-testid="login-email-input" id="email" type="email" class="p-inputtext" formControlName="email" />
                 <div class="error-msg" *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched">
                     A valid email is required.
                 </div>
@@ -18,13 +18,13 @@
 
             <div class="form-group">
                 <label for="password">{{ 'LOGIN.PASSWORD' | translate }}</label>
-                <input id="password" type="password" class="p-inputtext" formControlName="password" />
+                <input data-testid="login-password-input" id="password" type="password" class="p-inputtext" formControlName="password" />
                 <div class="error-msg" *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
                     Password is required.
                 </div>
             </div>
 
-            <button type="submit" class="btn primary" style="width: 100%; margin-top: 1rem;" [disabled]="isLoading">
+            <button data-testid="login-submit-button" type="submit" class="btn primary" style="width: 100%; margin-top: 1rem;" [disabled]="isLoading">
                 {{ isLoading ? ('GENERAL.LOADING' | translate) : ('LOGIN.SUBMIT' | translate) }}
             </button>
 
@@ -34,7 +34,7 @@
             <span>OR</span>
         </div>
         </div>
-        <button type="button" class="btn secondary" (click)="loginWithGoogle()">
+        <button data-testid="login-google-button" type="button" class="btn secondary" (click)="loginWithGoogle()">
             <svg viewBox="0 0 24 24" width="20" height="20" xmlns="http://www.w3.org/2000/svg">
                 <g transform="matrix(1, 0, 0, 1, 27.009001, -39.238598)">
                     <path fill="#4285F4"
@@ -51,7 +51,7 @@
         </button>
 
         <div class="auth-footer">
-            <a routerLink="/auth/register">{{ 'LOGIN.SIGNUP' | translate }}</a>
+            <a data-testid="login-register-link" routerLink="/auth/register">{{ 'LOGIN.SIGNUP' | translate }}</a>
         </div>
     </div>
 </div>

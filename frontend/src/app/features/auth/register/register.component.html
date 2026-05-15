@@ -8,7 +8,7 @@
 
             <div class="form-group">
                 <label for="username">{{ 'REGISTER.USERNAME' | translate }}</label>
-                <input id="username" type="text" class="p-inputtext" formControlName="username" />
+                <input data-testid="register-username-input" id="username" type="text" class="p-inputtext" formControlName="username" />
                 <div class="error-msg"
                     *ngIf="registerForm.get('username')?.invalid && registerForm.get('username')?.touched">
                     Username is required.
@@ -17,7 +17,7 @@
 
             <div class="form-group">
                 <label for="email">{{ 'LOGIN.EMAIL' | translate }}</label>
-                <input id="email" type="email" class="p-inputtext" formControlName="email" />
+                <input data-testid="register-email-input" id="email" type="email" class="p-inputtext" formControlName="email" />
                 <div class="error-msg" *ngIf="registerForm.get('email')?.invalid && registerForm.get('email')?.touched">
                     A valid email is required.
                 </div>
@@ -25,14 +25,14 @@
 
             <div class="form-group">
                 <label for="password">{{ 'LOGIN.PASSWORD' | translate }}</label>
-                <input id="password" type="password" class="p-inputtext" formControlName="password" />
+                <input data-testid="register-password-input" id="password" type="password" class="p-inputtext" formControlName="password" />
                 <div class="error-msg"
                     *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched">
                     Password must be at least 8 characters long.
                 </div>
             </div>
 
-            <button type="submit" class="btn primary" style="width: 100%; margin-top: 1rem;" [disabled]="isLoading">
+            <button data-testid="register-submit-button" type="submit" class="btn primary" style="width: 100%; margin-top: 1rem;" [disabled]="isLoading">
                 {{ isLoading ? ('GENERAL.LOADING' | translate) : ('REGISTER.SUBMIT' | translate) }}
             </button>
 
@@ -43,7 +43,7 @@
         </div>
 
         </div>
-        <button type="button" class="btn secondary" (click)="loginWithGoogle()">
+        <button data-testid="register-google-button" type="button" class="btn secondary" (click)="loginWithGoogle()">
             <svg viewBox="0 0 24 24" width="20" height="20" xmlns="http://www.w3.org/2000/svg">
                 <g transform="matrix(1, 0, 0, 1, 27.009001, -39.238598)">
                     <path fill="#4285F4"
@@ -60,7 +60,7 @@
         </button>
 
         <div class="auth-footer">
-            <a routerLink="/auth/login">{{ 'REGISTER.SIGNIN' | translate }}</a>
+            <a data-testid="register-login-link" routerLink="/auth/login">{{ 'REGISTER.SIGNIN' | translate }}</a>
         </div>
     </div>
 </div>

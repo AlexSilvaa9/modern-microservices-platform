@@ -1,6 +1,7 @@
 package com.microservices.core.common.dto;
 
 import com.microservices.core.common.dto.enums.IdentityProvider;
+import com.microservices.core.common.dto.enums.Language;
 import com.microservices.core.common.dto.enums.Role;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -44,5 +45,9 @@ public class UserDTO {
      * The list of identity providers (e.g., Google, Database) linked to this user.
      */
     private List<IdentityProvider> providers;
+
+    private Language preferredLanguage;
+
+    private Boolean enabled;
 
 }

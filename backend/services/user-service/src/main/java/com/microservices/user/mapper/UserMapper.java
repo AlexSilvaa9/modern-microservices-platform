@@ -34,7 +34,6 @@ public interface UserMapper {
     @Mapping(target = "accountNonExpired", ignore = true)
     @Mapping(target = "accountNonLocked", ignore = true)
     @Mapping(target = "credentialsNonExpired", ignore = true)
-    @Mapping(target = "enabled", ignore = true)
     UserEntity fromDTO(UserDTO dto);
 }
 

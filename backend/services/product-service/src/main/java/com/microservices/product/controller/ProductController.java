@@ -41,7 +41,7 @@ public class ProductController {
      * @param pageable pagination and sorting parameters
      * @return a successful response containing a page of product DTOs
      */
-    @GetMapping
+    @GetMapping("/getProducts")
     public ResponseEntity<BaseApiResponse<Page<ProductDTO>>> getAllProducts(Pageable pageable) {
         Page<ProductDTO> products = productService.getAllActiveProducts(pageable);
 

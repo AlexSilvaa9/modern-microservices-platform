@@ -109,5 +109,17 @@ public class GlobalExceptionHandler {
                 .status(HttpStatus.CONFLICT)
                 .body(body);
     }
+    @ExceptionHandler(InvalidRefreshTokenException.class)
+    public ResponseEntity<BaseApiResponse<Object>>
+    handleInvalidRefreshToken(InvalidRefreshTokenException ex) {
+
+        BaseApiResponse<Object> body =
+                new BaseApiResponse<>(ex.getMessage());
+
+        return ResponseEntity
+                .status(HttpStatus.FORBIDDEN)
+                .body(body);
+    }
+
 }
 

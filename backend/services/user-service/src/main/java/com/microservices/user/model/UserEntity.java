@@ -2,9 +2,11 @@ package com.microservices.user.model;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Locale;
 import java.util.UUID;
 
 import com.microservices.core.common.dto.enums.IdentityProvider;
+import com.microservices.core.common.dto.enums.Language;
 import com.microservices.core.common.dto.enums.Role;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -60,6 +62,8 @@ public class UserEntity {
     @Column(name = "provider")
     private List<IdentityProvider> providers;
 
+    private Language preferredLanguage = Language.ES;
+
     /** Timestamp capturing when the user account was created. */
     @Column(nullable = false)
     private LocalDateTime createdAt;
@@ -79,5 +83,7 @@ public class UserEntity {
     /** Flag indicating if the user is enabled or disabled. */
     @Column(nullable = false)
     private boolean enabled = true;
+
+
 
 }

@@ -34,7 +34,7 @@
       </ng-template>
 
       <ng-template pTemplate="body" let-order>
-        <tr>
+        <tr data-testid="order-history-row">
           <td>#{{ order.id }}</td>
           <td>
             <span class="status-pill" [class.status-pill--completed]="order.status === OrderStatus.COMPLETED">
@@ -47,6 +47,7 @@
           <td>{{ order.items?.length || 0 }}</td>
           <td class="action-cell">
             <button
+              data-testid="view-order-details-btn"
               type="button"
               class=" action-icon pi pi-eye"
               (click)="viewOrderDetail(order)"

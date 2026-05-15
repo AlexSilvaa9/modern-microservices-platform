@@ -18,7 +18,7 @@
           <div class="checkmark">✓</div>
           <h2>Payment successful</h2>
           <p>Your transaction has been processed.</p>
-          <button class="btn btn-primary" (click)="goToHistory()">View order</button>
+          <button data-testid="view-order-btn" class="btn btn-primary" (click)="goToHistory()">View order</button>
         </div>
       } @else {
         <div class="payment-form">
@@ -46,7 +46,7 @@
               <p>Processing payment...</p>
             </div>
           } @else {
-            <button class="btn btn-submit" (click)="confirmPayment()" [disabled]="!orderUuid()">
+            <button data-testid="pay-now-btn" class="btn btn-submit" (click)="confirmPayment()" [disabled]="!orderUuid()">
               Pay now
             </button>
           }

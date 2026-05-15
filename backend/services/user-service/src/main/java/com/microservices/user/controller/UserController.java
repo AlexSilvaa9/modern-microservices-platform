@@ -4,6 +4,8 @@ package com.microservices.user.controller;
 import com.microservices.core.common.dto.BaseApiResponse;
 import com.microservices.core.common.dto.UserDTO;
 
+import com.microservices.core.common.dto.enums.Language;
+import com.microservices.core.common.dto.enums.Role;
 import com.microservices.user.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;
@@ -22,6 +24,9 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.UUID;
 
 /**
  * REST controller for managing user profiles and querying user records.
@@ -109,6 +114,60 @@ public class UserController {
 
         BaseApiResponse<Page<UserDTO>> body =
                 new BaseApiResponse<>("Users fetched successfully", users);
+
+        return ResponseEntity.ok(body);
+    }
+
+
+    @PatchMapping("/enable")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<BaseApiResponse<Void>> enableUser(
+            @RequestParam(name = "uuid") UUID uuid
+    ) {
+        service.enableUser(uuid);
+
+        BaseApiResponse<Void> body =
+                new BaseApiResponse<>("User enabled", null);
+
+        return ResponseEntity.ok(body);
+    }
+
+    @PatchMapping("/disable")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<BaseApiResponse<Void>> disableUser(
+            @RequestParam(name = "uuid") UUID uuid
+    ) {
+        service.disableUser(uuid);
+
+        BaseApiResponse<Void> body =
+                new BaseApiResponse<>("User disabled", null);
+
+        return ResponseEntity.ok(body);
+    }
+    @PatchMapping("/setRoles")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<BaseApiResponse<Void>> setRoles(
+            @RequestParam(name = "uuid") UUID uuid,
+            @RequestBody List<Role> roles
+    ) {
+
+        service.setRoles(uuid, roles);
+
+        BaseApiResponse<Void> body =
+                new BaseApiResponse<>("Roles updated successfully", null);
+
+        return ResponseEntity.ok(body);
+    }
+    @PatchMapping("/setPreferredLanguage")
+    public ResponseEntity<BaseApiResponse<Void>> setPreferredLanguage(
+            @RequestParam(name = "uuid") UUID uuid,
+            @RequestParam(name = "language") Language language
+    ) {
+
+        service.setPreferredLanguage(uuid, language);
+
+        BaseApiResponse<Void> body =
+                new BaseApiResponse<>("Language updated successfully", null);
 
         return ResponseEntity.ok(body);
     }
