@@ -1,7 +1,7 @@
 <header class="app-header">
 
     <div class="menu-button">
-        <button (click)="toggleSidebar()" size="large">
+        <button class="sidebar-button" (click)="toggleSidebar()" size="large">
             <i class="pi pi-bars"></i>
         </button>
     </div>
@@ -9,6 +9,16 @@
         <h2 routerLink="/">MicroApp</h2>
     </div>
     <div class="header-actions">
+
+
+        <div *appIsLoggedIn class="shopping-cart">
+            <p-overlaybadge [value]="cartService.itemCount()" severity="danger">
+                <a routerLink="/cart"><i class="pi pi-shopping-cart cart-icon" style="font-size: 1.35rem"></i></a>
+            </p-overlaybadge>
+        </div>
+        <div *appIsNotLoggedIn class="shopping-cart">
+            <a routerLink="/auth/login"><i class="pi pi-shopping-cart cart-icon"  style="font-size: 1.35rem"></i></a>
+        </div>
         <div class="header-profile">
 
             <!-- Profile Switcher Dropdown -->
@@ -30,28 +40,7 @@
             </div>
         </div>
 
-        <div *appIsLoggedIn class="shopping-cart">
-             <p-overlaybadge [value]="cartService.itemCount()" severity="danger">
-                <a routerLink="/cart"><i class="pi pi-shopping-cart cart-icon" style="font-size: 1.35rem"></i></a>
-            </p-overlaybadge>
-        </div>
-        <div *appIsNotLoggedIn class="shopping-cart">
-            <a routerLink="/auth/login"><i class="pi pi-shopping-cart cart-icon"  style="font-size: 1.35rem"></i></a>
-        </div>
+   
 
-
-        <!-- Language Switcher Dropdown -->
-        <div class="lang-switcher">
-            <button class="lang-btn">
-                {{ 'FLAG' | translate }}
-                <i class="bi bi-chevron-down"></i>
-            </button>
-            <div class="lang-menu">
-                <a (click)="translationService.setLanguage('en')">🇬🇧 English</a>
-                <a (click)="translationService.setLanguage('es')">🇪🇸 Español</a>
-                <a (click)="translationService.setLanguage('de')">🇩🇪 Deutsch</a>
-                <a (click)="translationService.setLanguage('fr')">🇫🇷 Français</a>
-            </div>
-        </div>
     </div>
 </header>

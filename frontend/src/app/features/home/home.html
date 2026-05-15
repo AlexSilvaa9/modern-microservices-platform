@@ -6,8 +6,8 @@
       <p class="subtitle">{{ 'HOME.SUBTITLE' | translate }}</p>
 
       <div class="hero-actions">
-        <a pButton routerLink="/cart" class="p-button-raised p-button-rounded">{{ 'HOME.GO_CART' | translate }}</a>
-        <a pButton routerLink="/blog" class="p-button-outlined p-button-rounded">{{ 'HOME.EXPLORE' | translate }}</a>
+        <button class="btn primary" routerLink="/cart" >{{ 'HOME.GO_CART' | translate }}</button>
+        <button class="btn secondary" routerLink="/blog" >{{ 'HOME.EXPLORE' | translate }}</button>
       </div>
     </div>
 
@@ -27,7 +27,7 @@
 
   <div class="cards-grid">
     @for (card of welcomeCards(); track card.titleKey) {
-      <article class="info-card">
+      <article class="card">
         <h2>{{ card.titleKey | translate }}</h2>
         <p>{{ card.descriptionKey | translate }}</p>
       </article>

@@ -6,15 +6,11 @@
       <p class="subtitle">{{ 'CART.SUBTITLE' | translate }}</p>
     </div>
 
-    <div class="cart-badge">
-      <span>{{ itemCount() }}</span>
-      <small>{{ 'CART.ITEMS' | translate }}</small>
-    </div>
   </header>
 
   @if (items().length) {
     <div class="cart-layout">
-      <div class="cart-list">
+      <div class="card">
         @for (item of items(); track item.product.productId) {
           <article class="cart-item">
             <div class="item-image">
@@ -46,11 +42,11 @@
         }
       </div>
 
-      <aside class="cart-summary">
+      <aside class="card">
         <h2>{{ 'CART.SUMMARY' | translate }}</h2>
 
-        <div class="summary-chip">
-          <span>{{ 'CART.SUMMARY_ITEMS' | translate }}</span>
+        <div class="inner-card">
+          <span>{{ 'CART.SUMMARY_ITEMS' | translate }}: </span>
           <strong>{{ itemCount() }}</strong>
         </div>
 
@@ -60,8 +56,8 @@
         </div>
 
         <div class="summary-actions">
-          <button type="button" class="action-btn action-btn--primary" (click)="checkout()">{{ 'CART.CHECKOUT' | translate }}</button>
-          <button type="button" class="action-btn action-btn--secondary" (click)="clear()">{{ 'CART.CLEAR' | translate }}</button>
+          <button type="button" class="btn primary" (click)="checkout()">{{ 'CART.CHECKOUT' | translate }}</button>
+          <button type="button" class="btn secondary" (click)="clear()">{{ 'CART.CLEAR' | translate }}</button>
         </div>
       </aside>
     </div>

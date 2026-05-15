@@ -3,12 +3,14 @@ import { isPlatformBrowser } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Cart, CartItem } from '../../models/cart.model';
 import { ErrorService } from './error.service';
+import { environment } from '../../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
-  private readonly CART_URL = 'http://localhost:8080/api/cart/';
+  private readonly GATEWAY_URL = environment.apiUrl; // Assuming gateway is heavily routing /api --- IGNORE ---
+  private readonly CART_URL = `${this.GATEWAY_URL}cart/`;
   private readonly STORAGE_KEY = 'microservices-template.cart';
   private readonly itemsSignal = signal<CartItem[]>([]);
   private readonly platformId = inject(PLATFORM_ID);

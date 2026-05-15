@@ -2,7 +2,6 @@ import { Component, inject, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Router } from '@angular/router';
 import { AuthService } from '../../core/services/api/auth.service';
-import { TranslationService } from '../../core/services/global-state/translation.service';
 import { UserStateService } from '../../core/services/global-state/user-state.service';
 import { TranslatePipe } from '../../shared/pipes/translate.pipe';
 import { IsLoggedInDirective } from '../../shared/directives/isLoggedInDirective';
@@ -27,7 +26,6 @@ import { OverlayBadgeModule } from 'primeng/overlaybadge';
 })
 export class HeaderComponent {
     private authService = inject(AuthService);
-    public translationService = inject(TranslationService);
     public cartService = inject(CartService);
     public userState = inject(UserStateService);
     private router = inject(Router);

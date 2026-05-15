@@ -1,41 +1,17 @@
-@import '../../../../styles/variables';
+@use '../../../../styles/variables' as *;
+@use '../../../../styles/shared-shells' as *;
 
 .order-management {
-  position: relative;
-  min-height: 100vh;
-  padding: clamp(1.25rem, 3vw, 2.5rem);
   background:
     radial-gradient(circle at top left, rgba($primary-light, 0.15), transparent 26%),
     radial-gradient(circle at top right, rgba($secondary-dark, 0.16), transparent 24%),
     linear-gradient(180deg, #f8fbff 0%, #edf4fb 100%);
-
-  &::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    background-image: linear-gradient(rgba($primary-color, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba($primary-color, 0.03) 1px, transparent 1px);
-    background-size: 30px 30px;
-    mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.55), transparent 90%);
-  }
-
-  .page-hero,
-  .table-shell {
-    position: relative;
-    z-index: 1;
-  }
+  @include page-shell(clamp(1.25rem, 3vw, 2.5rem), 30px, 90%);
 
   .page-hero {
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
-    gap: 1rem;
-    margin-bottom: 1.25rem;
-    padding: 1.5rem;
-    border-radius: $border-radius-xl;
-    border: 1px solid rgba($border-color-strong, 0.65);
-    background: rgba($surface-0, 0.9);
-    box-shadow: $shadow-lg;
+    @include hero-row(1.5rem);
+    @include glass-panel(null, rgba($surface-0, 0.9), rgba($border-color-strong, 0.65));
+    z-index: 2000;
 
     .eyebrow {
       margin: 0 0 0.35rem;
@@ -65,12 +41,13 @@
     gap: 0.75rem;
     flex-wrap: wrap;
     justify-content: flex-end;
+    align-items: flex-end;
   }
 
   .status-filter {
     display: grid;
     gap: 0.35rem;
-    min-width: 220px;
+    min-width: min(220px, 100%);
 
     span {
       font-size: $font-size-xs;
@@ -98,45 +75,10 @@
   }
 
   .table-shell {
-    padding: 1rem;
-    border-radius: $border-radius-xl;
-    border: 1px solid rgba($border-color-strong, 0.65);
-    background: rgba($surface-0, 0.84);
-    box-shadow: $shadow-lg;
-    backdrop-filter: blur(12px);
+    @include glass-panel(1rem, rgba($surface-0, 0.84), rgba($border-color-strong, 0.65));
+    overflow-x: auto;
   }
 
-  :host ::ng-deep .order-table {
-    .p-datatable-wrapper {
-      border-radius: $border-radius-lg;
-      overflow: hidden;
-    }
-
-    .p-datatable-thead > tr > th {
-      background: linear-gradient(180deg, $surface-50, $surface-100);
-      color: $primary-dark;
-      border-color: $border-color;
-      font-weight: $font-weight-semibold;
-    }
-
-    .p-datatable-tbody > tr {
-      background: $surface-0;
-
-      > td {
-        border-color: $border-color;
-        color: $text-color;
-      }
-
-      &:hover {
-        background: rgba($primary-light, 0.05);
-      }
-    }
-
-    .p-paginator {
-      border-top: 1px solid $border-color;
-      background: $surface-0;
-    }
-  }
 
   .primary-cell {
     display: grid;
@@ -173,11 +115,15 @@
     align-items: center;
     gap: 0.45rem;
     white-space: nowrap;
+    justify-content: flex-start;
   }
 
   .action-icon.p-button,
   .action-icon {
     color: $primary-color;
+    background: none;
+    border: none;
+   
   }
 
   .complete-btn.p-button,
@@ -205,12 +151,110 @@
       margin: 0;
     }
   }
+}
+
+@media (max-width: 1024px) {
+  .order-management {
+    :host ::ng-deep .order-table {
+      .p-datatable-thead > tr > th:nth-child(5),
+      .p-datatable-tbody > tr > td:nth-child(5) {
+        display: none;
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .order-management {
+    padding: 1rem;
+    @include page-shell(0, 30px, 90%);
+
+    .page-hero {
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 0.75rem;
+    }
+
+    .hero-controls {
+      width: 100%;
+      justify-content: flex-start;
+    }
+
+    .status-filter {
+      width: 100%;
+    }
+
+    .table-shell {
+      padding: 0.75rem;
+    }
+
+    :host ::ng-deep .order-table {
+      .p-datatable {
+        font-size: $font-size-sm;
+      }
+
+      .p-datatable-thead > tr > th {
+        padding: 0.6rem 0.5rem;
+        font-size: $font-size-xs;
+      }
+
+      .p-datatable-tbody > tr > td {
+        padding: 0.6rem 0.5rem;
+
+        &.order-id-cell {
+          font-size: 0.8rem;
+        }
+
+        &.action-cell {
+          gap: 0.25rem;
+        }
+      }
+
+      .p-datatable-thead > tr > th:nth-child(2),
+      .p-datatable-tbody > tr > td:nth-child(2),
+      .p-datatable-thead > tr > th:nth-child(5),
+      .p-datatable-tbody > tr > td:nth-child(5),
+      .p-datatable-thead > tr > th:nth-child(6),
+      .p-datatable-tbody > tr > td:nth-child(6) {
+        display: none;
+      }
+
+      .primary-cell {
+        gap: 0.1rem;
+      }
+
+      .cell-title {
+        font-size: $font-size-xs;
+      }
+
+      .cell-subtitle {
+        font-size: 0.65rem;
+      }
+
+      .p-paginator {
+        padding: 0.5rem;
+        font-size: $font-size-xs;
+
+        .p-paginator-current {
+          display: none;
+        }
+      }
+    }
+
+    .complete-btn.p-button,
+    .complete-btn {
+      min-height: 2rem;
+      padding: 0.4rem 0.6rem;
+      font-size: $font-size-xs;
+    }
+  }
+}
 
   .order-id-cell {
     color: $primary-light;
     font-weight: $font-weight-semibold;
   }
-}
+
 
 @media (max-width: 900px) {
   .order-management {
@@ -221,6 +265,7 @@
 
     .hero-controls {
       justify-content: flex-start;
+      width: 100%;
     }
   }
 }
@@ -235,8 +280,21 @@
       border-radius: $border-radius-lg;
     }
 
+    .status-filter {
+      width: 100%;
+
+      select {
+        min-width: 0;
+      }
+    }
+
     .action-cell {
       flex-wrap: wrap;
+    }
+
+    .complete-btn.p-button,
+    .complete-btn {
+      width: 100%;
     }
   }
 }

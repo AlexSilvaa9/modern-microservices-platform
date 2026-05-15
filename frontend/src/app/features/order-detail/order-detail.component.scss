@@ -391,14 +391,6 @@
   border-radius: $border-radius;
 }
 
-.admin-actions {
-  display: flex;
-  gap: 1rem;
-  padding: 1.5rem;
-  background: rgba($primary-light, 0.08);
-  border-radius: $border-radius-xl;
-  border: 1px solid rgba($primary-light, 0.15);
-}
 
 :host ::ng-deep .admin-actions {
   button {

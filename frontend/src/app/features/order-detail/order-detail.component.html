@@ -1,6 +1,6 @@
 <div class="order-detail-shell">
   <header class="detail-hero">
-    <button class="back-btn" (click)="goBack()">← {{ 'ORDER_DETAIL.BACK' | translate }}</button>
+    <button class="btn back" (click)="goBack()">← {{ 'ORDER_DETAIL.BACK' | translate }}</button>
 
     <div class="hero-copy">
       <p class="eyebrow">{{ 'ORDER_DETAIL.EYEBROW' | translate }}</p>
@@ -84,9 +84,7 @@
       </section>
 
       @if (isAdmin() && !isCompleted(order()!)) {
-        <div class="admin-actions">
-          <button pButton type="button" [label]="'ORDER_DETAIL.MARK_COMPLETED' | translate" icon="pi pi-check" (click)="completeOrder()"></button>
-        </div>
+          <button type="button" class="btn secondary"  icon="pi pi-check" (click)="completeOrder()">{{ 'ORDER_DETAIL.MARK_COMPLETED' | translate }}</button>
       }
     </div>
   }

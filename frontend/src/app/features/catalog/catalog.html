@@ -19,7 +19,7 @@
 				<p class="empty-icon">⚠</p>
 				<h2>{{ 'GENERAL.ERROR' | translate }}</h2>
 				<p>{{ error() }}</p>
-				<button type="button" class="catalog-btn catalog-btn--primary" (click)="retry()">
+				<button type="button" class="btn primary" (click)="retry()">
 					{{ 'GENERAL.RETRY' | translate }}
 				</button>
 			</div>
@@ -43,7 +43,7 @@
 							<div class="catalog-actions">
 							<button 
 								type="button" 
-								class="catalog-btn catalog-btn--primary" 
+								class="btn primary" 
 								(click)="addToCart(product, $event)"
 							>
 									{{ 'CATALOG.ADD_TO_CART' | translate }}

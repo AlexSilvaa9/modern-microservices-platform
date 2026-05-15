@@ -3,6 +3,9 @@
         <h2>{{ 'LOGIN.WELCOME' | translate }}</h2>
         <p>{{ 'LOGIN.SUBTITLE' | translate }}</p>
 
+        <div *ngIf="isLoginDatabaseEnabled">
+
+        
         <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
 
             <div class="form-group">
@@ -21,7 +24,7 @@
                 </div>
             </div>
 
-            <button type="submit" class="p-button" [disabled]="isLoading">
+            <button type="submit" class="btn primary" style="width: 100%; margin-top: 1rem;" [disabled]="isLoading">
                 {{ isLoading ? ('GENERAL.LOADING' | translate) : ('LOGIN.SUBMIT' | translate) }}
             </button>
 
@@ -30,8 +33,8 @@
         <div class="p-divider">
             <span>OR</span>
         </div>
-
-        <button type="button" class="p-button p-button-outlined" (click)="loginWithGoogle()">
+        </div>
+        <button type="button" class="btn secondary" (click)="loginWithGoogle()">
             <svg viewBox="0 0 24 24" width="20" height="20" xmlns="http://www.w3.org/2000/svg">
                 <g transform="matrix(1, 0, 0, 1, 27.009001, -39.238598)">
                     <path fill="#4285F4"

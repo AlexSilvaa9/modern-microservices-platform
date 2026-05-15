@@ -6,14 +6,16 @@
       <p class="subtitle">{{ 'ORDER_MANAGEMENT.SUBTITLE' | translate }}</p>
     </div>
 
-    <div class="hero-controls">
       <label class="status-filter">
         <span>{{ 'ORDER_MANAGEMENT.STATUS_FILTER' | translate }}</span>
-        <select [ngModel]="selectedStatus()" (ngModelChange)="onStatusChange($event)">
-          <option *ngFor="let status of statuses" [value]="status">{{ 'ORDER_STATUS.' + status | translate }}</option>
-        </select>
+        <app-dropdown
+              [options]="statuses"
+              [selected]="selectedStatus()"
+              (selectedChange)="onStatusChange()">
+          </app-dropdown>
+     
       </label>
-    </div>
+  
   </section>
 
   <section class="table-shell">
@@ -64,20 +66,12 @@
               pButton
               type="button"
               icon="pi pi-eye"
-              class="p-button-rounded p-button-text action-icon"
+              class="action-icon"
               (click)="viewOrderDetail(order)"
               [pTooltip]="'ORDER_MANAGEMENT.VIEW_DETAILS' | translate"
               tooltipPosition="left"
             ></button>
-            <button
-              pButton
-              type="button"
-              [label]="'ORDER_MANAGEMENT.COMPLETE' | translate"
-              icon="pi pi-check"
-              [disabled]="isCompleted(order)"
-              (click)="completeOrder(order)"
-              class="complete-btn"
-            ></button>
+
           </td>
         </tr>
       </ng-template>

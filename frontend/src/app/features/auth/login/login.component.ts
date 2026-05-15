@@ -5,7 +5,7 @@ import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../../core/services/api/auth.service';
 import { ErrorService } from '../../../core/services/global-state/error.service';
 import { TranslatePipe } from '../../../shared/pipes/translate.pipe';
-
+import { environment } from '../../../../environments/environment';
 @Component({
     selector: 'app-login',
     standalone: true,
@@ -26,7 +26,7 @@ export class LoginComponent {
     });
 
     isLoading = false;
-
+    isLoginDatabaseEnabled = environment.enableDatabaseLogging;
     loginWithGoogle() {
         this.authService.loginWithGoogle();
     }

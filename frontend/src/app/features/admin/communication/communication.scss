@@ -220,59 +220,7 @@
   margin-top: 1.15rem;
 }
 
-.action-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 2.9rem;
-  padding: 0.75rem 1rem;
-  border-radius: $border-radius-full;
-  border: 0;
-  cursor: pointer;
-  font: inherit;
-  font-weight: $font-weight-semibold;
-  transition: transform $transition-fast, box-shadow $transition-fast, background-color $transition-fast, color $transition-fast, border-color $transition-fast;
-}
 
-.action-btn:disabled {
-  cursor: wait;
-  opacity: 0.75;
-}
-
-.action-btn.primary {
-  background: $primary-color;
-  color: $primary-contrast;
-  box-shadow: $shadow-sm;
-}
-
-.action-btn.primary:hover:not(:disabled) {
-  transform: translateY(-1px);
-  background: $primary-hover;
-  box-shadow: $shadow-md;
-}
-
-.action-btn.secondary {
-  background: $surface-0;
-  border: 1px solid $border-color;
-  color: $primary-color;
-}
-
-.action-btn.secondary:hover:not(:disabled) {
-  transform: translateY(-1px);
-  border-color: $primary-light;
-  box-shadow: $shadow-sm;
-}
-
-.action-btn.tertiary {
-  background: rgba($warning-color, 0.12);
-  border: 1px solid rgba($warning-color, 0.18);
-  color: $warning-color;
-}
-
-.action-btn.tertiary:hover:not(:disabled) {
-  transform: translateY(-1px);
-  background: rgba($warning-color, 0.16);
-}
 
 .side-stack {
   display: grid;

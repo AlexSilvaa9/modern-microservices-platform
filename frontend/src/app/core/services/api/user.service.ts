@@ -4,6 +4,8 @@ import { Observable } from 'rxjs';
 
 import { BaseApiResponse, Role, UserDTO } from '../../models/user.model';
 import { Page } from '../../models/page.model';
+import { SupportedLanguage } from '../global-state/translation.service';
+import { environment } from '../../../../environments/environment';
 
 /** Interfaz para respuestas paginadas */
 
@@ -14,8 +16,8 @@ import { Page } from '../../models/page.model';
 export class UserService {
     private http = inject(HttpClient);
 
-    private readonly GATEWAY_URL = 'http://localhost:8080/api';
-    private readonly USERS_URL = `${this.GATEWAY_URL}/user/`;
+    private readonly GATEWAY_URL = environment.apiUrl;
+    private readonly USERS_URL = `${this.GATEWAY_URL}user/`;
  
 
      
@@ -57,6 +59,10 @@ export class UserService {
     setRoles(userId: string, roles: Role[] = []): Observable<BaseApiResponse<null>> {
         const url = `${this.USERS_URL}setRoles?uuid=${userId}`;
         return this.http.patch<BaseApiResponse<null>>(url, roles);
+    }
+    setPreferredLanguage(userId: string, lang: SupportedLanguage): Observable<BaseApiResponse<null>> {
+        const url = `${this.USERS_URL}setPreferredLanguage?uuid=${userId}&language=${lang}`;
+        return this.http.patch<BaseApiResponse<null>>(url, null);
     }
    
 }

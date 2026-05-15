@@ -28,7 +28,11 @@ export const SIDEBAR_MENU: SidebarGroup[] = [
         icon: PrimeIcons.RECEIPT,
         route: '/orders/history',
     },
-
+    {
+        label: 'SIDEBAR.PROFILE',
+        icon: PrimeIcons.USER,
+        route: '/userdetail',
+    },
 
     {
         label: 'SIDEBAR.ADMINISTRATION',

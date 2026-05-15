@@ -11,6 +11,8 @@
     "SIDEBAR.SEO": "SEO",
     "SIDEBAR.USERS": "Usuarios",
     "SIDEBAR.CART": "Carrito",
+    "SIDEBAR.PROFILE": "Mi perfil",
+
     "LANDING.HERO.TITLE": "Construye aplicaciones modernas sin fricción",
     "LANDING.HERO.SUBTITLE": "Una plataforma cloud-native diseñada para escalar, adaptarse y evolucionar contigo.",
     "LANDING.HERO.CTA_PRIMARY": "Comenzar ahora",
@@ -393,6 +395,8 @@
     "USER_DETAIL.DEACTIVATE_USER": "Desactivar usuario",
     "USER_DETAIL.USER_ENABLED": "Usuario activado",
     "USER_DETAIL.USER_DISABLED": "Usuario desactivado",
+    "USER_DETAIL.PREFERRED_LANGUAGE": "Idioma preferido",
+    "USER_DETAIL.USER_PREFERRED_LANGUAGE_UPDATED": "Idioma preferido actualizado",
     "USER_DETAIL.USER_STATUS_UPDATE_ERROR": "No se pudo actualizar el estado del usuario",
     "ORDER_STATUS.PENDING_PAYMENT": "Pendiente de pago",
     "ORDER_STATUS.PAID": "Pagado",

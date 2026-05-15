@@ -105,7 +105,7 @@
       </form>
 
       <div class="action-row">
-        <button type="button" class="action-btn primary" [disabled]="isSubmitting()" (click)="sendNow()">
+        <button type="button" class="secondaty" [disabled]="isSubmitting()" (click)="sendNow()">
           {{ isSubmitting() ? ('COMMUNICATION.SENDING' | translate) : ('COMMUNICATION.SEND_NOW' | translate) }}
         </button>
       </div>

@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, inject, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
@@ -10,11 +10,12 @@ import { OrderDTO, OrderStatus } from '../../../core/models/order.model';
 import { OrderService } from '../../../core/services/api/order.service';
 import { ErrorService } from '../../../core/services/global-state/error.service';
 import { TranslatePipe } from '../../../shared/pipes/translate.pipe';
+import { DropdownComponent, DropdownOption } from "../../../shared/components/dropdown/dropdown.component";
 
 @Component({
   selector: 'app-order-management',
   standalone: true,
-  imports: [CommonModule, FormsModule, TableModule, ButtonModule, SkeletonModule, TooltipModule, TranslatePipe],
+  imports: [CommonModule, FormsModule, TableModule, ButtonModule, SkeletonModule, TooltipModule, TranslatePipe, DropdownComponent],
   templateUrl: './order-management.html',
   styleUrl: './order-management.scss'
 })
@@ -24,8 +25,12 @@ export class OrderManagementComponent {
   private readonly errorService = inject(ErrorService);
 
   OrderStatus = OrderStatus;
-  statuses = Object.values(OrderStatus);
-
+statuses: DropdownOption[] = Object.values(OrderStatus)
+  .filter((value) => typeof value === 'string')
+  .map((value) => ({
+    label: value,
+    value
+  }));  
   orders = signal<OrderDTO[]>([]);
   totalRecords = signal(0);
   loading = signal(false);
@@ -59,14 +64,16 @@ export class OrderManagementComponent {
   }
 
   onPageChange(event: any) {
+    console.log('Available statuses:', this.statuses);
     const page = Math.floor((event.first || 0) / (event.rows || this.rows()));
     const pageSize = event.rows || this.rows();
 
     this.loadOrders(page, pageSize, this.selectedStatus());
   }
 
-  onStatusChange(status: string) {
-    this.loadOrders(0, this.rows(), status as OrderStatus);
+  onStatusChange() {
+
+    this.loadOrders(0, this.rows(), this.selectedStatus());
   }
 
   completeOrder(order: OrderDTO) {

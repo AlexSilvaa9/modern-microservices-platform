@@ -8,6 +8,7 @@ import { EventDTO } from '../../models/event.model';
 import { AnalyticsSummaryDTO } from '../../models/analytics-summary.model';
 import { SKIP_LOADING } from '../../interceptors/loading.interceptor';
 import { ErrorService } from '../global-state/error.service';
+import { environment } from '../../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -82,9 +83,7 @@ export class AnalyticsService implements OnDestroy {
     const eventsToSend = [...this.eventQueue];
     this.eventQueue = [];
 
-    console.log('📤 Sending analytics batch:', eventsToSend);
-
-    this.http.post<void>('http://localhost:8080/api/user/events/batch', eventsToSend
+    this.http.post<void>(`${environment.apiUrl}user/events/batch`, eventsToSend
       , {
         context: new HttpContext().set(SKIP_LOADING, true)
       }
@@ -94,7 +93,6 @@ export class AnalyticsService implements OnDestroy {
       )
       .subscribe({
         next: () => {
-          console.log('✅ Analytics batch sent successfully');
         },
         error: (err) => {
           this.errorService.showError({
@@ -108,7 +106,7 @@ export class AnalyticsService implements OnDestroy {
   }
 
   public getSummary() {
-    return this.http.get<AnalyticsSummaryDTO>('http://localhost:8080/api/user/analytics/summary');
+    return this.http.get<AnalyticsSummaryDTO>(`${environment.apiUrl}user/analytics/summary`);
   }
 
   public forceFlush(): void {

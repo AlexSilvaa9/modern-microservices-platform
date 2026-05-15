@@ -1,29 +1,14 @@
 @use '../../../../styles/variables' as *;
+@use '../../../../styles/shared-shells' as *;
 
 .auth-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: calc(100vh - 72px);
-    /* matching header height roughly */
-    background: $bg;
-    padding: $space-4;
-    min-height: 100vh;
+    @include auth-shell();
 
 }
 
 .auth-card {
+    @include auth-card();
     background: $surface-0;
-    width: 100%;
-    max-width: 420px;
-    padding: $space-8;
-    border-radius: $border-radius-xl;
-    box-shadow: $shadow-lg;
-    display: flex;
-    flex-direction: column;
-    gap: $space-6;
-    animation: slideUp 0.4s ease-out forwards;
-    margin: 2%;
 
     h2 {
         margin: 0;
@@ -55,25 +40,7 @@
     }
 
     .p-inputtext {
-        width: 100%;
-        padding: $space-3 $space-4;
-        border: 1px solid $border-color;
-        border-radius: $border-radius-lg;
-        font-size: $font-size-base;
-        background: $surface-50;
-        transition: all $transition-base;
-        color: $text-color;
-
-        &::placeholder {
-            color: $text-muted;
-        }
-
-        &:focus {
-            outline: none;
-            background: $surface-0;
-            border-color: $primary-light;
-            box-shadow: 0 0 0 4px rgba($primary-light, 0.15);
-        }
+        @include auth-form-input;
     }
 }
 
@@ -95,59 +62,6 @@
     font-weight: $font-weight-medium;
     text-align: center;
     border: 1px solid rgba($error-color, 0.2);
-}
-
-.p-button {
-    width: 100%;
-    padding: $space-3 $space-4;
-    margin-top: $space-4;
-    border: none;
-    border-radius: $border-radius-lg;
-    background: $primary-color;
-    color: $primary-contrast;
-    font-size: $font-size-base;
-    font-weight: $font-weight-semibold;
-    cursor: pointer;
-    transition: all $transition-base;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: $space-3;
-    box-shadow: 0 4px 12px rgba($primary-color, 0.2);
-
-    &:hover {
-        background: $primary-hover;
-        transform: translateY(-2px);
-        box-shadow: 0 6px 16px rgba($primary-color, 0.3);
-    }
-
-    &:active {
-        transform: translateY(0);
-    }
-
-    &:disabled {
-        opacity: 0.6;
-        cursor: not-allowed;
-        transform: none;
-        box-shadow: none;
-    }
-}
-
-.p-button-outlined {
-    background: $surface-0;
-    border: 1px solid $border-color-strong;
-    color: $text-color;
-    box-shadow: $shadow-sm;
-
-    &:hover {
-        background: $surface-50;
-        border-color: $text-color;
-        box-shadow: $shadow-md;
-    }
-
-    svg {
-        margin-right: -4px;
-    }
 }
 
 .p-divider {
@@ -193,17 +107,5 @@
             color: $primary-hover;
             text-decoration: underline;
         }
-    }
-}
-
-@keyframes slideUp {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
     }
 }

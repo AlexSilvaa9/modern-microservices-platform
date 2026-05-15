@@ -2,13 +2,14 @@ import { inject, Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { UserDTO } from '../../models/user.model';
 import { CartService } from './cart.service';
+import { TranslationService } from './translation.service';
 
 @Injectable({
     providedIn: 'root'
 })
 export class UserStateService {
     private cartService = inject(CartService);
-
+    private translationService = inject(TranslationService);
     private readonly _currentUser = new BehaviorSubject<UserDTO | null>(null);
 
     /** Observable for components to subscribe to user changes */
@@ -20,6 +21,8 @@ export class UserStateService {
         if (user) {
             // Optionally, load user-specific data like cart here
             this.cartService.loadCart();
+            console.log('User loaded in state:', user.preferredLanguage);
+            this.translationService.setLanguage(user.preferredLanguage || 'es');
         }
 
 

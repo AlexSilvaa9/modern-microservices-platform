@@ -1,15 +1,13 @@
 <div class="blog-shell">
     <section class="hero">
-        <div class="hero-copy">
+        <div class="card">
             <p class="eyebrow">{{ 'BLOG.EYEBROW' | translate }}</p>
             <h1>{{ 'BLOG.HERO.TITLE' | translate }}</h1>
             <p class="lead">{{ 'BLOG.HERO.SUBTITLE' | translate }}</p>
-            <div class="status">{{ 'BLOG.STATUS' | translate }}</div>
         </div>
 
-        <aside class="hero-notes">
-            <div class="note-card note-card--highlight">
-                <span>{{ 'BLOG.OVERVIEW.KICKER' | translate }}</span>
+        <aside class="card">
+            <div class="inner-card">
                 <strong>{{ 'BLOG.OVERVIEW.TITLE' | translate }}</strong>
                 <p>{{ 'BLOG.OVERVIEW.TEXT' | translate }}</p>
             </div>
@@ -49,7 +47,7 @@
 
         <div class="tech-grid">
             @for (card of backendCards; track card.titleKey) {
-                <article class="tech tech--backend">
+                <article class="card">
                     <h3>{{ card.titleKey | translate }}</h3>
                     <p class="desc">{{ card.descKey | translate }}</p>
                     <p class="use">{{ card.noteKey | translate }}</p>
@@ -69,11 +67,11 @@
 
         <div class="tech-grid">
             @for (card of frontendCards; track card.titleKey) {
-                <article class="tech tech--frontend">
+                <div class="card">
                     <h3>{{ card.titleKey | translate }}</h3>
                     <p class="desc">{{ card.descKey | translate }}</p>
                     <p class="use">{{ card.noteKey | translate }}</p>
-                </article>
+                </div>
             }
         </div>
     </section>
@@ -89,10 +87,10 @@
 
         <div class="flow-grid">
             @for (flow of flowCards; track flow.titleKey) {
-                <article class="flow-card">
+                <div class="card">
                     <strong>{{ flow.titleKey | translate }}</strong>
                     <p>{{ flow.descKey | translate }}</p>
-                </article>
+                </div>
             }
         </div>
     </section>
@@ -108,7 +106,7 @@
 
         <div class="highlight-grid">
             @for (highlight of highlights; track highlight.titleKey) {
-                <article class="highlight-card">
+                <article class="card">
                     <strong>{{ highlight.titleKey | translate }}</strong>
                     <p>{{ highlight.descKey | translate }}</p>
                 </article>
@@ -116,22 +114,4 @@
         </div>
     </section>
 
-    <section class="roadmap">
-        <div class="section-heading section-heading--center">
-            <div>
-                <p class="section-kicker">{{ 'BLOG.CLOSING.KICKER' | translate }}</p>
-                <h2>{{ 'BLOG.CLOSING.TITLE' | translate }}</h2>
-            </div>
-            <p>{{ 'BLOG.CLOSING.SUBTITLE' | translate }}</p>
-        </div>
-
-        <ul>
-            <li>{{ 'BLOG.CLOSING.ITEM1' | translate }}</li>
-            <li>{{ 'BLOG.CLOSING.ITEM2' | translate }}</li>
-            <li>{{ 'BLOG.CLOSING.ITEM3' | translate }}</li>
-            <li>{{ 'BLOG.CLOSING.ITEM4' | translate }}</li>
-            <li>{{ 'BLOG.CLOSING.ITEM5' | translate }}</li>
-            <li>{{ 'BLOG.CLOSING.ITEM6' | translate }}</li>
-        </ul>
-    </section>
 </div>

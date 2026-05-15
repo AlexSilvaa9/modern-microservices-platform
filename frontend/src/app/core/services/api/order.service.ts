@@ -3,6 +3,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { BaseApiResponse } from '../../models/user.model';
 import { OrderPage, OrderStatus } from '../../models/order.model';
+import { environment } from '../../../../environments/environment';
 
 @Injectable({
     providedIn: 'root'
@@ -10,8 +11,8 @@ import { OrderPage, OrderStatus } from '../../models/order.model';
 export class OrderService {
     private http = inject(HttpClient);
 
-    private readonly GATEWAY_URL = 'http://localhost:8080/api';
-    private readonly ORDER_URL = `${this.GATEWAY_URL}/order`;
+    private readonly GATEWAY_URL = environment.apiUrl;
+    private readonly ORDER_URL = `${this.GATEWAY_URL}order`;
     
 
     checkout(): Observable<BaseApiResponse<string>> {

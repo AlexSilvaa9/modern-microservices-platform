@@ -3,8 +3,6 @@
     <!-- HERO -->
     <div class="hero">
         <div class="hero-content">
-
-
             <h1>
                 {{ 'LANDING.HERO.TITLE' | translate }}
             </h1>
@@ -14,13 +12,13 @@
             </p>
 
             <div class="hero-actions">
-                <a routerLink="/catalog" class="btn primary">
+                <button routerLink="/catalog" class="btn primary">
                     {{ 'LANDING.HERO.CTA_PRIMARY' | translate }}
-                </a>
+                </button>
 
-                <a routerLink="/auth/login" class="btn secondary">
+                <button routerLink="/auth/login" class="btn secondary">
                     {{ 'LANDING.HERO.CTA_SECONDARY' | translate }}
-                </a>
+                </button>
             </div>
 
         </div>
@@ -29,17 +27,17 @@
     <!-- FEATURES -->
     <div class="features">
 
-        <div class="feature">
+        <div class="card">
             <h3>{{ 'LANDING.FEATURES.SCALABLE.TITLE' | translate }}</h3>
             <p>{{ 'LANDING.FEATURES.SCALABLE.DESC' | translate }}</p>
         </div>
 
-        <div class="feature">
+        <div class="card">
             <h3>{{ 'LANDING.FEATURES.EVENT.TITLE' | translate }}</h3>
             <p>{{ 'LANDING.FEATURES.EVENT.DESC' | translate }}</p>
         </div>
 
-        <div class="feature">
+        <div class="card">
             <h3>{{ 'LANDING.FEATURES.CLOUD.TITLE' | translate }}</h3>
             <p>{{ 'LANDING.FEATURES.CLOUD.DESC' | translate }}</p>
         </div>

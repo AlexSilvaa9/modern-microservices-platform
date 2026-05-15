@@ -109,7 +109,7 @@
         }
 
         &.accent {
-          background: linear-gradient(135deg, $primary-color, $primary-light);
+          background: linear-gradient(135deg, $primary-color, $secondary-light);
           border-color: transparent;
 
           .stat-value,

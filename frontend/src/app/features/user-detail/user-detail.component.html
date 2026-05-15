@@ -3,7 +3,7 @@
 
     <ng-container *ngIf="user; else emptyState">
     <section class="hero-panel">
-        <button pButton type="button" icon="pi pi-arrow-left" [label]="'USER_DETAIL.BACK' | translate" class="back-btn p-button-text" (click)="back()"></button>
+        <button type="button"class="btn back" (click)="back()">⇐ {{ 'USER_DETAIL.BACK' | translate }}</button>
 
         <div class="hero-copy">
             <p class="eyebrow">{{ 'USER_DETAIL.EYEBROW' | translate }}</p>
@@ -117,10 +117,23 @@
                     </div>
                 </div>
 
+                   <div class="field-row field-row--stacked">
+                    <div class="field-group">
+                        <label>{{ 'USER_DETAIL.PREFERRED_LANGUAGE' | translate }}</label>
+                        <app-dropdown
+                            [options]="languages"
+                            [(selected)]="selectedLanguage"
+                            (selectedChange)="setPreferredLanguage($event)">
+                        </app-dropdown>
+                    </div>
+                </div>
+
+           
+
                 <div class="action-strip" *ngIf="showActions">
-                    <button pButton type="button" [label]="'USER_DETAIL.UPDATE_ROLES' | translate" icon="pi pi-users" (click)="saveRoles()" [loading]="isProcessing" class="action-btn action-btn--secondary"></button>
-                    <button pButton *ngIf="!isUserEnabled" type="button" [label]="'USER_DETAIL.ACTIVATE_USER' | translate" icon="pi pi-check-circle" (click)="enableUser()" [loading]="isProcessing" class="action-btn action-btn--primary"></button>
-                    <button pButton *ngIf="isUserEnabled" type="button" [label]="'USER_DETAIL.DEACTIVATE_USER' | translate" icon="pi pi-ban" (click)="disableUser()" [loading]="isProcessing" class="action-btn action-btn--secondary"></button>
+                    <button type="button" icon="pi pi-users" (click)="saveRoles()" class="btn primary">{{ 'USER_DETAIL.UPDATE_ROLES' | translate }}</button>
+                    <button type="button" *ngIf="!isUserEnabled"  icon="pi pi-check-circle" (click)="enableUser()"  class="btn primary">{{ 'USER_DETAIL.ACTIVATE_USER' | translate }}</button>
+                    <button type="button" *ngIf="isUserEnabled"  icon="pi pi-ban" (click)="disableUser()" class="btn secondary">{{ 'USER_DETAIL.DEACTIVATE_USER' | translate }}</button>
                 </div>
 
                 <div class="note-card" *ngIf="!showActions">
@@ -141,7 +154,7 @@
             <i class="pi pi-user"></i>
             <h2>{{ 'USER_DETAIL.EMPTY_TITLE' | translate }}</h2>
             <p>{{ 'USER_DETAIL.EMPTY_TEXT' | translate }}</p>
-            <button pButton type="button" [label]="'USER_DETAIL.BACK' | translate" icon="pi pi-arrow-left" (click)="back()" class="action-btn action-btn--primary"></button>
+            <button type="button"  icon="pi pi-arrow-left" (click)="back()" class="back">{{ 'USER_DETAIL.BACK' | translate }}</button>
         </div>
     </section>
     </ng-template>

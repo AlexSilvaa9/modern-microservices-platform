@@ -62,28 +62,82 @@ a {
     }
 }
 
-// Botones
-button {
-    font-family: inherit;
-    font-size: $font-size-sm;
-    border: none;
-    border-radius: $border-radius;
-    padding: $space-2 $space-4;
-    cursor: pointer;
-    transition: $transition-fast;
+
+
+.btn {
+    position: relative;
+    overflow: hidden;
+    padding: $space-3 $space-6;
+    border-radius: $border-radius-full;
+    font-weight: $font-weight-semibold;
+    transition: $transition-base;
+}
+
+.btn.primary {
     background: $primary-color;
     color: $primary-contrast;
-
+    box-shadow: $shadow-lg;
+    
     &:hover {
+        transform: translateY(-3px);
         background: $primary-hover;
     }
 
-    &:disabled {
-        opacity: 0.6;
-        cursor: not-allowed;
+    &::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(120deg,
+                transparent,
+                rgba(255, 255, 255, 0.3),
+                transparent);
+        opacity: 0;
+    }
+
+    &:hover::after {
+        opacity: 1;
+        animation: shine 0.8s;
     }
 }
+.btn.secondary {
+    background: $secondary-color;
+    color: $secondary-contrast;
+    box-shadow: $shadow-sm;
+    border: 1px solid $secondary-dark;
 
+    &:hover {
+        transform: translateY(-3px);
+        background: $secondary-hover;
+        box-shadow: $shadow-md;
+    }
+
+    &::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+            120deg,
+            transparent,
+            rgba(255, 255, 255, 0.35),
+            transparent
+        );
+        opacity: 0;
+    }
+
+    &:hover::after {
+        opacity: 1;
+        animation: shine 0.8s;
+    }
+}
+.btn.back {
+    background: transparent;
+    color: $primary-color;
+    border: none;
+    
+    &:hover {
+        translate: -3px 0;
+    }
+}
 // Inputs
 input,
 textarea,
@@ -111,6 +165,13 @@ select {
     box-shadow: $card-shadow;
     padding: $space-4;
 }
+.inner-card {
+    background: $surface-300;
+    border-radius: $border-radius;
+    padding: $space-3;
+    border: 1px solid $border-color;
+    box-shadow: $shadow-sm;
+}
 
 // Separador
 hr {
@@ -131,4 +192,22 @@ hr {
 
 ::-webkit-scrollbar-thumb:hover {
     background: $surface-500;
+}
+.hero {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: clamp(2.5rem, 7vw, 5rem) clamp(1rem, 4vw, 3rem);
+    text-align: center;
+}
+
+/* HERO CONTENT */
+.hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 700px;
+    width: min(100%, 700px);
+    animation: fadeUp 0.8s ease-out both;
+
 }

@@ -17,6 +17,7 @@ export interface UserDTO {
     enabled?: boolean;
     imageUrl?: string;
     providers?: IdentityProvider[];
+    preferredLanguage?: string;
 }
 
 export interface BaseApiResponse<T> {

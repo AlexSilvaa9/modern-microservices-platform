@@ -6,7 +6,7 @@ import esTranslations from '../../../../../public/resources/i18n/es.json';
 import frTranslations from '../../../../../public/resources/i18n/fr.json';
 
 export type SupportedLanguage = 'en' | 'es' | 'de' | 'fr';
-const LANGUAGES: SupportedLanguage[] = ['en', 'es', 'de', 'fr'];
+export const LANGUAGES: SupportedLanguage[] = ['en', 'es', 'de', 'fr'];
 
 @Injectable({
     providedIn: 'root'

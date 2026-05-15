@@ -8,8 +8,7 @@
     transition: $transition-base;
     display: flex;
     flex-direction: column;
-
-
+    z-index: -1;
 
 }
 
@@ -102,5 +101,12 @@
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
+    }
+}
+@media (max-width: 768px) {
+
+    .sidebar {
+        height: auto;
+        min-height: auto;
     }
 }

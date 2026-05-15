@@ -1,41 +1,17 @@
-@import '../../../../styles/variables';
+@use '../../../../styles/variables' as *;
+@use '../../../../styles/shared-shells' as *;
 
 .order-history {
-  position: relative;
-  min-height: 100vh;
-  padding: clamp(1.25rem, 3vw, 2.5rem);
   background:
     radial-gradient(circle at top left, rgba($primary-light, 0.15), transparent 26%),
     radial-gradient(circle at top right, rgba($secondary-dark, 0.16), transparent 24%),
     linear-gradient(180deg, #f8fbff 0%, #edf4fb 100%);
-
-  &::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    background-image: linear-gradient(rgba($primary-color, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba($primary-color, 0.03) 1px, transparent 1px);
-    background-size: 30px 30px;
-    mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.55), transparent 90%);
-  }
-
-  .page-hero,
-  .table-shell {
-    position: relative;
-    z-index: 1;
-  }
+  @include page-shell(clamp(1.25rem, 3vw, 2.5rem), 30px, 90%);
 
   .page-hero {
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
-    gap: 1rem;
-    margin-bottom: 1.25rem;
-    padding: 1.5rem;
-    border-radius: $border-radius-xl;
-    border: 1px solid rgba($border-color-strong, 0.65);
-    background: rgba($surface-0, 0.9);
-    box-shadow: $shadow-lg;
+    @include hero-row(1.5rem);
+    @include glass-panel(null, rgba($surface-0, 0.9), rgba($border-color-strong, 0.65));
+    
 
     .eyebrow {
       margin: 0 0 0.35rem;
@@ -60,73 +36,12 @@
     }
   }
 
-  .hero-chip {
-    min-width: 8.5rem;
-    padding: 1rem 1.1rem;
-    border-radius: $border-radius-lg;
-    background: linear-gradient(135deg, $primary-color, $primary-light);
-    color: $primary-contrast;
-    box-shadow: $shadow-sm;
 
-    span {
-      display: block;
-      margin-bottom: 0.35rem;
-      font-size: $font-size-xs;
-      font-weight: $font-weight-bold;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      opacity: 0.85;
-    }
-
-    strong {
-      font-size: 1.75rem;
-    }
-  }
 
   .table-shell {
-    padding: 1rem;
-    border-radius: $border-radius-xl;
-    border: 1px solid rgba($border-color-strong, 0.65);
-    background: rgba($surface-0, 0.84);
-    box-shadow: $shadow-lg;
-    backdrop-filter: blur(12px);
+    @include glass-panel(1rem, rgba($surface-0, 0.84), rgba($border-color-strong, 0.65));
   }
 
-  :host ::ng-deep .history-table {
-    .p-datatable-wrapper {
-      border-radius: $border-radius-lg;
-      overflow: hidden;
-    }
-
-    .p-datatable-thead > tr > th {
-      background: linear-gradient(180deg, $surface-50, $surface-100);
-      color: $primary-dark;
-      border-color: $border-color;
-      font-weight: $font-weight-semibold;
-    }
-
-    .p-datatable-tbody > tr {
-      background: $surface-0;
-
-      > td {
-        border-color: $border-color;
-        color: $text-color;
-      }
-
-      &:hover {
-        background: rgba($primary-light, 0.05);
-      }
-    }
-
-    .p-paginator {
-      border-top: 1px solid $border-color;
-      background: $surface-0;
-    }
-  }
-
-  .not-completed {
-    background: rgba($warning-color, 0.08) !important;
-  }
 
   .status-pill {
     display: inline-flex;
@@ -143,18 +58,16 @@
     }
   }
 
-  .order-id-cell {
-    color: $primary-light;
-    font-weight: $font-weight-semibold;
-  }
-
   .action-cell {
     white-space: nowrap;
+    display: flex;
+    justify-content: flex-start;
   }
 
-  .action-icon.p-button,
   .action-icon {
     color: $primary-color;
+    background: none;
+    border: none;
   }
 
   .empty-state {
@@ -175,23 +88,92 @@
   }
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1024px) {
   .order-history {
+    :host ::ng-deep .history-table {
+      .p-datatable-thead > tr > th:nth-child(4),
+      .p-datatable-tbody > tr > td:nth-child(4),
+      .p-datatable-thead > tr > th:nth-child(5),
+      .p-datatable-tbody > tr > td:nth-child(5) {
+        display: none;
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .order-history {
+    padding: 1rem;
+
+    .page-hero,
+    .table-shell {
+      padding: 0.75rem;
+      border-radius: $border-radius-lg;
+    }
+
     .page-hero {
       flex-direction: column;
       align-items: flex-start;
+    }
+
+    .hero-chip {
+      width: 100%;
+      min-width: auto;
+    }
+
+    :host ::ng-deep .history-table {
+      .p-datatable {
+        font-size: $font-size-sm;
+      }
+
+      .p-datatable-thead > tr > th {
+        padding: 0.6rem 0.5rem;
+        font-size: $font-size-xs;
+      }
+
+      .p-datatable-tbody > tr > td {
+        padding: 0.6rem 0.5rem;
+
+        &.order-id-cell {
+          font-size: 0.8rem;
+          font-weight: $font-weight-bold;
+        }
+
+        &.action-cell {
+          display: flex;
+          justify-content: center;
+          padding: 0.6rem 0.3rem;
+        }
+      }
+
+      .p-datatable-thead > tr > th:nth-child(2),
+      .p-datatable-tbody > tr > td:nth-child(2),
+      .p-datatable-thead > tr > th:nth-child(4),
+      .p-datatable-tbody > tr > td:nth-child(4),
+      .p-datatable-thead > tr > th:nth-child(5),
+      .p-datatable-tbody > tr > td:nth-child(5) {
+        display: none;
+      }
+
+      .p-paginator {
+        padding: 0.5rem;
+        font-size: $font-size-xs;
+
+        .p-paginator-current {
+          display: none;
+        }
+      }
     }
   }
 }
 
 @media (max-width: 640px) {
   .order-history {
-    padding: 1rem;
+    padding: 0.75rem;
 
     .page-hero,
     .table-shell {
-      padding: 1rem;
-      border-radius: $border-radius-lg;
+      padding: 0.6rem;
     }
   }
 }

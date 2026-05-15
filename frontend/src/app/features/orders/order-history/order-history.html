@@ -5,11 +5,6 @@
       <h1>{{ 'ORDER_HISTORY.TITLE' | translate }}</h1>
       <p class="subtitle">{{ 'ORDER_HISTORY.SUBTITLE' | translate }}</p>
     </div>
-
-    <div class="hero-chip">
-      <span>{{ 'ORDER_HISTORY.HERO_LABEL' | translate }}</span>
-      <strong>{{ totalRecords() }}</strong>
-    </div>
   </section>
 
   <section class="table-shell">
@@ -39,8 +34,8 @@
       </ng-template>
 
       <ng-template pTemplate="body" let-order>
-        <tr [class.not-completed]="isNotCompleted(order)">
-          <td class="order-id-cell">#{{ order.id }}</td>
+        <tr>
+          <td>#{{ order.id }}</td>
           <td>
             <span class="status-pill" [class.status-pill--completed]="order.status === OrderStatus.COMPLETED">
               {{ order.status }}
@@ -52,14 +47,13 @@
           <td>{{ order.items?.length || 0 }}</td>
           <td class="action-cell">
             <button
-              pButton
               type="button"
-              icon="pi pi-eye"
-              class="p-button-rounded p-button-text action-icon"
+              class=" action-icon pi pi-eye"
               (click)="viewOrderDetail(order)"
               [pTooltip]="'ORDER_HISTORY.VIEW_DETAILS' | translate"
               tooltipPosition="left"
-            ></button>
+            >
+            </button>
           </td>
         </tr>
       </ng-template>

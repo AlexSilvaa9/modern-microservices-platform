@@ -1,4 +1,5 @@
 @use '../../../styles/variables' as *;
+@use '../../../styles/shared-shells' as *;
 
 .blog-shell {
   font-family: $font-family;
@@ -6,24 +7,6 @@
     radial-gradient(circle at top left, rgba($primary-light, 0.16), transparent 30%),
     radial-gradient(circle at top right, rgba($secondary-dark, 0.18), transparent 28%),
     linear-gradient(180deg, #f8fbff 0%, #eef4fb 100%);
-  min-height: 100vh;
-  padding: clamp(1.25rem, 3vw, 2.5rem);
-  position: relative;
-
-  &::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    background-image: linear-gradient(rgba($primary-color, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba($primary-color, 0.03) 1px, transparent 1px);
-    background-size: 30px 30px;
-    mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.55), transparent 92%);
-  }
-
-  > * {
-    position: relative;
-    z-index: 1;
-  }
 }
 
 .hero {
@@ -38,11 +21,7 @@
   .diagram-panel,
   .section-block,
   .roadmap {
-    border: 1px solid rgba($border-color-strong, 0.65);
-    border-radius: $border-radius-xl;
-    background: rgba($surface-0, 0.9);
-    box-shadow: $shadow-lg;
-    backdrop-filter: blur(12px);
+    @include glass-panel(null, rgba($surface-0, 0.9), rgba($border-color-strong, 0.65));
   }
 
   .hero-copy {
@@ -74,58 +53,12 @@
     max-width: 56rem;
   }
 
-  .status {
-    margin-top: 1rem;
-    display: inline-flex;
-    align-items: center;
-    background: $warning-bg;
-    color: $warning-color;
-    padding: 0.55rem 0.85rem;
-    border-radius: $border-radius-full;
-    font-size: $font-size-sm;
-    font-weight: $font-weight-medium;
-  }
-
   .hero-notes {
     padding: 1rem;
     display: grid;
     gap: 1rem;
   }
 
-  .note-card {
-    padding: 1rem;
-    border-radius: $border-radius-lg;
-    border: 1px solid rgba($border-color, 0.9);
-    background: linear-gradient(180deg, $surface-0, $surface-50);
-
-    span {
-      display: block;
-      color: $text-muted;
-      font-size: $font-size-xs;
-      font-weight: $font-weight-bold;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      margin-bottom: 0.35rem;
-    }
-
-    strong {
-      display: block;
-      color: $primary-dark;
-      font-size: 1.2rem;
-      margin-bottom: 0.45rem;
-    }
-
-    p {
-      margin: 0;
-      color: $text-secondary;
-      line-height: 1.55;
-    }
-
-    &--highlight {
-      background: linear-gradient(135deg, rgba($primary-color, 0.12), rgba($primary-light, 0.18));
-      border-color: rgba($primary-color, 0.16);
-    }
-  }
 
   .value-props {
     display: flex;
@@ -193,71 +126,10 @@
   gap: $space-6;
 }
 
-.tech {
-  background: $surface-0;
-  border-radius: $border-radius-xl;
-  padding: 1.2rem;
-  box-shadow: $shadow-sm;
-  border: 1px solid $border-color;
-  transition: transform $transition-base, box-shadow $transition-base, border-color $transition-base;
-
-  &:hover {
-    transform: translateY(-4px);
-    box-shadow: $shadow-md;
-    border-color: rgba($primary-light, 0.22);
-  }
-
-  h3 {
-    color: $primary-color;
-    margin-bottom: $space-2;
-    font-weight: $font-weight-semibold;
-  }
-
-  .desc {
-    font-size: $font-size-sm;
-    color: $text-color;
-    margin-bottom: $space-2;
-  }
-
-  .use {
-    font-size: $font-size-sm;
-    color: $text-secondary;
-  }
-
-  &--backend {
-    background: linear-gradient(180deg, rgba($surface-0, 0.98), rgba($surface-50, 0.94));
-  }
-
-  &--frontend {
-    background: linear-gradient(180deg, rgba($surface-0, 0.98), rgba($surface-50, 0.94));
-  }
-}
-
 .flow-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   gap: 1rem;
-}
-
-.flow-card {
-  padding: 1rem;
-  border-radius: $border-radius-lg;
-  background: linear-gradient(180deg, $surface-0, $surface-50);
-  border: 1px solid $border-color;
-  box-shadow: $shadow-sm;
-
-  strong {
-    display: block;
-    margin-bottom: 0.35rem;
-    color: $primary-dark;
-    font-size: $font-size-base;
-  }
-
-  p {
-    color: $text-secondary;
-    margin: 0;
-    line-height: 1.55;
-  }
 }
 
 .highlight-grid {
@@ -266,57 +138,6 @@
   gap: 1rem;
 }
 
-.highlight-card {
-  padding: 1.2rem;
-  border-radius: $border-radius-lg;
-  background: linear-gradient(180deg, rgba($surface-0, 0.96), rgba($surface-50, 0.92));
-  border: 1px solid rgba($secondary-dark, 0.18);
-  box-shadow: $shadow-sm;
-  transition: transform $transition-base, box-shadow $transition-base, border-color $transition-base;
-
-  &:hover {
-    transform: translateY(-3px);
-    box-shadow: $shadow-md;
-    border-color: rgba($secondary-dark, 0.28);
-  }
-
-  strong {
-    display: block;
-    margin-bottom: 0.5rem;
-    color: $secondary-dark;
-    font-size: $font-size-base;
-    font-weight: $font-weight-semibold;
-  }
-
-  p {
-    color: $text-secondary;
-    margin: 0;
-    line-height: 1.55;
-    font-size: $font-size-sm;
-  }
-}
-
-.roadmap {
-  ul {
-    max-width: 900px;
-    margin: 1rem auto 0;
-    list-style: none;
-    padding: 0;
-    display: grid;
-    gap: 0.75rem;
-
-    li {
-      background: $surface-0;
-      padding: 1rem 1.1rem;
-      border-radius: $border-radius-lg;
-      border: 1px solid $border-color;
-      box-shadow: $shadow-sm;
-      font-size: $font-size-sm;
-      line-height: 1.5;
-      color: $text-color;
-    }
-  }
-}
 
 @media (max-width: 960px) {
   .hero {

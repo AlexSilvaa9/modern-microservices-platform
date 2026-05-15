@@ -1,0 +1,19 @@
+<div class="dropdown" [class.disabled]="disabled">
+
+  <button class="dropdown-trigger" (click)="toggle($event)">
+    <span>{{ selectedLabel }}</span>
+    <i class="arrow" [class.open]="open"></i>
+  </button>
+
+  <div class="dropdown-menu" *ngIf="open">
+    <button
+      class="dropdown-item"
+      *ngFor="let opt of normalizedOptions"
+      (click)="select(opt)"
+      [class.active]="opt.value === selected">
+
+      {{ opt.label }}
+    </button>
+  </div>
+
+</div>

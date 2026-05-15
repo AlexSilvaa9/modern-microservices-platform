@@ -5,6 +5,7 @@ import { Product } from '../../models/product.model';
 import { Page } from '../../models/page.model';
 import { BaseApiResponse } from '../../models/user.model';
 import { ErrorService } from '../global-state/error.service';
+import { environment } from '../../../../environments/environment';
 
 
 
@@ -12,8 +13,8 @@ import { ErrorService } from '../global-state/error.service';
   providedIn: 'root'
 })
 export class CatalogService {
-  private apiUrl = 'http://localhost:8080/api/product/';
-  private loadProductsUrl = `${this.apiUrl}getProducts`;
+  private apiUrl = environment.apiUrl;
+  private loadProductsUrl = `${this.apiUrl}product/getProducts`;
   private http = inject(HttpClient);
   private errorService = inject(ErrorService);
   public products = signal<Product[]>([]);
