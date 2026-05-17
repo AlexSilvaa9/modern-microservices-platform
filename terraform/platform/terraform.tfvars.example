@@ -1,0 +1,18 @@
+aws_region            = "eu-west-1"
+project_name          = "microservices-template"
+environment           = "prod"
+frontend_bucket_name  = "microservices-template-front-prod-REPLACE"
+frontend_dist_dir     = "../../frontend/dist/microservices-front/browser"
+domain_name           = "app.example.com"
+hosted_zone_id        = "Z0123456789ABCDEFG"
+create_www_record     = true
+enable_ingress_nginx  = true
+enable_strimzi        = true
+kubeconfig_path       = "~/.kube/config"
+k8s_manifest_root     = "../../k8s"
+
+tags = {
+  Owner       = "alex"
+  CostCenter  = "platform"
+  Terraform   = "true"
+}
