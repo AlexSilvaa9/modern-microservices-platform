@@ -1,20 +1,13 @@
 import { test, expect } from '@playwright/test';
-import { LoginPage } from '../../pages/LoginPage';
 import { SidebarPage } from '../../pages/SidebarPage';
+import { loginAsAdmin } from '../../helpers/auth';
 
 test.describe('B2B Journey: Admin Access', () => {
 
   test('Admin user logs in and can access admin sidebar options', async ({ page }) => {
-    const loginPage = new LoginPage(page);
     const sidebarPage = new SidebarPage(page);
 
-    // 1. Navigate and Login with Admin credentials
-    // Note: Assuming 'admin@example.com' has Role.ADMIN in your backend.
-    await loginPage.navigate();
-    await loginPage.login('alexsilvaebg9@gmail.com', 'admin123');
-
-    // Wait for redirect to home/dashboard
-    await page.waitForURL('**/home');
+    await loginAsAdmin(page);
 
     // 2. Verify Admin Sidebar Options
     // Since the user is an admin, the DOM should render the *appIsAdmin sections.

@@ -1,17 +1,13 @@
 import { test, expect } from '@playwright/test';
-import { LoginPage } from '../../pages/LoginPage';
 import { AdminPages } from '../../pages/AdminPages';
+import { loginAsAdmin } from '../../helpers/auth';
 
 test.describe('Admin Panel', () => {
 
   test('should allow admin to access all admin pages', async ({ page }) => {
-    const loginPage = new LoginPage(page);
     const adminPages = new AdminPages(page);
 
-    // Login with Admin credentials
-    await loginPage.navigate();
-    await loginPage.login('alexsilvaebg9@gmail.com', 'admin123'); // Assuming these are valid seeded admin creds
-    await page.waitForURL('**/home');
+    await loginAsAdmin(page);
 
     // Visit User Management
     await adminPages.navigateToUsers();

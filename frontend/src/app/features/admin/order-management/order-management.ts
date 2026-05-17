@@ -71,9 +71,8 @@ statuses: DropdownOption[] = Object.values(OrderStatus)
     this.loadOrders(page, pageSize, this.selectedStatus());
   }
 
-  onStatusChange() {
-
-    this.loadOrders(0, this.rows(), this.selectedStatus());
+  onStatusChange(status: OrderStatus) {
+    this.loadOrders(0, this.rows(), status);
   }
 
   completeOrder(order: OrderDTO) {

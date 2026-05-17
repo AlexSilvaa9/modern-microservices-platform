@@ -1,5 +1,7 @@
 import { test, expect } from '@playwright/test';
 import { RegisterPage } from '../../pages/RegisterPage';
+import { LoginPage } from '../../pages/LoginPage';
+import { createUniqueUser } from '../../helpers/auth';
 
 test.describe('Register', () => {
   let registerPage: RegisterPage;
@@ -22,8 +24,16 @@ test.describe('Register', () => {
     await expect(registerPage.page.locator('.error-msg').first()).toBeVisible();
   });
 
-  test('should allow user to type and submit', async () => {
-    await registerPage.register('newuser', 'newuser@example.com', 'password123');
+  test('should allow user to type and submit', async ({ page }) => {
+    const user = createUniqueUser();
+    await registerPage.register(user.username, user.email, user.password);
+
+
+    const loginPage = new LoginPage(page);
+    await loginPage.navigate();
+    await loginPage.login(user.email, user.password);
+    await page.waitForURL('**/home');
+    await expect(page).toHaveURL(/.*\/home|.*\/$/);
     // Depending on your app's actual behavior, assert a redirect or success message
   });
 

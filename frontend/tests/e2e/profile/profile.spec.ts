@@ -1,27 +1,13 @@
 import { test, expect } from '@playwright/test';
-import { LoginPage } from '../../pages/LoginPage';
 import { ProfilePage } from '../../pages/ProfilePage';
+import { registerAndLogin, createUniqueUser } from '../../helpers/auth';
 
 test.describe('User Profile', () => {
+  test.beforeEach(async ({ page }) => {
+    await registerAndLogin(page, createUniqueUser('profile'));
+  });
 
   test('should allow user to view and edit profile', async ({ page }) => {
-    const randomId = Date.now() + Math.floor(Math.random() * 100000);
-    const email = `profile${randomId}@example.com`;
-    const password = 'Password123!';
-    // Register
-    await page.goto('/auth/register');
-    await page.getByTestId('register-username-input').fill('profileuser');
-    await page.getByTestId('register-email-input').fill(email);
-    await page.getByTestId('register-password-input').fill(password);
-    await page.getByTestId('register-submit-button').click();
-    await page.waitForURL('**/auth/login');
-
-    // Login
-    const loginPage = new LoginPage(page);
-    await loginPage.navigate();
-    await loginPage.login(email, password);
-    await page.waitForURL('**/home');
-
     // Navigate to profile
     const profilePage = new ProfilePage(page);
     await profilePage.navigate();

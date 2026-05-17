@@ -11,7 +11,7 @@
         <app-dropdown
               [options]="statuses"
               [selected]="selectedStatus()"
-              (selectedChange)="onStatusChange()">
+            (selectedChange)="onStatusChange($event)">
           </app-dropdown>
      
       </label>
