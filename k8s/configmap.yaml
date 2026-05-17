@@ -204,7 +204,8 @@ data:
     server:
       servlet:
         context-path: /api/mail
-    
+    mail:
+      enabled: false
     spring:
       mail:
         host: smtp.gmail.com

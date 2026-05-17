@@ -44,6 +44,7 @@
 - [Stack Tecnológico](#-stack-tecnológico)
 - [Patrones Avanzados](#-patrones-avanzados)
 - [Flujos de Usuario](#-flujos-de-usuario)
+- [Pruebas End-to-End](#-pruebas-end-to-end)
 - [Documentación](#-documentación)
 - [Roadmap](#-roadmap)
 
@@ -353,6 +354,29 @@ Admin → Users/Orders/SEO → Ver detalles → Editar → Auditado en BD → Ev
 
 ---
 
+## 🧪 Pruebas End-to-End
+
+El frontend incluye pruebas automáticas con [Playwright](./frontend/package.json), y esas pruebas cubren los casos de uso principales del sistema. Cada spec representa un journey real de usuario, por ejemplo:
+
+- **Compra de cliente**: [frontend/tests/e2e/journeys/customer-purchase.spec.ts](./frontend/tests/e2e/journeys/customer-purchase.spec.ts)
+- **Completar pedido como admin**: [frontend/tests/e2e/journeys/admin-complete-order.spec.ts](./frontend/tests/e2e/journeys/admin-complete-order.spec.ts)
+- **Promoción de usuario a admin**: [frontend/tests/e2e/journeys/admin-promote-user.spec.ts](./frontend/tests/e2e/journeys/admin-promote-user.spec.ts)
+- **Acceso al panel admin**: [frontend/tests/e2e/journeys/admin-access.spec.ts](./frontend/tests/e2e/journeys/admin-access.spec.ts)
+- **Cambio de idioma de perfil**: [frontend/tests/e2e/journeys/profile-language.spec.ts](./frontend/tests/e2e/journeys/profile-language.spec.ts)
+
+Los videos y trazas generados por Playwright se guardan en `frontend/test-results/` cuando se ejecutan los tests.
+
+### Videos de demostración
+
+Se han colocado videos seleccionados en `frontend/docs/demo/` para acceso directo desde el repositorio:
+
+| Use case | Video |
+| --- | --- |
+| Customer purchase journey | [doc/demo/customer-purchase.webm](frontend/docs/demo/customer-purchase.webm) |
+| Admin completes a paid order | [doc/demo/admin-complete-order.webm](frontend/docs/demo/admin-complete-order.webm) |
+
+---
+
 ## 🗺️ Roadmap
 
 | Estado | Feature                           |
@@ -366,7 +390,7 @@ Admin → Users/Orders/SEO → Ver detalles → Editar → Auditado en BD → Ev
 | ⏳     | Monitoring (Prometheus + Grafana) |
 | ⏳     | Distributed tracing (Jaeger)      |
 | ⏳     | CI/CD pipeline (GitHub Actions)   |
-| ⏳     | Testes e2e (Cypress)              |
+| ✅     | Testes e2e (Playwright)           |
 
 ---
 

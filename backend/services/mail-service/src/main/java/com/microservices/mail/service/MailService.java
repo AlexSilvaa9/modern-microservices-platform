@@ -22,6 +22,9 @@ public class MailService {
     @Value("${spring.mail.username}")
     private String username;
 
+    @Value("${mail.enabled:true}")
+    private boolean mailEnabled;
+
     /** The underlying Spring JavaMail component. */
     private final JavaMailSender mailSender;
 
@@ -65,6 +68,9 @@ public class MailService {
 
 
     private void sendHtml(String to, String subject, String htmlBody) {
+        if(!mailEnabled){
+            return;
+        }
         try {
             MimeMessage message = mailSender.createMimeMessage();
 
