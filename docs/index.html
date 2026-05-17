@@ -62,27 +62,15 @@
         id: 'video-customer',
         title: 'Customer purchase journey',
         mediaName: 'customer-purchase.webm',
-        paths:[
-          './media/customer-purchase.webm',
-          '../frontend/test-results/e2e-journeys-customer-purc-13f7e--cart-pays-and-checks-order-chromium/video.webm'
-        ],
-        posterPaths:[
-          './media/customer-purchase.png',
-          '../frontend/test-results/e2e-journeys-customer-purc-13f7e--cart-pays-and-checks-order-chromium/test-finished-1.png'
-        ]
+        paths:['./media/customer-purchase.webm'],
+        posterPaths:['./media/customer-purchase.png']
       },
       {
         id: 'video-admin',
         title: 'Admin completes a paid order',
         mediaName: 'admin-complete-order.webm',
-        paths:[
-          './media/admin-complete-order.webm',
-          '../frontend/test-results/e2e-journeys-admin-complet-0cbda-s-a-paid-order-as-completed-chromium/video.webm'
-        ],
-        posterPaths:[
-          './media/admin-complete-order.png',
-          '../frontend/test-results/e2e-journeys-admin-complet-0cbda-s-a-paid-order-as-completed-chromium/test-finished-1.png'
-        ]
+        paths:['./media/admin-complete-order.webm'],
+        posterPaths:['./media/admin-complete-order.png']
       }
      
     ];
@@ -121,7 +109,7 @@
           msg.style.padding = '2rem';
           msg.style.textAlign = 'center';
           msg.style.color = '#666';
-          msg.textContent = 'Vídeo no encontrado. Sube los archivos a `docs/media/` o en `frontend/test-results/`.';
+          msg.textContent = 'Vídeo no encontrado. Sube los archivos a `docs/media/`.';
           card.appendChild(msg);
           const cap = document.createElement('figcaption');
           cap.style.fontSize = '.9rem';
@@ -150,14 +138,14 @@
     })();
 
     // Load README markdown into docs section
-    fetch('../README.md').then(function(resp){
-      if(!resp.ok) throw new Error('No se pudo cargar README.md');
+    fetch('./doc.md').then(function(resp){
+      if(!resp.ok) throw new Error('No se pudo cargar doc.md');
       return resp.text();
     }).then(function(md){
       document.getElementById('content').innerHTML = marked.parse(md);
     }).catch(function(err){
       console.error(err);
-      document.getElementById('content').textContent = 'No se pudo cargar la documentación. Comprueba que `docs/readme.md` existe.';
+      document.getElementById('content').textContent = 'No se pudo cargar la documentación. Comprueba que `docs/doc.md` existe.';
     });
   </script>
 </body>
