@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Microservices Template — Documentación</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@5.1.0/github-markdown.min.css">
+  <style>
+    body{background:#f6f8fa;margin:0;padding:2rem;font-family:system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial}
+    .markdown-body{max-width:980px;margin:0 auto;background:linear-gradient(180deg,#fff,#fcfeff);padding:2rem;border-radius:6px;box-shadow:0 6px 18px rgba(2,6,23,.04);color:#111;line-height:1.6}
+    .markdown-body h1,.markdown-body h2,.markdown-body h3{color:#0f172a}
+    .markdown-body pre{background:#0b1220;color:#e6f0ff;padding:12px;border-radius:6px;overflow:auto}
+    .markdown-body code{background:#f3f4f6;padding:2px 6px;border-radius:4px}
+    .markdown-body blockquote{border-left:4px solid #c7d2fe;padding:8px 12px;background:#fbfbff}
+    .markdown-body img{max-width:100%;border-radius:6px}
+    header{max-width:980px;margin:0 auto 1rem;padding:0 2rem}
+    header h1{font-size:1.25rem;margin:0}
+  </style>
+</head>
+<body>
+  <header style="text-align:center;margin-bottom:1rem;">
+    <h1 style="margin:.25rem 0;font-size:1.6rem">Microservices Template — Demo</h1>
+    <p style="margin:0;color:#555">Vídeos cortos generados por las pruebas E2E. La documentación completa está más abajo.</p>
+  </header>
+
+  <main style="display:flex;flex-direction:column;align-items:center;gap:1.25rem;">
+
+    <section id="videos" style="width:100%;max-width:1100px;padding:0 1rem;">
+      <div style="display:flex;justify-content:center;margin-bottom:.75rem;">
+        <div style="padding:.5rem 1rem;background:linear-gradient(180deg,#fff,#f8fafc);border-radius:10px;box-shadow:0 6px 20px rgba(2,6,23,.08);">
+          <strong style="font-size:1rem">Demostraciones rápidas</strong>
+        </div>
+      </div>
+
+      <div id="videoGrid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:1rem;align-items:start;">
+        <!-- video cards injected by JS -->
+      </div>
+    </section>
+
+    <section id="docsSection" style="width:100%;max-width:1100px;padding:1rem;background:#fff;border-radius:8px;box-shadow:0 6px 20px rgba(2,6,23,.04);">
+      <h2 style="margin:.25rem 0 1rem 0;text-align:center">Documentación</h2>
+      <div id="content" class="markdown-body">Cargando documentación…</div>
+    </section>
+
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script>
+    // Helper: try a URL with fetch HEAD to see if it exists
+    async function exists(url){
+      try{
+        const r = await fetch(url, {method:'HEAD'});
+        return r.ok;
+      }catch(e){
+        return false;
+      }
+    }
+
+    // Configure videos (logical names and fallback paths)
+    const videos = [
+      {
+        id: 'video-customer',
+        title: 'Customer purchase journey',
+        mediaName: 'customer-purchase.webm',
+        paths:[
+          './media/customer-purchase.webm',
+          '../frontend/test-results/e2e-journeys-customer-purc-13f7e--cart-pays-and-checks-order-chromium/video.webm'
+        ],
+        posterPaths:[
+          './media/customer-purchase.png',
+          '../frontend/test-results/e2e-journeys-customer-purc-13f7e--cart-pays-and-checks-order-chromium/test-finished-1.png'
+        ]
+      },
+      {
+        id: 'video-admin',
+        title: 'Admin completes a paid order',
+        mediaName: 'admin-complete-order.webm',
+        paths:[
+          './media/admin-complete-order.webm',
+          '../frontend/test-results/e2e-journeys-admin-complet-0cbda-s-a-paid-order-as-completed-chromium/video.webm'
+        ],
+        posterPaths:[
+          './media/admin-complete-order.png',
+          '../frontend/test-results/e2e-journeys-admin-complet-0cbda-s-a-paid-order-as-completed-chromium/test-finished-1.png'
+        ]
+      }
+     
+    ];
+
+    // Build grid
+    (async function renderVideos(){
+      const grid = document.getElementById('videoGrid');
+      for(const v of videos){
+        const card = document.createElement('figure');
+        card.style.margin = '0';
+        card.style.background = '#fff';
+        card.style.borderRadius = '8px';
+        card.style.padding = '8px';
+        card.style.boxShadow = '0 4px 12px rgba(2,6,23,.04)';
+
+        const video = document.createElement('video');
+        video.controls = true;
+        video.style.width = '100%';
+        video.style.height = 'auto';
+        video.style.background = '#000';
+        video.id = v.id;
+
+        // pick first existing source
+        let chosen = null;
+        for(const p of v.paths){
+          if(await exists(p)) { chosen = p; break; }
+        }
+        if(chosen){
+          const src = document.createElement('source');
+          src.src = chosen;
+          src.type = 'video/webm';
+          video.appendChild(src);
+        } else {
+          // show placeholder message
+          const msg = document.createElement('div');
+          msg.style.padding = '2rem';
+          msg.style.textAlign = 'center';
+          msg.style.color = '#666';
+          msg.textContent = 'Vídeo no encontrado. Sube los archivos a `docs/media/` o en `frontend/test-results/`.';
+          card.appendChild(msg);
+          const cap = document.createElement('figcaption');
+          cap.style.fontSize = '.9rem';
+          cap.style.paddingTop = '.5rem';
+          cap.style.color = '#333';
+          cap.textContent = v.title;
+          card.appendChild(cap);
+          grid.appendChild(card);
+          continue;
+        }
+
+        // poster fallback
+        for(const pp of v.posterPaths){
+          if(await exists(pp)){ video.poster = pp; break; }
+        }
+
+        card.appendChild(video);
+        const fig = document.createElement('figcaption');
+        fig.style.fontSize = '.95rem';
+        fig.style.paddingTop = '.5rem';
+        fig.style.color = '#222';
+        fig.textContent = v.title;
+        card.appendChild(fig);
+        grid.appendChild(card);
+      }
+    })();
+
+    // Load README markdown into docs section
+    fetch('../README.md').then(function(resp){
+      if(!resp.ok) throw new Error('No se pudo cargar README.md');
+      return resp.text();
+    }).then(function(md){
+      document.getElementById('content').innerHTML = marked.parse(md);
+    }).catch(function(err){
+      console.error(err);
+      document.getElementById('content').textContent = 'No se pudo cargar la documentación. Comprueba que `docs/readme.md` existe.';
+    });
+  </script>
+</body>
+</html>

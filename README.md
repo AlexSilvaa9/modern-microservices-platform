@@ -10,6 +10,8 @@
 [![Kubernetes](https://img.shields.io/badge/kubernetes-ready-blue?style=flat-square)](https://kubernetes.io)
 [![License](https://img.shields.io/badge/license-MIT-success?style=flat-square)](LICENSE)
 
+[<img src="https://img.shields.io/badge/Demo%20en%20vivo-Visitar%20página-0f172a?style=for-the-badge&logo=githubpages&logoColor=white" alt="Demo en vivo" />](https://alexsilvaa9.github.io/modern-microservices-platform)
+
 [Blog Técnico](#-características-técnicas) • [Documentación](#-documentación) • [Inicio Rápido](#-inicio-rápido) • [Estructura](#-estructura-del-proyecto) • [Contribuir](#-contribuciones)
 
 </div>
@@ -368,13 +370,7 @@ Los videos y trazas generados por Playwright se guardan en `frontend/test-result
 
 ### Videos de demostración
 
-Se han colocado videos seleccionados en `frontend/docs/demo/` para acceso directo desde el repositorio:
-
-| Use case | Video |
-| --- | --- |
-| Customer purchase journey | [doc/demo/customer-purchase.webm](frontend/docs/demo/customer-purchase.webm) |
-| Admin completes a paid order | [doc/demo/admin-complete-order.webm](frontend/docs/demo/admin-complete-order.webm) |
-
+Disponibles en: [Demo en vivo](https://alexsilvaa9.github.io/modern-microservices-platform)
 ---
 
 ## 🗺️ Roadmap
