@@ -98,6 +98,26 @@
     <section class="section-block">
         <div class="section-heading">
             <div>
+                <p class="section-kicker">{{ 'BLOG.INFRA.KICKER' | translate }}</p>
+                <h2>{{ 'BLOG.INFRA.TITLE' | translate }}</h2>
+            </div>
+            <p>{{ 'BLOG.INFRA.SUBTITLE' | translate }}</p>
+        </div>
+
+        <div class="tech-grid">
+            @for (card of infraCards; track card.titleKey) {
+                <div class="card">
+                    <h3>{{ card.titleKey | translate }}</h3>
+                    <p class="desc">{{ card.descKey | translate }}</p>
+                    <p class="use">{{ card.noteKey | translate }}</p>
+                </div>
+            }
+        </div>
+    </section>
+
+    <section class="section-block">
+        <div class="section-heading">
+            <div>
                 <p class="section-kicker">{{ 'BLOG.HIGHLIGHTS.KICKER' | translate }}</p>
                 <h2>{{ 'BLOG.HIGHLIGHTS.TITLE' | translate }}</h2>
             </div>

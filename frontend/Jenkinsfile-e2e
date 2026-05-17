@@ -1,0 +1,67 @@
+pipeline {
+    agent {
+        docker {
+            image 'mcr.microsoft.com/playwright:v1.43.0-jammy' // Ajustar a la versión de Playwright usada en package.json
+            args '-u root'
+        }
+    }
+
+    environment {
+        // La URL base del frontend desplegado para ejecutar las pruebas contra él
+        // Puedes inyectarla como parámetro si tienes distintos entornos (dev, staging, prod)
+        PLAYWRIGHT_BASE_URL = 'http://frontend.default.svc.cluster.local' // O la URL del Ingress
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
+
+        stage('Install Dependencies') {
+            steps {
+                dir('frontend') {
+                    // Instalar dependencias necesarias para los tests
+                    sh 'npm ci'
+                }
+            }
+        }
+
+        stage('Run E2E Tests') {
+            steps {
+                dir('frontend') {
+                    // Ejecutamos Playwright en todos los navegadores definidos o según configuración
+                    sh 'npx playwright test --config=playwright.config.ts'
+                }
+            }
+        }
+    }
+
+    post {
+        always {
+            dir('frontend') {
+                // Publicar el reporte HTML de Playwright en Jenkins
+                publishHTML([
+                    allowMissing: true, 
+                    alwaysLinkToLastBuild: true, 
+                    keepAll: true, 
+                    reportDir: 'playwright-report', 
+                    reportFiles: 'index.html', 
+                    reportName: 'Playwright E2E Report'
+                ])
+                
+                // Archivar resultados por si fallaron pantallazos o trazas
+                archiveArtifacts artifacts: 'test-results/**/*', allowEmptyArchive: true
+            }
+            echo "Pruebas E2E completadas."
+        }
+        success {
+            echo "Las pruebas E2E pasaron correctamente. El despliegue es estable."
+        }
+        failure {
+            echo "Las pruebas E2E han fallado. El despliegue podría estar comprometido."
+            // Opcional: rollback del despliegue o notificación en Slack/Teams
+        }
+    }
+}

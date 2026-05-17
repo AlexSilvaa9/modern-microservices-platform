@@ -56,6 +56,11 @@ export class Blog implements OnInit {
     { titleKey: 'BLOG.FLOWS.ADMIN.TITLE', descKey: 'BLOG.FLOWS.ADMIN.DESC' }
   ];
 
+  readonly infraCards = [
+    { titleKey: 'BLOG.INFRA.JENKINS.TITLE', descKey: 'BLOG.INFRA.JENKINS.DESC', noteKey: 'BLOG.INFRA.JENKINS.NOTE' },
+    { titleKey: 'BLOG.INFRA.TERRAFORM.TITLE', descKey: 'BLOG.INFRA.TERRAFORM.DESC', noteKey: 'BLOG.INFRA.TERRAFORM.NOTE' }
+  ];
+
   ngOnInit() {
     // Detect language from URL path (es/, en/, de/, fr/)
     const urlPath = this.location.path();

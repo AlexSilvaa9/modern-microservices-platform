@@ -1,0 +1,69 @@
+pipeline {
+    agent {
+        docker {
+            image 'hashicorp/terraform:1.6' // Ajusta a la versión que uses
+            args '-u root --entrypoint=' // Entrypoint vacío para que Jenkins pueda ejecutar comandos shell
+        }
+    }
+
+    environment {
+        // Hipotético: Usar credenciales seguras de Jenkins para conectarse al proveedor de Cloud (ej. AWS)
+        // AWS_ACCESS_KEY_ID = credentials('aws-access-key')
+        // AWS_SECRET_ACCESS_KEY = credentials('aws-secret-key')
+        TF_IN_AUTOMATION = 'true'
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
+
+        stage('Terraform Init & Validate') {
+            steps {
+                // Aquí usamos 'platform' asumiendo que es el entorno principal
+                // Si 'bootstrap' también necesita CI, puedes separar las etapas o hacer un bucle
+                dir('terraform/platform') {
+                    sh 'terraform init'
+                    sh 'terraform validate'
+                    // Opcional: chequeo de formato
+                    // sh 'terraform fmt -check'
+                }
+            }
+        }
+
+        stage('Terraform Plan') {
+            steps {
+                dir('terraform/platform') {
+                    // Genera un plan de los cambios
+                    sh 'terraform plan -out=tfplan'
+                }
+            }
+        }
+
+        stage('Terraform Apply (Manual Approval)') {
+            steps {
+                script {
+                    // Pedimos aprobación manual en la interfaz de Jenkins antes de aplicar cambios en la infra
+                    timeout(time: 1, unit: 'HOURS') {
+                        input message: '¿Aprobar y aplicar los cambios en la infraestructura de Terraform?', ok: 'Aplicar'
+                    }
+                }
+                dir('terraform/platform') {
+                    // Aplica el plan aprobado sin preguntar
+                    sh 'terraform apply -auto-approve tfplan'
+                }
+            }
+        }
+    }
+
+    post {
+        always {
+            echo "Pipeline de Infraestructura Terraform finalizado."
+        }
+        failure {
+            echo "Error en la ejecución o despliegue de Terraform."
+        }
+    }
+}

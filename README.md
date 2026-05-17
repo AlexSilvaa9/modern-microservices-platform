@@ -270,6 +270,7 @@ Nginx Ingress Controller (API Gateway)
 Apache Kafka (Strimzi operator)
 AWS (S3, CloudFront, Route53)
 ConfigMap & Secrets (Configuración)
+Terraform (Infraestructura como Código)
 ```
 
 ---
@@ -386,7 +387,8 @@ Disponibles en: [Demo en vivo](https://alexsilvaa9.github.io/modern-microservice
 | ✅     | Kubernetes ready                  |
 | ⏳     | Monitoring (Prometheus + Grafana) |
 | ⏳     | Distributed tracing (Jaeger)      |
-| ⏳     | CI/CD pipeline (GitHub Actions)   |
+| ✅     | CI/CD pipeline (Jenkins)          |
+| ✅     | Infraestructura como Código (Terraform) |
 | ✅     | Testes e2e (Playwright)           |
 
 ---
